@@ -1,4 +1,18 @@
-### SAMED planning
+### Statistical Analysis and Modelling of Ecological Data 
+
+Course Planning
+
+
+
+### Main premises of the course:
+
+- Statistics is philosophy of science translated into math
+- There is no single, true statistical method for any given problem
+- Statistics is about expressing belief and/or uncertainty in the form of **models**
+  - Even if you're just calculating a mean, your building a are (very simple) statistical model
+- In ecology, **effect size** is everything. Yes/no decisions are of rare and limited interest.
+
+
 
 #### Part 1: Thinking statistically
 
@@ -13,6 +27,8 @@
   - Why do we care about statistics?
 
     - Statistics = quantifying uncertainty
+    - "Statistics" is not a single thing
+      - Most people act as if statistics is a unique, perfectly correct and unquestionable set of methods, i.e. a series of dogmas. It is not, it is a science, with alternative ways to do things, and debates about it.
     - The frequentist view: converging on the hidden truth
     - The Bayesian view: updating your beliefs
       - Objective Bayesianism (Jeffrey) and subjective bayesianism (de Finetti)
