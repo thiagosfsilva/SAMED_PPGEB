@@ -1,4 +1,4 @@
-### Statistical Analysis and Modelling of Ecological Data 
+##Statistical Analysis and Modelling of Ecological Data 
 
 Course Planning
 
@@ -9,8 +9,9 @@ Course Planning
 - Statistics is philosophy of science translated into math
 - There is no single, true statistical method for any given problem
 - Statistics is about expressing belief and/or uncertainty in the form of **models**
-  - Even if you're just calculating a mean, your building a are (very simple) statistical model
+  - Even if you're just calculating a mean, your building a (very simple) statistical model
 - In ecology, **effect size** is everything. Yes/no decisions are of rare and limited interest.
+- A good way to gain insight through statistics is by **model comparison**
 
 
 
@@ -121,3 +122,25 @@ Things that could be covered:
 - Lets add instead: GAMs
 - Temporal models: longitudinal data / time series
 - Causality: SEM and Path analysis
+
+
+
+####Part 3: Predictive models and machine learning
+
+- Pig data fable
+
+- If you truly only care about the accuracy of your predictions, then screw parameters and assumptions.
+
+- Simplicity (interpretability), generality, accuracy: pick any two
+
+- Is parsimony a fallacy?
+
+- How to evaluate models when there are no parameters and no assumptions: validation and testing
+
+- The machine learning framework: sample -> augment -> fit -> tune -> test -> repeat
+
+- Ecologists don't have big data. No, hundreds of observations are not big data. **Millions** of observations are big data.
+
+- Bringing interpretability back: variable importance measurements and other approaches
+
+  ​
