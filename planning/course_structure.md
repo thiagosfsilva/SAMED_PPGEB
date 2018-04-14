@@ -1,5 +1,7 @@
 ### SAMED planning
 
+#### Part 1: Thinking statistically
+
 - **Lecture 1** : "*If you're doing statistics without philosophy, you're doing it wrong (McGill)*"
 
   - Basic principles of the philosophy and epistemology of science:
@@ -13,6 +15,7 @@
     - Statistics = quantifying uncertainty
     - The frequentist view: converging on the hidden truth
     - The Bayesian view: updating your beliefs
+      - Objective Bayesianism (Jeffrey) and subjective bayesianism (de Finetti)
 
   - Everything is a model: assessing uncertainty by comparing and updating models
 
@@ -88,7 +91,17 @@
 - A non-hypothetical frequentist approach: parameter uncertainty and exact p-values
 - Hypotheses and error estimation in the Bayesian view
   - ?
-  - Model comparison revisited
+- Model comparison revisited
+  - Anderson and Burham
 
-    - Anderson and Burham
+
 - New efforts: second generation p-values (https://www.statisticalevidence.com/second-generation-p-values), or how they sneaked a prior into my frequentist analysis
+
+#### Part 2: Building Models
+
+Things that could be covered:
+
+- From General to Generalized to Generalized Mixed Models
+- Lets add instead: GAMs
+- Temporal models: longitudinal data / time series
+- Causality: SEM and Path analysis
