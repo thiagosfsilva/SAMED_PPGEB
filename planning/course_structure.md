@@ -44,6 +44,8 @@ Course Planning
 
   - Likelihood and model comparison: the one ring to rule them all? (see https://stat.ethz.ch/pipermail/r-sig-ecology/2008-September/000321.html )
 
+    - Likelihood can be applied frequentist or bayesian beliefs, but can also be a theory in itself, through model comparison
+
     ​
 
 - **Lecture 2** : *"Absence of evidence is not evidence of absence (proverb)"*
