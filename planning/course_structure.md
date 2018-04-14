@@ -75,10 +75,20 @@
 
       - What is a p-value? What does it measure?
       - The cult of significance
-    - Hypotheses in the Bayesian view
-  - The trend of unimportant, uninformative hypotheses
+      - The null is meaningless without an alternative, since "not null" means "anything else"
+      - Absence of evidence is not evidence of absence. Failing to reject the null does not mean accepting it as true (otherwise you might as well calculate *p* for the alternative and run with it)
+      - the traditional frequentist approach makes sense for controlled experiments, but most ecology is observational, so there is no true decision. We are then more interested in estimating effect sizes that in making yes/no decisions.
+  - A problem of unimportant, uninformative hypotheses
 
     - The Earth is round, p <0.05, Is there a difference, mindless statistics, the difference between significant and non significant results is not significant
+- Improving frequentist hypothesis testing
+  - Make specific predictions
+  - Do you homework before the experiment - define your sig, power, and estimate your N beforehand.
+  - Refrain from two-tailed tests. Sure if you have a decent question you at least expect a **direction** for the effect?
+- A non-hypothetical frequentist approach: parameter uncertainty and exact p-values
+- Hypotheses and error estimation in the Bayesian view
+  - ?
   - Model comparison revisited
 
     - Anderson and Burham
+- New efforts: second generation p-values (https://www.statisticalevidence.com/second-generation-p-values), or how they sneaked a prior into my frequentist analysis
