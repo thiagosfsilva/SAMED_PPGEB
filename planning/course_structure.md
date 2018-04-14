@@ -42,9 +42,9 @@ Course Planning
 
     - Any statistic is a model
 
-    - Model comparison: a common ground between frequentists and Bayesians?
+  - Likelihood and model comparison: the one ring to rule them all? (see https://stat.ethz.ch/pipermail/r-sig-ecology/2008-September/000321.html )
 
-      ​
+    ​
 
 - **Lecture 2** : *"Absence of evidence is not evidence of absence (proverb)"*
 
@@ -74,7 +74,12 @@ Course Planning
       - Fitting parameters
       - Estimating uncertainty
     - Analytic solutions: once they were all we had
+
   - Maximum Likelihood: the probabilities that are not probabilities
+
+    - Likelihood the frequentist way
+    - Likelihood the Bayesian way
+
   - Randomization and resampling:  let the data speak
     - Jacknife and Bootstrap: something from nothing
 
@@ -85,31 +90,39 @@ Course Planning
 - **Lecture 4**: "Judgment is not invited (Gigerenzer)" 
 
 
-  - What is a hypothesis?
-  - What does it mean to test hypotheses?
-  - Do we always need a hypothesis?
-  - Popper, Platt
-  - Hypotheses as models
+    - What is a hypothesis?
+    - What does it mean to test hypotheses?
+    - Do we always need a hypothesis?
+    - Popper, Platt
+    - Hypotheses as models
 
-    - Hypotheses in the frequentist view
+      - Hypotheses in the frequentist view
 
-      - What is a p-value? What does it measure?
-      - The cult of significance
-      - The null is meaningless without an alternative, since "not null" means "anything else"
-      - Absence of evidence is not evidence of absence. Failing to reject the null does not mean accepting it as true (otherwise you might as well calculate *p* for the alternative and run with it)
-      - the traditional frequentist approach makes sense for controlled experiments, but most ecology is observational, so there is no true decision. We are then more interested in estimating effect sizes that in making yes/no decisions.
-  - A problem of unimportant, uninformative hypotheses
+        - What is a p-value? What does it measure?
+        - The cult of significance
 
-    - The Earth is round, p <0.05, Is there a difference, mindless statistics, the difference between significant and non significant results is not significant
-- Improving frequentist hypothesis testing
-  - Make specific predictions
-  - Do you homework before the experiment - define your sig, power, and estimate your N beforehand.
-  - Refrain from two-tailed tests. Sure if you have a decent question you at least expect a **direction** for the effect?
-- A non-hypothetical frequentist approach: parameter uncertainty and exact p-values
+          - There is no defense of blanket 5% alpha
+          - In fact other areas don't use it - physics and the "5-sigma" certainty
+        - The null is meaningless without an alternative, since "not null" means "anything else"
+        - Absence of evidence is not evidence of absence. Failing to reject the null does not mean accepting it as true (otherwise you might as well calculate *p* for the alternative and run with it)
+        - the traditional frequentist approach makes sense for controlled experiments, but most ecology is observational, so there is no true decision. We are then more interested in estimating effect sizes that in making yes/no decisions.
+        - Most of the hypothesis testing theory ecologists mis(use) today was developed at the beginning of last century, before computers. How much of it still makes sense today?
+  - The problem of unimportant, uninformative hypotheses
+
+    - Readings: the Earth is round, p <0.05, Is there a difference - a nonsensical question, mindless statistics, the difference between significant and non significant results is not significant
+  - Can we make better use of frequentist hypothesis testing?
+
+    - Make specific predictions
+    - Do you homework before the experiment - define your sig, power, and estimate your N beforehand.
+    - Refrain from two-tailed tests. Sure if you have a decent question you at least expect a **direction** for the effect?
+  - Do we need to do hypothesis testing? A non-hypothetical frequentist approach through estimating parameter uncertainty and assessing it using p-values
+
+    - Still, confidence intervals will make more sense than p-values here. But no need to worry, they are equivalent.
 - Hypotheses and error estimation in the Bayesian view
   - ?
 - Model comparison revisited
   - Anderson and Burham
+  - Pure likelihoodness - is all evidence relative?
 
 
 - New efforts: second generation p-values (https://www.statisticalevidence.com/second-generation-p-values), or how they sneaked a prior into my frequentist analysis
