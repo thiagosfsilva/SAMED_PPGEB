@@ -46,6 +46,8 @@ Course Planning
 
     - Likelihood can be applied frequentist or bayesian beliefs, but can also be a theory in itself, through model comparison
 
+  - The state and evolution of modeling in Ecology
+
     ​
 
 - **Lecture 2** : *"Absence of evidence is not evidence of absence (proverb)"*
@@ -97,12 +99,12 @@ Course Planning
     - Do we always need a hypothesis?
     - Popper, Platt
     - Hypotheses as models
-
+    
       - Hypotheses in the frequentist view
-
+    
         - What is a p-value? What does it measure?
         - The cult of significance
-
+    
           - There is no defense of blanket 5% alpha
           - In fact other areas don't use it - physics and the "5-sigma" certainty
         - The null is meaningless without an alternative, since "not null" means "anything else"
