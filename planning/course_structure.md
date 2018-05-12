@@ -11,6 +11,7 @@ Course Planning
 - Statistics is about expressing belief and/or uncertainty in the form of **models**
   - Even if you're just calculating a mean, your building a (very simple) statistical model
 - In ecology, **effect size** is everything. Yes/no decisions are of rare and limited interest.
+- Ecological patterns and phenomena are often **multicausal**
 - A good way to gain insight through statistics is by **model comparison**
 
 
@@ -47,6 +48,11 @@ Course Planning
     - Likelihood can be applied frequentist or bayesian beliefs, but can also be a theory in itself, through model comparison
 
   - The state and evolution of modeling in Ecology
+
+    - From observations to hypotheses to models (from positivism to negationism to ?)
+    - Recognizing the multicausal nature of ecology
+    - The computational **R**evolution and the 'statistical machismo'
+    - Recognizing the mistakes and noticing the decline in explanatory power.
 
     ​
 
@@ -93,24 +99,24 @@ Course Planning
 
 - **Lecture 4**: "Judgment is not invited (Gigerenzer)" 
 
+- What is a hypothesis?
+- What does it mean to "test" a hypothesis?
+- Do we always need a hypothesis?
+- Popper, Platt
+- Hypotheses as models
 
-    - What is a hypothesis?
-    - What does it mean to test hypotheses?
-    - Do we always need a hypothesis?
-    - Popper, Platt
-    - Hypotheses as models
-    
-      - Hypotheses in the frequentist view
-    
-        - What is a p-value? What does it measure?
-        - The cult of significance
-    
-          - There is no defense of blanket 5% alpha
-          - In fact other areas don't use it - physics and the "5-sigma" certainty
-        - The null is meaningless without an alternative, since "not null" means "anything else"
-        - Absence of evidence is not evidence of absence. Failing to reject the null does not mean accepting it as true (otherwise you might as well calculate *p* for the alternative and run with it)
-        - the traditional frequentist approach makes sense for controlled experiments, but most ecology is observational, so there is no true decision. We are then more interested in estimating effect sizes that in making yes/no decisions.
-        - Most of the hypothesis testing theory ecologists mis(use) today was developed at the beginning of last century, before computers. How much of it still makes sense today?
+  - Hypotheses in the frequentist view
+
+    - What is a p-value? What does it measure?
+    - The cult of significance
+
+      - There is no defense of blanket 5% alpha
+      - In fact other areas don't use it - physics and the "5-sigma" certainty
+    - The null is meaningless without an alternative, since "not null" means "anything else"
+    - Absence of evidence is not evidence of absence. Failing to reject the null does not mean accepting it as true (otherwise you might as well calculate *p* for the alternative and run with it)
+    - the traditional frequentist approach makes sense for controlled experiments, but most ecology is observational, so there is no true decision. We are then more interested in estimating effect sizes that in making yes/no decisions.
+    - Most of the hypothesis testing theory ecologists mis(use) today was developed at the beginning of last century, before computers. How much of it still makes sense today?
+
   - The problem of unimportant, uninformative hypotheses
 
     - Readings: the Earth is round, p <0.05, Is there a difference - a nonsensical question, mindless statistics, the difference between significant and non significant results is not significant
