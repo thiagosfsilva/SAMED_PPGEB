@@ -28,12 +28,13 @@ Course Planning
 
   - Why do we care about statistics?
 
-    - Statistics = quantifying uncertainty
+    - Statistics = quantifying uncertainty and then making use of this knowledge (for understanding, for prediction, etc.)
     - "Statistics" is not a single thing
-      - Most people act as if statistics is a unique, perfectly correct and unquestionable set of methods, i.e. a series of dogmas. It is not, it is a science, with alternative ways to do things, and debates about it.
+      - Most people act as if statistics is a unique, perfectly correct and unquestionable set of methods, i.e. a series of dogmas, which must be ritualistic performed every time. 
+      - Surprise! It is not, it is a science, with alternative ways to do things, and debates about it.
     - The frequentist view: converging on the hidden truth
     - The Bayesian view: updating your beliefs
-      - Objective Bayesianism (Jeffrey) and subjective bayesianism (de Finetti)
+      - Objective Bayesianism (Jeffrey) and subjective Bayesianism (de Finetti)
 
   - Everything is a model: assessing uncertainty by comparing and updating models
 
@@ -41,11 +42,11 @@ Course Planning
 
     - Why use models?
 
-    - Any statistic is a model
+    - Every statistic is a model
 
   - Likelihood and model comparison: the one ring to rule them all? (see https://stat.ethz.ch/pipermail/r-sig-ecology/2008-September/000321.html )
 
-    - Likelihood can be applied frequentist or bayesian beliefs, but can also be a theory in itself, through model comparison
+    - Likelihood can be applied under frequentist or bayesian beliefs, but can also be a theory in itself, through model comparison
 
   - The state and evolution of modeling in Ecology
 
@@ -58,24 +59,21 @@ Course Planning
 
 - **Lecture 2** : *"Absence of evidence is not evidence of absence (proverb)"*
 
+  - Random variables - what are they, where do live, and why do we care?
   - Using probabilities to represent uncertainties (or certainties)
-
   - The deceptively simple rules of probability
-
   - Random variables and probability distributions
 
     - Why define a probability distribution? Because they have know properties!
       - Expectation, variance, support
-    - We don't  *find* the distribution of data, we *assign* it
-    - How to use distributions to model problems
-
-
-
-  - - Simulating probabilistic outcomes
+    - We don't  *find* the distribution of a dataset / random variable - we *assign* it
+  - How to use distributions to model problems
+    - Simulating probabilistic outcomes
     - From the distribution of data to the distribution of a *parameter* 
     - Combining distributions to simulate complex processes
 
-    ​
+
+
 
 - **Lecture 3** : *"All models are wrong, some are useful (Box)"* 
 
@@ -107,7 +105,12 @@ Course Planning
 
   - Hypotheses in the frequentist view
 
-    - What is a p-value? What does it measure?
+    - P-vals vs effect sizes: you don't want want you think you want
+      - What is a p-value? What does it measure?
+      - P(H|D) vs P(D|H)
+      - Simulating variability in p-vals: wtf is happening?
+      - P-val is a noisy measure, because it conflates sample size, population variance and effect size
+      - Effect sizes are where the science is happening
     - The cult of significance
 
       - There is no defense of blanket 5% alpha
@@ -160,7 +163,7 @@ Things that could be covered:
 
 - How to evaluate models when there are no parameters and no assumptions: validation and testing
 
-- The machine learning framework: sample -> augment -> fit -> tune -> test -> repeat
+- The machine learning framework: sample -> engineer -> augment -> fit -> tune -> test -> repeat -> validate
 
 - Ecologists don't have big data. No, hundreds of observations are not big data. **Millions** of observations are big data.
 
