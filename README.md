@@ -1,11 +1,13 @@
 # Statistical Analysis and Modeling of Ecological Data
 ### Graduate Program in Ecology and Biodiversity, UNESP - São Paulo State University, Rio Claro, Brazil
 
-This is the home of the postgraduate course in "Statistical Analysis and Modeling of Ecological Data", offered by the Graduate Program in Ecology and Biodiversity, UNESP-Rio Claro. 
+Visit the course website: (https://thiagosfsilva.github.io/ecostats/)
+
+This is the home of the postgraduate course in "Statistical Analysis and Modeling of Ecological Data", offered by the [Graduate Program in Ecology and Biodiversity](http://ib.rc.unesp.br/#!/departamentos/ecologia/pos-graduacao-em-ecologia-e-biodiversidade/), [IB - UNESP Rio Claro](http://ib.rc.unesp.br/). 
 
 ### Course Overview
 
-This course will (hopefully) teach you how to *think* statistically. Unlike most statistical courses, this will not be a "buffet" of statistical tests (that usually paired with flowchart of "how to choose your test"😱 - I loathe statistical "testing").
+This course will (hopefully) teach you how to *think* statistically. Unlike most statistical courses, this will not be a "buffet" of statistical tests (usually paired with a flowchart of "how to choose your test" :man_facepalming:). Null hypothesis testing is almost useless, as you learn in this course.
 
 If we succeed in this course, you should be able to *understand* enough statistical thinking to indentify, learn and apply any statistical analysis, to any ecological data. The keyword here is *understanding*, meaning **not** blindly following a recipe without really understanding what you' re doing. Sadly, statistics is not like cooking.
 
