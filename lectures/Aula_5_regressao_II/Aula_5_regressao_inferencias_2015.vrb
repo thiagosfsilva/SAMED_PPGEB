@@ -1,0 +1,42 @@
+\frametitle{Multicolinearidade}
+
+Caso 3: $X_k$ parcialmente correlacionados
+\vfill
+
+\begin{knitrout}\tiny
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{m2} \hlkwb{<-} \hlkwd{lm}\hlstd{(y} \hlopt{~} \hlstd{x2} \hlopt{+} \hlstd{x1); m2}
+\end{alltt}
+\begin{verbatim}
+##
+## Call:
+## lm(formula = y ~ x2 + x1)
+##
+## Coefficients:
+## (Intercept)           x2           x1
+##      23.886       -1.418        6.878
+\end{verbatim}
+\begin{alltt}
+\hlkwd{anova}\hlstd{(m2)}
+\end{alltt}
+\begin{verbatim}
+## Analysis of Variance Table
+##
+## Response: y
+##           Df  Sum Sq Mean Sq F value
+## x2         1 202.448 202.448  5.4078
+## x1         1  30.246  30.246  0.8080
+## Residuals  5 187.180  37.436
+##            Pr(>F)
+## x2        0.06759 .
+## x1        0.40992
+## Residuals
+## ---
+## Signif. codes:
+##   0 '***' 0.001 '**' 0.01 '*' 0.05
+##   '.' 0.1 ' ' 1
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+

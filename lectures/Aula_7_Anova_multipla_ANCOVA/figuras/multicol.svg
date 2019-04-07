@@ -1,0 +1,971 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.5 r10040"
+   sodipodi:docname="multicol.svg">
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.371585"
+     inkscape:cx="338.12897"
+     inkscape:cy="222.74854"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:snap-global="true"
+     inkscape:snap-to-guides="true"
+     inkscape:snap-bbox="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1027"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:snap-grids="false">
+    <sodipodi:guide
+       orientation="1,0"
+       position="62.880682,1052.0625"
+       id="guide3009" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="187.58523,953.25"
+       id="guide5607" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="556.58981,739.58979"
+       id="guide5609" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="440.16477,971.74432"
+       id="guide5611" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="197.33639,691.52067"
+       id="guide5613" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="379.49305,695.73726"
+       id="guide6104" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="495.87092,407.32254"
+       id="guide6124" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="258.05527,763.20269"
+       id="guide6279" />
+  </sodipodi:namedview>
+  <defs
+     id="defs4">
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#Strips1_5-955"
+       id="pattern5651-740"
+       patternTransform="matrix(-0.92009149,1.2185448,-7.980521,-6.025884,-72.933832,34.179517)" />
+    <pattern
+       inkscape:stockid="Stripes 1:5"
+       id="Strips1_5-955"
+       patternTransform="translate(0,0) scale(10,10)"
+       height="1"
+       width="6"
+       patternUnits="userSpaceOnUse"
+       inkscape:collect="always">
+      <rect
+         id="rect5674"
+         height="2"
+         width="1"
+         y="-0.5"
+         x="0"
+         style="fill:#808080;stroke:none" />
+    </pattern>
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#Strips1_5-414"
+       id="pattern5661-941"
+       patternTransform="matrix(-1.0814995,1.201834,-73.674108,-66.297438,0.23270721,32.711592)" />
+    <pattern
+       inkscape:stockid="Stripes 1:5"
+       id="Strips1_5-414"
+       patternTransform="translate(0,0) scale(10,10)"
+       height="1"
+       width="6"
+       patternUnits="userSpaceOnUse"
+       inkscape:collect="always">
+      <rect
+         id="rect5752"
+         height="2"
+         width="1"
+         y="-0.5"
+         x="0"
+         style="fill:#808080;stroke:none" />
+    </pattern>
+    <pattern
+       patternTransform="matrix(-0.92009149,1.2185448,-7.980521,-6.025884,-73.175102,-46.591123)"
+       id="pattern5823"
+       xlink:href="#pattern5651-740-2"
+       inkscape:collect="always" />
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#Strips1_5-955-0"
+       id="pattern5651-740-2"
+       patternTransform="matrix(-0.92009149,1.2185448,-7.980521,-6.025884,-72.933832,30.179517)" />
+    <pattern
+       inkscape:stockid="Stripes 1:5"
+       id="Strips1_5-955-0"
+       patternTransform="translate(0,0) scale(10,10)"
+       height="1"
+       width="6"
+       patternUnits="userSpaceOnUse"
+       inkscape:collect="always">
+      <rect
+         id="rect5674-9"
+         height="2"
+         width="1"
+         y="-0.5"
+         x="0"
+         style="fill:#808080;stroke:none" />
+    </pattern>
+    <pattern
+       patternTransform="matrix(-1.0814995,1.201834,-73.674108,-66.297438,-0.2327068,-130.86445)"
+       id="pattern5854"
+       xlink:href="#pattern5661-941-3"
+       inkscape:collect="always" />
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#Strips1_5-414-7"
+       id="pattern5661-941-3"
+       patternTransform="matrix(-1.0814995,1.201834,-73.674108,-66.297438,0,0)" />
+    <pattern
+       inkscape:stockid="Stripes 1:5"
+       id="Strips1_5-414-7"
+       patternTransform="translate(0,0) scale(10,10)"
+       height="1"
+       width="6"
+       patternUnits="userSpaceOnUse"
+       inkscape:collect="always">
+      <rect
+         id="rect5752-2"
+         height="2"
+         width="1"
+         y="-0.5"
+         x="0"
+         style="fill:#808080;stroke:none" />
+    </pattern>
+    <pattern
+       patternTransform="matrix(-1.084163,1.2018204,-73.855552,-66.296688,61.988721,201.98565)"
+       id="pattern5854-2"
+       xlink:href="#pattern5661-941-3-6"
+       inkscape:collect="always" />
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#Strips1_5-414-7-6"
+       id="pattern5661-941-3-6"
+       patternTransform="matrix(-1.0814995,1.201834,-73.674108,-66.297438,0,0)" />
+    <pattern
+       inkscape:stockid="Stripes 1:5"
+       id="Strips1_5-414-7-6"
+       patternTransform="translate(0,0) scale(10,10)"
+       height="1"
+       width="6"
+       patternUnits="userSpaceOnUse"
+       inkscape:collect="always">
+      <rect
+         id="rect5752-2-0"
+         height="2"
+         width="1"
+         y="-0.5"
+         x="0"
+         style="fill:#808080;stroke:none" />
+    </pattern>
+    <pattern
+       patternTransform="matrix(-0.91455844,1.2176883,-7.9325294,-6.0216485,-71.803366,286.37585)"
+       id="pattern5823-3"
+       xlink:href="#pattern5651-740-2-8"
+       inkscape:collect="always" />
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#Strips1_5-955-0-0"
+       id="pattern5651-740-2-8"
+       patternTransform="matrix(-0.92009149,1.2185448,-7.980521,-6.025884,-72.933832,30.179517)" />
+    <pattern
+       inkscape:stockid="Stripes 1:5"
+       id="Strips1_5-955-0-0"
+       patternTransform="translate(0,0) scale(10,10)"
+       height="1"
+       width="6"
+       patternUnits="userSpaceOnUse"
+       inkscape:collect="always">
+      <rect
+         id="rect5674-9-1"
+         height="2"
+         width="1"
+         y="-0.5"
+         x="0"
+         style="fill:#808080;stroke:none" />
+    </pattern>
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#Strips1_5-414-5"
+       id="pattern5661-941-2"
+       patternTransform="matrix(-1.0854866,1.2018136,-73.945719,-66.296318,61.586594,365.77274)" />
+    <pattern
+       inkscape:stockid="Stripes 1:5"
+       id="Strips1_5-414-5"
+       patternTransform="translate(0,0) scale(10,10)"
+       height="1"
+       width="6"
+       patternUnits="userSpaceOnUse"
+       inkscape:collect="always">
+      <rect
+         id="rect5752-0"
+         height="2"
+         width="1"
+         y="-0.5"
+         x="0"
+         style="fill:#808080;stroke:none" />
+    </pattern>
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#Strips1_5-955-4"
+       id="pattern5651-740-9"
+       patternTransform="matrix(-0.91237414,1.2186022,-7.913583,-6.0261679,-71.255774,366.20714)" />
+    <pattern
+       inkscape:stockid="Stripes 1:5"
+       id="Strips1_5-955-4"
+       patternTransform="translate(0,0) scale(10,10)"
+       height="1"
+       width="6"
+       patternUnits="userSpaceOnUse"
+       inkscape:collect="always">
+      <rect
+         id="rect5674-7"
+         height="2"
+         width="1"
+         y="-0.5"
+         x="0"
+         style="fill:#808080;stroke:none" />
+    </pattern>
+    <pattern
+       patternTransform="matrix(-1.1617448,1.2014311,-79.140591,-66.275214,215.01002,504.12482)"
+       id="pattern5854-2-0"
+       xlink:href="#pattern5661-941-3-6-9"
+       inkscape:collect="always" />
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#Strips1_5-414-7-6-9"
+       id="pattern5661-941-3-6-9"
+       patternTransform="matrix(-1.0814995,1.201834,-73.674108,-66.297438,0,0)" />
+    <pattern
+       inkscape:stockid="Stripes 1:5"
+       id="Strips1_5-414-7-6-9"
+       patternTransform="translate(0,0) scale(10,10)"
+       height="1"
+       width="6"
+       patternUnits="userSpaceOnUse"
+       inkscape:collect="always">
+      <rect
+         id="rect5752-2-0-6"
+         height="2"
+         width="1"
+         y="-0.5"
+         x="0"
+         style="fill:#808080;stroke:none" />
+    </pattern>
+    <pattern
+       patternTransform="matrix(-0.91601177,1.2185706,-7.945135,-6.0260118,-72.568276,588.30912)"
+       id="pattern5823-3-8"
+       xlink:href="#pattern5651-740-2-8-3"
+       inkscape:collect="always" />
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#Strips1_5-955-0-0-4"
+       id="pattern5651-740-2-8-3"
+       patternTransform="matrix(-0.92009149,1.2185448,-7.980521,-6.025884,-72.933832,30.179517)" />
+    <pattern
+       inkscape:stockid="Stripes 1:5"
+       id="Strips1_5-955-0-0-4"
+       patternTransform="translate(0,0) scale(10,10)"
+       height="1"
+       width="6"
+       patternUnits="userSpaceOnUse"
+       inkscape:collect="always">
+      <rect
+         id="rect5674-9-1-8"
+         height="2"
+         width="1"
+         y="-0.5"
+         x="0"
+         style="fill:#808080;stroke:none" />
+    </pattern>
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#Strips1_5-414-5-9"
+       id="pattern5661-941-2-4"
+       patternTransform="matrix(-1.1617446,1.2014311,-79.140587,-66.275215,215.71069,668.75379)" />
+    <pattern
+       inkscape:stockid="Stripes 1:5"
+       id="Strips1_5-414-5-9"
+       patternTransform="translate(0,0) scale(10,10)"
+       height="1"
+       width="6"
+       patternUnits="userSpaceOnUse"
+       inkscape:collect="always">
+      <rect
+         id="rect5752-0-9"
+         height="2"
+         width="1"
+         y="-0.5"
+         x="0"
+         style="fill:#808080;stroke:none" />
+    </pattern>
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#Strips1_5-955-4-5"
+       id="pattern5651-740-9-2"
+       patternTransform="matrix(-0.91487495,1.2185864,-7.9352741,-6.0260897,-73.318826,665.10931)" />
+    <pattern
+       inkscape:stockid="Stripes 1:5"
+       id="Strips1_5-955-4-5"
+       patternTransform="translate(0,0) scale(10,10)"
+       height="1"
+       width="6"
+       patternUnits="userSpaceOnUse"
+       inkscape:collect="always">
+      <rect
+         id="rect5674-7-5"
+         height="2"
+         width="1"
+         y="-0.5"
+         x="0"
+         style="fill:#808080;stroke:none" />
+    </pattern>
+  </defs>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:none;stroke:#999999;stroke-width:1.15458930000000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3.46376794999999980, 1.15458931000000000;stroke-dashoffset:0"
+       d="m 440.11936,312.77239 0,-213.614798"
+       id="path5580"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Thiago Silva\Documents\Dropbox\EstatisticaINPE\Aula_7_multipla\figuras\multi1.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829" />
+    <path
+       style="fill:none;stroke:#999999;stroke-width:1.15303230000000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3.45909699999999990, 1.15303233000000000;stroke-dashoffset:0"
+       d="m 258.91867,312.77239 0,-213.614798"
+       id="path5580-6"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Thiago Silva\Documents\Dropbox\EstatisticaINPE\Aula_7_multipla\figuras\multi1.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829" />
+    <path
+       style="fill:none;stroke:#999999;stroke-width:1.15147746000000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3.45443225000000000, 1.15147742000000000;stroke-dashoffset:0"
+       d="m 62.926091,312.19665 0,-213.039058"
+       id="path5580-5"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Thiago Silva\Documents\Dropbox\EstatisticaINPE\Aula_7_multipla\figuras\multi1.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829" />
+    <path
+       style="fill:none;stroke:#808080;stroke-width:1.15040278;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3.45120821, 1.15040273;stroke-dashoffset:0"
+       d="m 380.06825,644.46444 0,-212.64098"
+       id="path5580-4"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Thiago Silva\Documents\Dropbox\EstatisticaINPE\Aula_7_multipla\figuras\multi2.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829" />
+    <path
+       style="fill:none;stroke:#808080;stroke-width:1.15040278000000010;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3.45120825000000010, 1.15040275000000000;stroke-dashoffset:0"
+       d="m 197.87961,642.99039 0,-212.64098"
+       id="path5580-6-1"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Thiago Silva\Documents\Dropbox\EstatisticaINPE\Aula_7_multipla\figuras\multi2.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829" />
+    <path
+       style="fill:none;stroke:#808080;stroke-width:1.15040278000000010;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3.45120819000000000, 1.15040272999999990;stroke-dashoffset:0"
+       d="m 63.455881,643.98269 0,-212.64098"
+       id="path5580-5-4"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Thiago Silva\Documents\Dropbox\EstatisticaINPE\Aula_7_multipla\figuras\multi2.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829" />
+    <path
+       style="fill:none;stroke:#808080;stroke-width:1.15040278;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3.45120825, 1.15040275;stroke-dashoffset:0"
+       d="m 258.63047,644.46444 0,-212.64098"
+       id="path5580-6-1-1"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Thiago Silva\Documents\Dropbox\EstatisticaINPE\Aula_7_multipla\figuras\multi2.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829" />
+    <rect
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.84269631"
+       id="rect2985"
+       width="598.64734"
+       height="49.957489"
+       x="62.880684"
+       y="98.817375"
+       inkscape:export-filename="C:\Users\Thiago Silva\Documents\Dropbox\EstatisticaINPE\Aula_7_multipla\figuras\multi1.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829" />
+    <rect
+       style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-width:0.67035162;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect2985-8-2"
+       width="377.28409"
+       height="50.13039"
+       x="62.880684"
+       y="98.730927"
+       inkscape:export-filename="C:\Users\Thiago Silva\Documents\Dropbox\EstatisticaINPE\Aula_7_multipla\figuras\multi1.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="551.13068"
+       y="133.40549"
+       id="text2987"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\Users\Thiago Silva\Documents\Dropbox\EstatisticaINPE\Aula_7_multipla\figuras\multi1.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829"><tspan
+         sodipodi:role="line"
+         id="tspan2989"
+         x="551.13068"
+         y="133.40549"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Serif;-inkscape-font-specification:Serif Italic">Var(Y)</tspan></text>
+    <rect
+       style="fill:url(#pattern5651-740);fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.48252741"
+       id="rect2985-8"
+       width="194.87817"
+       height="50.316483"
+       x="64.042282"
+       y="179.40851"
+       ry="0"
+       inkscape:export-filename="C:\Users\Thiago Silva\Documents\Dropbox\EstatisticaINPE\Aula_7_multipla\figuras\multi1.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829" />
+    <rect
+       style="fill:url(#pattern5661-941);fill-opacity:1;stroke:#000000;stroke-width:0.46542811"
+       id="rect2985-8-0"
+       width="181.24431"
+       height="50.33503"
+       x="-439.93207"
+       y="262.20465"
+       transform="scale(-1,1)"
+       inkscape:export-filename="C:\Users\Thiago Silva\Documents\Dropbox\EstatisticaINPE\Aula_7_multipla\figuras\multi1.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="145.16537"
+       y="213.80893"
+       id="text2987-0"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\Users\Thiago Silva\Documents\Dropbox\EstatisticaINPE\Aula_7_multipla\figuras\multi1.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829"><tspan
+         sodipodi:role="line"
+         id="tspan2989-2"
+         x="145.16537"
+         y="213.80893"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Serif;-inkscape-font-specification:Serif Italic">X<tspan
+   style="font-size:65.00091553%;baseline-shift:sub"
+   id="tspan5576">1</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="332.32739"
+       y="296.61435"
+       id="text2987-4"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\Users\Thiago Silva\Documents\Dropbox\EstatisticaINPE\Aula_7_multipla\figuras\multi1.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829"><tspan
+         sodipodi:role="line"
+         id="tspan2989-8"
+         x="332.32739"
+         y="296.61435"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Serif;-inkscape-font-specification:Serif Italic">X<tspan
+   style="font-size:65.00091553%;baseline-shift:sub"
+   id="tspan5578">2</tspan></tspan></text>
+    <rect
+       style="fill:url(#pattern5823);fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.48252741"
+       id="rect2985-8-7"
+       width="194.87817"
+       height="50.316483"
+       x="63.801014"
+       y="98.637878"
+       ry="0"
+       inkscape:export-filename="C:\Users\Thiago Silva\Documents\Dropbox\EstatisticaINPE\Aula_7_multipla\figuras\multi1.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829" />
+    <rect
+       style="fill:url(#pattern5854);fill-opacity:1;stroke:#000000;stroke-width:0.46542811"
+       id="rect2985-8-0-6"
+       width="181.24431"
+       height="50.33503"
+       x="-440.39746"
+       y="98.628601"
+       transform="scale(-1,1)"
+       inkscape:export-filename="C:\Users\Thiago Silva\Documents\Dropbox\EstatisticaINPE\Aula_7_multipla\figuras\multi1.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829" />
+    <text
+       xml:space="preserve"
+       style="font-size:16.74106407px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Serif;-inkscape-font-specification:Serif"
+       x="70.053658"
+       y="171.21384"
+       id="text5871"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\Users\Thiago Silva\Documents\Dropbox\EstatisticaINPE\Aula_7_multipla\figuras\multi1.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829"><tspan
+         sodipodi:role="line"
+         id="tspan5875"
+         x="70.053658"
+         y="171.21384">Informação para estimar <tspan
+   style="font-style:italic"
+   id="tspan5950">β</tspan><tspan
+   style="font-size:10.88184357px;font-style:italic;baseline-shift:sub"
+   id="tspan5877">1</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:15.74173164px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Serif;-inkscape-font-specification:Serif"
+       x="263.91791"
+       y="251.89462"
+       id="text5871-5"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\Users\Thiago Silva\Documents\Dropbox\EstatisticaINPE\Aula_7_multipla\figuras\multi1.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829"><tspan
+         sodipodi:role="line"
+         id="tspan5875-9"
+         x="263.91791"
+         y="251.89462">Informação para estimar <tspan
+   style="font-style:italic"
+   id="tspan5952">β</tspan><tspan
+   style="font-size:10.23226929px;font-style:italic;baseline-shift:sub"
+   id="tspan5927">2</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:16.74106407px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Serif;-inkscape-font-specification:Serif"
+       x="119.56926"
+       y="84.038437"
+       id="text5871-8"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\Users\Thiago Silva\Documents\Dropbox\EstatisticaINPE\Aula_7_multipla\figuras\multi1.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829"><tspan
+         sodipodi:role="line"
+         id="tspan5875-1"
+         x="119.56926"
+         y="84.038437">Total de variância explicado por <tspan
+   style="font-style:italic"
+   id="tspan5944">X</tspan><tspan
+   style="font-size:65.00091553%;font-style:italic;baseline-shift:sub"
+   id="tspan5942">1</tspan> e <tspan
+   style="font-style:italic"
+   id="tspan5948">X</tspan><tspan
+   style="font-size:65.00091553%;font-style:italic;baseline-shift:sub"
+   id="tspan5940">2</tspan></tspan></text>
+    <rect
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.84269631"
+       id="rect2985-83"
+       width="598.64734"
+       height="49.957489"
+       x="63.411018"
+       y="431.66458"
+       inkscape:export-filename="C:\Users\Thiago Silva\Documents\Dropbox\EstatisticaINPE\Aula_7_multipla\figuras\multi2.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829" />
+    <rect
+       style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-width:0.61365235;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect2985-8-2-5"
+       width="315.80356"
+       height="50.187088"
+       x="63.382668"
+       y="431.5498"
+       inkscape:export-filename="C:\Users\Thiago Silva\Documents\Dropbox\EstatisticaINPE\Aula_7_multipla\figuras\multi2.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="551.66101"
+       y="466.25272"
+       id="text2987-1"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\Users\Thiago Silva\Documents\Dropbox\EstatisticaINPE\Aula_7_multipla\figuras\multi2.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829"><tspan
+         sodipodi:role="line"
+         id="tspan2989-20"
+         x="551.66101"
+         y="466.25272"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Serif;-inkscape-font-specification:Serif Italic">Var(Y)</tspan></text>
+    <rect
+       style="fill:url(#pattern5651-740-9);fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.48051086"
+       id="rect2985-8-1"
+       width="193.24359"
+       height="50.318855"
+       x="64.571426"
+       y="511.44299"
+       ry="0"
+       inkscape:export-filename="C:\Users\Thiago Silva\Documents\Dropbox\EstatisticaINPE\Aula_7_multipla\figuras\multi2.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829" />
+    <rect
+       style="fill:url(#pattern5661-941-2);fill-opacity:1;stroke:#000000;stroke-width:0.46628127"
+       id="rect2985-8-0-64"
+       width="181.91251"
+       height="50.334175"
+       x="-380.20093"
+       y="595.2619"
+       transform="scale(-1,1)"
+       inkscape:export-filename="C:\Users\Thiago Silva\Documents\Dropbox\EstatisticaINPE\Aula_7_multipla\figuras\multi2.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="145.69571"
+       y="545.8446"
+       id="text2987-0-0"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\Users\Thiago Silva\Documents\Dropbox\EstatisticaINPE\Aula_7_multipla\figuras\multi2.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829"><tspan
+         sodipodi:role="line"
+         id="tspan2989-2-6"
+         x="145.69571"
+         y="545.8446"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Serif;-inkscape-font-specification:Serif Italic">X<tspan
+   style="font-size:65.00091553%;baseline-shift:sub"
+   id="tspan5576-1">1</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="332.59668"
+       y="629.67114"
+       id="text2987-4-8"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\Users\Thiago Silva\Documents\Dropbox\EstatisticaINPE\Aula_7_multipla\figuras\multi2.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829"><tspan
+         sodipodi:role="line"
+         id="tspan2989-8-9"
+         x="332.59668"
+         y="629.67114"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Serif;-inkscape-font-specification:Serif Italic">X<tspan
+   style="font-size:65.00091553%;baseline-shift:sub"
+   id="tspan5578-8">2</tspan></tspan></text>
+    <rect
+       style="fill:url(#pattern5823-3);fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.48090526"
+       id="rect2985-8-7-3"
+       width="193.70625"
+       height="50.281116"
+       x="64.349022"
+       y="431.50278"
+       ry="0"
+       inkscape:export-filename="C:\Users\Thiago Silva\Documents\Dropbox\EstatisticaINPE\Aula_7_multipla\figuras\multi2.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829" />
+    <rect
+       style="fill:url(#pattern5854-2);fill-opacity:1;stroke:#000000;stroke-width:0.46599826"
+       id="rect2985-8-0-6-9"
+       width="181.69067"
+       height="50.334461"
+       x="-379.26004"
+       y="431.47614"
+       transform="scale(-1,1)"
+       inkscape:export-filename="C:\Users\Thiago Silva\Documents\Dropbox\EstatisticaINPE\Aula_7_multipla\figuras\multi2.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829" />
+    <text
+       xml:space="preserve"
+       style="font-size:16.74106407px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Serif;-inkscape-font-specification:Serif"
+       x="69.404175"
+       y="502.40619"
+       id="text5871-88"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\Users\Thiago Silva\Documents\Dropbox\EstatisticaINPE\Aula_7_multipla\figuras\multi2.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829"><tspan
+         sodipodi:role="line"
+         id="tspan5875-0"
+         x="69.404175"
+         y="502.40619">Informação para estimar <tspan
+   style="font-style:italic"
+   id="tspan5950-8">β</tspan><tspan
+   style="font-size:10.88184357px;font-style:italic;baseline-shift:sub"
+   id="tspan5877-7">1</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:16.74106407px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Serif;-inkscape-font-specification:Serif"
+       x="198.28404"
+       y="583.05103"
+       id="text5871-5-7"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\Users\Thiago Silva\Documents\Dropbox\EstatisticaINPE\Aula_7_multipla\figuras\multi2.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829"><tspan
+         sodipodi:role="line"
+         id="tspan5875-9-8"
+         x="198.28404"
+         y="583.05103">Informação para estimar <tspan
+   style="font-style:italic"
+   id="tspan5952-3">β</tspan><tspan
+   style="font-size:65.00091553%;font-style:italic;baseline-shift:sub"
+   id="tspan5927-8">2</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:16.74106407px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Serif;-inkscape-font-specification:Serif"
+       x="86.366875"
+       y="415.23077"
+       id="text5871-8-3"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\Users\Thiago Silva\Documents\Dropbox\EstatisticaINPE\Aula_7_multipla\figuras\multi2.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829"><tspan
+         sodipodi:role="line"
+         id="tspan5875-1-7"
+         x="86.366875"
+         y="415.23077">Total de variância explicado por <tspan
+   style="font-style:italic"
+   id="tspan5944-1">X</tspan><tspan
+   style="font-size:65.00091553%;font-style:italic;baseline-shift:sub"
+   id="tspan5942-0">1</tspan> e <tspan
+   style="font-style:italic"
+   id="tspan5948-7">X</tspan><tspan
+   style="font-size:65.00091553%;font-style:italic;baseline-shift:sub"
+   id="tspan5940-3">2</tspan></tspan></text>
+    <path
+       style="fill:none;stroke:#808080;stroke-width:1.15040278;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3.45120819, 1.15040273;stroke-dashoffset:0"
+       d="m 62.925546,946.03932 0,-212.64099"
+       id="path5580-5-4-3"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Thiago Silva\OneDrive\UNESP\Pos_graduacao\Eco\2015\Estatistica_2015\Aulas\Aula_7_Anova\figuras\multi3v2.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829" />
+    <path
+       style="fill:none;stroke:#808080;stroke-width:1.15040278;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3.45120825, 1.15040275;stroke-dashoffset:0"
+       d="m 257.48007,948.20771 0,-212.64099"
+       id="path5580-6-1-1-7"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Thiago Silva\OneDrive\UNESP\Pos_graduacao\Eco\2015\Estatistica_2015\Aulas\Aula_7_Anova\figuras\multi3v2.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829" />
+    <rect
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.84269631"
+       id="rect2985-83-4"
+       width="598.64734"
+       height="49.957489"
+       x="62.88068"
+       y="733.72119"
+       inkscape:export-filename="C:\Users\Thiago Silva\OneDrive\UNESP\Pos_graduacao\Eco\2015\Estatistica_2015\Aulas\Aula_7_Anova\figuras\multi3v2.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829" />
+    <rect
+       style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-width:0.48286566;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect2985-8-2-5-3"
+       width="195.0269"
+       height="50.317875"
+       x="62.786934"
+       y="733.54102"
+       inkscape:export-filename="C:\Users\Thiago Silva\OneDrive\UNESP\Pos_graduacao\Eco\2015\Estatistica_2015\Aulas\Aula_7_Anova\figuras\multi3v2.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="551.13074"
+       y="768.30933"
+       id="text2987-1-8"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\Users\Thiago Silva\OneDrive\UNESP\Pos_graduacao\Eco\2015\Estatistica_2015\Aulas\Aula_7_Anova\figuras\multi3v2.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829"><tspan
+         sodipodi:role="line"
+         id="tspan2989-20-0"
+         x="551.13074"
+         y="768.30933"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Serif;-inkscape-font-specification:Serif Italic">Var(Y)</tspan></text>
+    <rect
+       style="fill:url(#pattern5651-740-9-2);fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.48116583"
+       id="rect2985-8-1-8"
+       width="193.77327"
+       height="50.318199"
+       x="62.880684"
+       y="810.34326"
+       ry="0"
+       inkscape:export-filename="C:\Users\Thiago Silva\OneDrive\UNESP\Pos_graduacao\Eco\2015\Estatistica_2015\Aulas\Aula_7_Anova\figuras\multi3v2.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829" />
+    <rect
+       style="fill:url(#pattern5661-941-2-4);fill-opacity:1;stroke:#000000;stroke-width:0.48230523"
+       id="rect2985-8-0-64-8"
+       width="194.69231"
+       height="50.31815"
+       x="-257.11346"
+       y="898.1698"
+       transform="scale(-1,1)"
+       inkscape:export-filename="C:\Users\Thiago Silva\OneDrive\UNESP\Pos_graduacao\Eco\2015\Estatistica_2015\Aulas\Aula_7_Anova\figuras\multi3v2.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="143.45132"
+       y="844.74457"
+       id="text2987-0-0-0"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\Users\Thiago Silva\OneDrive\UNESP\Pos_graduacao\Eco\2015\Estatistica_2015\Aulas\Aula_7_Anova\figuras\multi3v2.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829"><tspan
+         sodipodi:role="line"
+         id="tspan2989-2-6-6"
+         x="143.45132"
+         y="844.74457"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Serif;-inkscape-font-specification:Serif Italic">X<tspan
+   style="font-size:65.00091553%;baseline-shift:sub"
+   id="tspan5576-1-8">1</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="142.78481"
+       y="932.57104"
+       id="text2987-4-8-1"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\Users\Thiago Silva\OneDrive\UNESP\Pos_graduacao\Eco\2015\Estatistica_2015\Aulas\Aula_7_Anova\figuras\multi3v2.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829"><tspan
+         sodipodi:role="line"
+         id="tspan2989-8-9-9"
+         x="142.78481"
+         y="932.57104"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Serif;-inkscape-font-specification:Serif Italic">X<tspan
+   style="font-size:65.00091553%;baseline-shift:sub"
+   id="tspan5578-8-8">2</tspan></tspan></text>
+    <rect
+       style="fill:url(#pattern5823-3-8);fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.48146155"
+       id="rect2985-8-7-3-9"
+       width="194.01407"
+       height="50.317551"
+       x="63.800472"
+       y="733.5412"
+       ry="0"
+       inkscape:export-filename="C:\Users\Thiago Silva\OneDrive\UNESP\Pos_graduacao\Eco\2015\Estatistica_2015\Aulas\Aula_7_Anova\figuras\multi3v2.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829" />
+    <rect
+       style="fill:url(#pattern5854-2-0);fill-opacity:1;stroke:#000000;stroke-width:0.48230523"
+       id="rect2985-8-0-6-9-7"
+       width="194.69229"
+       height="50.318153"
+       x="-257.81412"
+       y="733.54089"
+       transform="scale(-1,1)"
+       inkscape:export-filename="C:\Users\Thiago Silva\OneDrive\UNESP\Pos_graduacao\Eco\2015\Estatistica_2015\Aulas\Aula_7_Anova\figuras\multi3v2.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829" />
+    <text
+       xml:space="preserve"
+       style="font-size:16.74106407px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Serif;-inkscape-font-specification:Serif"
+       x="69.233322"
+       y="801.30609"
+       id="text5871-88-2"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\Users\Thiago Silva\OneDrive\UNESP\Pos_graduacao\Eco\2015\Estatistica_2015\Aulas\Aula_7_Anova\figuras\multi3v2.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829"><tspan
+         sodipodi:role="line"
+         id="tspan5875-0-2"
+         x="69.233322"
+         y="801.30609">Informação para estimar <tspan
+   style="font-style:italic"
+   id="tspan5950-8-8">β</tspan><tspan
+   style="font-size:10.88184357px;font-style:italic;baseline-shift:sub"
+   id="tspan5877-7-2">1</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:16.03825569px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Serif;-inkscape-font-specification:Serif"
+       x="262.56174"
+       y="883.57129"
+       id="text5871-5-7-8"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\Users\Thiago Silva\OneDrive\UNESP\Pos_graduacao\Eco\2015\Estatistica_2015\Aulas\Aula_7_Anova\figuras\multi3v2.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829"><tspan
+         sodipodi:role="line"
+         id="tspan5875-9-8-9"
+         x="262.56174"
+         y="883.57129">Informação para estimar <tspan
+   style="font-style:italic"
+   id="tspan5952-3-0">β</tspan><tspan
+   style="font-size:10.42501259px;font-style:italic;baseline-shift:sub"
+   id="tspan5927-8-7">2</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:16.74106407px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Serif;-inkscape-font-specification:Serif"
+       x="29.334238"
+       y="718.13068"
+       id="text5871-8-3-8"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\Users\Thiago Silva\OneDrive\UNESP\Pos_graduacao\Eco\2015\Estatistica_2015\Aulas\Aula_7_Anova\figuras\multi3v2.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829"><tspan
+         sodipodi:role="line"
+         id="tspan5875-1-7-1"
+         x="29.334238"
+         y="718.13068">Total de variância explicado por <tspan
+   style="font-style:italic"
+   id="tspan5944-1-5">X</tspan><tspan
+   style="font-size:65.00091553%;font-style:italic;baseline-shift:sub"
+   id="tspan5942-0-8">1</tspan> e <tspan
+   style="font-style:italic"
+   id="tspan5948-7-6">X</tspan><tspan
+   style="font-size:65.00091553%;font-style:italic;baseline-shift:sub"
+   id="tspan5940-3-1">2</tspan></tspan></text>
+    <path
+       style="fill:none;stroke:#999999;stroke-width:1.1545893;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3.46376795, 1.15458931;stroke-dashoffset:0"
+       d="m 440.74206,947.49677 0,-213.61477"
+       id="path5580-1"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Thiago Silva\OneDrive\UNESP\Pos_graduacao\Eco\2015\Estatistica_2015\Aulas\Aula_7_Anova\figuras\multi3v2.png"
+       inkscape:export-xdpi="199.99829"
+       inkscape:export-ydpi="199.99829" />
+  </g>
+</svg>

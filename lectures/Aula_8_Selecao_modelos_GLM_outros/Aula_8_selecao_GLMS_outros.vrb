@@ -1,0 +1,39 @@
+\frametitle{GLS}
+
+\begin{columns}[c]
+
+\column{0.7\linewidth}
+\setlength{\topsep}{2pt}
+\begin{knitrout}\tiny
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# Exemplo de Zuur et al. (2009) - Pássaros  }
+\hlstd{M1}\hlkwb{<-}\hlkwd{gls}\hlstd{(Birds} \hlopt{~} \hlstd{Rainfall} \hlopt{+} \hlstd{Year,} \hlkwc{na.action} \hlstd{= na.omit,}
+        \hlkwc{correlation} \hlstd{=} \hlkwd{corCompSymm}\hlstd{(}\hlkwc{form} \hlstd{=}\hlopt{~} \hlstd{Year),}
+        \hlkwc{data}\hlstd{=Hawaii)}
+
+\hlstd{M2}\hlkwb{<-}\hlkwd{gls}\hlstd{(Birds} \hlopt{~} \hlstd{Rainfall} \hlopt{+} \hlstd{Year,} \hlkwc{na.action} \hlstd{= na.omit,}
+      \hlkwc{correlation} \hlstd{=} \hlkwd{corAR1}\hlstd{(}\hlkwc{form} \hlstd{=}\hlopt{~} \hlstd{Year),} \hlkwc{data} \hlstd{= Hawaii)}
+
+\hlkwd{AIC}\hlstd{(M0,M1,M2)}
+\end{alltt}
+\begin{verbatim}
+##    df      AIC
+## M0  4 228.4798
+## M1  5 230.4798
+## M2  5 199.1394
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\column{0.4\linewidth}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=0.7\linewidth]{figure/glspt3-1}
+
+\includegraphics[width=0.7\linewidth]{figure/glspt3-2}
+
+\end{knitrout}
+
+\end{columns}
+

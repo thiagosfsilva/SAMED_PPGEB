@@ -1,0 +1,28 @@
+
+Interpretando o output do modelo de regressão no R \dots até agora.
+
+\begin{knitrout}\tiny
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+##
+## Call:
+## lm(formula = y ~ x)
+##
+## Residuals:
+##     Min      1Q  Median      3Q     Max
+## -7.7244 -3.9253  0.2196  3.5752  7.5188
+##
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)
+## (Intercept)   0.3632     2.0016   0.181    0.858
+## x             3.3127     0.2058  16.099 3.93e-12 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+##
+## Residual standard error: 4.81 on 18 degrees of freedom
+## Multiple R-squared:  0.9351,^^IAdjusted R-squared:  0.9315
+## F-statistic: 259.2 on 1 and 18 DF,  p-value: 3.925e-12
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+

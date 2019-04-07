@@ -1,0 +1,2396 @@
+\documentclass{beamer}
+\usefonttheme[onlymath]{serif}
+
+\usepackage[portuguese]{babel}
+\usepackage{graphicx}
+\usepackage{ulem} % Para texto em strikeout
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usetheme{m}
+
+\ifdefined\knitrout 
+\renewenvironment{knitrout}{\setlength{\topsep}{0mm}}{}
+\else
+\fi
+
+\title{Aula 5: Análise Gráfica e Exploratória}
+\subtitle{Análise Quantitativa de Dados Ambientais}
+\author{\textbf{Thiago S. F. Silva} - tsfsilva@rc.unesp.br}
+\institute{Programa de Pós Graduação em Geografia - IGCE/UNESP}
+\date{\today}
+
+\begin{document}
+
+<<opts, echo=FALSE>>=
+options(width=80)
+library(ggplot2)
+plotheme <- theme(axis.line = element_line(colour = "black", size=1), panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.border = element_blank(),panel.background = element_blank()) 
+@
+
+%===============================================================================%
+\begin{frame}[plain] % plain avoids a badbox error from page number in title page
+  \titlepage
+\end{frame}
+
+\begin{frame}{Outline}
+  \tableofcontents
+\end{frame}
+%===============================================================================%
+
+\section{Pra que serve análise exploratória?}
+
+
+%===============================================================================%
+\begin{frame}{Análise Exploratória de Dados (AED)}
+\centering
+
+\large{\textbf{Você iria a um encontro surpresa, sem saber nada sobre seu par?}} \pause
+
+\begin{figure}
+\includegraphics[width=0.6\linewidth]{C:/Users/thiago/OneDrive/UNESP/Pos_graduacao/Eco/2015/Estatistica_2015/Aulas/Aula_3_EDA_Graph/figs/sapo.jpg}
+\end{figure}
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}{Análise Exploratória de Dados (AED)}
+\setbeamercovered{transparent}  
+  
+\begin{itemize}
+
+\item  É essencial ficar ``íntimo'' dos dados antes de qualquer análise \pause
+\item	Você já possui um modelo conceitual (\textbf{Ou deveria\ldots}) \pause
+\item	Será que seus dados se conformam a esse modelo? \pause
+\item Será que seus dados foram coletados corretamente? \pause
+\item Será que seus dados foram \emph{registrados} corretamente? \pause
+\item Será \ldots? 
+\end{itemize}
+
+
+\end{frame} 
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}[fragile]{Análise Exploratória de Dados (AED)}
+
+<<bolas, echo=5, size='tiny'>>=
+set.seed(765)
+x <- c(rnorm(20,5,1), rnorm(20,30,1))
+y <- x + rnorm(40,0,3)
+m1 <- lm(y ~ x)
+summary(m1)
+@
+
+
+\end{frame} 
+%===============================================================================%
+% 
+%===============================================================================%
+\begin{frame}{Análise Exploratória de Dados (AED)}
+
+<<bolasnoeval, echo=TRUE, eval=FALSE, tidy=FALSE,size='scriptsize'>>=
+x <- c(rnorm(20,5,1),rnorm(20,30,1))
+
+y <- x + rnorm(40,0,3)
+@
+
+\centering
+<<bolasplot, echo=FALSE, fig.height=5, fig.width=5, out.width='0.6\\linewidth'>>=
+par(mar=c(7,5,1,1))
+plot(x,y)
+abline(m1,col="red")
+@
+
+
+
+\end{frame} 
+%===============================================================================%
+
+
+
+%===============================================================================%
+\begin{frame}[fragile]{Análise Exploratória de Dados (AED)}
+
+<<ushape, echo=5, size='tiny'>>=
+set.seed(765)
+x2 <- runif(50,-20,20)
+y2 <- 2 + 3*x2 + (2*x2^2) + rnorm(50,0,3)
+m2 <- lm(y2 ~ x2)
+summary(m2)
+@
+
+
+\end{frame} 
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}{Análise Exploratória de Dados (AED)}
+
+<<ushapenoeval, echo=TRUE, eval=FALSE, tidy=FALSE,size='scriptsize'>>=
+x2 <- runif(50,-20,20)
+
+y2 <- 2 + 3*x2 + (2*x2^2) + rnorm(50,0,3)
+@
+
+\centering
+<<ushapeplot, echo=FALSE, fig.height=5, fig.width=5, out.width='0.6\\linewidth'>>=
+par(mar=c(7,5,1,1))
+plot(x2,y2)
+abline(m1,col="red")
+@
+
+\end{frame} 
+%===============================================================================%
+
+
+
+
+%===============================================================================%
+\begin{frame}[fragile]{Análise Exploratória de Dados (AED)}
+
+\textbf{"O Quarteto de Anscombe"}
+
+\scriptsize{Anscombe, F.J., 1973. Graphs in Statistical Analysis. The American Statistician 27, 17–21.}
+
+\begin{columns}[c]
+
+\column{0.5\linewidth}
+
+<<size='tiny',echo=-1>>=
+ans = read.csv('C:/Users/thiago/OneDrive/UNESP/Pos_graduacao/Eco/2015/Estatistica_2015/Aulas/Aula_3_EDA_Graph/anscombe.csv')
+m1 <- lm(y1 ~ x1, data = ans)
+
+m1$coefficients
+
+
+m2 <- lm(y2 ~ x2, data = ans)
+
+m2$coefficients
+@
+
+\column{0.5\linewidth}
+
+<<size='tiny'>>=
+m3 <- lm(y3 ~ x3, data = ans)
+
+m3$coefficients
+
+
+m4 <- lm(y4 ~ x4, data = ans)
+
+m4$coefficients
+@
+
+\end{columns}
+
+\end{frame} 
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}[fragile]{O Quarteto de Anscombe}
+
+\begin{columns}[c]
+
+\column{0.5\linewidth}
+
+<<ans12,echo=FALSE,fig.height=4,fig.width=5,out.width='0.9\\linewidth',tidy=FALSE>>=
+par(mar=c(5,5,1,1))
+plot(ans$x1,ans$y1)
+abline(m1)
+plot(ans$x2,ans$y2)
+abline(m2)
+@
+
+\column{0.5\linewidth}
+
+<<an34,echo=FALSE,fig.height=4,fig.width=5,out.width='0.9\\linewidth',tidy=FALSE>>=
+par(mar=c(5,5,1,1))
+plot(ans$x3,ans$y3)
+abline(m3)
+plot(ans$x4,ans$y4)
+abline(m4)
+@
+
+\end{columns}
+
+\end{frame} 
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}{Análise Exploratória de Dados (AED)}
+%\setbeamercovered{transparent}  
+\linespread{1.5} 
+ 
+ A Análise Exploratória é normalmente composta por:
+ 
+\begin{itemize}
+
+\item \textbf{Estatísticas Descritivas}
+\item	\textbf{Análise Gráfica}
+\item  Aderência à distribuição
+\item Análise de Relações
+
+\end{itemize}
+
+
+\end{frame} 
+%===============================================================================%
+
+\section{Codificação e organização de dados}
+% 
+% %=============================================================================%
+% \begin{frame}{Codificação de Variáveis}{Teoria da mensuração}
+% 
+% \begin{tikzpicture}[grow=right]
+%   \tikzset{level distance=80pt,sibling distance=5pt}
+%   \tikzset{execute at begin node=\strut}
+%   \tikzset{every tree node/.style={anchor=base west}}
+%   \only<1>{\Tree [.Variáveis Qualitativas(Categóricas) Quantitativas ]}
+%   \only<2>{\Tree [.Variáveis [.Qualitativas Nominais Ordinais ] Quantitativas ]}
+%   \only<3>{\Tree [.Variáveis [.Qualitativas [.Nominais (Binárias) ] Ordinais ] Quantitativas ]}
+%   \only<4>{\Tree [.Variáveis [.Qualitativas Binárias Nominais Ordinais ] Quantitativas ] [.Quantitativas Intervalo Razão ]]}
+%   \only<5>{\Tree [.Variáveis [.Qualitativas Binárias Nominais Ordinais ] [.Quantitativas \alert{Discretas} \alert{Contínuas} ]]}
+% \end{tikzpicture}
+% 
+% \end{frame}
+% % %===============================================================================%
+% 
+% 
+% 
+% %===============================================================================%
+% \begin{frame}{Codificação de Variáveis}{Exemplos}
+% %\setbeamercovered{transparent}  
+% \linespread{1.5} 
+%  
+% \begin{itemize}
+% 
+% \item \textbf{Binária:} Sim/Não, Masculino/Feminino
+% \item \textbf{Nominal:} Esquerda/Direita/Centro, Floresta/Água/Solo
+% \item	\textbf{Ordinal:} Ruim/Médio/Bom, Baixo/Médio/Alto
+% \item \textbf{Intervalo:} Temperatura ($^{\circ}\mathrm{C}$) (intervalos iguais, sem zero absoluto, razões não fazem sentido) 
+% \item \textbf{Razão(\emph{Ratio}):} temperatura (K), altura (m), peso (g) (intervalos iguais, zero abosoluto, razões fazem sentido)
+% 
+% \end{itemize}
+% 
+% 
+% \end{frame} 
+% %===============================================================================%
+
+%===============================================================================%
+\begin{frame}[fragile]{Organizando tabelas de dados}
+
+\begin{Small}
+\begin{itemize}
+  \item Na maioria das vezes, recebemos ou tabulamos nossos dados no formato \emph{wide} (largo)
+  \item Mas a maioria dos pacotes de análise requer tabelas no formato \emph{long} (longo) 
+  \item Exemplo: um estudo de lagos em ambientes litorâneos, interiores e montanhosos
+\end{itemize}
+
+<<laketab1, size='tiny',out.width='\\textwidth', echo=2>>=
+lago.litoral <- read.table('lakedata_lit.txt',skip=1,header=T,sep=' ',dec='.')
+@
+
+
+\begin{tiny}
+<<laketablat, results='asis', echo=FALSE>>=
+library(xtable)
+xtable(lago.litoral,caption='Lagos litorâneos')
+@
+\end{tiny}
+
+% \begin{itemize} \pause
+%   \item{\textbf{Quantas variáveis existem nessa tabela?}}
+% \end{item}
+
+\end{Small}
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}[fragile]
+
+<<laketab2, size='tiny',out.width='\\textwidth', echo=2>>=
+lago.interior <- read.table('lakedata_int.txt',skip=1,header=T,sep=' ',dec='.')
+@
+
+\begin{tiny}
+<<laketablat2, results='asis', echo=FALSE>>=
+library(xtable)
+xtable(lago.interior, caption='Lagos interiores')
+@
+\end{tiny}
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}[fragile]
+
+<<laketab3, size='tiny',out.width='\\textwidth', echo=2>>=
+lago.montanha <- read.table('lakedata_mon.txt',skip=1,header=T,sep=' ',dec='.')
+@
+
+\begin{tiny}
+<<laketablat3, results='asis', echo=FALSE>>=
+library(xtable)
+xtable(lago.montanha, caption='Lagos de montanha')
+@
+\end{tiny}
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}
+\centering
+\textbf{Quantas variáveis possui esse estudo?}
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}{Quantas variáveis?}
+
+\begin{itemize}
+  \item Lago (L1, L2,\ldots - poderia ser analisada se tomássemos várias observações por lago) \pause
+  \item Região (Litoral, Interior, Montanha) \pause
+  \item Estação (Inverno, Verão) \pause
+  \item Temperatura \pause
+  \item pH
+\end{itemize}
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}[fragile]
+
+\begin{itemize}
+  \item No formato longo, cada coluna descreve uma variável, e cada linha representa uma observação:
+\end{itemize} \pause
+
+<<longtable, size='tiny'>>=
+lago.long <- read.csv('lakedata_long.csv')
+@
+
+\begin{tiny}
+\begin{table}[ht]
+\centering
+\begin{tabular}{rlllrr}
+  \hline
+ & Lago & Regiao & Estacao & Temp & pH \\ 
+  \hline
+1 & L1 & Litoral & Inverno & 20.32 & 6.50 \\ 
+  2 & L2 & Litoral & Inverno & 19.63 & 6.82 \\ 
+  3 & L3 & Litoral & Inverno & 20.99 & 7.11 \\ 
+  4 & L4 & Litoral & Inverno & 20.31 & 8.00 \\ 
+  5 & L5 & Litoral & Inverno & 20.13 & 6.56 \\ 
+  6 & L6 & Litoral & Inverno & 19.93 & 7.46 \\ 
+  7 & L7 & Litoral & Inverno & 20.95 & 7.25 \\ 
+  8 & L8 & Litoral & Inverno & 21.13 & 7.06 \\ 
+  9 & L9 & Litoral & Inverno & 19.70 & 6.70 \\ 
+  10 & L10 & Litoral & Inverno & 20.04 & 5.92 \\ 
+  11 & L11 & Interior & Inverno & 14.99 & 6.37 \\ 
+  12 & L12 & Interior & Inverno & 14.35 & 5.50 \\ 
+   \ldots & \ldots & \ldots & \ldots & \ldots & \ldots \\
+   54 & L24 & Montanha & Verao & 22.56 & 6.55 \\ 
+  55 & L25 & Montanha & Verao & 21.31 & 7.26 \\ 
+  56 & L26 & Montanha & Verao & 22.76 & 7.26 \\ 
+  57 & L27 & Montanha & Verao & 22.08 & 7.07 \\ 
+  58 & L28 & Montanha & Verao & 23.34 & 7.71 \\ 
+  59 & L29 & Montanha & Verao & 20.33 & 7.15 \\ 
+  60 & L30 & Montanha & Verao & 21.62 & 6.75 \\ 
+   \hline
+\end{tabular}
+\end{table}
+\end{tiny}
+
+\end{frame}
+
+%===============================================================================%
+
+
+\section{Estatística Descritiva}
+
+%===============================================================================%
+\begin{frame}{Estatística Descritiva: tendência central e dispersão}
+%\setbeamercovered{transparent}  
+\linespread{1.5} 
+ 
+Através da estatística descritiva, buscamos: 
+ 
+\begin{itemize}
+
+\item \emph{Localizar} nossos dados no espaço (numérico)
+\begin{itemize}
+  \item Quais os valores \emph{esperados} para estes dados?
+\end{itemize}
+\vfill
+\item  Quantificar a \emph{dispersão} destes dados em torno desta localidade
+\begin{itemize}
+  \item Qual a \emph{variância} dos meus dados?
+\end{itemize}
+\end{itemize}
+
+\end{frame} 
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}{Estatística Descritiva: tendência central e dispersão}
+%\setbeamercovered{transparent}  
+\linespread{1.5} 
+ 
+\textbf{Tendência central para dados contínuos?}
+
+\begin{columns}[c]
+
+\column{0.6\linewidth}
+
+\begin{itemize}
+  \only<2>{\item Média}
+%   \only<3-4>{\item \textcolor{gray}{Média aritmética}}
+%   \only<3>{\item Média geométrica}
+%   \only<4-4>{\item \textcolor{gray}{Média geométrica}}
+%   \only<4-4>{\item Média harmônica}
+\end{itemize}
+
+\column{0.4\linewidth}
+
+\only<2>{
+\begin{equation*}
+  \bar X_{(arit)} = \frac{1}{n} \sum_{i=1}^{n} x_i
+\end{equation*}
+}
+
+% \only<3>{
+% \begin{equation*}
+%   \bar X_{(geom)} = \left(\prod_{i=1}^{n}{x_i}\right)^\frac{1}{n} 
+% \end{equation*}
+% }
+% 
+% \only<3>{
+% \begin{equation*}
+%   \bar X_{(geom)} = \exp\left({\alert{\frac{1}{n}\sum_{i=1}^{n}} \log{x_i}}\right)
+% \end{equation*}
+% }
+% 
+% 
+% \only<4>{
+% \begin{equation*}
+%   \bar X = \left(\alert{\frac{1}{n}\sum_{i=1}^{n}}\frac{1}{x_i}\right)^{-1}
+% \end{equation*}
+% }
+
+\end{columns}
+
+\end{frame} 
+%===============================================================================%
+
+% %===============================================================================%
+% \begin{frame}{Tendência Central: Exemplos}
+% 
+% \begin{block}{Média Aritmética: para variáveis que se somam (efeitos aditivos)}
+%   Se eu tenho três pacotes, de 1kg, 6kg, e 3kg, quanto carrego de peso em média?
+%   
+%   \vspace{10 mm}
+%   
+%   $\frac{1 + 6 + 3}{3} = \Sexpr{mean(c(1,6,3))}$
+%   
+%   \vspace{10 mm}
+%   
+%   Ou seja, seria o mesmo que carregar 3 pacotes de \Sexpr{mean(c(1,6,3))}kg \txtbf{somados}
+% \end{block}
+% 
+% \end{frame}
+% %===============================================================================%
+% 
+% 
+% %===============================================================================%
+% \begin{frame}{Tendência Central: Exemplos}
+% 
+% \begin{small}
+% \begin{block}{Média Geométrica: para variáveis que se multiplicam (efeitos cumulativos)}
+%   Se sua bolsa de mestrado recebe um aumento de 1\% no primeiro ano, 6\% no segundo ano, e 3\% no terceiro ano, qual é o aumento médio nos 3 anos?
+%    
+%  \vspace{3 mm}
+%    
+% Bolsa final: R\$ $1500 * 1.01 * 1.06 * 1.03 =$ R\$ \Sexpr{round(1500 * 1.01*1.06*1.03,0)}
+% 
+%  \vspace{3 mm}
+%    
+%    $(1.01 * 1.06 * 1.03)^\frac{1}{3} = \Sexpr{1.01*1.06*1.03}^\frac{1}{3} = \Sexpr{(prod(c(1.01,1.06,1.03)))^(1/3)}$
+%  
+%  \vspace{3 mm}
+%  
+%     Ou seja, o aumento percentual médio foi de \Sexpr{-((1-(prod(c(1.01,1.06,1.03))^(1/3)))*100)} \%
+%   
+%   \vspace{5 mm}
+%   
+% Redimento: $1500 * 1.0331 * 1.0331 * 1.0331= \Sexpr{round(1500 * 1.0331*1.0331*1.0331,0)}$\pause
+% 
+% Aritmética: \alert{$1500 * 1.0333 * 1.0333 * 1.0333 = \Sexpr{round(1500 * 1.0333*1.0333*1.0333,0)}$}
+% \end{block}
+% \end{small}
+% 
+% \end{frame}
+% %===============================================================================%
+% 
+% 
+% %===============================================================================%
+% \begin{frame}{Tendência Central: Exemplos}
+% 
+% \begin{small}
+% \begin{block}{Média Harmônica: para proporções (recíprocos)}
+%  Você viaja de carro por 300km, a 20km/h nos primeiros 100km, a 40km/h nos próximos 100km, e finalmente a 80km/h nos 100km finais. Que velocidade você deveria manter constante para percorrer os mesmos 300km, no mesmo tempo?
+%    
+%  \vspace{3 mm}
+%  
+%   Parte 1: 100/20 = 5h; Parte 2: 100/40 = 2.5h; 100/80 = 1.25h; Tempo total =8.75h
+%  
+%   \vspace{3 mm}
+%    
+%    $\leff(\left(\frac{1}{3} \times \left(\frac{1}{20} + \frac{1}{40} + \frac{1}{80}\right)\right)^{-1} = \Sexpr{(mean(c(1/20,1/40,1/80)))^-1}$
+%  
+%  \vspace{3 mm}
+%  
+%     Ou seja, uma velocidade média de \Sexpr{(mean(1/c(20,40,80)))^-1} km/h
+%   
+%   \vspace{3 mm}
+%   
+% Distancia: \Sexpr{(mean(1/c(20,40,80)))^-1} * 8.75 = \Sexpr{((mean(1/c(20,40,80)))^-1)*8.75}\pause
+% 
+% Aritmética: \alert{\Sexpr{mean(c(20,40,80))} * 8.75  = \Sexpr{mean(c(20,40,80))*8.75}}
+% \end{block}
+% 
+% \end{small}
+% \end{frame}
+% %===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}{Estatística Descritiva: tendência central e dispersão}
+ 
+\textbf{Dispersão para dados contínuos?}
+
+\begin{columns}[T]
+
+\column{0.6\linewidth}
+
+\begin{itemize}
+  \only<2>{\item Variância e Desvio Padrão}
+  \only<3-4>{\item \textcolor{gray}{Variância e Desvio Padrão}}
+  \only<3>{\item Amplitude}
+  \only<4-4>{\item \textcolor{gray}{Amplitude}}
+  \only<4-4>{\item Coeficiente de Variação}
+\end{itemize}
+
+\column{0.4\linewidth}
+
+\only<2>{
+\begin{equation*}
+ s^2 = \frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar x)^2
+\end{equation*}
+}
+
+\only<2>{
+\begin{equation*}
+ s = \sqrt{s^2}
+\end{equation*}
+}
+
+\only<3>{
+\begin{equation*}
+  A = max(x) - min(x)
+\end{equation*}
+}
+
+\only<4>{
+\begin{equation*}
+  CV = \frac{s}{\bar x} * 100 (\%)
+\end{equation*}
+}
+
+\end{columns}
+
+\end{frame} 
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}[fragile]%{Tendência Central: Distribuição Normal}
+
+\begin{columns}[c]
+
+\column{0.49\linewidth}
+
+<<size='tiny',fig.keep='none'>>=
+set.seed(1979)
+x <- rnorm(500,50,10)
+cv <- function(x) sd(x)/mean(x) * 100
+mean(x)
+sd(x)
+cv(x)
+hist(x,breaks=40,prob=T,xlim=c(0,100),col='gray70')
+curve(dnorm(x,mean=50, sd=10), add=T)
+abline(v=mean(x),col='red')
+abline(v=c(mean(x)+sd(x),mean(x)-sd(x)),col='blue')
+abline(v=c(mean(x)+2*sd(x),mean(x)-2*sd(x)),col='purple')
+@
+
+\column{0.5\linewidth}
+\centering
+<<fig.width=5,fig.height=5,out.width='1.1\\linewidth', echo=FALSE>>=
+hist(x,breaks=40,prob=T,,xlim=c(0,100),col='gray70')
+curve(dnorm(x,mean=50, sd=10), add=T)
+abline(v=mean(x),col='red')
+abline(v=c(mean(x)+sd(x),mean(x)-sd(x)),col='blue')
+abline(v=c(mean(x)+2*sd(x),mean(x)-2*sd(x)),col='purple')
+@
+
+\end{columns}
+
+\end{frame} 
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}[fragile]%{Tendência Central: Distribuição Normal}
+
+\begin{columns}[c]
+
+\column{0.49\linewidth}
+
+<<size='tiny',fig.keep='none',eval=c(1:6)>>=
+set.seed(1979)
+x <- rnorm(500,50,20)
+cv <- function(x) sd(x)/mean(x) * 100
+mean(x)
+sd(x)
+cv(x)
+hist(x,breaks=40,prob=T,xlim=c(0,100),col='gray70')
+curve(dnorm(x,mean=50, sd=20), add=T)
+abline(v=mean(x),col='red')
+abline(v=c(mean(x)+sd(x),mean(x)-sd(x)),col='blue')
+abline(v=c(mean(x)+2*sd(x),mean(x)-2*sd(x)),col='purple')
+@
+
+\column{0.5\linewidth}
+\centering
+<<fig.width=5,fig.height=5,out.width='1.1\\linewidth', echo=FALSE>>=
+hist(x,breaks=40,prob=T,xlim=c(0,100),col='gray70')
+curve(dnorm(x,mean=50, sd=20), add=T)
+abline(v=mean(x),col='red')
+abline(v=c(mean(x)+sd(x),mean(x)-sd(x)),col='blue')
+abline(v=c(mean(x)+2*sd(x),mean(x)-2*sd(x)),col='purple')
+@
+
+\end{columns}
+
+\end{frame} 
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}{Estatística Descritiva: desvio padrão}
+
+\begin{columns}[c]
+
+\column{0.49\linewidth}
+
+A regra do $68$-$95$-$99.7$
+
+Para uma distribuição normal
+
+\begin{itemize}
+
+  \item $1 \times s \approx 68$ \% dos dados
+  \item $2 \times s \approx 95$ \% dos dados
+  \item $3 \times s \approx 99.7$ \% dos dados
+
+\end{itemize}
+\column{0.5\linewidth}
+\centering
+<<fig.width=5,fig.height=5,out.width='1.1\\linewidth', echo=FALSE>>=
+np <- rnorm(500,0,1)
+hist(np,breaks=40,prob=T,xlim=c(-4,4),col='gray70')
+curve(dnorm(x,mean=0, sd=1), add=T)
+abline(v=mean(np),col='red')
+abline(v=c(mean(np)+sd(np),mean(np)-sd(np)),col='blue')
+abline(v=c(mean(np)+2*sd(np),mean(np)-2*sd(np)),col='purple')
+abline(v=c(mean(np)+3*sd(np),mean(np)-3*sd(np)),col='pink')
+@
+
+\end{columns}
+
+
+\end{frame} 
+%===============================================================================%
+
+
+
+%===============================================================================%
+\begin{frame}{Estatística Descritiva: tendência central e dispersão}
+\setbeamercovered{transparent}  
+
+\textbf{Percentis (\emph{Percentiles}): medidas robustas de tendência central e dispersão}
+
+$k$-ésimo percentil = $k$\% de $n$ está abaixo desse valor, $(100-k)$\% de $n$ está acima desse valor
+
+\pause
+
+\begin{itemize}
+  \item \textbf{Mediana}: $k= 50$\%, $100-k =50$\%
+   
+\end{itemize}
+
+\end{frame} 
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}{Estatística Descritiva: tendência central e dispersão}
+\setbeamercovered{transparent}  
+
+\alert{Problema:} nem sempre existe um valor que satisfaça a condição, para um dado $k$
+
+$ x = [1, 2, 4, 33, 200]$
+
+$k(0\%) = 1$
+
+$k(25\%) = 2$
+
+$k(50\%) = 4$
+
+$k(75\%) = 33$
+
+$k(100\%) = 200$
+
+$k(95\%) = ?$
+
+\end{frame} 
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}{Estatística Descritiva: tendência central e dispersão}
+\setbeamercovered{transparent}  
+
+\textbf{Quantis (\emph{Quantiles}): podem ser calculados para qualquer amostra}
+
+$Q(p) = x:P(X < x) \leq p; P(X > x) \geq (1-p)$
+
+Se não há valores que satisfazem essa condição, o valor é interpolado proporcionalmente à distância entre os percentis dos valores $x_i$ e $x_{i+1}$ que enquadram o quantil desejado.
+\pause
+
+\begin{itemize}
+  \item \textbf{Mediana}: $Q(0.5)$
+  \item \textbf{Quartil Superior}: $Q(0.75)$
+  \item \textbf{Quartil Inferior}: $Q(0.25)$
+   
+\end{itemize}
+
+\end{frame} 
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}[fragile]%{Tendência Central: Distribuição Normal}
+
+\begin{columns}[c]
+
+\column{0.49\linewidth}
+
+<<size='tiny',fig.keep='none'>>=
+set.seed(1979)
+x <- rnorm(500,50,20)
+
+median(x)
+quantile(x,prob=0.5)
+quantile(x,prob=c(0.25,0.75))
+
+hist(x,breaks=40,prob=T,xlim=c(0,100),col='gray70')
+curve(dnorm(x,mean=50, sd=20), add=T)
+abline(v=median(x),col='red',lwd=2,lty=2)
+abline(v=quantile(x,prob=c(0.25,0.75)),#
+       col='blue',lwd=2,lty=2)
+@
+
+\column{0.5\linewidth}
+\centering
+<<fig.width=5,fig.height=5,out.width='1.1\\linewidth', echo=FALSE>>=
+hist(x,breaks=40,prob=T,xlim=c(0,100),col='gray70')
+curve(dnorm(x,mean=50, sd=20), add=T)
+
+abline(v=median(x),col='red',lwd=2,lty=2)
+abline(v=quantile(x,prob=c(0.25,0.75)),col='blue',lwd=2,lty=2)
+@
+
+\end{columns}
+
+\end{frame} 
+%===============================================================================%
+
+
+
+%===============================================================================%
+\begin{frame}[fragile]%{Tendência Central: Distribuição Normal}
+
+\begin{columns}[c]
+
+\column{0.49\linewidth}
+
+<<size='tiny',fig.keep='none'>>=
+set.seed(1979)
+x <- rnorm(500,50,20)
+
+hist(x,breaks=40,prob=T,xlim=c(0,100),col='gray70')
+curve(dnorm(x,mean=50, sd=20), add=T)
+abline(v=mean(x),col='red',lwd=2,lty=1)
+abline(v=median(x),col='red',lwd=2,lty=2)
+abline(v=c(mean(x)+sd(x),mean(x)-sd(x)),#
+       col='blue',lwd=2,lty=1)
+abline(v=quantile(x,prob=c(0.25,0.75)),#
+       col='purple',lwd=2,lty=2)
+abline(v=quantile(x,prob=c(0.16,0.84)),#
+       col='blue',lwd=2,lty=2)
+@
+
+\column{0.5\linewidth}
+\centering
+<<fig.width=5,fig.height=5,out.width='1.1\\linewidth', echo=FALSE>>=
+hist(x,breaks=40,prob=T,xlim=c(0,100),col='gray70')
+curve(dnorm(x,mean=50, sd=20), add=T)
+abline(v=mean(x),col='red',lwd=2,lty=1)
+abline(v=median(x),col='red',lwd=2,lty=2)
+abline(v=c(mean(x)+sd(x),mean(x)-sd(x)),col='blue',lwd=2,lty=1)
+abline(v=quantile(x,prob=c(0.25,0.75)),col='purple',lwd=2,lty=2)
+abline(v=quantile(x,prob=c(0.16,0.84)),col='blue',lwd=2,lty=2)
+@
+
+\end{columns}
+
+\end{frame} 
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}[fragile]%{Tendência Central: Distribuição Normal}
+
+\begin{columns}[c]
+
+\column{0.49\linewidth}
+
+<<size='tiny',fig.keep='none'>>=
+set.seed(1979)
+x <- rgeom(500,0.1)
+
+mean(x)
+median(x)
+sd(x)
+quantile(x,probs=c(0.25,0.50))
+@
+
+\column{0.5\linewidth}
+\centering
+<<fig.width=5,fig.height=5,out.width='1.1\\linewidth', echo=FALSE>>=
+hist(x,breaks=30,prob=T,col='gray70')
+abline(v=median(x),col='red',lwd=2,lty=2)
+abline(v=quantile(x,prob=c(0.25,0.75)),#
+       col='purple',lwd=2,lty=2)
+@
+
+\end{columns}
+
+\end{frame} 
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}[fragile]%{Tendência Central: Distribuição Normal}
+
+\begin{columns}[c]
+
+\column{0.49\linewidth}
+
+<<size='tiny',fig.keep='none',eval=c(1,2)>>=
+set.seed(1979)
+x <- rgeom(500,0.1)
+
+hist(x,breaks=30,prob=T,col='gray70')
+abline(v=mean(x),col='red',lwd=2,lty=1)
+abline(v=median(x),col='red',lwd=2,lty=2)
+abline(v=c(mean(x)+sd(x),mean(x)-sd(x)),#
+       col='blue',lwd=2,lty=1)
+abline(v=quantile(x,prob=c(0.25,0.75)),#
+       col='purple',lwd=2,lty=2)
+abline(v=quantile(x,prob=c(0.16,0.84)),#
+       col='blue',lwd=2,lty=2)
+@
+
+\column{0.5\linewidth}
+\centering
+<<fig.width=5,fig.height=5,out.width='1.1\\linewidth', echo=FALSE>>=
+hist(x,breaks=30,prob=T,,col='gray70')
+abline(v=mean(x),col='red',lwd=2,lty=1)
+abline(v=median(x),col='red',lwd=2,lty=2)
+abline(v=c(mean(x)+sd(x),mean(x)-sd(x)),col='blue',lwd=2,lty=1)
+abline(v=quantile(x,prob=c(0.25,0.75)),col='purple',lwd=2,lty=2)
+abline(v=quantile(x,prob=c(0.16,0.84)),col='blue',lwd=2,lty=2)
+@
+
+\end{columns}
+
+\end{frame} 
+%===============================================================================%
+
+
+
+%===============================================================================%
+\begin{frame}[fragile]%{Tendência Central: Distribuição Normal}
+
+\begin{itemize}
+  \item Os quantis são muito mais robustos com relação a valores extremos (\emph{outliers})
+\end{itemize}
+\begin{columns}[c]
+
+\column{0.49\linewidth}
+
+<<size='tiny',fig.keep='none'>>=
+x <- c(1,2,3,2,3,4,5,6,2,3,5,4,1,2,3,4,5,5,6,30)
+
+mean(x)
+median(x)
+hist(x,breaks=40,prob=T,,col='gray70')
+abline(v=mean(x),col='red',lwd=2,lty=1)
+abline(v=median(x),col='red',lwd=2,lty=2)
+@
+
+\column{0.5\linewidth}
+\centering
+<<fig.width=5,fig.height=5,out.width='1.1\\linewidth', echo=FALSE>>=
+hist(x,breaks=40,prob=T,,col='gray70')
+abline(v=mean(x),col='red',lwd=2,lty=1)
+abline(v=median(x),col='red',lwd=2,lty=2)
+@
+
+\end{columns}
+
+\end{frame} 
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}[fragile]%{Tendência Central: Distribuição Normal}
+
+\begin{itemize}
+  \item Os quantis são muito mais robustos com relação a valores extremos (\emph{outliers})
+\end{itemize}
+\begin{columns}[c]
+
+\column{0.49\linewidth}
+
+<<size='tiny',fig.keep='none'>>=
+x <- c(1,2,3,2,3,4,5,6,2,3,5,4,1,2,3,4,5,5,6,300)
+
+mean(x)
+median(x)
+hist(x,breaks=80,prob=T,,col='gray70')
+abline(v=mean(x),col='red',lwd=2,lty=1)
+abline(v=median(x),col='red',lwd=2,lty=2)
+@
+
+\column{0.5\linewidth}
+\centering
+<<fig.width=5,fig.height=5,out.width='1.1\\linewidth', echo=FALSE>>=
+hist(x,breaks=80,prob=T,,col='gray70')
+abline(v=mean(x),col='red',lwd=2,lty=1)
+abline(v=median(x),col='red',lwd=2,lty=2)
+@
+
+\end{columns}
+
+\end{frame} 
+%===============================================================================%
+
+
+
+%===============================================================================%
+\begin{frame}[fragile]%{Tendência Central: Distribuição Normal}
+
+\begin{itemize}
+  \item Os quantis são muito mais robustos com relação a valores extremos (\emph{outliers})
+\end{itemize}
+\begin{columns}[c]
+
+\column{0.49\linewidth}
+
+<<size='tiny',fig.keep='none'>>=
+x <- c(1,2,3,2,3,4,5,6,2,3,5,4,1,2,3,4,5,5,6,30)
+
+sd(x)
+quantile(x,prob=c(0.16,0.84))
+hist(x,breaks=40,prob=T,,col='gray70')
+abline(v=mean(x),col='red',lwd=2,lty=1)
+abline(v=median(x),col='red',lwd=2,lty=2)
+abline(v=c(mean(x)-sd(x),mean(x)+sd(x)),#
+       col='blue',lwd=2,lty=1)
+abline(v=quantile(x,prob=c(0.16,0.84)),#
+       col='blue',lwd=2,lty=2)
+@
+
+\column{0.5\linewidth}
+\centering
+<<fig.width=5,fig.height=5,out.width='1.1\\linewidth', echo=FALSE>>=
+hist(x,breaks=40,prob=T,,col='gray70')
+abline(v=mean(x),col='red',lwd=2,lty=1)
+abline(v=median(x),col='red',lwd=2,lty=2)
+abline(v=c(mean(x)-sd(x),mean(x)+sd(x)),col='blue',lwd=2,lty=1)
+abline(v=quantile(x,prob=c(0.16,0.84)),col='blue',lwd=2,lty=2)
+@
+
+\end{columns}
+
+\end{frame} 
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}{Estatística Descritiva: tendência central e dispersão}
+%\setbeamercovered{transparent}  
+\linespread{1.5} 
+ 
+\textbf{Tendência e dispersão para dados \emph{categóricos}?}
+
+\begin{small}
+\begin{itemize}
+  \item Qual a média de (Floresta, Campo, Cidade)? \pause
+  \item Solução: contagens, frequência, porcentagem, \emph{odds}\pause
+  \item Exemplo: Você gosta de estatística?
+\end{itemize}
+\end{small}
+
+\begin{columns}[c]
+\only<4-5>{
+\column{0.3\linewidth}
+\begin{tiny}
+\begin{table}[ht]
+\centering
+\begin{tabular}{rr}
+  \hline
+  Obs. & Gosto \\
+  \hline
+  1 & Sim\\
+  2 & Não\\
+  3 & Não\\
+  4 & Não\\
+  5 & Não\\
+  6 & Não\\
+  7 & Não\\
+  8 & Sim\\
+  9 & Sim\\
+  \hline
+\end{tabular}
+\end{table}
+\end{tiny}\pause
+}
+
+\column{0.6\linewidth}
+\only<5>{
+\begin{tiny}
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+  Variável & Contagem & Frequência & Porcentagem & \emph{odds}\\
+  \hline
+  Sim & 3 & 0.33 & 33\% & 0.5\\
+  Não & 6 & 0.66 & 66\% & 2\\
+  \hline
+\end{tabular}
+\end{table}
+\end{tiny}\pause
+}
+\end{columns}
+\end{frame} 
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}{Estatística Descritiva: tendência central e dispersão}
+%\setbeamercovered{transparent}  
+\linespread{1.5} 
+ 
+\textbf{Tendência e dispersão para dados \emph{categóricos}?}
+
+\begin{small}
+\begin{itemize}
+  \item Exemplo: O quanto você gosta de estatística? (1-Abomino, 2-Odeio, 3-Não Gosto, 4-Tolero,5-Adoro)
+\end{itemize}
+\end{small}
+
+\begin{columns}[c]
+\column{0.3\linewidth}
+\begin{tiny}
+\begin{table}[ht]
+\centering
+\begin{tabular}{rr}
+  \hline
+  Obs. & Gosto \\
+  \hline
+  1 & 5\\
+  2 & 1\\
+  3 & 1\\
+  4 & 1\\
+  5 & 2\\
+  6 & 2\\
+  7 & 3\\
+  8 & 3\\
+  9 & 4\\
+  \hline
+\end{tabular}
+\end{table}
+\end{tiny}
+
+
+\column{0.6\linewidth}
+\begin{tiny}
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+  Variável & Contagem & Frequência & Porcentagem & \emph{odds}\\
+  \hline
+  Abomino & 3 & 0.33 & 33\% & 0.5\\
+  Odeio & 2 & 0.25 & 25\% & 0.29\\
+  Não Gosto & 2 & 0.25 & 25\% & 0.29\\
+  Tolero & 1 & 0.1 & 10\% & 0.125\\
+  Adoro & 1 & 0.1 & 10\% & 0.125\\
+  \hline
+\end{tabular}
+\end{table}
+\end{tiny}
+\end{columns}
+\end{frame} 
+%===============================================================================%
+
+
+\section{Análise Gráfica}
+
+
+%===============================================================================%
+\begin{frame}{Análise Gráfica}
+\setbeamercovered{transparent}
+  
+\begin{itemize}
+
+\item O ser humano tem uma capacidade incrível de processar informações visuais \pause
+\vfill
+\item	A análise gráfica pode ser considerada uma das partes mais importantes do processo \pause
+\vfill
+\item	Muitas questões podem ser respondidas sem a necessidade de (\emph{mindless}) testes  \pause
+\vfill
+\item  Métodos de visualição tem sido um \emph{hot topic} em análise de dados atualmente  
+
+\end{itemize}
+
+
+\end{frame} 
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}{Tipos de Gráficos - 1 variável: Histograma}
+  
+\textbf{Histograma}  
+
+\begin{itemize}
+  \item Adequado para mostrar distribuições, pode ser usado tanto para dados categóricos quanto contínuos \pause
+  \vfill
+  \item  É importante definirem-se bem as subdivisões (\emph{bins})
+\end{itemize}
+
+
+\end{frame} 
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}[fragile]{Tipos de Gráficos - 1 variável: Histograma}
+
+\begin{columns}[t]
+
+\column{0.56\linewidth}
+<<size='tiny',echo=c(-1,-2),fig.keep='none'>>=
+load('C:/Users/thiago/OneDrive/UNESP/Pos_graduacao/Eco/2015/Estatistica_2015/Aulas/Aula_3_EDA_Graph/backscattering.Rdata')
+plot.data <- subset(bs,bs$modo=='S1' & bs$pol=='HH'& bs$classe=='floresta_inundavel'& bs$data=='2011-07-06')
+hist(plot.data$sigma0)
+@
+
+\column{0.5\linewidth}
+
+<<fig.height=5,fig.width=5,out.width='1\\linewidth',echo=F>>=
+hist(plot.data$sigma0)
+@
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}[fragile]{Tipos de Gráficos - 1 variável: Histograma}
+\begin{columns}[t]
+
+\column{0.56\linewidth}
+<<size='tiny',fig.keep='none',eval=F>>=
+hist(plot.data$sigma0)
+hist(plot.data$sigma0,breaks=40)
+@
+
+\column{0.5\linewidth}
+
+<<fig.height=5,fig.width=5,out.width='1\\linewidth',echo=F>>=
+hist(plot.data$sigma0,breaks=40)
+@
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}[fragile]{Tipos de Gráficos - 1 variável: Histograma}
+
+\begin{columns}[t]
+
+\column{0.56\linewidth}
+<<size='tiny',echo=-1,fig.keep='none',eval=F>>=
+hist(plot.data$sigma0)
+hist(plot.data$sigma0,breaks=40)
+hist(plot.data$sigma0,breaks=100)
+@
+
+\column{0.5\linewidth}
+
+<<fig.height=5,fig.width=5,out.width='1\\linewidth',echo=F>>=
+hist(plot.data$sigma0,breaks=100)
+@
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+
+
+
+%===============================================================================%
+\begin{frame}[fragile]{Tipos de Gráficos - 1 variável: Histograma}
+
+\begin{columns}[t]
+
+\column{0.56\linewidth}
+<<size='tiny',fig.keep='none',eval=F>>=
+hist(plot.data$sigma0)
+hist(plot.data$sigma0,breaks=40)
+hist(10*log10(plot.data$sigma0),breaks=30)
+@
+
+\column{0.5\linewidth}
+
+<<fig.height=5,fig.width=5,out.width='1\\linewidth',echo=F>>=
+hist(10*log10(plot.data$sigma0),breaks=30)
+@
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}[fragile]{Tipos de Gráficos - 1 variável: Histograma}
+
+\begin{columns}[t]
+
+\column{0.56\linewidth}
+<<size='tiny',fig.keep='none',eval=F>>=
+hist(plot.data$sigma0)
+hist(plot.data$sigma0,breaks=40)
+hist(plot.data$sigma0,breaks=400)
+hist(10*log10(plot.data$sigma0),breaks=30)
+hist(10*log10(plot.data$sigma0),breaks=30,prob=T)
+@
+
+\column{0.5\linewidth}
+
+<<fig.height=5,fig.width=5,out.width='1\\linewidth',echo=F>>=
+hist(10*log10(plot.data$sigma0),breaks=30,prob=T)
+@
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}[fragile]{Tipos de Gráficos - 1 variável: Histograma}
+
+\begin{columns}[t]
+
+\column{0.56\linewidth}
+<<size='tiny',fig.keep='none',eval=F>>=
+hist(plot.data$sigma0)
+hist(plot.data$sigma0,breaks=40)
+hist(plot.data$sigma0,breaks=400)
+hist(10*log10(plot.data$sigma0),breaks=30)
+hist(10*log10(plot.data$sigma0),breaks=30,prob=T)
+hist(10*log10(plot.data$sigma0),breaks=30,prob=T, #
+     col='gray70',xlab="Retroespalhamento",#
+     ylab="densidade",main=NA)
+@
+
+\column{0.5\linewidth}
+
+<<fig.height=5,fig.width=5,out.width='1\\linewidth',echo=F>>=
+hist(10*log10(plot.data$sigma0),breaks=30,prob=T, col='gray70',xlab="Retroespalhamento",ylab="Densidade",main=NA)
+@
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+
+
+%===============================================================================%
+\begin{frame}{Tipos de Gráficos - 1 variável: Dot Plot}
+
+\textbf{Dot Plot}
+
+\begin{itemize}
+  \item Similar ao histograma, mas mostra todos as observações \pause
+  \vfill
+  \item  Para amostras com poucas observações, ou se a escolha dos \emph{bins} não for adequada, o histograma pode distorcer a forma real da distribuição
+\end{itemize}
+
+
+\end{frame} 
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}[fragile]{Tipos de Gráficos - 1 variável: Dot Plot}
+
+\begin{columns}[t]
+
+\column{0.56\linewidth}
+<<size='tiny',echo=TRUE,fig.keep='none',eval=F>>=
+stripchart(plot.data$sigma0, method = "stack", offset = .5, at = .15, pch = 19)
+@
+
+\column{0.5\linewidth}
+
+<<fig.height=5,fig.width=5,out.width='1\\linewidth',echo=F>>=
+stripchart(plot.data$sigma0, method = "stack", offset = .5, at = .15, pch = 19)
+@
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}{Tipos de Gráficos - 1 variável:Densidade \emph{kernel}}
+
+\textbf{Densidade \emph{Kernel}}
+
+\begin{itemize}
+  \item Similar ao histograma, mas ajusta uma linha suavizada à distribuição \pause
+  \vfill
+  \item  Assim como o histograma depende das subdivisões, este gráfico depende da largura do \emmh{kernel (bandwidth)} \pause
+\end{itemize}
+
+
+\end{frame} 
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}[fragile]{Tipos de Gráficos - 1 variável:Densidade \emph{kernel}}
+
+\begin{columns}[t]
+
+\column{0.56\linewidth}
+<<size='tiny',echo=TRUE,fig.keep='none',eval=F>>=
+plot(density(plot.data$sigma0))
+@
+
+\column{0.5\linewidth}
+
+<<fig.height=5,fig.width=5,out.width='1\\linewidth',echo=F>>=
+plot(density(plot.data$sigma0),main=NULL)
+@
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}[fragile]{Tipos de Gráficos - 1 variável:Densidade \emph{kernel}}
+
+\begin{columns}[t]
+
+\column{0.56\linewidth}
+<<size='tiny',echo=TRUE,fig.keep='none',eval=F>>=
+plot(density(plot.data$sigma0))
+plot(density(plot.data$sigma0, bw = 0.04),main=NA)
+@
+
+\column{0.5\linewidth}
+
+<<fig.height=5,fig.width=5,out.width='1\\linewidth',echo=F>>=
+plot(density(plot.data$sigma0, bw = 0.04),main=NA)
+@
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}[fragile]{Tipos de Gráficos - 1 variável:Densidade \emph{kernel}}
+
+\begin{columns}[t]
+
+\column{0.56\linewidth}
+<<size='tiny',echo=TRUE,fig.keep='none',eval=F>>=
+plot(density(plot.data$sigma0))
+plot(density(plot.data$sigma0, bw = 0.04),main=NA)
+plot(density(plot.data$sigma0, bw = 0.08),main=NA)
+@
+
+\column{0.5\linewidth}
+
+<<fig.height=5,fig.width=5,out.width='1\\linewidth',echo=F>>=
+plot(density(plot.data$sigma0, bw = 0.08),main=NA)
+@
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+
+
+%===============================================================================%
+\begin{frame}[fragile]{Tipos de Gráficos - 1 variável:Densidade \emph{kernel}}
+
+\begin{columns}[t]
+
+\column{0.56\linewidth}
+<<size='tiny',echo=TRUE,fig.keep='none',eval=F>>=
+plot(density(plot.data$sigma0))
+plot(density(plot.data$sigma0, bw = 0.04),main=NA)
+plot(density(plot.data$sigma0, bw = 0.08),main=NA)
+plot(density(10*log10(plot.data$sigma0)),main=NA)
+@
+
+\column{0.5\linewidth}
+
+<<fig.height=5,fig.width=5,out.width='1\\linewidth',echo=F>>=
+plot(density(10*log10(plot.data$sigma0)),main=NA)
+@
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+
+
+%===============================================================================%
+\begin{frame}[fragile]{Tipos de Gráficos - 1 variável:Densidade \emph{kernel}}
+
+\begin{columns}[t]
+
+\column{0.56\linewidth}
+<<size='tiny',echo=TRUE,fig.keep='none',eval=F>>=
+plot(density(plot.data$sigma0))
+plot(density(plot.data$sigma0, bw = 0.04),main=NA)
+plot(density(plot.data$sigma0, bw = 0.08),main=NA)
+plot(density(10*log10(plot.data$sigma0)),main=NA)
+plot(density(10*log10(plot.data$sigma0), bw=1),main=NA)
+@
+
+\column{0.5\linewidth}
+
+<<fig.height=5,fig.width=5,out.width='1\\linewidth',echo=F>>=
+plot(density(10*log10(plot.data$sigma0), bw=1),main=NA)
+@
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}{Tipos de Gráficos - 1 variável: Gráfico de Barras} 
+
+\textbf{Gráfico de Barras}
+  
+\begin{itemize}
+  \item Adequado para mostrar proporções, especialmente apropriado para contagens de variáveis categóricas \pause
+  \vfill
+  \item  Pode ser mostrado lado a lado ou empilhado \pause
+  \vfill
+  \item Transmite a impressão de um dado \textbf{cumulativo} \pause
+  \vfill
+  \item Não é recomendado para valores pontuais (ex: média)
+\end{itemize}
+
+
+\end{frame} 
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}[fragile]{Tipos de Gráficos - 1 variável: Gráfico de Barras}
+
+\begin{columns}[t]
+
+\column{0.56\linewidth}
+<<size='tiny',echo=TRUE,fig.keep='none'>>=
+stats <- factor(c("Sim","Não","Não","Não","Não",
+                 "Não","Não","Sim","Sim"))
+summ <- table(stats)
+summ
+barplot(summ)
+@
+
+\column{0.5\linewidth}
+
+<<fig.height=5,fig.width=5,out.width='1\\linewidth',echo=F>>=
+barplot(summ)
+@
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+
+
+%===============================================================================%
+\begin{frame}[fragile]{Tipos de Gráficos - 1 variável: Gráfico de Barras}
+
+\begin{columns}[t]
+
+\column{0.56\linewidth}
+<<size='tiny',echo=TRUE,fig.keep='none',,eval=F>>=
+stats <- factor(c("Sim","Não","Não","Não","Não",
+                  "Não","Não","Sim","Sim"))
+summ <- table(stats)
+summ
+barplot(summ)
+barplot(summ,ylim=c(0,10))
+@
+
+\column{0.5\linewidth}
+
+<<fig.height=5,fig.width=5,out.width='1\\linewidth',echo=F>>=
+barplot(summ,ylim=c(0,10))
+@
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}[fragile]{Tipos de Gráficos - 1 variável: Gráfico de Barras} 
+
+\begin{columns}[t]
+
+\column{0.56\linewidth}
+<<size='tiny',echo=TRUE,fig.keep='none',eval=F>>=
+stats <- factor(c("Sim","Não","Não","Não","Não",
+                  "Não","Não","Sim","Sim"))
+summ <- table(stats)
+summ
+barplot(summ)
+barplot(summ,ylim=c(0,10))
+barplot(summ,horiz=T)
+@
+
+\column{0.5\linewidth}
+
+<<fig.height=5,fig.width=5,out.width='1\\linewidth',echo=F>>=
+barplot(summ,horiz=T)
+@
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}[fragile]{Tipos de Gráficos - 1 variável: Gráfico de Barras} 
+
+\begin{columns}[t]
+
+\column{0.6\linewidth}
+\begin{itemize}
+
+\item \scriptsize{Inapropriado, pois as médias são valores pontuais, e centrais.}
+\end{itemize}
+
+<<size='tiny',echo=TRUE,fig.keep='none',echo=5>>=
+plot.data <- subset(bs,bs$modo=='S1' & #
+      bs$pol=='HH' & bs$data=='2011-07-06')
+mean.bs <- tapply(plot.data$sigma0,#
+                  plot.data$classe,mean,na.rm=T)
+sd.bs <- tapply(plot.data$sigma0,#
+                plot.data$classe,sd,na.rm=T)
+
+barplot(mean.bs,las=2,ylab="Retroespalhamento Médio")
+@
+
+\column{0.4\linewidth}
+
+<<fig.height=5,fig.width=5,out.width='1\\linewidth',echo=F>>=
+par(mar=c(10,5,0,1))
+barplot(mean.bs,las=2, ylab="Retroespalhamento Médio")
+@
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}[fragile]{Tipos de Gráficos - 1+ variável: Gráfico de Barras}
+
+\begin{columns}[c]
+
+\column{0.5\linewidth}
+
+<<size='tiny',echo=TRUE,fig.keep='none'>>=
+load('rich+env_jun.Rdata')
+granulo <- rich.env.jun[,34:40]
+granulo <- t(as.matrix(granulo))
+barplot(granulo,col=rainbow(7),legend=T,#
+    args.legend = list(x="top", inset=c(0,-0.7),ncol=3))
+@
+
+\column{0.5\linewidth}
+
+<<fig.height=5,fig.width=5,out.width='1.4\\linewidth',echo=F>>=
+par(mar=c(5.1, 4.1, 10, 8.1), xpd=TRUE)
+barplot(granulo,col=rainbow(7),legend=T,args.legend = list(x="top", inset=c(0,-0.4),ncol=3,cex=0.5))
+@
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}{Tipos de Gráficos - 1 variável: Gráfico de Pizza}
+  
+\begin{itemize}
+  \item Gráficos de pizza servem para\ldots \pause
+  \vfill
+  \item  \dots nada!
+  \vfill
+  \item Nosso cérebro é muito mais apto em julgar distâncias do que áreas ou ângulos. \pause
+  \vfill
+  \item A partir de hoje, podem abolir gráficos de pizza do seu repertório.
+\end{itemize}
+
+\end{frame} 
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}{Tipos de Gráficos - 2 variáveis: Dispersão (\emph{scatterplot})}
+
+\textbf{Diagrama de Dispersão (\emph{scatterplot})}
+
+\begin{itemize}
+  \item Um dos gráficos mais úteis em estatística \ldots \pause
+  \vfill
+  \item   Pode servir para visualizar duas variáveis contínuas, ou uma variável contínua vs. uma categórica
+  \begin{itemize}
+  \item Desde que a variável categórica seja codificada
+  \end{itemize}
+  \vfill
+  \item Pode ser complementado por barras de erro \pause
+  \vfill
+  \item Cuidado ao unir os pontos com linhas, pois isso passa uma noção de continuidade!
+\end{itemize}
+
+\end{frame} 
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}[fragile]{Tipos de Gráficos - 2 variáveis: Dispersão (\emph{scatterplot})}
+
+\begin{columns}[t]
+
+\column{0.6\linewidth}
+
+<<size='tiny',echo=TRUE,fig.keep='none',eval=F>>=
+plot(mean.bs,las=2,
+     ylab="Retroespalhamento Médio",type="p")
+@
+
+\column{0.4\linewidth}
+
+<<fig.height=5,fig.width=5,out.width='1\\linewidth',echo=F>>=
+par(mar=c(10,5,1,1))
+plot(mean.bs,las=2,ylab="Retroespalhamento Médio",type="p")
+@
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}[fragile]{Tipos de Gráficos - 2 variáveis: Dispersão (\emph{scatterplot})}
+
+\begin{columns}[t]
+
+\column{0.6\linewidth}
+
+<<size='tiny',echo=TRUE,fig.keep='none',eval=FALSE>>=
+plot(mean.bs,las=2,ylab="Retroespalhamento Médio",#
+     type="p",xaxt="n",xlab=NA)
+axis(1,c(1:7),labels=names(mean.bs),las=2)
+@
+
+\column{0.4\linewidth}
+
+<<fig.height=5,fig.width=5,out.width='1\\linewidth',echo=F>>=
+par(mar=c(10,5,1,1))
+plot(mean.bs,las=2,ylab="Retroespalhamento Médio",#
+     type="p",xaxt="n",xlab=NA)
+axis(1,c(1:7),labels=names(mean.bs),las=2)
+@
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}[fragile]{Tipos de Gráficos - 2 variáveis: Dispersão (\emph{scatterplot})}
+
+\begin{columns}[t]
+
+\column{0.6\linewidth}
+
+Incorreto, não existe continuidade entre as categorias.
+\vfill
+
+<<size='tiny',echo=TRUE,fig.keep='none',eval=FALSE>>=
+plot(mean.bs,las=2,ylab="Retroespalhamento Médio",#
+     type="l",xaxt="n",xlab=NA)
+axis(1,c(1:7),labels=names(mean.bs),las=2)
+@
+
+\column{0.4\linewidth}
+
+<<fig.height=5,fig.width=5,out.width='1\\linewidth',echo=F>>=
+par(mar=c(10,5,1,1))
+plot(mean.bs,las=2,ylab="Retroespalhamento Médio",type="l",xaxt="n",xlab=NA)
+axis(1,c(1:7),labels=names(mean.bs),las=2)
+@
+
+\end{columns}
+
+\end{frame}
+%===============================================================================
+
+%===============================================================================%
+\begin{frame}[fragile]{Tipos de Gráficos - 2 variáveis: Dispersão (\emph{scatterplot})}
+
+\begin{columns}[t]
+
+\column{0.6\linewidth}
+
+<<size='tiny',echo=TRUE,fig.keep='none',message=FALSE,  warnings = FALSE>>=
+plot(mean.bs,las=2,ylab="Retroespalhamento Médio",type="l",#
+     xaxt="n",xlab=NA)
+axis(1,c(1:7),labels=names(mean.bs),las=2)
+library(Hmisc)
+errbar(c(1:7),mean.bs,yplus=mean.bs+sd.bs,#
+       yminus=mean.bs-sd.bs,lty=1,xaxt="n",xlab=NA)
+axis(1,c(1:7),labels=names(mean.bs),las=2)
+@
+
+\column{0.4\linewidth}
+
+<<fig.height=5,fig.width=5,out.width='1\\linewidth',echo=F>>=
+par(mar=c(10,5,1,1))
+sd.bs <- 
+errbar(c(1:7),mean.bs,yplus=mean.bs+sd.bs,yminus=mean.bs-sd.bs,#
+       lty=1,,xaxt="n",xlab=NA)
+axis(1,c(1:7),labels=names(mean.bs),las=2)
+
+@
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}[fragile]{Tipos de Gráficos - 2 variáveis: Dispersão (\emph{scatterplot})}
+
+\begin{columns}[t]
+
+\column{0.6\linewidth}
+
+<<size='tiny',echo=TRUE,fig.keep='none',message=FALSE>>=
+load('rich+env_jun.Rdata')
+plot(rich.env.jun$p.tot,rich.env.jun$rich,
+     xlab="Fósforo Total", ylab = "Riqueza de Espécies")
+# A sintaxe de "em função de" (~) também pode ser usada
+plot(rich ~ p.tot, data=rich.env.jun,
+     xlab="Fósforo Total", ylab = "Riqueza de Espécies")
+@
+
+\column{0.4\linewidth}
+
+<<fig.height=5,fig.width=5,out.width='1\\linewidth',echo=F>>=
+plot(rich ~ p.tot, data=rich.env.jun,xlab="Fósforo Total",#
+     ylab = "Riqueza de Espécies")
+@
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}{Tipos de Gráficos - 2 variáveis: Gráfico de Área}
+  
+\textbf{Área}
+  
+\begin{itemize}
+  \item Pode ser visto como uma versão contínua do gráfico de barras \ldots \pause
+  \vfill
+  \item Mostra diferenças ponto a ponto, e cumulativas
+  \vfill
+  \item Não deve ser usado se a área sob a curva não fizer sentido para os dados plotados \pause
+  \vfill
+  \item A ordem do empilhamento pode afetar a percepção \pause
+  \vfill
+  \item se a variável x não for contínua, melhor usar barras empilhadas \pause
+  
+\end{itemize}
+
+\end{frame} 
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}[fragile]{Tipos de Gráficos - 2 variáveis: Gráfico de Área}
+
+\begin{columns}[t]
+
+\column{0.4\linewidth}
+
+<<size='tiny',echo=TRUE,fig.keep='none',message=FALSE,warning=FALSE>>=
+load('npp_summary.Rdata')
+library(ggplot2)
+ggplot(npp.df,aes(year,mean)) +#
+  geom_area(fill='gray50') +#
+  xlab("Ano") +#
+  ylab("Produtividade Primára (Tg/ano)")
+
+@
+
+\column{0.6\linewidth}
+
+<<fig.height=5,fig.width=8,out.width='1\\linewidth',echo=F,warning=FALSE>>=
+ggplot(npp.df,aes(year,mean)) +#
+  geom_area(fill='blue') +#
+  xlab("Ano") +#
+  ylab("Produtividade Primára (Tg/ano)")
+@
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}[fragile]{Tipos de Gráficos - 2 variáveis: Gráfico de Área}
+
+\begin{columns}[t]
+
+\column{0.4\linewidth}
+
+<<size='tiny',echo=TRUE,fig.keep='none',message=FALSE,warning=FALSE,eval=F>>=
+library(ggplot2)
+ggplot(npp.df,aes(year,mean)) + #
+  geom_area(fill='blue') +#
+  xlab("Ano") + #
+  ylab("Produtividade Primária (Tg/ano)")
+
+ggplot(npp.df,aes(as.factor(year),mean)) + 
+  geom_bar(fill='blue') +xlab("Ano") + 
+  ylab("Produtividade Primária (Tg/ano)") + 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+@
+
+\column{0.6\linewidth}
+
+<<fig.height=5,fig.width=5,out.width='1\\linewidth',echo=F,warning=FALSE,message=FALSE>>=
+ggplot(npp.df,aes(as.factor(year),mean)) + #
+  geom_bar(fill='blue',stat="identity") + #
+  xlab("Ano") + #
+  ylab("Produtividade Primára (Tg/ano)") + #
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+@
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+
+
+%===============================================================================%
+\begin{frame}[fragile]{Tipos de Gráficos - 2 variáveis: Gráfico de Área}
+
+\url{http://www.leancrew.com/all-this/2011/11/i-hate-stacked-area-charts/}
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}{Tipos de Gráficos - 2 variáveis: \emph{Boxplot}}
+
+\textbf{Boxplot}
+
+\begin{itemize}
+  \item Usado para combinações entre variáveis contínuas e categóricas \ldots \pause
+  \vfill
+  \item Na opinião de muitos, um dos gráficos mais informativos que existem \ldots \pause
+  \vfill
+  \item Combina as propriedades de um histograma e de um scatterplot \pause
+  \vfill
+  \item Faz uso dos quantis para uma descrição robusta dos dados 
+\end{itemize}
+
+\end{frame} 
+%===============================================================================%
+
+
+
+%===============================================================================%
+\begin{frame}[fragile]{Tipos de Gráficos - 2 variáveis: \emph{Boxplot}}
+
+\centering
+\includegraphics[width=0.65\linewidth]{C:/Users/thiago/OneDrive/UNESP/Pos_graduacao/Eco/2015/Estatistica_2015/Aulas/Aula_3_EDA_Graph/figs/boxp.png}
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}[fragile]{Tipos de Gráficos - 2 variáveis: \emph{Boxplot}}
+
+
+\begin{columns}[t]
+
+\column{0.5\linewidth}
+
+<<fig.height=5,fig.width=5,out.width='1\\linewidth',echo=F,warning=FALSE,message=FALSE>>=
+sub <- plot.data[plot.data$classe=='floresta_inundavel',]
+sub$classe <- factor(sub$classe)
+hist(sub$sigma0,breaks=40,main=NA,,xlab="Retroespalhamento - Floresta Inundável")
+abline(v=median(sub$sigma0),col="red",lty=1,lwd=2)
+abline(v=quantile(sub$sigma0,prob=c(0.25,0.75)),col="red",lty=2,lwd=2)
+@
+
+
+\column{0.5\linewidth}
+
+<<fig.height=5,fig.width=5,out.width='1\\linewidth',echo=F,warning=FALSE,message=FALSE>>=
+boxplot(sigma0 ~ classe, data=sub,xlab="Retroespalhamento - Floresta Inundável")
+@
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}[fragile]{Tipos de Gráficos - 2 variáveis: \emph{Boxplot}}
+
+
+\begin{columns}[t]
+
+\column{0.49\linewidth}
+
+<<size='tiny',echo=TRUE,fig.keep='none',message=FALSE,warning=FALSE,eval=F>>=
+boxplot(sigma0 ~ classe, data=plot.data, las=2)
+
+#linha central: mediana
+#
+#caixa : quartis
+#
+#linhas verticais: valor mais alto/baixo dentro da 
+# distância quartil+/-1.5*distancia interquartil
+#
+# pontos: outliers, tudo que for maior 
+# do que quartil +/- 1.5 quartil
+@
+
+\scriptsize{Superposição da distância interquartil é um indício de diferença/separabilidade}
+
+\column{0.6\linewidth}
+
+<<fig.height=5,fig.width=5,out.width='1\\linewidth',echo=F,warning=FALSE,message=FALSE>>=
+par(mar=c(13,5,0,1))
+boxplot(sigma0 ~ classe, data=plot.data, las=2)
+@
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}{Tipos de Gráficos - 2 variáveis: \emph{Violin Plot}}
+\setbeamercovered{transparent}
+  
+\begin{itemize}
+  \item Tentativa de ir além do boxplot \ldots \pause
+  \vfill
+  \item Combina as propriedades de um gráfico de densidades e de um scatterplot\pause
+  \vfill
+  \item Pode ficar estranho se as distribuições não forem bem-comportadas 
+\end{itemize}
+
+\end{frame} 
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}[fragile]{Tipos de Gráficos - 2 variáveis: \emph{Violin Plot}}
+
+\begin{columns}[t]
+
+\column{0.49\linewidth}
+
+<<size='tiny',echo=TRUE,fig.keep='none',message=FALSE,warning=FALSE,eval=F>>=
+ggplot(plot.data,aes(classe,sigma0)) +#
+  geom_boxplot() + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+@
+
+\column{0.6\linewidth}
+
+<<fig.height=5,fig.width=5,out.width='1\\linewidth',echo=F,warning=FALSE,message=FALSE>>=
+ggplot(plot.data,aes(classe,sigma0)) +#
+  geom_boxplot() +#
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+@
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}[fragile]{Tipos de Gráficos - 2 variáveis: \emph{Violin Plot}}
+
+\begin{columns}[t]
+
+\column{0.49\linewidth}
+
+<<size='tiny',echo=TRUE,fig.keep='none',message=FALSE,warning=FALSE,eval=F>>=
+ggplot(plot.data,aes(classe,sigma0)) +#
+  geom_boxplot() +#
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+ggplot(plot.data,aes(classe,sigma0)) +#
+  geom_violin() +#
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+@
+
+\column{0.6\linewidth}
+
+<<fig.height=5,fig.width=5,out.width='1\\linewidth',echo=F,warning=FALSE,message=FALSE>>=
+ggplot(plot.data,aes(classe,sigma0)) + geom_violin() + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+@
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}{Combinando mais de duas variáveis \dots sem usar ``3D''}
+\setbeamercovered{transparent}
+  
+\begin{itemize}
+  \item Gráficos ``3D'' são dependentes de perspectiva, e não enfatizam bem as diferenças \pause
+  \vfill
+  \item São uma boa ferramenta de visualização se puderem ser manipulados \pause
+  \vfill
+  \item Mas para exibição em papel, dificultam a interpretação \pause
+  \vfill
+  \item Ao invés de usar múltiplos eixos, podemos explorar as relações entre cor, forma e tamanho dos objetos plotados 
+\end{itemize}
+
+\end{frame} 
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}[fragile]{Tipos de Gráficos - 2 variáveis}
+
+\begin{columns}[t]
+
+\column{0.49\linewidth}
+
+<<size='tiny',echo=TRUE,fig.keep='none',message=FALSE,warning=FALSE,eval=F>>=
+ggplot(rich.env.jun,aes(p.tot,n.tot)) +#
+  geom_point(size=3) +#
+  ylab("Nitrogênio Total") +#
+  xlab("Fósforo Total") +#
+  theme_bw()
+@
+
+\column{0.6\linewidth}
+
+<<fig.height=5,fig.width=5,out.width='1\\linewidth',echo=F,warning=FALSE,message=FALSE>>=
+ggplot(rich.env.jun,aes(p.tot,n.tot)) + geom_point(size=3) + ylab("Nitrogênio Total") + xlab("Fósforo Total") + theme_bw()
+@
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}[fragile]{Tipos de Gráficos - 3 variáveis}
+
+\begin{columns}[t]
+
+\column{0.49\linewidth}
+
+<<size='tiny',echo=TRUE,fig.keep='none',message=FALSE,warning=FALSE,eval=F>>=
+ggplot(rich.env.jun,aes(p.tot,n.tot)) +#
+  geom_point(size=3) +#
+  ylab("Nitrogênio Total") +#
+  xlab("Fósforo Total") +#
+  theme_bw()
+ggplot(rich.env.jun,aes(p.tot,n.tot)) +#
+  geom_point(aes(size=rich)) +#
+  ylab("Nitrogênio Total") +#
+  xlab("Fósforo Total") +#
+  theme_bw()
+@
+
+\column{0.6\linewidth}
+
+<<fig.height=5,fig.width=5,out.width='1\\linewidth',echo=F,warning=FALSE,message=FALSE>>=
+ggplot(rich.env.jun,aes(p.tot,n.tot)) + geom_point(aes(size=rich)) + ylab("Nitrogênio Total") + xlab("Fósforo Total") + theme_bw()
+@
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}[fragile]{Tipos de Gráficos - 4 variáveis}
+
+\begin{columns}[t]
+
+
+\column{0.49\linewidth}
+
+<<size='tiny',echo=TRUE,fig.keep='none',message=FALSE,warning=FALSE,eval=F>>=
+ggplot(rich.env.jun,aes(p.tot,n.tot)) +#
+  geom_point(size=3) +#
+  ylab("Nitrogênio Total") +#
+  xlab("Fósforo Total") +#
+  theme_bw()
+ggplot(rich.env.jun,aes(p.tot,n.tot)) +#
+  geom_point(aes(size=rich)) +#
+  ylab("Nitrogênio Total") +#
+  xlab("Fósforo Total") +#
+  theme_bw()
+ggplot(rich.env.jun,aes(p.tot,n.tot)) +#
+  geom_point(aes(color=rich, size=prof*-1)) +#
+  ylab("Nitrogênio Total") +#
+  xlab("Fósforo Total") +#
+  theme_bw()
+@
+
+\column{0.6\linewidth}
+
+<<fig.height=5,fig.width=5,out.width='1\\linewidth',echo=F,warning=FALSE,message=FALSE>>=
+ggplot(rich.env.jun,aes(rich,prof)) +#
+  geom_point(aes(color=n.tot, size=p.tot)) +#
+  ylab("Profundidade") +#
+  xlab("Riqueza Spp.") +#
+  theme_bw()
+@
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}[fragile]{Tipos de Gráficos - 5 variáveis}
+
+\begin{columns}[t]
+
+
+\column{0.49\linewidth}
+<<echo=FALSE>>=
+clayfac <- rep("Baixo",33)
+clayfac[which(rich.env.jun$clay.004l > 2)] <- "Alto"
+rich.env.jun$clayfac <- as.factor(clayfac)
+@
+
+<<size='tiny',echo=TRUE,fig.keep='none',message=FALSE,warning=FALSE>>=
+ggplot(rich.env.jun,aes(p.tot,n.tot)) +#
+  geom_point(size=3) +#
+  ylab("Nitrogênio Total") +#
+  xlab("Fósforo Total") +#
+  theme_bw()
+ggplot(rich.env.jun,aes(p.tot,n.tot)) +#
+  geom_point(aes(size=rich)) +#
+  ylab("Nitrogênio Total") +#
+  xlab("Fósforo Total") +#
+  theme_bw()
+ggplot(rich.env.jun,aes(rich,prof)) +#
+  geom_point(aes(color=n.tot, size=p.tot)) +#
+  ylab("Profundidade") +#
+  xlab("Riqueza Spp.") +#
+  theme_bw()
+ggplot(rich.env.jun,aes(rich,prof)) +#
+  geom_point(aes(color=n.tot, size=p.tot, shape=clayfac)) +#
+  ylab("Profundidade") +#
+  xlab("Riqueza Spp.") +#
+  theme_bw()
+@
+
+\column{0.6\linewidth}
+
+<<fig.height=5,fig.width=5,out.width='1\\linewidth',echo=F,warning=FALSE,message=FALSE>>=
+ggplot(rich.env.jun,aes(rich,prof)) + geom_point(aes(color=n.tot, size=p.tot, shape=clayfac)) +  ylab("Profundidade") +   xlab("Riqueza Spp.") +  theme_bw()
+@
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}{Elementos de um bom gráfico}
+  
+\begin{itemize}
+  \item Foco na informação que se quer enfatizar \pause
+  \vfill
+  \item Quanto menor a razão tinta/papel, melhor \pause
+  \vfill
+  \item Selecione e ordene suas variáveis de acordo com a pergunta a ser respondida \pause
+  \vfill
+  \item Cores e formas só devem ser usadas se também trouxerem informação! \pause
+\end{itemize}
+
+\end{frame} 
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}{Qual a pergunta a ser respondida?}
+
+Diferença entre classes, para cada polarização?
+
+
+<<fig.height=3,fig.width=7,out.width='1.1\\linewidth',echo=F,warning=FALSE,message=FALSE>>=
+bs$db <- 10*log10(bs$sigma0)
+ggplot(bs,aes(classe,db)) +
+  geom_boxplot() +
+  facet_wrap(~ pol,scales="free_y") +
+  theme_bw(base_size=8) +
+  theme(axis.text.x = element_text(angle =90, hjust = 1))
+@
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}{Qual a pergunta a ser respondida?}
+
+Ou a diferença entre polarizações, para cada classe?
+
+
+<<fig.height=3,fig.width=7,out.width='1\\linewidth',echo=F,warning=FALSE,message=FALSE>>=
+
+ggplot(bs,aes(pol,db)) + 
+  geom_boxplot() + 
+  facet_wrap(~ classe,scales = "free_y") + 
+  theme_bw(base_size=8)
+@
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}{Tipos de Gráficos}
+
+\begin{columns}[T]
+
+
+\column{0.5\linewidth}
+
+\scriptsize{Isso é melhor \ldots}
+
+\bigskip
+
+\includegraphics[width=1\linewidth]{C:/Users/thiago/OneDrive/UNESP/Pos_graduacao/Eco/2015/Estatistica_2015/Aulas/Aula_3_EDA_Graph/figs/unnamed-chunk-72.pdf}
+
+\pause
+
+\column{0.5\linewidth}
+
+\scriptsize{\ldots do que isso!}
+
+\vfill
+
+\includegraphics[width=1\linewidth]{C:/Users/thiago/OneDrive/UNESP/Pos_graduacao/Eco/2015/Estatistica_2015/Aulas/Aula_3_EDA_Graph/figs/badplot.pdf}
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+
+
+\end{document}

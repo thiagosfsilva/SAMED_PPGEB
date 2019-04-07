@@ -1,0 +1,5 @@
+\beamer@endinputifotherversion {3.36pt}
+\select@language {portuguese}
+\beamer@sectionintoc {1}{Regressão Múltipla}{3}{0}{1}
+\beamer@sectionintoc {2}{Diferenças entre Regressão Simples e Múltipla}{21}{0}{2}
+\beamer@sectionintoc {3}{ANOVA: Análise de Variância}{64}{0}{3}

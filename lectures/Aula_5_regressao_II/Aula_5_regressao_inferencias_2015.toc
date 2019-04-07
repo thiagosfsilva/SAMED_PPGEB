@@ -1,0 +1,6 @@
+\beamer@endinputifotherversion {3.36pt}
+\select@language {portuguese}
+\beamer@sectionintoc {1}{Inferências sobre o modelo}{3}{0}{1}
+\beamer@sectionintoc {2}{Relembrando: partição de variância}{145}{0}{2}
+\beamer@sectionintoc {3}{Tabela ANOVA e teste F para regressão}{155}{0}{3}
+\beamer@sectionintoc {4}{Regressão Múltipla}{182}{0}{4}

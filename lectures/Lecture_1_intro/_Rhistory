@@ -1,0 +1,512 @@
+flist
+flist <- list.files(path="E:/MOD11", full.names=T, recursive=T)
+flist
+flist <- list.files(path="E:/MOD11", full.names=T, recursive=T,, pattern="celsius")
+flist
+flist <- list.files(path="E:/MOD11", full.names=T, recursive=T,, pattern="dia.celsius")
+flist
+flist <- list.files(path="E:/MOD11", full.names=T, recursive=T,, pattern="dia.celsius.\.tif")
+flist <- list.files(path="E:/MOD11", full.names=T, recursive=T,, pattern="dia.celsius.tif")
+flist
+flist <- list.files(path="E:/MOD11", full.names=T, recursive=T)
+flist
+flist <- list.files(path="E:/MOD11", full.names=T, recursive=T, pattern="dia.celsius.$tif")
+flist
+flist <- list.files(path="E:/MOD11", full.names=T, recursive=T, pattern="dia.celsius$tif")
+flist
+flist <- list.files(path="E:/MOD11", full.names=T, recursive=T, pattern="$tif")
+flist
+flist <- list.files(path="E:/MOD11", full.names=T, recursive=T, pattern="tif$")
+flist
+flist <- list.files(path="E:/MOD11", full.names=T, recursive=T, pattern="celsius.tif$")
+flist
+flist <- list.files(path="E:/MOD11", full.names=T, recursive=T, pattern="/^(?=dia.celsius)(?=.*tif$)")
+flist <- list.files(path="E:/MOD11", full.names=T, recursive=T, pattern="^(?=dia.celsius)(?=.*tif$)")
+flist <- list.files(path="E:/MOD11", full.names=T, recursive=T, pattern="(?=dia.celsius)(?=.*tif$)")
+flist <- list.files(path="E:/MOD11", full.names=T, recursive=T, pattern="dia.celsius")
+flist
+flist <- list.files(path="E:/MOD11", full.names=T, recursive=T, pattern="*.dia.celsius.*\.tif$")
+flist <- list.files(path="E:/MOD11", full.names=T, recursive=T, pattern='*.dia.celsius.*\.tif$')
+flist <- list.files(path="E:/MOD11", full.names=T, recursive=T, pattern='dia.celsius.*\.tif$')
+flist <- list.files(path="E:/MOD11", full.names=T, recursive=T, pattern='dia.celsius.*tif$')
+flist
+expected.days <- (2013-2001)*44+38
+expected.days
+expected.obs <- (2013-2001)*44+38
+actual.obs <- dim(flist)[1]
+actual.obs
+actual.obs <- length(flist)
+actual.obs
+expected.obs <- (2013-2002)*46+44+38
+actual.obs <- length(flist)
+flist <- list.files(path="E:/MOD11", full.names=T, recursive=T, pattern='LST.day.*tif$')
+flist
+flist <- list.files(path="E:/MOD11", full.names=T, recursive=T, pattern='LST.*day.*tif$')
+flist
+flist <- list.files(path="E:/MOD11", full.names=T, recursive=T, pattern='LST.*Day.*tif$')
+flist
+day.flist <- list.files(path="E:/MOD11", full.names=T, recursive=T, pattern='LST.*Day.*tif$')
+night.flist <- list.files(path="E:/MOD11", full.names=T, recursive=T, pattern='LST.*Night.*tif$')
+day.dates <- strsplit(day.flist,".")
+day.dates
+head(day.dates)
+day.dates <- strsplit(day.flist,"[.]")
+head(day.dates)
+day.dates[3]
+unlist(head(day.dates))
+?strsplit
+data.frame(head(day.dates))
+data.frame(unlist(head(day.dates)))
+day.dates <- strsplit(day.flist,"[.]")
+day.dates
+day.dates[[3]]
+day.dates[3]
+day.dates[][[3]]
+day.dates[[[3]]]
+day.flist
+day.dates <- substr(day.flist,start=38,end=45)
+?substr
+day.dates <- substr(day.flist,start=38,stop=45)
+day.dates
+day.dates <- substr(day.flist,start=39,stop=45)
+day.dates
+?lubrifate
+?lubridate
+library(lubridate) # easy dealing with dates
+install.package('lubridate')
+install.packages('lubridate')
+library(lubridate) # easy dealing with dates
+?lubridate
+day.dates <- parse_date_time(substr(day.flist,start=39,stop=45),"%y%j")
+day.dates
+day.df <- data.frame(flist=day.flist,obs=day.dates,yr=year(day.dates),jday=yday(day.dates))
+head(day.df)
+night.df <- data.frame(flist=night.flist,obs=night.dates,yr=year(day.dates),jday=yday(day.dates))
+night.dates <- parse_date_time(substr(night.flist,start=39,stop=45),"%y%j")
+night.flist <- list.files(path="E:/MOD11", full.names=T, recursive=T, pattern='LST.*Night.*tif$')
+night.dates <- parse_date_time(substr(night.flist,start=39,stop=45),"%y%j")
+night.flsit
+night.flist
+night.dates <- parse_date_time(substr(night.flist,start=39,stop=45),"%y%j")
+substr(night.flist,start=39,stop=45)
+substr(night.flist,start=41,stop=48)
+night.dates <- parse_date_time(substr(night.flist,start=41,stop=47),"%y%j")
+night.df <- data.frame(flist=night.flist,obs=night.dates,yr=year(day.dates),jday=yday(day.dates))
+night.df <- data.frame(flist=night.flist,obs=night.dates,yr=year(night.dates),jday=yday(night.dates))
+?ddply
+day.obs <- ddply(day.dates,.(yr), lenght(day.df$flist))
+library(plyr) # summarizing data frames
+day.obs <- ddply(day.dates,.(yr), lenght(day.df$flist))
+day.obs <- ddply(day.dates,.(yr), length(day.df$flist))
+day.obs <- ddply(day.dates,.(yr), .fun=length(day.df$flist))
+day.obs <- ddply(day.dates,.(yr), summarize, nobs = length(day.df$flist))
+day.obs <- ddply(day.df,.(yr), summarize, nobs = length(day.df$flist))
+day.obs
+?tapply
+day.obs <- tapply(day.df,factor(yr),length)
+day.obs <- tapply(day.df,factor(day.df$yr),length)
+head(day.df)
+day.obs <- tapply(day.df,yr,length)
+day.obs <- tapply(day.df,day.df$yr,length)
+day.obs <- tapply(day.df$flist,day.df$yr,length)
+day.obs
+night.obs tapply(night.df$flist,night.df$yr,length)
+night.obs <- tapply(night.df$flist,night.df$yr,length)
+night.obs
+night.df[night.flist$yr == 2012,]
+night.df[night.df$yr == 2012,]
+library(raster) # to read rasters in R
+library(lubridate) # easy dealing with dates
+d.flist <- list.files(path="E:/MOD11", full.names=T, recursive=T, pattern='LST.*Day.*tif$')
+n.flist <- list.files(path="E:/MOD11", full.names=T, recursive=T, pattern='LST.*Night.*tif$')
+d.dates <- parse_date_time(substr(d.flist,start=39,stop=45),"%y%j")
+n.dates <- parse_date_time(substr(n.flist,start=41,stop=47),"%y%j")
+source('E:/MOD11/temp_calcs.R', echo=TRUE)
+print(d.obs <- tapply(d.df$flist,d.df$yr,length))
+print(n.obs <- tapply(n.df$flist,n.df$yr,length))
+d.df <- data.frame(flist=d.flist,obs=d.dates,yr=year(d.dates),mo=month(d.dates),d=day(d.dates),jday=yday(d.dates))
+n.df <- data.frame(flist=n.flist,obs=n.dates,yr=year(n.dates),mo=month(n.dates),d=day(n.dates),jday=yday(n.dates))
+print(d.obs <- tapply(d.df$flist,d.df$yr,length))
+print(n.obs <- tapply(n.df$flist,n.df$yr,length))
+d.df <- data.frame(flist=d.flist,obs=d.dates,yr=year(d.dates),mo=month(d.dates),d=day(d.dates),jday=yday(d.dates),type='Day')
+n.df <- data.frame(flist=n.flist,obs=n.dates,yr=year(n.dates),mo=month(n.dates),d=day(n.dates),jday=yday(n.dates),type="Night")
+all.df <- rbind(d.df,n.df)
+ddply(all.df,.(type,yr),summarize)
+ddply(all.df,.(type,yr),summarize, ln=length(flist))
+?stack
+?raster
+?writeRAster
+?writeRaster
+sel <- d.df[d.df$year==2013,]
+x<- d.df[d.df$year==2013,]
+x
+x<- d.df[d.df$yr==2013,]
+x
+bands <- stack(x$flist)
+x$flist
+x$flist[1]
+bands <- brick(x$flist)
+str(x)
+d.df <- data.frame(flist=as.character(d.flist),obs=d.dates,yr=year(d.dates),mo=month(d.dates),d=day(d.dates),jday=yday(d.dates),type='Day')
+n.df <- data.frame(flist=as.character(n.flist),obs=n.dates,yr=year(n.dates),mo=month(n.dates),d=day(n.dates),jday=yday(n.dates),type="Night")
+x<- d.df[d.df$yr==2013,]
+bands <- brick(x$flist)
+str(x)
+as.character(x<- d.df[d.df$yr==2013,])
+d.flist <- list.files(path="E:/MOD11", full.names=T, recursive=T, pattern='LST.*Day.*tif$')
+str(d.flist)
+?data.frame
+d.df <- data.frame(flist=d.flist,obs=d.dates,yr=year(d.dates),mo=month(d.dates),d=day(d.dates),jday=yday(d.dates),type='Day',stringAsFactors=F)
+str(d.df)
+d.df <- data.frame(flist=d.flist,obs=d.dates,yr=year(d.dates),mo=month(d.dates),d=day(d.dates),jday=yday(d.dates),type='Day',stringsAsFactors=F)
+str(d.df)
+n.df <- data.frame(flist=n.flist,obs=n.dates,yr=year(n.dates),mo=month(n.dates),d=day(n.dates),jday=yday(n.dates),type="Night",stringsAsFactors=F)
+x<- d.df[d.df$yr==2013,]
+str(x)
+bands <- brick(x$flist)
+warings()
+warnings()
+bands <- stack(x$flist)
+amp <- range(bands)
+amp = amp *0.02 - 273.15
+amp[amp==-273.15] <- NA
+fname <- paste("E:/MOD11/outputs/Annual_amplitude_",x$yr[1],".tif",sep="")
+writeRaster(amp,filename=fname,format="GTiff")
+plot(amp)
+plot(bands[1])
+plot(bands)
+str(bands)
+plot(bands[[1]])
+bands <- amp *0.02 - 273.15
+bands <- stack(x$flist)
+bands <- bands*0.02 - 273.15
+bands[bands==-273.15] <- NA
+plot(bands[[1]])
+plot(bands[[2]])
+amp <- range(bands)
+plot(amp)
+?raster
+amp <- max(bands)
+plot(amp)
+plot(bands[[2]])
+plot(bands[[3]])
+mean <- mean(bands)
+plot(mean)
+plot(bands[[3]])
+plot(bands[[1]])
+mean <- mean(bands,na.rm=T)
+plot(mean)
+?range
+?span
+?amplitude
+bands <- stack(x$flist)
+bands <- bands*0.02 - 273.15
+bands[bands==-273.15] <- NA
+min <- min(bands,na.rm=T)
+max <- max(bands,na.tm=T)
+amp <- max - min
+writeRaster(min,filename=paste("E:/MOD11/outputs/Annual_min_",x$yr[1],".tif",sep="")
+writeRaster(min,filename=paste("E:/MOD11/outputs/Annual_min_",x$yr[1],".tif",sep=""),format="GTiff")
+writeRaster(max,filename=paste("E:/MOD11/outputs/Annual_max_",x$yr[1],".tif",sep=""),format="GTiff")
+writeRaster(amp,filename=paste("E:/MOD11/outputs/Annual_amp_",x$yr[1],".tif",sep=""),format="GTiff")
+plot(min)
+plot(max)
+max <- max(bands,na.tm=T)
+plot(max)
+max <- max(bands,na.rm=T)
+plot(max)
+amp <- max - min
+plot(amp)
+plot(min)
+plot(max)
+amp <- max - min
+plot(amp)
+writeRaster(min,filename=paste("E:/MOD11/outputs/Annual_min_",x$yr[1],".tif",sep=""),format="GTiff")
+writeRaster(min,filename=paste("E:/MOD11/outputs/Annual_min_",x$yr[1],".tif",sep=""),format="GTiff",overwrite=T)
+writeRaster(max,filename=paste("E:/MOD11/outputs/Annual_max_",x$yr[1],".tif",sep=""),format="GTiff",overwrite=T)
+writeRaster(amp,filename=paste("E:/MOD11/outputs/Annual_amp_",x$yr[1],".tif",sep=""),format="GTiff",overwrite=T)
+library(raster) # to read rasters in R
+library(lubridate) # easy dealing with dates
+library(plyr) # summarization of data frames
+library(stringr) # easier working with strings
+library(rasterVis) # plotting raster
+install.packages("rasterVis")
+d.flist <- list.files(path=mpath, full.names=T, recursive=T, pattern='LST.*Day.*tif$')
+mpath = 'E:MOD11/'
+mpath = 'E:/MOD11/'
+# Part 1 - Reorganizing all images into the same folder
+# Get a list of file names, based on a regular expression (pattern). The regular expresison can be read as dia(any character)celsius(any group of characters)(ends with)tiff
+#gets a list of files that have "LST" and "day" or "night" in them
+d.flist <- list.files(path=mpath, full.names=T, recursive=T, pattern='LST.*Day.*tif$')
+n.flist <- list.files(path=mpath, full.names=T, recursive=T, pattern='LST.*Night.*tif$')
+d.dates <- parse_date_time(str_extract(d.flist, "\\d{7}"),"%y%j") #\\d{7} is a regular expression saying "a sequence of 7 digits"
+n.dates <- parse_date_time(str_extract(n.flist, "\\d{7}"),"%y%j")
+d.df <- data.frame(flist=d.flist,obs=d.dates,yr=year(d.dates),mo=month(d.dates),d=day(d.dates),jday=yday(d.dates),type='Day',stringsAsFactors=F)
+n.df <- data.frame(flist=n.flist,obs=n.dates,yr=year(n.dates),mo=month(n.dates),d=day(n.dates),jday=yday(n.dates),type="Night",stringsAsFactors=F)
+all.df <- rbind(d.df,n.df)
+ddply(all.df,.(type,yr),summarize, ln=length(flist))
+minmaxamp <- function(x){
+bands <- stack(x$flist)
+bands <-reclassify(bands,cbind(0, NA))
+bands <- bands*0.02 - 273.15
+mn <- min(bands,na.rm=T)
+mx <- max(bands,na.rm=T)
+amp <- mx - mn
+writeRaster(mn,filename=paste(mpath,"outputs/Annual/Annual_min_",x$yr[1],".tif",sep=""),format="GTiff",overwrite=T)
+writeRaster(mx,filename=paste(mpath,"outputs/Annual/Annual_max_",x$yr[1],".tif",sep=""),format="GTiff",overwrite=T)
+writeRaster(amp,filename=paste(mpath,"outputs/Annual/Annual_amp_",x$yr[1],".tif",sep=""),format="GTiff",overwrite=T)
+}
+mnsd <- function(x,type){
+bands <- stack(x$flist)
+bands <-reclassify(bands,cbind(0, NA))
+bands <- bands*0.02 - 273.15
+mn <- mean(bands,na.rm=T)
+std <- calc(bands, fun=sd, na.rm=T)
+writeRaster(mn,filename=paste(mpath,"outputs/Annual/Annual_",type,"_mean_",x$yr[1],".tif",sep=""),format="GTiff",overwrite=T)
+writeRaster(std,filename=paste(mpath,"outputs/Annual/Annual_",type,"_sd_",x$yr[1],".tif",sep=""),format="GTiff",overwrite=T)
+}
+for (y in unique(d.df$yr)){
+suball <- all.df[all.df$yr==y,]
+subday <- d.df[d.df$yr==y,]
+subnight <- n.df[n.df$yr==y,]
+minmaxamp(suball)
+mnsd(subday,type='Day')
+mnsd(subnight,type='Night')
+}
+# Part 3 - Monthly Climatologies
+minmaxamp <- function(x){
+bands <- stack(x$flist)
+bands <-reclassify(bands,cbind(0, NA))
+bands <- bands*0.02 - 273.15
+mn <- min(bands,na.rm=T)
+mx <- max(bands,na.rm=T)
+amp <- mx - mn
+writeRaster(mn,filename=paste(mpath,"outputs/Climatology/Climat_min_",x$mo[1],".tif",sep=""),format="GTiff",overwrite=T)
+writeRaster(mx,filename=paste(mpath,"outputs/Climatology/Climat_max_",x$mo[1],".tif",sep=""),format="GTiff",overwrite=T)
+writeRaster(amp,filename=paste(mpath,"outputs/Climatology/Climat_amp_",x$mo[1],".tif",sep=""),format="GTiff",overwrite=T)
+}
+mnsd <- function(x,type){
+bands <- stack(x$flist)
+bands <-reclassify(bands,cbind(0, NA))
+bands <- bands*0.02 - 273.15
+mn <- mean(bands,na.rm=T)
+std <- calc(bands, fun=sd, na.rm=T)
+writeRaster(mn,filename=paste(mpath,"outputs/Climatology/Climat_",type,"_mean_",x$mo[1],".tif",sep=""),format="GTiff",overwrite=T)
+writeRaster(std,filename=paste(mpath,"outputs/Climatology/Climat_",type,"_sd_",x$mo[1],".tif",sep=""),format="GTiff",overwrite=T)
+}
+for (m in c(1:12)){
+suball <- all.df[all.df$mo==m,]
+subday <- d.df[d.df$mo==m,]
+subnight <- n.df[n.df$mo==m,]
+minmaxamp(suball)
+mnsd(subday,type='day')
+mnsd(subnight,type='night')
+}
+for (m in c(1:12)){
+suball <- all.df[all.df$mo==m,]
+subday <- d.df[d.df$mo==m,]
+subnight <- n.df[n.df$mo==m,]
+minmaxamp(suball)
+mnsd(subday,type='day')
+mnsd(subnight,type='night')
+}
+?quantile
+minmaxamp <- function(x){
+bands <- stack(x$flist)
+bands <-reclassify(bands,cbind(0, NA))
+bands <- bands*0.02 - 273.15
+#mn <- min(bands,na.rm=T)
+#mx <- max(bands,na.rm=T)
+#amp <- mx - mn
+q95 <- calc(bands, fun=quantile,probs=0.95,na.rm=T)
+q05 <- calc(bands, fun=quantile,probs=0.05,na.rm=T)
+writeRaster(amp,filename=paste(mpath,"outputs/Annual/Annual_q95_",x$mo[1],".tif",sep=""),format="GTiff",overwrite=T)
+writeRaster(amp,filename=paste(mpath,"outputs/Annual/Annual_q05_",x$mo[1],".tif",sep=""),format="GTiff",overwrite=T)
+#writeRaster(mn,filename=paste(mpath,"outputs/Annual/Annual_min_",x$yr[1],".tif",sep=""),format="GTiff",overwrite=T)
+#writeRaster(mx,filename=paste(mpath,"outputs/Annual/Annual_max_",x$yr[1],".tif",sep=""),format="GTiff",overwrite=T)
+#writeRaster(amp,filename=paste(mpath,"outputs/Annual/Annual_amp_",x$yr[1],".tif",sep=""),format="GTiff",overwrite=T)
+}
+for (y in unique(d.df$yr)){
+suball <- all.df[all.df$yr==y,]
+subday <- d.df[d.df$yr==y,]
+subnight <- n.df[n.df$yr==y,]
+minmaxamp(suball)
+mnsd(subday,type='Day')
+mnsd(subnight,type='Night')
+}
+minmaxamp <- function(x){
+bands <- stack(x$flist)
+bands <-reclassify(bands,cbind(0, NA))
+bands <- bands*0.02 - 273.15
+#mn <- min(bands,na.rm=T)
+#mx <- max(bands,na.rm=T)
+#amp <- mx - mn
+q95 <- calc(bands, fun=quantile,probs=0.95,na.rm=T)
+q05 <- calc(bands, fun=quantile,probs=0.05,na.rm=T)
+writeRaster(q95,filename=paste(mpath,"outputs/Annual/Annual_q95_",x$mo[1],".tif",sep=""),format="GTiff",overwrite=T)
+writeRaster(q05,filename=paste(mpath,"outputs/Annual/Annual_q05_",x$mo[1],".tif",sep=""),format="GTiff",overwrite=T)
+#writeRaster(mn,filename=paste(mpath,"outputs/Annual/Annual_min_",x$yr[1],".tif",sep=""),format="GTiff",overwrite=T)
+#writeRaster(mx,filename=paste(mpath,"outputs/Annual/Annual_max_",x$yr[1],".tif",sep=""),format="GTiff",overwrite=T)
+#writeRaster(amp,filename=paste(mpath,"outputs/Annual/Annual_amp_",x$yr[1],".tif",sep=""),format="GTiff",overwrite=T)
+}
+for (y in unique(d.df$yr)){
+suball <- all.df[all.df$yr==y,]
+subday <- d.df[d.df$yr==y,]
+subnight <- n.df[n.df$yr==y,]
+minmaxamp(suball)
+mnsd(subday,type='Day')
+mnsd(subnight,type='Night')
+}
+minmaxamp <- function(x){
+bands <- stack(x$flist)
+bands <-reclassify(bands,cbind(0, NA))
+bands <- bands*0.02 - 273.15
+#mn <- min(bands,na.rm=T)
+#mx <- max(bands,na.rm=T)
+#amp <- mx - mn
+q95 <- calc(bands, fun=quantile,probs=0.95,na.rm=T)
+q05 <- calc(bands, fun=quantile,probs=0.05,na.rm=T)
+writeRaster(q95,filename=paste(mpath,"outputs/Annual/Annual_q95_",x$yr[1],".tif",sep=""),format="GTiff",overwrite=T)
+writeRaster(q05,filename=paste(mpath,"outputs/Annual/Annual_q05_",x$yr[1],".tif",sep=""),format="GTiff",overwrite=T)
+#writeRaster(mn,filename=paste(mpath,"outputs/Annual/Annual_min_",x$yr[1],".tif",sep=""),format="GTiff",overwrite=T)
+#writeRaster(mx,filename=paste(mpath,"outputs/Annual/Annual_max_",x$yr[1],".tif",sep=""),format="GTiff",overwrite=T)
+#writeRaster(amp,filename=paste(mpath,"outputs/Annual/Annual_amp_",x$yr[1],".tif",sep=""),format="GTiff",overwrite=T)
+}
+for (y in unique(d.df$yr)){
+suball <- all.df[all.df$yr==y,]
+subday <- d.df[d.df$yr==y,]
+subnight <- n.df[n.df$yr==y,]
+minmaxamp(suball)
+mnsd(subday,type='Day')
+mnsd(subnight,type='Night')
+}
+suball
+x <- suball
+bands <- stack(x$flist)
+bands <-reclassify(bands,cbind(0, NA))
+bands <- bands*0.02 - 273.15
+?calc
+q95 <- calc(bands, fun=quantile,probs=0.95,na.rm=T)
+levelplot(q95)
+library(rasterVis) # plotting raster
+levelplot(q95)
+q95 <- calc(bands, fun=function(x) quantile(x,probs=0.95,na.rm=T))
+levelplot(q95)
+minmaxamp <- function(x){
+bands <- stack(x$flist)
+bands <-reclassify(bands,cbind(0, NA))
+bands <- bands*0.02 - 273.15
+#mn <- min(bands,na.rm=T)
+#mx <- max(bands,na.rm=T)
+#amp <- mx - mn
+q95 <- calc(bands, fun=function(x) quantile(x,probs=0.95,na.rm=T))
+q05 <- calc(bands, fun=function(x) quantile(x,probs=0.05,na.rm=T))
+writeRaster(q95,filename=paste(mpath,"outputs/Annual/Annual_q95_",x$yr[1],".tif",sep=""),format="GTiff",overwrite=T)
+writeRaster(q05,filename=paste(mpath,"outputs/Annual/Annual_q05_",x$yr[1],".tif",sep=""),format="GTiff",overwrite=T)
+#writeRaster(mn,filename=paste(mpath,"outputs/Annual/Annual_min_",x$yr[1],".tif",sep=""),format="GTiff",overwrite=T)
+#writeRaster(mx,filename=paste(mpath,"outputs/Annual/Annual_max_",x$yr[1],".tif",sep=""),format="GTiff",overwrite=T)
+#writeRaster(amp,filename=paste(mpath,"outputs/Annual/Annual_amp_",x$yr[1],".tif",sep=""),format="GTiff",overwrite=T)
+}
+for (y in unique(d.df$yr)){
+suball <- all.df[all.df$yr==y,]
+subday <- d.df[d.df$yr==y,]
+subnight <- n.df[n.df$yr==y,]
+minmaxamp(suball)
+mnsd(subday,type='Day')
+mnsd(subnight,type='Night')
+}
+?rmean
+?robust
+?mean
+?std
+?sd
+mnsd <- function(x,type){
+bands <- stack(x$flist)
+bands <-reclassify(bands,cbind(0, NA))
+bands <- bands*0.02 - 273.15
+mn <- mean(bands,na.rm=T,trim=0.05)
+std <- calc(bands, fun=sd, na.rm=T)
+writeRaster(mn,filename=paste(mpath,"outputs/Climatology/Climat_",type,"_mean_",x$mo[1],".tif",sep=""),format="GTiff",overwrite=T)
+writeRaster(std,filename=paste(mpath,"outputs/Climatology/Climat_",type,"_sd_",x$mo[1],".tif",sep=""),format="GTiff",overwrite=T)
+}
+for (m in c(1:12)){
+suball <- all.df[all.df$mo==m,]
+subday <- d.df[d.df$mo==m,]
+subnight <- n.df[n.df$mo==m,]
+#minmaxamp(suball)
+mnsd(subday,type='day')
+mnsd(subnight,type='night')
+}
+mnsd <- function(x,type){
+bands <- stack(x$flist)
+bands <-reclassify(bands,cbind(0, NA))
+bands <- bands*0.02 - 273.15
+mn <- mean(bands,na.rm=T,trim=0.025)
+std <- calc(bands, fun=sd, na.rm=T)
+writeRaster(mn,filename=paste(mpath,"outputs/Annual/Annual_",type,"_mean_",x$yr[1],".tif",sep=""),format="GTiff",overwrite=T)
+writeRaster(std,filename=paste(mpath,"outputs/Annual/Annual_",type,"_sd_",x$yr[1],".tif",sep=""),format="GTiff",overwrite=T)
+}
+for (y in unique(d.df$yr)){
+suball <- all.df[all.df$yr==y,]
+subday <- d.df[d.df$yr==y,]
+subnight <- n.df[n.df$yr==y,]
+minmaxamp(suball)
+mnsd(subday,type='Day')
+mnsd(subnight,type='Night')
+}
+source('E:/MOD11/temp_calcs.R', echo=TRUE)
+library(rgdal)
+library(raster)
+?readOGL
+?readOGR
+vec <- readOGR(dsn="E:/Thiago/SkyDrive/UNESP/Pos_graduacao/Eco/Fenologia/MODIS_itirapina/Torre.shp", layer="torre")
+vec <- readOGR(dsn="E:/Thiago/SkyDrive/UNESP/Pos_graduacao/Eco/Fenologia/MODIS_itirapina/", layer="torre")
+vec <- readOGR(dsn="E:/Thiago/SkyDrive/UNESP/Pos_graduacao/Eco/Fenologia/MODIS_itirapina/", layer="Torre")
+vec <- readOGR(dsn="E:/Thiago/SkyDrive/UNESP/Pos_graduacao/Eco/Fenologia/MODIS_itirapina/Torre.shp", layer="Torre")
+ras <- stack("E:/Itira_2005_2011.tif")
+?extract
+serie <- extract(ras,vec)
+plot(serie)
+str(serie)
+serie[1:10]
+plot(length(serie),serie)
+length(serie)
+plot(1:length(serie),serie)
+write.csv(serie,"E:/Thiago/SkyDrive/UNESP/Pos_graduacao/Eco/Fenologia/MODIS_itirapina/pixel_torre.csv")
+322/46
+1/5
+3/5
+5/2
+?rbinom
+x <- rbinom(1,0.5)
+x <- rbinom(1,prob=0.5)
+x <- rbinom(size=1,prob=0.5)
+x <- rbinom(n=1,size=1,prob=0.5)
+x
+x <- rbinom(n=1,size=1,prob=0.5)
+rbinom(n=1,size=1,prob=0.5)
+int(runif(1,1,3))
+integer(runif(1,1,3))
+runif(1,1,3)
+round(runif(1,1,3),0)
+round(runif(1,0.5,3.5),0)
+?integer
+??multinomial
+rmultinom(1, 3, prob=0.33333)
+hist(round(runif(1000,0.5,3.5),0))
+round(runif(1,0.5,6.5),0)
+?rmultinom
+rmultinom(n=1,k=5)
+rmultinom(n=1,size=5)
+rmultinom(n=1,size=5,prob=c(0.33,0.33,0.33))
+rmultinom(n=1,size=1,prob=c(0.33,0.33,0.33))
+rmultinom(n=1,size=1,prob=c(0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1))
+class(mtcars)
+summary(mtcars)
+mtcars
+install.packages("car")
+install.packages("scatterplot3d")
+library(bfast)
+install.packages("fracdiff")
+library(bfast)
+setwd("E:/Thiago/SkyDrive/UNESP/Pos_graduacao/Eco/2015/Estatistica_2015/Aulas/Aula_1_Intro_2015")

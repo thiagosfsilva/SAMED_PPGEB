@@ -1,0 +1,6 @@
+\beamer@endinputifotherversion {3.36pt}
+\select@language {portuguese}
+\beamer@sectionintoc {1}{Diagnóstico, Remediação e Validação}{3}{0}{1}
+\beamer@sectionintoc {2}{Análise de resíduos}{13}{0}{2}
+\beamer@sectionintoc {3}{Remediação}{86}{0}{3}
+\beamer@sectionintoc {4}{Validação}{124}{0}{4}

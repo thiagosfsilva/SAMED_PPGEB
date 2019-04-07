@@ -1,0 +1,6 @@
+\beamer@endinputifotherversion {3.36pt}
+\select@language {portuguese}
+\beamer@sectionintoc {1}{Seleção de variáveis e construção do modelo}{3}{0}{1}
+\beamer@sectionintoc {2}{Mais extensões dos modelos lineares gerais}{69}{0}{2}
+\beamer@sectionintoc {3}{Modelos Lineares Generalizados}{89}{0}{3}
+\beamer@sectionintoc {4}{Mínimos Quadrados Generalizados}{114}{0}{4}

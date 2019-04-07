@@ -1,0 +1,7 @@
+\beamer@endinputifotherversion {3.36pt}
+\select@language {portuguese}
+\beamer@sectionintoc {1}{Modelos Lineares Gerais}{3}{0}{1}
+\beamer@sectionintoc {2}{Formulação do Modelo de Regressão}{25}{0}{2}
+\beamer@sectionintoc {3}{Os Parâmetros da Regressão}{42}{0}{3}
+\beamer@sectionintoc {4}{Estimando o Modelo}{57}{0}{4}
+\beamer@sectionintoc {5}{Estimando a Variância do Modelo}{88}{0}{5}

@@ -1,0 +1,45 @@
+\frametitle{Tipos de Gráficos - 5 variáveis}
+
+\begin{columns}[t]
+
+
+\column{0.49\linewidth}
+
+
+\begin{knitrout}\tiny
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{ggplot}\hlstd{(rich.env.jun,}\hlkwd{aes}\hlstd{(p.tot,n.tot))} \hlopt{+}\hlcom{#}
+  \hlkwd{geom_point}\hlstd{(}\hlkwc{size}\hlstd{=}\hlnum{3}\hlstd{)} \hlopt{+}\hlcom{#}
+  \hlkwd{ylab}\hlstd{(}\hlstr{"Nitrogênio Total"}\hlstd{)} \hlopt{+}\hlcom{#}
+  \hlkwd{xlab}\hlstd{(}\hlstr{"Fósforo Total"}\hlstd{)} \hlopt{+}\hlcom{#}
+  \hlkwd{theme_bw}\hlstd{()}
+\hlkwd{ggplot}\hlstd{(rich.env.jun,}\hlkwd{aes}\hlstd{(p.tot,n.tot))} \hlopt{+}\hlcom{#}
+  \hlkwd{geom_point}\hlstd{(}\hlkwd{aes}\hlstd{(}\hlkwc{size}\hlstd{=rich))} \hlopt{+}\hlcom{#}
+  \hlkwd{ylab}\hlstd{(}\hlstr{"Nitrogênio Total"}\hlstd{)} \hlopt{+}\hlcom{#}
+  \hlkwd{xlab}\hlstd{(}\hlstr{"Fósforo Total"}\hlstd{)} \hlopt{+}\hlcom{#}
+  \hlkwd{theme_bw}\hlstd{()}
+\hlkwd{ggplot}\hlstd{(rich.env.jun,}\hlkwd{aes}\hlstd{(rich,prof))} \hlopt{+}\hlcom{#}
+  \hlkwd{geom_point}\hlstd{(}\hlkwd{aes}\hlstd{(}\hlkwc{color}\hlstd{=n.tot,} \hlkwc{size}\hlstd{=p.tot))} \hlopt{+}\hlcom{#}
+  \hlkwd{ylab}\hlstd{(}\hlstr{"Profundidade"}\hlstd{)} \hlopt{+}\hlcom{#}
+  \hlkwd{xlab}\hlstd{(}\hlstr{"Riqueza Spp."}\hlstd{)} \hlopt{+}\hlcom{#}
+  \hlkwd{theme_bw}\hlstd{()}
+\hlkwd{ggplot}\hlstd{(rich.env.jun,}\hlkwd{aes}\hlstd{(rich,prof))} \hlopt{+}\hlcom{#}
+  \hlkwd{geom_point}\hlstd{(}\hlkwd{aes}\hlstd{(}\hlkwc{color}\hlstd{=n.tot,} \hlkwc{size}\hlstd{=p.tot,} \hlkwc{shape}\hlstd{=clayfac))} \hlopt{+}\hlcom{#}
+  \hlkwd{ylab}\hlstd{(}\hlstr{"Profundidade"}\hlstd{)} \hlopt{+}\hlcom{#}
+  \hlkwd{xlab}\hlstd{(}\hlstr{"Riqueza Spp."}\hlstd{)} \hlopt{+}\hlcom{#}
+  \hlkwd{theme_bw}\hlstd{()}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\column{0.6\linewidth}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=1\linewidth]{figure/unnamed-chunk-86-1}
+
+\end{knitrout}
+
+\end{columns}
+

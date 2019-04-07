@@ -1,0 +1,29 @@
+\frametitle{Exemplo}
+
+\begin{knitrout}\tiny
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{quantile}\hlstd{(b0,}\hlkwc{probs}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{0.025}\hlstd{,}\hlnum{0.975}\hlstd{))}
+\end{alltt}
+\begin{verbatim}
+##      2.5%     97.5%
+## -9.022321 -2.187944
+\end{verbatim}
+\begin{alltt}
+\hlkwd{quantile}\hlstd{(b1,}\hlkwc{probs}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{0.025}\hlstd{,}\hlnum{0.975}\hlstd{))}
+\end{alltt}
+\begin{verbatim}
+##      2.5%     97.5%
+## 0.5945032 0.8997511
+\end{verbatim}
+\begin{alltt}
+\hlkwd{confint}\hlstd{(m0)}
+\end{alltt}
+\begin{verbatim}
+##                  2.5 %     97.5 %
+## (Intercept) -9.4999606 -1.2162557
+## speed        0.5865477  0.9030047
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+

@@ -1,0 +1,512 @@
+sqt
+sqr + sqe
+b1 <- m$coefficients[2]
+xbar <- mean(x)
+sqx <- sum((x-xbar)^2)
+sqr2 <- (b1^2)*sqx
+sqr2
+sqr
+?legend
+((18/3)/1)/((13/3/8))
+((18)/1)/((13/8))
+34539/370
+df(0.975,1,18)
+pf(0.975,1,18)
+?df
+1-0.05
+0.95/2
+pf(0.975,1,18)
+df(0.975,1,18)
+rf(0.975,1,18)
+df(0.975,1,18)
+df(0.975,1,18)q
+qf(0.975,1,18)
+pf(93.3,1,18)
+df(93.3,1,18)
+par(mar=c(3,3,0,0))
+plot(x,y,pch=19)
+abline(h=ybar,lty=2,lwd=2)
+legend("bottomright",legend = expression(bar(Y)),lty=2,lwd=2,cex=1.5,bty="n")
+@
+abline(m,lty=1,lw2=2)
+abline(m,lty=1,lwd=2)
+par(mar=c(3,3,0,0))
+plot(x,y,pch=19)
+abline(h=ybar,lty=2,lwd=2)
+abline(m,lty=1,lwd=2)
+legend("bottomright",legend = c(expression(bar(Y)),expression(hat(Y))),lty=c(2,1),lwd=2,cex=1.5,bty="n")
+set.seed(1979)
+x2 <- c(5,9,13)
+y2 <- 1.1*x2 + rnorm(3,0,5)
+plot(x2,y2,pch=19)
+x2 <- c(re(5,10),rep(9,10),rep(13,10))
+x2 <- c(rep(5,10),rep(9,10),rep(13,10))
+y2 <- 1.1*x2 + rnorm(30,0,5)
+plot(x2,y2,pch=19)
+yhat1 <- mean(y[1:10])
+yhat2 <- mean(y[11:20])
+yhat3 <- mean(y[21:30])
+par(mar=c(3,3,0,0))
+plot(x2,y2,pch=19)
+abline(h=ybar,lty=2,lwd=2)
+ybar <- mean(y2)
+par(mar=c(3,3,0,0))
+plot(x2,y2,pch=19)
+abline(h=ybar,lty=2,lwd=2)
+yhat <- c(yha1,yhat2,yhat3)
+yhat <- c(yhat1,yhat2,yhat3)
+segments(x0=x-2,y0=yhat,x1=x+2,y1=yhat,col='red',lwd=2)
+segments(x0=x2-2,y0=yhat,x1=x2+2,y1=yhat,col='red',lwd=2)
+yhat
+yhat1 <- mean(y2[1:10])
+yhat2 <- mean(y2[1:20])
+yhat3 <- mean(y2[21:30])
+yhat <- c(yhat1,yhat2,yhat3)
+yhat
+segments(x0=x2-2,y0=yhat,x1=x2+2,y1=yhat,col='red',lwd=2)
+x2
+x2-2
+x2+2
+plot(x2,y2,pch=19)
+abline(h=ybar,lty=2,lwd=2)
+segments(x0=x2-2,y0=yhat,x1=x2+2,y1=yhat,col='red',lwd=2)
+par(mar=c(3,3,0,0))
+plot(x2,y2,pch=19)
+abline(h=ybar,lty=2,lwd=2)
+segments(x0=unique(x2)-2,y0=yhat,x1=unique(x2)+2,y1=yhat,col='red',lwd=2)
+plot(x2,y2,pch=19)
+abline(h=ybar,lty=2,lwd=2)
+segments(x0=unique(x2)-1,y0=yhat,x1=unique(x2)+1,y1=yhat,col='red',lwd=2)
+par(mar=c(3,3,0,0))
+plot(x2,y2,pch=19)
+abline(h=ybar,lty=2,lwd=2)
+segments(x0=unique(x2)-0.2,y0=yhat,x1=unique(x2)+0.2,y1=yhat,col='red',lwd=2)
+legend("bottomright",legend = c(expression(bar(Y)),expression(hat(Y[i]))),lty=c(2,1),lwd=2,cex=1.5,bty="n")
+legend("bottomright",legend = c(expression(bar(Y)),expression(hat(Y[i]))),lty=c(2,1),lwd=2,cex=1.5,bty="n",col=c('black','red'))
+set.seed(1979)
+x2 <- c(rep(10,10),rep(30,10),rep(50,10))
+y2 <- 1.1*x2 + rnorm(30,0,5)
+ybar <- mean(y2)
+yhat1 <- mean(y2[1:10])
+yhat2 <- mean(y2[1:20])
+yhat3 <- mean(y2[21:30])
+yhat <- c(yhat1,yhat2,yhat3)
+par(mar=c(3,3,0,0))
+plot(x2,y2,pch=19,xlim=c(0,50))
+abline(h=ybar,lty=2,lwd=2)
+segments(x0=unique(x2)-0.2,y0=yhat,x1=unique(x2)+0.2,y1=yhat,col='red',lwd=2)
+yhat
+y2
+yhat1 <- mean(y2[1:10])
+yhat2 <- mean(y2[11:20])
+yhat3 <- mean(y2[21:30])
+yhat <- c(yhat1,yhat2,yhat3)
+par(mar=c(3,3,0,0))
+plot(x2,y2,pch=19,xlim=c(0,50))
+abline(h=ybar,lty=2,lwd=2)
+segments(x0=unique(x2)-0.2,y0=yhat,x1=unique(x2)+0.2,y1=yhat,col='red',lwd=2)
+par(mar=c(3,3,0,0))
+plot(x,y,pch=19,xlim=c(0,50))
+abline(h=ybar,lty=2,lwd=2)
+abline(m,lty=1,lwd=2)
+plot(x,y,pch=19,xlim=c(0,50))
+abline(m,lty=1,lwd=2)
+legend("bottomright",legend = c(expression(bar(Y)),expression(hat(Y[i]))),lty=c(2,1),lwd=2,cex=1.5,bty="n")
+segment(x0=x,y0=y,x1=x,y1=m$fitted.values)
+segmenta(x0=x,y0=y,x1=x,y1=m$fitted.values)
+segments(x0=x,y0=y,x1=x,y1=m$fitted.values)
+segments(x0=x,y0=y,x1=x,y1=m$fitted.values,lwd=2,col='red')
+?plotmath
+plot(x,y,pch=19,xlim=c(0,50))
+abline(m,lty=1,lwd=2)
+segments(x0=x,y0=y,x1=x,y1=m$fitted.values,lwd=2,col='red')
+legend("bottomright",legend = c(expression(hat(Y[i])),expression(epsilon[i])),lty=c(1,1),lwd=2,cex=1.5,bty="n",col=c('black','red'))
+legend("bottomright",legend = c(expression(beta[0] + beta[1]X),expression(epsilon[i])),lty=c(1,1),lwd=2,cex=1.5,bty="n",col=c('black','red'))
+par(mar=c(3,3,0,0))
+plot(x,y,pch=19,xlim=c(0,50))
+abline(m,lty=1,lwd=2)
+segments(x0=x,y0=y,x1=x,y1=m$fitted.values,lwd=2,col='red')
+legend("bottomright",legend = c(expression(beta[0] + beta[1]*X),expression(epsilon[i])),lty=c(1,1),lwd=2,cex=1.5,bty="n",col=c('black','red'))
+par(mar=c(3,3,0,3))
+plot(x,y,pch=19,xlim=c(0,50))
+abline(m,lty=1,lwd=2)
+segments(x0=x,y0=y,x1=x,y1=m$fitted.values,lwd=2,col='red')
+legend("bottomright",legend = c(expression(beta[0] + beta[1]*X),expression(epsilon[i])),lty=c(1,1),lwd=2,cex=1.5,bty="n",col=c('black','red'))
+legend(30,10,legend = c(expression(beta[0] + beta[1]*X),expression(epsilon[i])),lty=c(1,1),lwd=2,cex=1.5,bty="n",col=c('black','red'))
+par(mar=c(3,3,0,3))
+plot(x,y,pch=19,xlim=c(0,50))
+abline(m,lty=1,lwd=2)
+segments(x0=x,y0=y,x1=x,y1=m$fitted.values,lwd=2,col='red')
+legend(40,10,legend = c(expression(beta[0] + beta[1]*X),expression(epsilon[i])),lty=c(1,1),lwd=2,cex=1.5,bty="n",col=c('black','red'))
+par(mar=c(3,3,0,0))
+plot(x,y,pch=19,xlim=c(0,50))
+abline(m,lty=1,lwd=2)
+segments(x0=x,y0=y,x1=x,y1=m$fitted.values,lwd=2,col='red')
+legend(40,10,legend = c(expression(beta[0] + beta[1]*X),expression(epsilon[i])),lty=c(1,1),lwd=2,cex=1.5,bty="n",col=c('black','red'))
+legend(35,10,legend = c(expression(beta[0] + beta[1]*X),expression(epsilon[i])),lty=c(1,1),lwd=2,cex=1.5,bty="n",col=c('black','red'))
+par(mar=c(3,3,0,0))
+plot(x,y,pch=19,xlim=c(0,50))
+abline(m,lty=1,lwd=2)
+segments(x0=x,y0=y,x1=x,y1=m$fitted.values,lwd=2,col='red')
+legend(35,10,legend = c(expression(beta[0] + beta[1]*X),expression(epsilon[i])),lty=c(1,1),lwd=2,cex=1.5,bty="n",col=c('black','red'))
+set.seed(1979)
+x2 <- c(rep(10,10),rep(30,10),rep(50,10))
+y2 <- 1.1*x2 + rnorm(30,0,5)
+ybar <- mean(y2)
+yhat1 <- mean(y2[1:10])
+yhat2 <- mean(y2[11:20])
+yhat3 <- mean(y2[21:30])
+yhat <- c(yhat1,yhat2,yhat3)
+par(mar=c(3,3,0,0))
+plot(x2,y2,pch=19,xlim=c(0,50))
+abline(h=ybar,lty=2,lwd=2)
+segments(x0=unique(x2)-2,y0=yhat,x1=unique(x2)+2,y1=yhat,col='red',lwd=2)
+ypred2 <- 1.1*x2
+segments(x0=x2,y0=y2,x1=x2,y1=ypred2,lwd=2,col='red')
+par(mar=c(3,3,0,0))
+plot(x2,y2,pch=19,xlim=c(0,50))
+segments(x0=unique(x2)-2,y0=yhat,x1=unique(x2)+2,y1=yhat,col='black',lwd=2)
+segments(x0=x2,y0=y2,x1=x2,y1=ypred2,lwd=2,col='red')
+legend("bottomright",legend = c(expression(bar(Y)),expression(hat(Y[i]))),lty=c(2,1),lwd=2,cex=1.5,bty="n",col=c('black','red'))
+x
+segments(x0=unique(x2)-2,y0=yhat,x1=unique(x2)+2,y1=yhat,col='black',lwd=2)
+segments(x0=x2,y0=y2,x1=x2,y1=ypred2,lwd=2,col='red')
+legend(35,10,legend = c(expression(mu[i]),expression(epsilon[ij])),lty=c(1,1),lwd=2,cex=1.5,bty="n",col=c('black','red'))
+legend(35,5,legend = c(expression(mu[i]),expression(epsilon[ij])),lty=c(1,1),lwd=2,cex=1.5,bty="n",col=c('black','red'))
+legend(35,8,legend = c(expression(mu[i]),expression(epsilon[ij])),lty=c(1,1),lwd=2,cex=1.5,bty="n",col=c('black','red'))
+data(coagulation)
+library(faraway)
+install.packages("faraway")
+library(faraway)
+data(coagulation)
+coagulation
+boxplot(coagulation)
+boxplot(coag ~ diet, data = coagulation)
+g<- lm(coag ~ diet, data=coagulation)
+summary(g)
+library(xtable)
+xtable(coagulation)
+xtable(coagulation, row.names=F)
+?xtable
+library(faraway)
+data(coagulation)
+boxplot(coag ~ diet, data = coagulation)
+?aov
+?lm
+coagulation
+str(coagulation)
+flow <- data.frame(per = c(10,12,12,13,9,11,11,12,12,13,15,16),trat = factor(c("C1","C1","C1","C1","C2","C2","C2","C2","T","T","T","T")))
+flow
+boxplot(flow)
+boxplot(per ~ trat, flow)
+m <- lm(per ~ trat,flow)
+summary(flow)
+summary(m)
+m2 <- aov((per ~ trat,flow)
+m2 <- aov(per ~ trat,flow)
+summary(m2)
+m2
+getwd()
+setwd("~/Dropbox/EstatisticaINPE/Aula_5_Anova")
+mangue <- read.tabe('SpongeContrastData.txt',sep=" ",header=T)
+mangue <- read.table('SpongeContrastData.txt',sep=" ",header=T)
+mangue
+names(mangue) <- c("trat","cresc")
+boxplot(cresc ~ trat,mangue)
+tapply(mangue$cresc,mangue$trat,mean())
+tapply(mangue$cresc,mangue$trat,mean
+tapply(mangue$cresc,mangue$trat,mean)
+m1 <- lm(cresc ~ trat,mangue)
+summary(m1)
+anova(m1)
+?HSD
+?hsd
+TukeyHSD(m1)
+m1 <- aov(cresc ~ trat,mangue)
+m1 <- lm(cresc ~ trat,mangue)
+summary(m1)
+anova(m1)
+m2 <- aov(cresc ~ trat,mangue)
+summary(m2)
+m2
+names(m1)
+names(m2)
+TukeyHSD(m2)
+TukeyHSD(m1)
+TukeyHSD(m2)
+contrats(m1)
+contrasts(m1)
+contrasts(mangue)
+contrasts(mangue$trat)
+cont.mat1 <- matrix(c(0,0,0,2,0,0,0,-1,0,0,0,-1),ncol=3,byrow=T)
+cont.mat1
+contrasts(mangue$trat) <-cont.mat1
+m3 <- aov(cresc ~ trat, mangue)
+m2
+m3
+contrasts(mangue$trat) <-cont.mat1
+m3 <- lm(cresc ~ trat, mangue)
+summary(m2)
+summary(m3)
+summary(m1)
+?lm
+m3 <- lm(cresc ~ trat, mangue, contrats=c(0,2,-1,-1))
+m3 <- lm(cresc ~ trat, mangue, contrats=c(,2,-1,-1))
+m3 <- lm(cresc ~ trat, mangue, contrats=c(2,-1,-1))
+m3 <- lm(cresc ~ trat, mangue, contrasts=c(0,2,-1,-1))
+m1
+m2
+m3
+m1
+contrasts(m3)
+names(m3)
+m3$contrats
+m3$contrasts
+summary(m3)
+summary(m1)
+m2 <- aov(cresc ~ trat,mangue)
+summary(m2)
+m3 <- aov(cresc ~ trat, mangue, contrasts=c(0,2,-1,-1))
+m3
+summary(m3)
+m3 <- aov(cresc ~ trat, mangue, contrasts=c(0,2,-1,-1))
+summary(m3)
+summary(m2)
+cont.mat1 <- matrix(c(0,0,0,2,0,0,0,-1,0,0,0,-1),ncol=3,byrow=T)
+contrasts(mangue$trat) <-cont.mat1
+mangue <- read.table('SpongeContrastData.txt',sep=" ",header=T)
+names(mangue) <- c("trat","cresc")
+m2 <- aov(cresc ~ trat,mangue)
+summary(m2)
+contrasts(mangue$trat) # contrastes originais
+c(1,1,1,-1,-1,-1)
+data(InsectSprays)
+str(InsectSprays)
+boxplot(count ~ spary,InsectSprays)
+boxplot(count ~ spray,InsectSprays)
+m1 <- aov(count ~ spray,InsectSprays)
+m1
+summary(m1)
+c1 <- c(1,1,1,-1,-1,-1)
+c2 <- c(1,1,-1,-1,-1,1)
+mat <- cbind(c1,c2)
+mat
+in2 <- InsectSprays
+contrats(InsectSprays)
+contrasts(InsectSprays)
+contrasts(InsectSprays$spray)
+contrasts(InsectSprays$spray)<- mat
+contrasts(InsectSprays$spray)
+m1
+m2 <- aov(count ~ spray,InsectSprays)
+m2
+summary(m2)
+summary(m2, split=list(spray=list("First 3 vs other"=1, "ABF vs CDE"=2)))
+summary(m1, split=list(spray=list("First 3 vs other"=1, "ABF vs CDE"=2)))
+?summary
+?summary.lm
+?summary.aov
+summary(m2, split=list(spray=list("First 3 vs other"=1, "ABF vs CDE"=2)))
+summary(m1)
+cont1 <- matrix(c(0,2,-1,-1))
+cont1
+mangue <- read.table('SpongeContrastData.txt',sep=" ",header=T)
+names(mangue) <- c("trat","cresc")
+boxplot(cresc ~ trat,mangue)
+tapply(mangue$cresc,mangue$trat,mean)
+m1 <- lm(cresc ~ trat,mangue)
+summary(m1)
+anova(m1)
+m2 <- aov(cresc ~ trat,mangue)
+summary(m2)
+m2
+mangue2 <- mangue
+cont1 <- matrix(c(0,2,-1,-1))
+contrasts(mangue2)
+contrasts(mangue2$trat)
+contrasts(mangue2$trat) <- cont1
+contrasts(mangue2$trat)
+?contrsats
+?contrasts
+m3 <- aov(cresc ~ trat, mangue2)
+summary(m3)
+summary(m2)
+summary(m3)
+summary(m3,split=list("Natural vs. Artificial"=1))
+summary(m3,split=list("N"=1))
+summary(m3,split=list("N"=1,"X"=2))
+list("N"=1,"X"=2)
+summary(m3,split=list("Natural vs. Artificial"=1))
+contrasts(mangue2)
+contrasts(mangue2$trat)
+model.matrix(m2)
+model.matrix(m3)
+summary(m3,split=list(trat=list("Natural vs. Artificial"=1))
+summary(m3,split=list(trat=list("Natural vs. Artificial"=1)))
+cont1*cont2
+cont1 <- matrix(c(0,2,-1,-1))
+cont2 <- matrix(c(3,-1,-1,-1))
+cont1*cont2
+sum(cont1*cont2)
+cont3 <- matrix(c(0,0,1,-1))
+sum(cont1*cont2*cont3)
+conts <- cbind(cont1,cont2,cont3)
+contrasts(mangue$trat) <- conts
+levels(mangue$trat)
+contrats(mangue$trat)
+contrasts(mangue$trat)
+cont
+conts
+tapply(mangue$cresc,mangue$trat,mean)
+mds <- tapply(mangue$cresc,mangue$trat,mean)
+mds
+cont1
+cont1*mds
+cont1 <- vector(cont1)
+cont1 <- as.vector(cont1)
+cont1
+cont1*mds
+cont1*mds*14
+(cont1*mds)^2*14
+((sum(cont1*mds)^2)*14)/(sum(cont1^2))
+m1
+m2
+anova(m2)
+((sum(cont1*mds)^2)*14)/(sum(cont1^2))/0.86
+cont2 <- as.vector(cont2)
+cont2
+((sum(cont2*mds)^2)*14)/(sum(cont1^2))
+((sum(cont1*mds)^2)*14)/(sum(cont1^2))
+0.15/0.87
+0.15/0.16
+((sum(cont2*mds)^2)*14)/(sum(cont1^2))
+pf(0.882)
+pf(0.882,1,52)
+4.6/0.16
+pf(28.75,1,52)
+?pf
+df(0.882,1,52)
+mangue
+c1 <- c(rep(0,14),rep(2,14),rep(-1,28))
+mangue$c1 <- c1
+mangue
+lm(cresc ~ c1)
+lm(cresc ~ c1,mangue)
+summary(lm(cresc ~ c1,mangue))
+summary(m1)
+14*3
+c2 <- c(rep(3,14),rep(-1,42))
+c3 <- c(rep(0,28),rep(1,14),rep(-1,14))
+mangue$c2 <- c2
+mangue$c3 <- c3
+summary(lm(cresc ~ c2,mangue))
+summary(lm(cresc ~ c3,mangue))
+summary(lm(cresc ~ c1 + c2 + c3,mangue))
+tapply(mangue$cresc,mangue$trat,mean)
+tapply(mangue$c1,mangue$trat,mean)
+mean(mangue$cresc[mangue$trat =='Haliclonia' | mangue$trat == 'Tedania'])
+dim(mangue)
+56-28
+mean(mangue[29:56,cresc])
+mean(mangue[29:56,1])
+mean(mangue[29:56,2])
+sum(mangue$c1*mangue$c2*mangue$c3)
+m3 <- aov(cresc ~ c1 + c2 + c3, mangue)
+summary(m3)
+summary(m3)$sum.sq
+names(summary(m3))
+(summary(m3)
+summary(m3)
+0.0151 + 2.296 + 0.155
+summary(m1)
+0.0151 + 2.296 + 0.155
+anova(m1)
+names(m3)
+x <0 summary(m3)
+x <- summary(m3)
+m3
+x <- summary(m3)
+names(x)
+x
+m3 <- lm(cresc ~ c1 + c2 + c3, mangue)
+anova(m3)
+names(summary(m3))
+names(m3)
+names(anova(m3))
+anova(m3)[2]
+sum(anova(m3)[2,1:3]
+)
+anova(m3)[2,1:3]
+anova(m3)[1:3,2]
+sum(anova(m3)[1:3,2]
+)
+anova(m1)
+c2 <- c(rep(3,14),rep(-1,42))
+c2
+c3 <- c(rep(0,28),rep(1,14),rep(-1,14))
+c3
+install.packages("car")
+install.packages(c("formatR", "highr", "manipulate", "mime", "rmarkdown"))
+set.seed(234)
+x1 <- runif(40,0,20)
+x2 <- c(rep(0,20),rep(1,20))
+y <- 3 + 2*x1 + 6*x2 + 1.2*x1*x2 + rnorm(20,0,5)
+m <- lm(y ~ x1 * x2)
+summary(m)
+set.seed(234)
+x1 <- runif(40,0,20)
+x2 <- c(rep(0,20),rep(1,20))
+y <- 3 + 2*x1 + 20*x2 + rnorm(20,0,5)
+m <- lm(y ~ x1 + x2)
+plot(x1,y, pch=19)
+df <- data.frame(x1=x1,x2=x2,y=y)
+m <- lm(y ~ x1 + x2, df)
+m
+ggplot(df,aes(x1,y)) + geom_point(aes(color=x2))
+library(ggplot2)
+ggplot(df,aes(x1,y)) + geom_point(aes(color=x2))
+str(df)
+x2 <- factor(c(rep(0,20),rep(1,20)))
+df <- data.frame(x1=x1,x2=factor(x2),y=y)
+ggplot(df,aes(x1,y)) + geom_point(aes(color=x2))
+?geom_smooth
+ggplot(df,aes(x1,y)) + geom_point(aes(color=x2)) + geom_smooth(method="lm", formula = m)
+ggplot(df,aes(x1,y)) + geom_point(aes(color=x2)) + geom_smooth(method="lm", formula = y ~ x1 + x2)
+plot(x1,y, pch=19,col=x2)
+x21novo <- data.frame(x1 = seq(0,20,by=1), x2=rep(0,21))
+x22novo <- data.frame(x1 = seq(0,20,by=1), x2=rep(1,21))
+p1 <- predict(m,x21novo)
+p2 <- predict(m,x22novo)
+lines(seq(0,20,by=1),p1, lwd=2,col='red')
+lines(seq(0,20,by=1),p2, lwd=2,col='blue')
+plot(x1,y, pch=19, col=x2)
+lines(seq(0,20,by=1),p1, lwd=2,col='black')
+lines(seq(0,20,by=1),p2, lwd=2,col='red')
+plot(x1,y, pch=19, col=x2)
+lines(seq(0,20,by=1),p1, lwd=2,col='black')
+lines(seq(0,20,by=1),p2, lwd=2,col='red')
+plot(x1,y, pch=19, col=x2)
+lines(seq(0,20,by=1),p1, lwd=2,col='black')
+lines(seq(0,20,by=1),p2, lwd=2,col='red')
+plot(x1,y, pch=19, col=x2)
+lines(seq(0,20,by=1),p1, lwd=2,col='black')
+lines(seq(0,20,by=1),p2, lwd=2,col='red')
+col <- X2; col[col==0] <- 27; col[col==1] <- 24
+set.seed(234)
+x1 <- runif(40,0,20)
+x2 <- c(rep(0,20),rep(1,20))
+col <- X2; col[col==0] <- 27; col[col==1] <- 24
+col <- x2; col[col==0] <- 27; col[col==1] <- 24
+y <- 3 + 2*x1 + 20*x2 + rnorm(20,0,5)
+m <- lm(y ~ x1 + x2)
+plot(x1,y, pch=19,col=x2)
+plot(x1,y, pch=19,col=col)
+col <- x2; col[col==0] <- "blue"; col[col==1] <- "red"
+plot(x1,y, pch=19,col=col)
+x21novo <- data.frame(x1 = seq(0,20,by=1), x2=rep(0,21))
+x22novo <- data.frame(x1 = seq(0,20,by=1), x2=rep(1,21))
+p1 <- predict(m,x21novo)
+p2 <- predict(m,x22novo)
+lines(seq(0,20,by=1),p1, lwd=2,col='black')
+lines(seq(0,20,by=1),p2, lwd=2,col='red')
+lines(seq(0,20,by=1),p1, lwd=2,col='blue')

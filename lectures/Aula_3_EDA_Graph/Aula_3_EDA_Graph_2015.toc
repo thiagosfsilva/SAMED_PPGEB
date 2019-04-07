@@ -1,0 +1,6 @@
+\beamer@endinputifotherversion {3.36pt}
+\select@language {portuguese}
+\beamer@sectionintoc {1}{Pra que serve análise exploratória?}{3}{0}{1}
+\beamer@sectionintoc {2}{Codificação e organização de dados}{19}{0}{2}
+\beamer@sectionintoc {3}{Estatística Descritiva}{31}{0}{3}
+\beamer@sectionintoc {4}{Análise Gráfica}{60}{0}{4}

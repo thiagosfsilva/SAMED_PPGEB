@@ -1,0 +1,47 @@
+\frametitle{ANCOVA}
+
+\begin{columns}
+
+\column{0.65\linewidth}
+\setlength{\topsep}{2pt}
+\begin{knitrout}\tiny
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{m} \hlkwb{<-} \hlkwd{lm}\hlstd{(y} \hlopt{~} \hlstd{x1} \hlopt{+} \hlstd{x1}\hlopt{:}\hlstd{x2)}
+\hlkwd{summary}\hlstd{(m)}
+\end{alltt}
+\begin{verbatim}
+##
+## Call:
+## lm(formula = y ~ x1 + x1:x2)
+##
+## Residuals:
+##     Min      1Q  Median      3Q     Max
+## -8.2419 -2.3296 -0.0221  2.7361  7.6408
+##
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)
+## (Intercept)   5.6613     1.4062   4.026  0.00027 ***
+## x1            1.6808     0.1235  13.607 5.63e-16 ***
+## x1:x2         1.8030     0.1033  17.453  < 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+##
+## Residual standard error: 3.864 on 37 degrees of freedom
+## Multiple R-squared:   0.95,^^IAdjusted R-squared:  0.9473
+## F-statistic: 351.8 on 2 and 37 DF,  p-value: < 2.2e-16
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\column{0.4\linewidth}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=1.1\linewidth]{figure/ancovplot5-1}
+
+\end{knitrout}
+
+
+\end{columns}
+

@@ -1,0 +1,1968 @@
+\documentclass{beamer}
+\usefonttheme[onlymath]{serif}
+
+\usepackage[portuguese]{babel}
+\usepackage{graphicx}
+\usepackage{ulem} % Para texto em strikeout
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usetheme{m}
+
+\ifdefined\knitrout 
+\renewenvironment{knitrout}{\setlength{\topsep}{0mm}}{}
+\else
+\fi
+
+\title{Aula 6: Regressão Múltipla, ANOVA e ANCOVA}
+\subtitle{Análise Estatística e Modelagem de Dados Ecológicos}
+\author{\textbf{Thiago S. F. Silva} - tsfsilva@rc.unesp.br}
+\institute{Programa de Pós Graduação em Ecologia e Biodiversidade - UNESP}
+\date{\today}
+
+\graphicspath{{C:/Users/thiago/OneDrive/UNESP/Pos_graduacao/Eco/2015/Estatistica_2015/Aulas/Aula_7_Anova/figuras/}}
+
+\begin{document}
+
+<<opts, echo=FALSE>>=
+options(width=80)
+library(ggplot2)
+plotheme <- theme(axis.line = element_line(colour = "black", size=1), panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.border = element_blank(),panel.background = element_blank()) 
+@
+
+%===============================================================================%
+\begin{frame}[plain] % plain avoids a badbox error from page number in title page
+  \titlepage
+\end{frame}
+
+\begin{frame}{Outline}
+  \tableofcontents
+\end{frame}
+%===============================================================================%
+
+\section{Regressão Múltipla}
+
+
+%===============================================================================%
+\begin{frame}{Um é pouco, dois é bom, três é melhor ainda}
+
+O modelo de regressão múltipla é uma extensão do modelo simples 
+
+\vfill
+
+Para duas variáveis explicativas, temos: \pause
+
+\begin{equation*}
+Y_i = \beta _0 + \beta _1 X_1 + \beta _2 X_2 + \ldots + \beta _k X_k + \varepsilon _i \pause
+\end{equation*}
+
+Os termos fixos nos dão $E(Y)$, e o termo aleatório nos dá $Var(Y)$. \pause
+
+\vfill
+
+Se $E(Y)$ depende de uma combinação de duas variáveis preditoras ($X_1$ e $X_2$), a reta se torna um plano 
+
+\vfill
+
+% Designamos as diferentes variáveis explicativas por $X_1$, $X_2$, \ldots, $X_{(p-1)}$, onde $p$ é o número de parametros (coeficientes) do modelo.
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}{Um é pouco, dois é bom, três é melhor ainda}
+
+<<c1,fig.height=5,fig.width=5,out.width='0.8\\linewidth',echo=FALSE>>=
+set.seed(6267)
+x1 <- runif(20,0,5)
+set.seed(6223)
+x2 <- runif(20,10,20)
+y = 15.4 + 3*x1 + 0.8*x2 + rnorm(20,0,5)
+m <- lm(y ~ x1 + x2)
+mat <- cbind(x1,x2,y)
+
+library(scatterplot3d)
+s3d <- scatterplot3d(mat,angle=140,type="p",color="blue",pch=19,highlight.3d=F)
+s3d$plane3d(m, lty.box = "solid")
+@
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}{Interpretação dos termos do modelo}
+
+\begin{itemize}
+
+\item $\beta _0$: intercepto da superfície de resposta. Valor de $Y$ quando  $X_{1} = X_2 = \dots X_{k=(p-1)} = 0$. Geralmente não tem um significado explícito. \pause
+\vfill
+\item $\beta _1$, $\beta _2$, \ldots, $\beta _k$: determinam o aumento em $E(Y)$ quando $X_{k}$ $(k=\{0,p-1\})$ aumenta em 1, e os demais $X_k$ permanecem constantes.\pause
+\vfill
+\item Cada coeficiente representa a contribuição absoluta de  $X_{k}$ para a estimativa de $E(Y)$ (ou $\beta _k = \frac{\delta E(Y)}{\delta X_{(k)}}$) \pause
+\vfill
+\item $\varepsilon _i$ continua sendo a diferença entre $Y_i$ e $E(Y_i)$
+
+\end{itemize}
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}{Partição da variância}
+
+A partição geral da variância segue o mesmo padrão do modelo simples, mas com diferentes graus de liberdade
+\vfill
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcllccc}
+Fonte & GL & Soma Quadrados & Média Quadrados \\
+\hline
+& & & & & &\\
+Regressão & $p-1$ & $SQ_{Reg} = \mathbf{b'X'Y-\dfrac{1}{n} Y'JY}$ & $MR_{Reg} = \dfrac{SQ_{Reg}}{p-1}$ \\[5ex]
+Resíduos & $n-p$ & $SQ_{Res} = \mathbf{Y'Y - b'X'Y}$ & $MQ_{Res} = \dfrac{SQ_{Res}}{n-p}$ \\[5ex]
+Total & $n-1$ & $SQ_{Tot} = \mathbf{Y'Y - \dfrac{1}{n} Y'JY}$ & $MQ_{Tot} = \dfrac{SQ_{Tot}}{n-1}$ \\[5ex]
+\hline
+\end{tabular}%
+}
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}{Coeficiente de determinação múltiplo}
+
+\begin{itemize}
+
+\item O teste geral para a regressão ainda é feito usando $F^* = \frac{MQ_{Reg}}{MQ_{Res}}$, e a quantidade de variância explicada é representada por $R^2 = \frac{SQ_{Reg}}{SQ_{Tot}} = 1 - \frac{SQ_{Res}}{SQ_{Tot}}$ \pause
+
+\vfill
+
+\item Quando novas variáveis são incluídas no modelo, pode-se mostrar matematicamente que $SQ_{Res} nunca aumenta. \pause
+\vfill
+Por esse motivo, o $R^2$ aumenta mesmo que a quantidade de variância adicional explicada seja mínima. \pause
+\vfill
+\item Assim, não se pode confiar em $R^2$ como uma medida de qualidade do modelo (a interpretação de quantidade de variância explicada continua correta).
+
+
+\end{itemize}
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}{Coeficiente de determinação múltiplo}
+
+\begin{itemize}
+
+\item O coeficiente de determinação ajustado ($R^2_a$) penaliza a razão de somas de quadrados pela razão entre os graus de liberdade:
+
+\begin{equation*}
+\centering
+R ^2 _a = 1 - \left(\frac{n-1}{n-p}\right) \frac{SQ_{Res}}{SQ_{Tot}}
+
+\end{equation*}
+
+\pause
+\item Dessa maneira, o ganho em explicação é ponderado pelo aumento de $\frac{(n-1)}{(n-p)}$, e o $R^2_a$ pode até diminuir com a adição de novas variáveis, se a contribuição não for importante.
+
+\vfill
+
+(Mas $R^2_a$ deixa de ter relação com \% de variância explicada)
+
+\end{itemize}
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}{Inferências e Diagnósticos}
+
+As inferências sobre o modelo (intervalos de confiança e testes de hipótese) seguem o mesmo modelo da regressão simples.
+
+\vfill
+As equações para estimativas dos erros são mais complexas, mas o princípio não se altera.
+
+\vfill
+Os procedimentos diagnósticos também são os mesmos, com a adição de scatterplots dos resíduos verus cada variável $X_k$.
+
+\end{frame}
+%===============================================================================%
+
+\section{Diferenças entre Regressão Simples e Múltipla}
+
+
+%===============================================================================%
+\begin{frame}{Complicações adicionais}
+
+Os modelos lineares de regressão múltipla apresentam algumas ``complicações'' extras quando comparados aos modelos simples:
+\vfill
+\begin{itemize}
+
+\item A existência de correlação entre as variáveis pode atrapalhar a nossa partição de variância (multicolinearidade). \pause
+\vfill
+\item Os coeficientes $\beta$ normalmente não são diretamente comparáveis. \pause
+\vfill
+\item Quando o número de variáveis independentes aumenta, a decisão sobre quais são mais ou menos importantes é mais difícil.
+\vfill
+
+\end{itemize}
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}{Multicolinearidade}
+
+O modelo de regressão busca explicar parte da variância de $Y$ através da co-variância entre $Y$ e $X$ (partição de variâncias).
+\vfill
+Se as variáveis $X$ são independentes, cada porção da variância de $Y$ é explicada separadamente por cada $X$.
+\vfill
+Mas se as variáveis preditoras foem correlacionadas, há redundância de informação, reduzindo a quantidade de informação disponível para estimação dos coeficientes. $\beta$.
+\vfill
+
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}{Multicolinearidade}
+
+Caso 1: $X_k$ perfeitamente independentes
+\vfill
+\includegraphics[width=1\textwidth]{multi1.png}
+
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}[fragile]{Multicolinearidade}
+
+Caso 1: $X_k$ perfeitamente independentes
+\vfill
+Nesse caso, a contribuição de $X_1$ e $X_2$ são exatamente as mesmas de dois modelos lineares simples:
+\vfill
+<<mc0,size='tiny'>>=
+x1 <- c(4,4,4,4,6,6,6,6)
+x2 <- c(2,2,3,3,2,2,3,3)
+y <- c(42,39,48,51,49,53,61,60)
+
+cor(x1,x2)
+@
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}[fragile]{Multicolinearidade}
+
+Caso 1: $X_k$ perfeitamente independentes
+\vfill
+
+<<mc01,size='tiny'>>=
+m1 <- lm(y ~ x1)
+m1
+anova(m1)
+@
+
+\end{frame}
+%===============================================================================%
+
+
+
+%===============================================================================%
+\begin{frame}[fragile]{Multicolinearidade}
+
+Caso 1: $X_k$ perfeitamente independentes
+\vfill
+
+<<mc02,size='tiny'>>=
+m2 <- lm(y ~ x2)
+m2
+anova(m2)
+@
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}[fragile]{Multicolinearidade}
+
+Caso 1: $X_k$ perfeitamente independentes
+\vfill
+
+<<mc03,size='tiny'>>=
+m3 <- lm(y ~ x1 + x2)
+m3
+anova(m3)
+@
+
+\end{frame}
+%===============================================================================%
+
+
+
+%===============================================================================%
+\begin{frame}{Multicolinearidade}
+ 
+Caso 2: $X_k$ perfeitamente correlacionados
+\vfill
+\includegraphics[width=1\textwidth]{multi3v2.png}
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}[fragile]{Multicolinearidade}
+
+Caso 2: $X_k$ perfeitamente correlacionados
+\vfill
+Nesse caso, não há variância restante para estimar $\beta _2$ após a estimação de $\beta _1$:
+\vfill
+<<mc00,size='tiny'>>=
+x1 <- c(4,4,4,4,6,6,6,6)
+x2 <- x1
+y <- c(42,39,48,51,49,53,61,60)
+
+cor(x1,x2)
+@
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}[fragile]{Multicolinearidade}
+
+Caso 2: $X_k$ perfeitamente correlacionados
+\vfill
+
+<<mc001,size='tiny'>>=
+m1 <- lm(y ~ x1 + x2)
+m1
+anova(m1)
+@
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}[fragile]{Multicolinearidade}
+
+Caso 2: $X_k$ perfeitamente correlacionados
+\vfill
+
+<<mc002,size='tiny'>>=
+m2 <- lm(y ~ x2 + x1)
+m2
+anova(m2)
+@
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}{Multicolinearidade}
+
+Caso 3: $X_k$ parcialmente correlacionados
+\vfill
+\includegraphics[width=1\textwidth]{multi2.png}
+ 
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}[fragile]{Multicolinearidade}
+
+Caso 3: $X_k$ parcialmente correlacionados
+\vfill
+Nesse caso, há "menos" variância restante para estimar $\beta _2$ após a estimação de $\beta _1$:
+\vfill
+<<mc000,size='tiny'>>=
+x1 <- c(4,4,4,4,6,6,6,6)
+set.seed(154)
+x2 <- x1 + runif(8,0,1)
+y <- c(42,39,48,51,49,53,61,60)
+
+cor(x1,x2)
+@
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}[fragile]{Multicolinearidade}
+
+Caso 3: $X_k$ parcialmente correlacionados
+\vfill
+
+<<mc0001,size='tiny'>>=
+m1 <- lm(y ~ x1 + x2)
+m1
+anova(m1)
+@
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}[fragile]{Multicolinearidade}
+
+Caso 3: $X_k$ parcialmente correlacionados
+\vfill
+
+<<mc0002,size='tiny'>>=
+m2 <- lm(y ~ x2 + x1)
+m2
+anova(m2)
+@
+
+\end{frame}
+%===============================================================================%
+
+
+
+%===============================================================================%
+\begin{frame}{Multicolinearidade}
+
+Que parte do modelo de regressão esperamos que vá ser afetada pela multicolinearidade?  \pause
+
+\begin{itemize}
+
+\item Os coeficientes $\beta _1$, \ldots, $\beta _k$ \pause
+
+\end{itemize}
+
+Qual será o principal efeito da multicolinearidade sobre a especificação do modelo? \pause
+
+\begin{itemize}
+
+\item As propriedades dos estimadores não se alteram (\emph{BLUE}) \pause
+
+\item Devido à redução na quantidade de informação disponível, o erro de cada $b_k$ aumenta \pause
+
+\item Como a informação é redudante, múltiplas combinações de $X_k$ e $b_k$ podem dar o mesmo resultado final 
+ 
+\end{itemize}
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}[fragile]{Exemplo}
+
+<<mc1,size='tiny'>>=
+set.seed(1500)
+x1 <- runif(50,0,20)
+x2 <- x1 + runif(50,0,5)
+y <- 24 + 1.2 *x1 + 2.1*x2 + rnorm(50,0,20)
+m1 <- lm(y ~ x1)
+summary(m1)
+@
+
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}[fragile]{Exemplo}
+
+<<mc2,size='tiny'>>=
+m2 <- lm(y ~ x2)
+summary(m2)
+@
+
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}[fragile]{Exemplo}
+
+<<mc3,size='tiny'>>=
+m3 <- lm(y ~ x1 + x2)
+summary(m3)
+@
+
+
+\end{frame}
+%===============================================================================%
+
+
+
+%===============================================================================%
+\begin{frame}{Multicolinearidade: diagnóstico}
+
+\begin{small}
+
+Podemos quantificar a existência de multicolinearidade através da medida de \textbf{tolerância}:
+
+\vfill
+
+$T = 1 - R^2_k$ \pause
+
+\vfill
+
+$R^2_k$ vem da regressão $\mathbf{X_k} = \beta _0 + \beta _1 X_1 + \ldots + \beta _{k-1} X_{k-1} + \varepsilon$ \pause
+
+\vfill
+Normalmente, expressamos a tolerância na forma inversa, o que denominamos \textbf{Fator de Inflação da Variância} (\emph{Variance Inflation Factor, VIF})
+
+\vfill
+
+$VIF = \dfrac{1}{T} = \dfrac{1}{1-R^2 _k}$ \pause
+\vfill
+
+O $VIF$ nos dá a proporção do quanto o erro é "inflado" pela variável. Se $X_k$ tem um $VIF$ de 1.8, isso significa que o erro do coeficiente $b _k$ é 80\% maior do que o esperado se não houvesse colinearidade.
+
+\end{small}
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}[fragile]{Multicolinearidade: diagnóstico}
+
+<<mc4,size='tiny',error=FALSE,warning=FALSE,message=FALSE>>=
+library(car)
+vif(m3) 
+@
+
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}{Multicolinearidade: diagnóstico}
+
+A partir de que valor devemos nos preocupar com o VIF? \pause
+\vfill
+Não existe uma regra fixa, mas em geral: \pause
+\vfill
+VIF > 4 pede que a correlação entre os preditores seja melhor investigada \pause
+\vfill
+VIF > 10 representa multicolinearidade severa, precisa ser corrigida de qualquer maneira 
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}[fragile]{Multicolinearidade: remediação}
+
+ Podemos resolver o problema da multicolinearidade de diversas maneiras: \pause
+
+\vfill
+
+1) Através de uma combinação entre as variáveis (ex.: $X_1 + X_2$) \pause
+\vfill
+2) Usando os resíduos da regressão entre $X_1$ e $X_2$ \pause
+\vfill
+3) Ortogonalização (ex.: análise de componentes principais)
+ 
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}[fragile]{Multicolinearidade: remediação}
+
+1) Através de uma combinação entre as variáveis (ex.: $X_1 + X_2$)
+ 
+ <<mc5,size='tiny'>>=
+x.novo <- x1 + x2
+m4 <- lm(y ~ x.novo)
+summary(m4)
+@
+ 
+
+\end{frame}
+%===============================================================================%
+
+
+
+%===============================================================================%
+\begin{frame}[fragile]{Multicolinearidade: remediação}
+
+2) Usando os resíduos da regressão entre $X_1$ e $X_2$
+
+ 
+ <<mc6,size='tiny'>>=
+mx <- lm(x2 ~ x1)
+rx <- residuals(mx)
+m5 <- lm(y ~ x1 + rx)
+summary(m5)
+@
+ 
+
+\end{frame}
+%===============================================================================%
+
+
+
+%===============================================================================%
+\begin{frame}[fragile]{Multicolinearidade: remediação}
+
+3) Ortogonalização (ex.: análise de componentes principais)
+
+ 
+ <<mc7,size='tiny'>>=
+pca <- princomp(~ x2 + x1)
+m6 <- lm(y ~ pca$scores[,1] + pca$scores[,2])
+summary(m6)
+@
+ 
+
+\end{frame}
+%===============================================================================%
+
+
+\section{ANOVA: Análise de Variância}
+
+
+
+%===============================================================================%
+\begin{frame}{ANOVA: Análise de Variância}
+
+A ANOVA pode ser vista como uma regressão usando uma variável $X$ categórica \pause
+\vfill
+Como $X$ não é contínua, o foco é determinar se existem diferenças em $E(Y)$ para cada nível de $X$, sem a pressuposição de relação linear entre $X$ e$Y$\pause
+\vfill
+ANOVA e Regressão Linear são casos específicos dos chamados Modelos Lineares Gerais 
+
+\end{frame}
+%===============================================================================%
+
+
+
+%===============================================================================%
+\begin{frame}{ANOVA: Análise de Variância}
+
+\begin{columns}[c]
+
+\column{0.5\linewidth}
+
+<<echo=F,plotreg,fig.height=5,fig.width=5,out.width='1\\linewidth'>>=
+# Plot de regressao
+<<echo=FALSE>>=
+set.seed(1979)
+x <- runif(20,0,50)
+y <- 2 + 3*x + rnorm(20,0,20)
+m <-lm(y ~ x)
+ybar <- mean(y)
+ypred <- m$fitted.values# predict calcula os valores de Y_hat para cada nivel de x no modelo
+par(mar=c(3,3,0,0))
+plot(x,y,pch=19,xlim=c(0,50))
+abline(h=ybar,lty=2,lwd=2)
+abline(m,lty=1,lwd=2)
+legend("bottomright",legend = c(expression(bar(Y)),expression(hat(Y[i]))),lty=c(2,1),lwd=2,cex=1.5,bty="n")
+@
+
+\pause
+
+\column{0.5\linewidth}
+
+<<echo=F,plotanova,fig.height=5,fig.width=5,out.width='1\\linewidth'>>=
+
+# Plot de SQ_{Res}
+set.seed(1979)
+x2 <- c(rep(10,10),rep(30,10),rep(50,10))
+y2 <- 1.1*x2 + rnorm(30,0,5)
+ybar <- mean(y2)
+yhat1 <- mean(y2[1:10])
+yhat2 <- mean(y2[11:20])
+yhat3 <- mean(y2[21:30])
+yhat <- c(yhat1,yhat2,yhat3)
+par(mar=c(3,3,0,0))
+plot(x2,y2,pch=19,xlim=c(0,50))
+abline(h=ybar,lty=2,lwd=2)
+segments(x0=unique(x2)-2,y0=yhat,x1=unique(x2)+2,y1=yhat,col='red',lwd=2)
+legend("bottomright",legend = c(expression(bar(Y)),expression(hat(Y[i]))),lty=c(2,1),lwd=2,cex=1.5,bty="n",col=c('black','red'))
+@
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}{ANOVA: Análise de Variância}
+
+\includegraphics[width = 1\linewidth]{Fig_1.jpg}
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}{ANOVA: Terminologia}
+
+A notação matemática utilizada para a ANOVA é um pouco diferente da regressão: \pause
+\vfill
+\begin{itemize}
+  \item $Y$ ainda é a variável resposta  \pause
+  \vfill
+  \item Em vez de ter um $X$ contínuo, temos um $X$ categórico (fator), com diferentes níveis ou \emph{tratamentos} que são identificados por $i = (1,2,\ldots,r)$ \pause
+  \vfill
+  \item Cada $X_i$ tem um certo número de observações, $n_i$, e o número total de obseravções é $n$
+    \vfill
+  \item Como agora usamos $i$ para identificar os níveis de $X$, usamos $j$ para descrever uma observação específica em cada nível: $j = (1,2,\dots,n_i)$
+\end{itemize}
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}{O modelo ANOVA}
+
+O nosso modelo de regressão era:
+\vfill
+
+$Y_i = \beta _0 + \beta _1 X_i + \varepsilon_i$ \pause
+\vfill
+
+O modelo ANOVA é parecido, mas tem menos parâmetros:
+\vfill
+
+$Y_{ij} = \mu_i + \varepsilon _{ij}$ \pause
+\vfill
+Ou seja, cada valor de $Y$ ($Y_{ij}$) é determinado pela média do grupo $i$, mais um erro aleatório (distância entre $Y_{ij}$ e $\mu _i$). Este é o chamado ``modelo celular'', ou modelo de médias celulares.
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}{O modelo ANOVA}
+
+Também podemos especificar o modelo da seguinte maneira:
+\vfill
+$Y_{ij} = \mu + \alpha _i + \varepsilon _{ij}$ \pause
+\vfill
+Aqui, cada valor de $Y$ ($Y_{ij}$) é determinado pela média global de $Y$ ($\mu$), somada ou subtraída de um coeficiente $\alpha$ que varia de acordo com o nível $i$, mais um erro aleatório. ($\mu + \alpha _i = \mu _i$). \pause
+\vfill
+Este modelo é chamado de ``modelo de efeitos'', já que individualiza os efeitos de cada tratamento.
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}{ANOVA: Análise de Variância}
+
+\begin{columns}[c]
+
+\column{0.5\linewidth}
+
+<<echo=F,plotreg2,fig.height=5,fig.width=5,out.width='1\\linewidth'>>=
+# Plot de regressao
+par(mar=c(3,3,0,0))
+plot(x,y,pch=19,xlim=c(0,50))
+abline(m,lty=1,lwd=2)
+segments(x0=x,y0=y,x1=x,y1=m$fitted.values,lwd=2,col='red')
+legend(27,20,legend = c(expression(beta[0] + beta[1]*X),expression(epsilon[i])),lty=c(1,1),lwd=2,cex=1.5,bty="n",col=c('black','red'))
+@
+
+\pause
+
+\column{0.5\linewidth}
+
+<<echo=F,plotanova2,fig.height=5,fig.width=5,out.width='1\\linewidth'>>=
+# Plot de SQ_{Res}
+set.seed(1979)
+x2 <- c(rep(10,10),rep(30,10),rep(50,10))
+y2 <- 1.1*x2 + rnorm(30,0,5)
+ypred2 <- 1.1*x2
+ybar <- mean(y2)
+yhat1 <- mean(y2[1:10])
+yhat2 <- mean(y2[11:20])
+yhat3 <- mean(y2[21:30])
+yhat <- c(yhat1,yhat2,yhat3)
+par(mar=c(3,3,0,0))
+plot(x2,y2,pch=19,xlim=c(0,50))
+abline(h =ybar, lty=2,lwd=2)
+segments(x0=unique(x2)-2,y0=yhat,x1=unique(x2)+2,y1=yhat,col='black',lwd=2)
+segments(x0=x2,y0=y2,x1=x2,y1=ypred2,lwd=2,col='red')
+legend(30,15,legend = c(expression(mu),expression(mu + alpha[i]),expression(epsilon[ij])),lty=c(2,1,1),lwd=2,cex=1.5,bty="n",col=c('black','black','red'))
+@
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}{Pressuposições do modelo ANOVA}
+
+O modelo ANOVA segue pressuposições similares ao modelo de regressão: \pause
+\vfill
+\begin{itemize}
+  \item A distribuição dos erros segue $\varepsilon \sim N(0,\sigma ^2) \pause
+  \vfill
+  \item $\sigma ^2$ é constante para todos os $i$ níveis de $X$ ($\sigma ^2 _1 = \sigma ^2 _2 \ldots = \sigma ^2 _i = \sigma ^2$) \pause
+  \vfill
+  \item Os erros $\varepsilon _i$ são independentes entre si \pause
+\end{itemize}
+\vfill
+Se essas pressuposições são verdadeiras, então:
+\vfill
+$E(Y_{ij}) = \mu + \alpha _i$, $Var(Y_{ij}) = \sigma ^2$
+\end{frame}
+%===============================================================================%
+
+
+
+
+%===============================================================================%
+\begin{frame}{ANOVA: estimando o modelo}
+
+Podemos desdobrar nosso modelo ANOVA para que se assemelhe a uma regressão. No caso de uma ANOVA com três níveis de $X$:
+\vfill
+$Y_{ij} = \mu + \alpha _i + \varepsilon _{ij}$ \pause
+\vfill
+$Y_{ij} = \mu + \alpha _1 X_{i=1} + \alpha _2 X_{i=2} + \alpha _3 X_{i=3} + \varepsilon _{ij}$  ou \pause
+\vfill
+$Y_{ij} = \mu_1 + \alpha _2 X_{i=2} + \alpha _3 X_{i=3} + \varepsilon _{ij}$ \pause
+\vfill
+Nesse caso, $X_i$ é chamado de variável \textbf{indicadora} (ou \emph{dummy}) com valor $X_i = 1$ para $Y = Y_{ij}$, e $X_i = 0$ quando $Y \neq Y_{ij}$
+
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}{Exemplo: variável indicadora}
+
+\begin{columns}[c]
+
+\column{0.5\linewidth}
+
+\begin{tabular}{rrl}
+  \hline
+  $Y$ & $X$ \\ 
+  \hline
+  62.00 & $A$ \\ 
+  60.00 & $A$ \\ 
+  63.00 & $A$ \\ 
+  63.00 & $B$ \\ 
+  67.00 & $B$ \\ 
+  71.00 & $B$ \\ 
+  72.00 & $C$ \\ 
+  70.00 & $C$ \\ 
+  75.00 & $C$ \\ 
+  \hline
+\end{tabular}
+
+\column{0.5\linewidth}
+
+$A = X_{i=1}$
+\vfill
+$B = X_{i=2}$
+\vfill
+$C = X_{i=3}$
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}{Exemplo: variável indicadora}
+
+\begin{columns}[c]
+
+\column{0.4\linewidth}
+
+\begin{tabular}{cc|ccc}
+  \hline
+  $Y$ & $X$ & $X_1$ & $X_2$ & $X_3$\\ 
+  \hline
+  62.00 & $A$ & 1 & 0 & 0\\ 
+  60.00 & $A$ & 1 & 0 & 0\\ 
+  63.00 & $A$ & 1 & 0 & 0\\ 
+  63.00 & $B$ & 0 & 1 & 0\\ 
+  67.00 & $B$ & 0 & 1 & 0\\ 
+  71.00 & $B$ & 0 & 1 & 0\\ 
+  72.00 & $C$ & 0 & 0 & 1\\ 
+  70.00 & $C$ & 0 & 0 & 1\\ 
+  75.00 & $C$ & 0 & 0 & 1\\ 
+  \hline
+\end{tabular}
+\pause
+\column{0.6\linewidth}
+\vbox to .7\textheight{%
+
+$Y_{ij} = \mu + \alpha _1 X_1 + \alpha _2 X_2 + \alpha _3X_3 + \varepsilon _{ij}$ \pause
+\vfill
+Para $Y = Y_{Aj}:
+\vfill
+$Y_{Aj} = \mu + \alpha _1 \times 1 + \alert{\alpha _2 \times 0} + \alert{\alpha _3 \times 0} + \varepsilon _{Aj}$ 
+$Y_{Aj} = \mu + \alpha _1 + \varepsilon _{Aj}$ \pause
+\vfill
+Para $Y = Y_{Bj}:
+\vfill
+$Y_{Bj} = \mu + \alert{\alpha _1 \times 0} + \alpha _2 \times 1 + \alert{\alpha _3 \times 0} + \varepsilon _{Bj}$ 
+$Y_{Bj} = \mu + \alpha _2 + \varepsilon _{Bj}$ \pause
+\vfill
+Para $Y = Y_{Cj}:
+\vfill
+$Y_{Cj} = \mu + \alert{\alpha _1 \times 0} + \alert{\alpha _2 \times 0} + \alpha _3 \times 1 + \varepsilon _{Cj}$ 
+$Y_{Cj} = \mu + \alpha _3 + \varepsilon _{Cj}$ 
+}%
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}{Exemplo: variável indicadora}
+
+\begin{columns}[c]
+
+\column{0.4\linewidth}
+
+\begin{tabular}{cc|ccc}
+  \hline
+  $Y$ & $X$ & $X_2$ & $X_3$ \\ 
+  \hline
+  62.00 & $A$ & 0 & 0\\ 
+  60.00 & $A$ & 0 & 0\\ 
+  63.00 & $A$ & 0 & 0\\ 
+  63.00 & $B$ & 1 & 0\\ 
+  67.00 & $B$ & 1 & 0\\ 
+  71.00 & $B$ & 1 & 0\\ 
+  72.00 & $C$ & 0 & 1\\ 
+  70.00 & $C$ & 0 & 1\\ 
+  75.00 & $C$ & 0 & 1\\ 
+  \hline
+\end{tabular}
+\pause
+\column{0.6\linewidth}
+\vbox to .7\textheight{%
+
+$Y_{ij} = \mu _1 + \alpha _2 X_2 + \alpha _3X_3 + \varepsilon _{ij}$ \pause
+\vfill
+Para $Y = Y_{Aj}:
+\vfill
+$Y_{Aj} = \mu _1 + \alert{\alpha _2 \times 0} + \alert{\alpha _3 \times 0} + \varepsilon _{Aj}$ 
+$Y_{Aj} = \mu _1 + \varepsilon _{Aj}$ \pause
+\vfill
+Para $Y = Y_{Bj}:
+\vfill
+$Y_{Bj} = \mu _1 + \alpha _2 \times 1 + \alert{\alpha _3 \times 0} + \varepsilon _{Bj}$ 
+$Y_{Bj} = \mu _1 + \alpha _2 + \varepsilon _{Bj}$ \pause
+\vfill
+Para $Y = Y_{Cj}:
+\vfill
+$Y_{Cj} = \mu _1 + \alert{\alpha _2 \times 0} + \alpha _3 \times 1 + \varepsilon _{Cj}$ 
+$Y_{Cj} = \mu _ 1 + \alpha _3 + \varepsilon _{Cj}$ 
+}%
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}{ANOVA: partição de variância}
+
+No nosso modelo de regressão, podíamos particionar a variância como $SQ_{Tot} = SQ_{Reg} + SQ_{Res}$: 
+\vfill
+\begin{equation*}
+SQ_{Tot} = \sum_{i=1}^{n}(Y_i - \bar Y)^2 \pause
+\end{equation*}
+\vfill
+\begin{equation*}
+SQ_{Res} = \sum_{i=1}^{n}(Y_i - \hat Y_i)^2 \pause
+\end{equation*}
+\vfill
+\begin{equation*}
+SQ_{Reg} = \sum_{i=1}^{n}(\hat Y_i - \bar Y)
+\end{equation*}
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}{ANOVA: partição de variância}
+
+Podemos fazer algo semelhante com o nosso modelo ANOVA: \pause
+
+\begin{equation*}
+SQ_{Tot} = \pause \sum_{i=1}^{r} \sum_{j=1}^{n_i}(Y_{ij} - \bar Y)^2 \pause
+\end{equation*}
+
+\begin{equation*}
+SQ_{Res} = \pause \sum_{i=1}^{r} \sum_{j=1}^{n_i} (Y_{ij} - \bar Y_i)^2 \pause
+\end{equation*}
+
+\begin{equation*}
+SQ_{Reg} = \pause \sum_{i=1}^{r} \sum_{j=1}^{n_i} (\bar Y_{i} - \bar Y)^2 = \sum_{i=1}^{r} n_i(\bar Y_i - \bar Y)^2 \pause
+\end{equation*}
+
+\begin{equation*}
+SQ_{Tot} = SQ_{Reg} + SQ_{Res}
+\end{equation*}
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}{ANOVA: partição de variância}
+
+Essa partição pode ser interpretada como: \pause
+\vfill
+$SQ_{Tot}$: Variância total de Y \pause
+\vfill
+$SQ_{Res}$: Variância \textbf{intra}-grupos  \pause
+\vfill
+$SQ_{Reg}$:  Variância \textbf{entre grupos}
+\vfill
+Através da comparação entre $SQ_{Res}$ e $SQ_{Reg}$, podemos avaliar o quanto as diferenças \textbf{entre grupos} são importantes, em relação à variação \textbf{intra-}grupos: \pause
+\vfill
+$H_0: \mu + \varepsilon _{ij}$
+
+$H_a: Y_{ij} = \mu + \alpha_i + \varepsilon _{ij}$  
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}{A tabela ANOVA para...ANOVA}
+
+A construção da tabela ANOVA é similar ao que vimos para regressão, mas a ênfase agora é na diferença entre variação intra- e inter- grupos:
+\vfill
+
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcllccc}
+Fonte & GL & Soma Quadrados & Média Quadrados & E(Med. Quad.) & F & P \\
+\hline
+& & & & & &\\
+Tratamento & $r-1$ & $SQ_{Reg} = \sum_{i=1}^{r} n_i(\bar Y_i - \bar Y)^2$ & $MQ_{Reg} = \dfrac{SQ_{Reg}}{r-1}$ & \alert{$ r\sum \dfrac{\alpha _i^2}{r-1} + \sigma ^2$} & $\dfrac{MQ_{Reg}}{MQ_{Res}} & P(F_{(r-1,n-1)}) \\[5ex]
+Resíduos & $ (n-r)$ & $SQ_{Reg} = \sum_{i=1}^{r} \sum_{j=1}^{n_i} (Y_{ij} - \bar Y_i)^2$ & $MQ_{Res} = \dfrac{SQ_{Res}}{n-r}$ & $\sigma ^2$ & &  \\[5ex]
+Total & $n-1$ & $SQ_{Tot} = \sum_{i=1}^{r} \sum_{j=1}^{n_i}(Y_{ij} - \bar Y)^2$ & $MQ_{Tot} = \dfrac{SQ_{Tot}}{n-1}$ & $\sigma ^2 _Y$ & &  \\[5ex]
+\hline
+\end{tabular}%
+}
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}{ANOVA: Teste de hipóteses}
+
+Para o modelo ANOVA, $E(MQ_{Reg})$ é:
+\vfill
+
+$r\sum \dfrac{\alpha _i^2}{r-1} + \sigma ^2$ \pause
+\vfill
+
+E $E(MQ_{Res}) = \sigma^2$  \pause
+\vfill
+
+Se não existe diferença entre os tratamentos, então $\alpha _1 = \alpha _2 = \ldots = \alpha_i = 0$ e temos:
+
+\begin{equation*}
+F = \frac{MQ_{Reg}}{MQ_{Res}} = \frac{r\sum \dfrac{\alpha _i^2}{r-1} + \sigma ^2}{\sigma ^2} = \frac{\sigma^2}{\sigma^2} = 1
+\end{equation*}
+\vfill \pause
+Mas se essa relação existe, então $\alpha _i > 0$, e $F > 1$
+
+\end{frame}
+%===============================================================================%
+
+% %===============================================================================%
+% \begin{frame}{ANOVA: modelos com efeitos fixos e aleatórios}
+% 
+% Uma importante distinção ao se realizar uma ANOVA é quanto ao tipo de efeito do tratamento:
+% \vfill
+% 
+% \begin{block}{Efeito Fixo:}
+% $r$ representa o conjunto completo de todos os níveis de interesse possíveis, ou seja, uma população. Exemplo: Temos quatro alunos de estatística, será que o desempenho ao longo do curso é diferente para cada um destes quatro?
+% \end{block}
+% \vfill
+% 
+% \pause
+% 
+% \begin{block}{Efeito Aleatório:}
+% $r$ representa um subconjunto de todos os níveis possíves de $X$, ou seja, uma amostra. Será que existe variação na performance dos alunos de Estatística? 
+% \end{block}
+% \vfill
+% 
+% \end{frame}
+% %===============================================================================%
+% 
+% 
+% %===============================================================================%
+% \begin{frame}{ANOVA: modelos com efeitos fixos e aleatórios}
+% 
+% A classificação dos efeitos se dá em função do tipo de inferência que se espera fazer para os níveis: \pause
+% \vfill
+% 
+% \textbf{``Aluno'' como fator de efeito fixo:} estamos preocupados em inferir se existem diferenças entre os quatro alunos especificados, em termos de desempenho. \pause
+% \vfill
+% 
+% \textbf{``Aluno'' como fator de efeito aleatório:} estamos preocupados em inferir se existe varição no desempenho dos alunos em geral, no curso de de estatística. Os quatro alunos avaliados são uma amostra aleatória do universo de todos os possíveis alunos da disciplina.
+% \end{frame}
+% %===============================================================================%
+% 
+% 
+% %===============================================================================%
+% \begin{frame}{ANOVA: efeitos aleatórios}
+% 
+% Quando os níveis de $X$ são aleatórios, o modelo é espcificado da mesma maneira: 
+% \vfill
+% $Y_{ij} = \mu + \alpha_i + \varepsilon _{ij}$ \pause
+% \vfill
+% A grande diferença é que $\alpha$ agora vem de um valor aleatório, e por isso tem uma distribuição com média e variância:
+% \vfill
+% $\alpha _i \sim N(0,\sigma ^2 _\alpha)$ \pause
+% \vfill
+% E o nosso modelo agora depende de duas variâncias: $\sigma ^2$ e $\sigma ^2 _\alpha$
+% 
+% \end{frame}
+% %===============================================================================%
+% 
+% 
+% %===============================================================================%
+% \begin{frame}{ANOVA: efeitos aleatórios}
+% 
+% O mais importante, contudo, é que nossa hipótese nula é bastante diferente. \pause
+% \vfill
+% Para o modelo de efeitos fixos, queremos avaliar se:
+% $\alpha _1 = \alpha _2 = \ldots = \alpha _i$ (não há diferença entre tratamentos) \pause
+% \vfill
+% Mas para o modelo de efeitos aleatórios, queremos avaliar se:
+% \vfill
+% $\sigma ^2 _\alpha = 0$ (não há variação entre os diferentes tratamentos) \pause
+% \vfill
+% De fato, no modelo aleatório, não faz sentido testar diferenças entre tratamentos: a cada nova realização do experimento, esses tratamentos seriam diferentes! 
+% \end{frame}
+% %===============================================================================%
+% 
+% %===============================================================================%
+% \begin{frame}{ANOVA: Teste de hipóteses para efeitos aleatórios}
+% 
+% Para o modelo ANOVA com efeitos aleatórios, $E(MQ_{Reg})$ é:
+% \vfill
+% 
+% $ r\sigma ^2 _\alpha + \sigma ^2$ \pause
+% \vfill
+% 
+% E ainda temos $E(MQ_{Res}) = \sigma^2$  \pause
+% \vfill
+% 
+% Se todos os níveis do fator são iguais, então $\sigma ^2 _\alpha = 0$ e temos:
+% 
+% \begin{equation*}
+% F = \frac{MQ_{Reg}}{MQ_{Res}} =  \frac{r\sigma ^2 _\alpha + \sigma ^2}{\sigma ^2} = \frac{\sigma^2}{\sigma^2} = 1
+% \end{equation*}
+% \vfill \pause
+% Mas se os níveis são diferentes, então $\sigma ^2 _\alpha > 0$, e $F > 1$
+% \vfill
+% \textbf{Importante:} O teste F para ANOVA com efeitos fixos e aleatórios é igual apenas para análises com um um unico fator.
+% 
+% \end{frame}
+% %===============================================================================%
+
+%===============================================================================%
+\begin{frame}{ANOVA: Testes Post-Hoc}
+
+O resultado de uma ANOVA nos diz apenas o quanto há de evidencia sobre a hipótese $H_0$ ser falsa, ou seja, os diferentes níveis ($r$) do tratamento tem de fato um efeito sobre $E(Y)$ \pause
+\vfill
+
+Se $r = 2$ \ldots a ANOVA é equivalente a um teste $t$
+\vfill
+
+Mas se $r \geq 3$, logo surge uma pergunta: será que \textbf{todos} os níveis são diferentes, ou apenas alguns deles?
+\vfill
+
+Podemos respoder à essa pergunta de duas maneiras: usando testes post-hoc, ou usando contrastes.
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}{ANOVA: Teste HSD de Tukey}
+
+Um dos testes post-hoc mais comuns é o ``Teste das Diferenças Honestamente Significantes'' de Tukey (\emph{Tukey's HSD test}) \pause
+\vfill
+
+O teste calcula uma diferença mínima entre os tratamentos que pode ser considerada significativa, usando:
+\vfill
+
+\begin{equation*}
+HSD = q \sqrt{\left(\frac{1}{n_i}+\frac{1}{n_j}\right) MS{Res}}
+\end{equation*}
+\vfill 
+\begin{scriptsize}
+\textbf{Atenção}: neste caso, $i$ e $j$ se referem a dois valores diferentes de $r$
+\end{scriptsize} \pause
+\vfill
+$q$ vem de uma tabela específica para o teste
+
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}{ANOVA: Teste HSD de Tukey}
+
+
+O teste HSD de tukey pode ser visto como uma série de testes $t$, com nível de significância ajustado para múltiplos testes. \pause
+\vfill
+Após calcular o valor de HSD, comparam-se as médias de cada tratamento. \pause
+\vfill
+Os valores $p$ e intervalos de confiança para cada diferença pareada podem ser interpretados como grau de incerteza.
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}{ANOVA: Contrastes}
+
+Através do uso de contrastes, podemos não só comparar diferenças entre níveis, mas diferentes combinações destes valores \pause
+\vfill
+Os contrastes são valores específicos, escolhidos de maneira a serem ortogonais (não-correlacionados), e que nos permitem controlar a partição das somas dos quadrados. \pause
+\vfill
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}{ANOVA: Contrastes}
+
+\textbf{Criando contrastes:}
+\vfill
+\begin{itemize}
+  \item Associe um valor inteiro (positivo, negativo ou zero) para cada tratamento \pause
+  \vfill
+  \item Tratamentos que devem ser agrupados recebem o mesmo número \pause
+  \vfill
+  \item Tratamentos excluídos da comparação recebem contraste zero \pause
+  \vfill
+  \item A soma final de todos os contrastes deve ser zero
+\end{itemize}
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}{ANOVA: Contrastes}
+
+Podemos criar múltipos contrastes, e testar várias hipóteses simultâneas, se obedecermos mais duas regras:
+\vfill
+\begin{itemize}
+  \item Se existem $r$ tratamentos, então podemos ter no máximo $r-1$ contrastes \pause
+  \vfill
+  \item A soma dos produtos cruzados de todos os contrastes precisa ser zero (ortogonalidade) \pause
+  \vfill
+\end{itemize}
+
+Criar contrastes é mais ou menos como resolver um sudoku\ldots
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}{ANOVA: Contrastes}
+
+E onde entram esses contrastes no modelo?
+\vfill
+Lembram do modelo expandido da regressão, com variáveis indicadoras?
+\vfill
+$Y_{ij} = \mu + \alpha _1 X_{i=1} + \alpha _2 X_{i=2} + \alpha _3 X_{i=3} + \varepsilon _{ij}$  ou \pause
+\vfill
+Os contrastes também são variáveis indicadoras! \pause
+\vfill
+
+\end{frame}
+%===============================================================================%
+
+
+
+%===============================================================================%
+\begin{frame}{Exemplo: contrastes}
+
+Comparação entre cada tratamento (original):
+
+\begin{tabular}{cc|ccc}
+  \hline
+  $Y$ & $X$ & $X_1$ & $X_2$ & $X_3$\\ 
+  \hline
+  62.00 & $A$ & 1 & 0 & 0\\ 
+  60.00 & $A$ & 1 & 0 & 0\\ 
+  63.00 & $A$ & 1 & 0 & 0\\ 
+  63.00 & $B$ & 0 & 1 & 0\\ 
+  67.00 & $B$ & 0 & 1 & 0\\ 
+  71.00 & $B$ & 0 & 1 & 0\\ 
+  72.00 & $C$ & 0 & 0 & 1\\ 
+  70.00 & $C$ & 0 & 0 & 1\\ 
+  75.00 & $C$ & 0 & 0 & 1\\ 
+  \hline
+\end{tabular}
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}{Exemplo: contrastes}
+
+Comparação entre B e C:
+
+\begin{tabular}{cc|c}
+  \hline
+  $Y$ & $X$ & $C_1$  \\ 
+  \hline
+  62.00 & $A$ & 0 \\ 
+  60.00 & $A$ & 0 \\ 
+  63.00 & $A$ & 0 \\ 
+  63.00 & $B$ & 1 \\ 
+  67.00 & $B$ & 1 \\ 
+  71.00 & $B$ & 1 \\ 
+  72.00 & $C$ & -1\\ 
+  70.00 & $C$ & -1\\ 
+  75.00 & $C$ & -1\\ 
+  \hline
+\end{tabular}
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}{Exemplo: contrastes}
+
+Comparação de A versus B e C combinados:
+
+\begin{tabular}{cc|c}
+  \hline
+  $Y$ & $X$ & $C_1$  \\ 
+  \hline
+  62.00 & $A$ & 2 \\ 
+  60.00 & $A$ & 2 \\ 
+  63.00 & $A$ & 2 \\ 
+  63.00 & $B$ & -1 \\ 
+  67.00 & $B$ & -1 \\ 
+  71.00 & $B$ & -1 \\ 
+  72.00 & $C$ & -1\\ 
+  70.00 & $C$ & -1\\ 
+  75.00 & $C$ & -1\\ 
+  \hline
+\end{tabular}
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}{ANOVA: Exemplo}
+
+Vamos utilizar o exemplo em Gotelli and Ellison (2004) (publicado em Ellison et al. Ecology 77: 2431-2444, 1996), sobre o efeito da presença de esponjas sobre crescimento radicular de \emph{Rhizophora mangle}. \pause
+\vfill
+O experimento consistiu em quatro tratamentos: \pause
+\vfill
+\begin{itemize}
+\item Control: sem manipulação \pause
+\item Foam: espuma sintética \pause
+\item Haliclona: enxerto da esponja \emph{Haliclona implexiformis} \pause
+\item Tedania: enxerto da esponja \emph{Tedania ignis} \pause
+\end{itemize}
+
+E a variável dependente foi: $Y$ = taxa mensal de crescimento radicular, em mm.dia
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}[fragile]{ANOVA: Exemplo}
+
+<<size='tiny',echo=-c(1:3)>>=
+options(width=100)
+mangue <- read.table('SpongeContrastData.txt',sep=" ",header=T)
+names(mangue) <- c("trat","cresc")
+str(mangue)
+mangue[1:5,]
+mangue[15:20,]
+@
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}[fragile]{ANOVA: Exemplo}
+
+<<size='tiny'>>=
+summary(mangue)
+tapply(mangue$cresc,mangue$trat,mean)
+tapply(mangue$cresc,mangue$trat,sd)
+@
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}[fragile]{ANOVA: Exemplo}
+
+<<size='tiny',out.width='0.6\\linewidth'>>=
+boxplot(cresc ~ trat,mangue)
+@
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}[fragile]{ANOVA: Exemplo}
+
+<<size='tiny'>>=
+m1 <- lm(cresc ~ trat,mangue)
+summary(m1)
+@
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}[fragile]{ANOVA: Exemplo}
+
+<<size='tiny'>>=
+anova(m1)
+@
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}[fragile]{ANOVA: Exemplo}
+
+<<size='tiny'>>=
+m1 <- aov(cresc ~ trat,mangue)
+summary(m1)
+anova(m1)
+@
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}[fragile]{ANOVA: Exemplo}
+
+<<size='tiny'>>=
+# O teste F sugere uma diferença "significativa"...mas entre quais tratamentos?
+TukeyHSD(m1)
+@
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}[fragile]{ANOVA: Exemplo}
+
+<<size='tiny'>>=
+# Testes pareados geram um pouco de confusão...
+# Melhor usar contrastes!
+#
+# Será que esponjas tem um efeito diferente da espuma artificial? (0,2,-1,-1)
+c1 <- c(rep(0,14),rep(2,14),rep(-1,28))
+mangue$c1 <- c1
+m2 <- lm(cresc ~ c1, mangue)
+anova(m2)
+@
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}[fragile]{ANOVA: Exemplo}
+
+<<size='tiny'>>=
+# Testando múltiplas hipóteses usando contrastes
+
+# 1) Será que esponjas tem um efeito diferente da espuma artificial? (0,2,-1,-1)
+
+# 2) Será que a adição de eponja/espuma faz diferença em relação ao controle? (3,-1,-1,-1)
+
+# 3) Será que existe diferença entre Tedania e Haliclonia? (0,1,-1,-1)
+
+# 4) Será que...opa! Só podemos usar até r-1 contrastes, e r = 4!
+
+c2 <- c(rep(3,14),rep(-1,42))
+c3 <- c(rep(0,28),rep(1,14),rep(-1,14))
+
+mangue$c2 <- c2
+mangue$c3 <- c3
+
+sum(mangue$c1*mangue$c2*mangue$c3)
+
+@
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}[fragile]{ANOVA: Exemplo}
+
+<<size='tiny'>>=
+# Testando múltiplas hipóteses usando contrastes
+
+# 1) Será que esponjas tem um efeito diferente da espuma artificial? (0,2,-1,-1)
+
+# 2) Será que a adição de eponja/espuma faz diferença em relação ao controle? (3,-1,-1,-1)
+
+# 3) Será que existe diferença entre Tedania e Haliclonia? (0,1,-1,-1)
+
+m3 <- lm(cresc ~ c1 + c2 + c3, mangue)
+
+anova(m3)
+@
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}[fragile]{ANOVA: Exemplo}
+
+<<size='tiny'>>=
+# Qual o efeito prático de se usarem diferentes contrastes?
+# Obter diferentes partições de variância!
+anova(m3)
+anova(m3)[1:3,2]
+sum(anova(m3)[1:3,2])
+@
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}[fragile]{ANOVA: Exemplo}
+
+<<size='tiny'>>=
+# Qual o efeito prático de se usarem diferentes contrastes?
+# Obter diferentes partições de variância!
+sum(anova(m3)[1:3,2])
+anova(m1)
+@
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}{ANOVA: modelos com efeitos fixos e aleatórios}
+
+Uma importante distinção ao se realizar uma ANOVA é quanto ao tipo de efeito do tratamento:
+\vfill
+
+\begin{block}{Efeito Fixo:}
+$r$ representa o conjunto completo de todos os níveis de interesse possíveis, ou seja, uma população. Exemplo: Temos quatro alunos de estatística, será que o desempenho ao longo do curso foi diferente para cada um destes quatro?
+\end{block}
+\vfill
+
+\pause
+
+\begin{block}{Efeito Aleatório:}
+$r$ representa um subconjunto de todos os níveis possíves de $X$, ou seja, uma amostra. Será que existe variação na performance dos alunos de Estatística, com base nesses quatro que eu observei? 
+\end{block}
+\vfill
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}{ANOVA: modelos com efeitos fixos e aleatórios}
+
+A classificação dos efeitos se dá em função do tipo de inferência que se espera fazer para os níveis: \pause
+\vfill
+
+\textbf{``Aluno'' como fator de efeito fixo:} estamos preocupados em inferir se existem diferenças entre os quatro alunos especificados, em termos de desempenho. \pause
+\vfill
+
+\textbf{``Aluno'' como fator de efeito aleatório:} estamos preocupados em inferir se existe varição no desempenho dos alunos em geral, no curso de de estatística. Os quatro alunos avaliados são uma amostra aleatória do universo de todos os possíveis alunos da disciplina.
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}{ANOVA: efeitos aleatórios}
+
+Quando os níveis de $X$ são aleatórios, o modelo é espcificado da mesma maneira: 
+\vfill
+$Y_{ij} = \mu + \alpha_i + \epsilon _{ij}$ \pause
+\vfill
+A grande diferença é que $\alpha$ agora vem de um valor aleatório, e por isso tem uma distribuição com média e variância:
+\vfill
+$\alpha _i \sim N(0,\sigma ^2 _\alpha)$ \pause
+\vfill
+E o nosso modelo agora depende de duas variâncias: $\sigma ^2$ e $\sigma ^2 _\alpha$
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}{ANOVA: efeitos aleatórios}
+
+O mais importante, contudo, é que nossa hipótese nula é bastante diferente. \pause
+\vfill
+Para o modelo de efeitos fixos, queremos avaliar se:
+$\alpha _1 = \alpha _2 = \ldots = \alpha _i$ (não há diferença entre tratamentos) \pause
+\vfill
+Mas para o modelo de efeitos aleatórios, queremos avaliar se:
+\vfill
+$\sigma ^2 _\alpha = 0$ (não há variação entre os diferentes tratamentos) \pause
+\vfill
+De fato, no modelo aleatório, não faz sentido testar diferenças entre tratamentos: a cada nova realização do experimento, esses tratamentos seriam diferentes! 
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}{ANOVA: Teste de hipóteses para efeitos aleatórios}
+
+Para o modelo ANOVA com efeitos aleatórios, $E(MQ_{Reg})$ é:
+\vfill
+
+$ r\sigma ^2 _\alpha + \sigma ^2$ \pause
+\vfill
+
+E ainda temos $E(MQ_{Res}) = \sigma^2$  \pause
+\vfill
+
+Se todos os níveis do fator são iguais, então $\sigma ^2 _\alpha = 0$ e temos:
+
+\begin{equation*}
+F = \frac{MQ_{Reg}}{MQ_{Res}} =  \frac{r\sigma ^2 _\alpha + \sigma ^2}{\sigma ^2} = \frac{\sigma^2}{\sigma^2} = 1
+\end{equation*}
+\vfill \pause
+Mas se os níveis são diferentes, então $\sigma ^2 _\alpha > 0$, e $F > 1$
+\vfill
+\textbf{Importante:} O teste F para ANOVA com efeitos fixos e aleatórios é igual apenas para análises com um um unico fator.
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}{ANCOVA}
+
+\textbf{ANCOVA:} Análise de Covariância
+\vfill
+\begin{itemize}
+\item Uma ``mistura'' de regressão e ANOVA
+\vfill
+\item Mistura variáveis explicativas categóricas (\emph{dummy}) e contínuas
+\vfill
+\item Pode incluir termos de \texbf{interação}
+\vfill
+\item $ Y = \beta _0 + \beta _1 X_1 + \beta _2 X_2 + \mathbf{ \boldsymbol{\beta} _3 X_1X_2} + \varepsilon$
+\vfill
+\end{itemize}
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}{ANOVA Multifatorial}
+
+Extensão da ANOVA para mais de uma variável explicativa (todas categóricas)
+\vfill
+\begin{itemize}
+\item Geralmente também inclui termos de interação.
+\vfill
+\item Com três ou mais fatores, a interpretação fica bastante difícil.
+\vfill
+\item Fortemente baseada em desenhos experimentais controlados, que permitam a partição correta da variância, sem multicolinearidade ou pseudoreplicação.
+\vfill
+\end{itemize}
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}{ANCOVA}
+
+\begin{small}
+
+A variável categórica altera o intercepto ($X_2 =(0,1)$)  :
+
+\begin{equation*}
+Y = \beta _0 + \beta _1 X_1 + \beta _2 X_2 + \varepsilon
+\end{equation*}
+
+Para o nível 1 de $X_2$:
+
+\begin{equation*}
+Y = \beta _0 + \beta _1 X_1 + \beta _2 \times 0 + \varepsilon = \beta _0 + \beta _1 X_1 + \varepsilon
+\end{equation*}
+
+Para o nível 2 de $X_2$:
+
+\begin{equation*}
+Y = \beta _0 + \beta _1 X_1 + \beta _2 \times 1 + \varepsilon
+\end{equation*}
+
+\begin{equation*}
+Y = (\beta _0 + \beta _2) +  \beta _1 X_1 + \varepsilon
+\end{equation*}
+
+\end{small}
+
+\end{frame}
+%===============================================================================%
+
+
+
+%===============================================================================%
+\begin{frame}[fragile]{ANCOVA}
+
+\begin{columns}
+
+\column{0.65\linewidth}
+\setlength{\topsep}{2pt}
+<<ancov1, size='tiny',fig.keep='none'>>=
+set.seed(234)
+x1 <- runif(40,0,20)
+x2 <- c(rep(0,20),rep(1,20))
+col <- x2; col[col==0] <- "blue"; col[col==1] <- "red"
+y <- 3 + 2*x1 + 20*x2 + rnorm(20,0,5)
+
+m <- lm(y ~ x1 + x2)
+
+plot(x1,y, pch=19,col=col)
+
+x21novo <- data.frame(x1 = seq(0,20,by=1), x2=rep(0,21))
+x22novo <- data.frame(x1 = seq(0,20,by=1), x2=rep(1,21))
+
+p1 <- predict(m,x21novo)
+p2 <- predict(m,x22novo)
+
+lines(seq(0,20,by=1),p1, lwd=2,col='blue')
+lines(seq(0,20,by=1),p2, lwd=2,col='red')
+
+@
+
+\column{0.4\linewidth}
+
+<<ancovplot1, echo=FALSE,fig.height=5,fig.width=5,out.width='1.1\\linewidth'>>=
+plot(x1,y, pch=19, col=col)
+lines(seq(0,20,by=1),p1, lwd=2,col='blue')
+lines(seq(0,20,by=1),p2, lwd=2,col='red')
+@
+
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}[fragile]{ANCOVA}
+
+\begin{columns}
+
+\column{0.65\linewidth}
+\setlength{\topsep}{2pt}
+<<ancov2, size='tiny',fig.keep='none'>>=
+summary(m)
+
+@
+
+\column{0.4\linewidth}
+
+<<ancovplot2, echo=FALSE,fig.height=5,fig.width=5,out.width='1.1\\linewidth'>>=
+plot(x1,y, pch=19, col=col)
+lines(seq(0,20,by=1),p1, lwd=2,col='blue')
+lines(seq(0,20,by=1),p2, lwd=2,col='red')
+@
+
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}{Mais algumas extensões dos Modelos Lineares Gerais}
+
+\begin{small}
+
+O termo de interação altera a inclinação:
+
+\begin{equation*}
+Y = \beta _0 + \beta _1 X_1 + \beta _2 X_2 + \beta _3 X_1 X_2 + \varepsilon
+\end{equation*}
+
+Para o nível 1 de $X_2$:
+
+\begin{equation*}
+Y = \beta _0  + \beta _1 X_1 + \beta _2 \times 0 + \beta _3 \times X_1 \times 0 + \varepsilon = Y = \beta _0 + \beta _1 X_1 + \varepsilon
+\end{equation*}
+
+Para o nível 2 de $X_2$:
+
+\begin{equation*}
+Y = \beta _0  + \beta _1 X_1 + \beta _2 \times 1 + \beta _3 \times X_1 \times 1 + \varepsilon
+\end{equation*}
+
+\begin{equation*}
+Y = (\beta _0 +  \beta _2) + (\beta _1 + \beta _3) \times  X_1 + \varepsilon
+\end{equation*}
+
+\end{small}
+
+\end{frame}
+%===============================================================================%
+
+
+
+%===============================================================================%
+\begin{frame}[fragile]{ANCOVA}
+
+\begin{columns}
+
+\column{0.65\linewidth}
+\setlength{\topsep}{2pt}
+<<ancov3, size='tiny',fig.keep='none'>>=
+set.seed(234)
+x1 <- runif(40,0,20)
+x2 <- c(rep(0,20),rep(1,20))
+y <- 3 + 2*x1 + 6*x2 + 1.2*x1*x2 + rnorm(20,0,5)
+
+m <- lm(y ~ x1 * x2)
+
+m <- lm(y ~ x1 * x2)
+
+x21novo <- data.frame(x1 = seq(0,20,
+                by=1), x2=rep(0,21))
+x22novo <- data.frame(x1 = seq(0,20
+                       ,by=1), x2=rep(1,21))
+
+p1 <- predict(m,x21novo)
+p2 <- predict(m,x22novo)
+
+plot(x1,y, pch=19, col=col)
+
+lines(seq(0,20,by=1),p1, lwd=2,col='blue')
+lines(seq(0,20,by=1),p2, lwd=2,col='red')
+
+@
+
+\column{0.4\linewidth}
+
+<<ancovplot3, echo=FALSE,fig.height=5,fig.width=5,out.width='1.1\\linewidth'>>=
+plot(x1,y, pch=19, col=col)
+lines(seq(0,20,by=1),p1, lwd=2,col='blue')
+lines(seq(0,20,by=1),p2, lwd=2,col='red')
+@
+
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+
+
+
+%===============================================================================%
+\begin{frame}[fragile]{ANCOVA}
+
+\begin{columns}
+
+\column{0.65\linewidth}
+\setlength{\topsep}{2pt}
+<<ancov4, size='tiny',fig.keep='none'>>=
+summary(m)
+
+@
+
+\column{0.4\linewidth}
+
+<<ancovplot4, echo=FALSE,fig.height=5,fig.width=5,out.width='1.1\\linewidth'>>=
+plot(x1,y, pch=19, col=col)
+lines(seq(0,20,by=1),p1, lwd=2,col='blue')
+lines(seq(0,20,by=1),p2, lwd=2,col='red')
+@
+
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+%===============================================================================%
+\begin{frame}[fragile]{ANCOVA}
+
+\begin{columns}
+
+\column{0.65\linewidth}
+\setlength{\topsep}{2pt}
+<<ancov5, size='tiny',fig.keep='none'>>=
+m <- lm(y ~ x1 + x1:x2)
+summary(m)
+
+@
+
+\column{0.4\linewidth}
+
+<<ancovplot5, echo=FALSE,fig.height=5,fig.width=5,out.width='1.1\\linewidth'>>=
+p1 <- predict(m,x21novo)
+p2 <- predict(m,x22novo)
+plot(x1,y, pch=19, col=col)
+lines(seq(0,20,by=1),p1, lwd=2,col='blue')
+lines(seq(0,20,by=1),p2, lwd=2,col='red')
+@
+
+
+\end{columns}
+
+\end{frame}
+%===============================================================================%
+
+
+%===============================================================================%
+\begin{frame}{ANCOVA}
+
+\begin{small}
+
+Quando usar ANCOVA?
+\vfill
+\begin{itemize}
+\item Explicar diferenças em uma relação contínua entre grupos (ex. fertilizante em duas espécies de planta) 
+\vfill
+\item O termo aditivo (novo intercepto) é interpretado como: mesma taxa de crescimento (inclinação), mas com níveis basais diferentes
+\vfill
+\item O termo de interação é intepretado como taxas (inclinações) diferentes. Ou seja, a resposta do fertilizante \emph{interage} com o tipo de espécie para determinar uma resposta.
+
+\vfill
+\item Se esses coeficientes são pequenos e/ou tem p-valor alto, interpreta-se que há pouca evidência de diferenças na relação entre $X_1$ e $Y$ para os diferentes grupos.
+\end{itemize}
+
+\end{small}
+
+\end{frame}
+%===============================================================================%
+
+\end{document}
