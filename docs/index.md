@@ -1,20 +1,19 @@
 # Statistical Analysis and Modeling of Ecological Data
 ### Graduate Program in Ecology and Biodiversity
-### UNESP - São Paulo State University, Rio Claro, Brazil
+#### UNESP - São Paulo State University, Rio Claro, Brazil
 
-This is the home of the postgraduate course in "Statistical Analysis and Modeling of Ecological Data", offered by the [Graduate Program in Ecology and Biodiversity]
-(http://ib.rc.unesp.br/#!/departamentos/ecologia/pos-graduacao-em-ecologia-e-biodiversidade/),
+This is the home of the postgraduate course in "Statistical Analysis and Modeling of Ecological Data", offered by the [Graduate Program in Ecology and Biodiversity](http://ib.rc.unesp.br/#!/departamentos/ecologia/pos-graduacao-em-ecologia-e-biodiversidade/),
 [IB - UNESP Rio Claro](http://ib.rc.unesp.br/). 
 
 ### Course Overview
 
-This course will (hopefully) teach you how to *think* statistically. Unlike most statistical courses, this will not be a "buffet" of statistical tests (usually paired with a flowchart of "how to choose your test" :man_facepalming:). Null hypothesis testing is almost useless, as you learn in this course.
+This course will (hopefully) teach you how to *think* statistically. Unlike most statistical courses, this will not be a "buffet" of statistical tests (usually paired with a flowchart of "how to choose your test" :man_facepalming:). Null hypothesis testing is almost useless, as you will learn in this course.
 
-If we succeed in this course, you should be able to *understand* enough statistical thinking to indentify, learn and apply any statistical analysis, to any ecological data. The keyword here is *understanding*, meaning **not** blindly following a recipe without really understanding what you' re doing. Sadly, statistics is not like cooking.
+If we succeed over these two weeks, you should be able to *understand* enough statistical thinking to indentify, learn and apply any statistical analysis to any ecological data. The keyword here is *understanding*, meaning **not** blindly following a recipe without really understanding what you are doing. Sadly, statistics is not like cooking.
 
 The course is usually delivered as a mixture of live streaming and recorded lectures. There are also practical exercises for each lecture, which **must** be done using [R](https://www.r-project.org/) and [RStudio](https://www.rstudio.com/).
 
-For videoconferences, use this link:
+For all videoconferences, use this link:
 [Google Hangouts link](https://meet.google.com/dss-wnog-vsa?hs=122)
 
 ### Learning Outcomes
@@ -46,7 +45,7 @@ At the end of this course, you should be able to:
 
 |   Day     |    Theme                       | Type            | Link                      |
 |-----------|--------------------------------|-----------------|---------------------------|  
-|**Day 1:** |   Introduction to the course   | Videoconference | [Hangouts](https://meet.google.com/dss-wnog-vsa?hs=122) / [Slides]('/lectures/Lecture_1_intro/Lecture_1_intro.html')|
+|**Day 1:** |   Introduction to the course   | Videoconference | [Hangouts](https://meet.google.com/dss-wnog-vsa?hs=122) / [Slides]('lectures/Lecture_1_intro/Lecture_1_intro.html')|
 |           | Probabilitites                 | Recorded lecture| [Video]() / [Slides]()    |
 |           | What is a 'hypothesis test'   | Recorded lecture| [Video]() / [Slides]()    |
 |           | Type I and type II errors      | Recorded lecture| [Video]() / [Slides]()    |

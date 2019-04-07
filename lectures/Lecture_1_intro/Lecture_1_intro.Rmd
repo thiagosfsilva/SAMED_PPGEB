@@ -1,13 +1,14 @@
 ---
 title: "Statistical Analysis and Modeling in Ecology"
 subtitle: "Lecture 1 - Introduction"
-author: "Thiago S. F. Silva (thiago.sf.silva@stir.ac.uk)"
+author: "Thiago S. F. Silva - thiago.sf.silva@stir.ac.uk"
 date: "2019/04/07 (updated: `r Sys.Date()`)"
 header-includes:
    - \usepackage{tikz}
    - \usetikzlibrary{shapes.geometric,arrows}
 output:
   xaringan::moon_reader:
+    css: xaringan-themer.css
     lib_dir: libs
     nature:
       highlightStyle: github
@@ -15,9 +16,30 @@ output:
       countIncrementalSlides: false
 
 ---
+class: center, middle, inverse
+
+
+# Introductions
+
+
+```{r xaringan-themer, include = FALSE}
+library(xaringanthemer)
+mono_accent(
+  base_color = "#2c4fa3",
+  header_font_google = google_font("Francois One"),
+  text_font_google   = google_font("Roboto Condensed", "400", "400i"),
+  code_font_google   = google_font("Fira Code"),
+  text_font_size = '1.5em',
+  title_slide_background_image = 'https://www.ox.ac.uk/sites/files/oxford/styles/ow_large_feature/public/field/field_image_main/Mathematics%20and%20Statistics.jpg',
+  link_color = "#eb0037" 
+        
+)
+```
+---
+
 About Me
 =============
-
+<small>
 **Thiago Sanna Freire Silva:** thiago.sf.silva@stir.ac.uk
 
 *1998 - 2002*:        Biology B.Sc. - UFRN (Brazil)
@@ -33,14 +55,14 @@ About Me
 *2019 - present*:     Lecturer, Biol. and Env. Sciences, University of Stirling (UK)
 
 **Research Interests:** global change biology, ecosystem function, community assembly, plant functional ecology, biogeochemistry, macroecology, biogeography, remote sensing, data analysis, modeling.
-
+</small>
 ---
 class: center, middle
 
-# About you?
+# Who are you?
 
 ---
-class: center, middle
+class: center, middle, inverse
 
 What is Statistics?
 ====================
@@ -51,9 +73,9 @@ What is Statistics?
 What is Statistics?
 ====================
 
-What Statistic ** is not **:
+What Statistics ** is not **:
 
-- A perfectly objective science
+- A completely objective science
 
 - A unique and foolproof method
 
@@ -63,12 +85,11 @@ What Statistic ** is not **:
 
 - The salvation for poor research
 
-<br/><br/> 
 
-> "To consult the statistician after an experiment is finished is often
+> *"To consult the statistician after an experiment is finished is often
 only to ask him to conduct a post mortem examination.
-> I can maybe say what the experiment died of. "
-> *Sir* Ronald Fisher.
+> I can maybe say what the experiment died of. "*
+> **- Ronald Fisher**.
 
 ---
 
@@ -76,6 +97,8 @@ What is Statistics?
 ====================
 
 Mathematics vs. Statistics: are they the same thing?
+
+--
 
 What is Statistics for?
 
@@ -85,9 +108,9 @@ Purpose of Statistics: to estimate and quantify ** uncertainties **
 
 Uncertainties = ** probabilities **
 
---
-
 How can we quantify uncertainties about something?
+
+--
 
 - Observations...
 
@@ -99,7 +122,8 @@ How can we quantify uncertainties about something?
 What is Statistics?
 ==================
 
-Why do we want to quantify uncertainties about something?
+Why would we want to quantify uncertainties about something?
+--
 
 - To make a **decision**
 
@@ -108,16 +132,35 @@ Why do we want to quantify uncertainties about something?
 - To make a **prediction**
 ---
 
-Example
+Examples
 =======
 
 "A reservoir has a 60% chance of eliminating the habitat of one aquatic species, but there is a 75% chance that it will ensure the preservation of 500 km<sup>2</sup> of primary forest habitat for the next 100 years. Should I authorize or veto the construction of this reservoir?" 
 
 "What is the relative contribution of hydrological regime, nutrient concentration and water turbidity to the growth of aquatic plants in the Amazon?"
 
-"How much will crop productivity increase after an addition of 10 grams of Nitrogen per m<sup>2</sup>?"   
+"How much will crop productivity increase after an addition of 10 grams of Nitrogen per m<sup>2</sup> ?"
+
 ---
-class: center, middle
+What statistics is
+==================
+
+- A method for quantifying uncertainty
+
+- A method to **help** us make decisions
+
+- A method to **help** us make interpretations
+
+- A method to **help** us make make predictions
+
+**Good computer:** R$ 10,000.00
+
+**PhD Student:**   R$ 2.200,00 $\times$ 48 months = R$ 105,600
+
+**Don't make yourself useless**!
+
+---
+class: center, middle, inverse
 
 Statistical Modeling
 =====================
@@ -130,7 +173,7 @@ Model
 .pull-left[What is a ** model **?]
 
 .pull-right[
-```{r, out.width = '100% ', fig.align ='center', echo = F}
+```{r, out.width = '150% ', fig.align ='center', echo = F}
 knitr :: include_graphics ('figs/bruno.jpg')
 ```
 ]
@@ -138,7 +181,7 @@ knitr :: include_graphics ('figs/bruno.jpg')
 ---
 class: center, middle
 
-# $Y = \beta_0 + \beta_1 X$ ?
+# $Y = \beta_0 + \beta_1 X$
 
 ---
 
@@ -159,16 +202,57 @@ What is a model?
 
 - Describes some aspects of interest while ignoring others
 
+- Doesn't have to be expressed using math!
+
 <br/><br/>
 
-> "All models are wrong. Some are useful" ** George E. P. Box **
+> "All models are wrong. Some are useful" 
+> **- George E. P. Box **
 
 ---
 
 ### A taxonomy of models
 
-```{r, out.width = '100% ', fig.align =' center ', echo = F}
-knitr :: include_graphics ('figs/models.png')
+```{r, fig.width = 20, out.height='100%', fig.align='center', echo = F}
+
+DiagrammeR::grViz("
+digraph graph2 {
+
+graph [layout = dot]
+
+# node definitions with substituted label text
+node [shape = rectangle, width = 4, fillcolor = Biege]
+a [label = '@@1']
+b [label = '@@2']
+c [label = '@@3']
+d [label = '@@4']
+e [label = '@@5']
+f [label = '@@6']
+g [label = '@@7']
+h [label = '@@8']
+i [label = '@@9']
+
+a -> b 
+a -> c
+c -> d
+c -> e
+d -> f -> h
+e -> g -> i
+
+}
+
+[1]: 'Models' 
+[2]: 'Conceptual' 
+[3]: 'Quantitative' 
+[4]: 'Mathematical' 
+[5]: 'Statistical' 
+[6]: 'Deterministic' 
+[7]: 'Stochastic' 
+[8]: 'Theoretical' 
+[9]: 'Empirical' 
+
+",width=800,height=400)
+
 ```
 
 **These relationships are * not * obligatory! **
@@ -192,12 +276,17 @@ Statistics is modelling
 ======================
 
 
-```{r mean as model}
+```{r mean as model, tidy=TRUE}
 x <- c(1,3,6,8,9,12,32)
 mean(x)
-sd(x)
 ```
+
+<br/>
+
 $\mu_x$ = $E(x)$ = `r round(mean(x),2)`
+
+<br/>
+
 
 We call the mean of variable $x$ the *expectation* of $x$
 
@@ -220,16 +309,50 @@ ggplot(plot_df,aes(x, y)) +
 
 
 ---
-$E(x)$: the simplest possible model
+$E(x)$: the simplest model
 ===================================
 
 - $E(x)$ is the most likely (i.e. the *expected*) value of $x$
 
 - We just created a model!
 
-- Our model simplifies $x$ by focusing only on what is the most likely outcome
+- Our model simplifies $x$ by focusing on what is the most likely outcome
 
 - Still, it gives us *some* information about $x$, i.e. , it reduces our *uncertainty* about $x$
+
+
+---
+
+## Going beyond: improving the models
+
+
+From here on, we can see every statistical analysis as:
+
+- Defining on a model form
+
+- Fitting the model to data
+
+- Assessing the confidence we have about the model fit
+
+- Comparing models to decide which one is best represents the data
+
+---
+
+```{r normplot2, warning=FALSE, message=FALSE, echo=FALSE, fig.height = 10, fig.width = 18, out.width='100%'}
+plot_df <- data.frame(x = seq(-30, 60, length=150)) %>%
+    mutate(y= dnorm(x,10.14,10.3),y2= dnorm(x,10.14,5))
+
+ggplot(plot_df,aes(x, y)) +
+    geom_line(size=1) +
+    geom_line(aes(x=x,y=y2), size=1, color = " Blue") +
+    geom_vline(aes(xintercept = 10.14),color=" red", size=2) +
+    xlab("E(X)") +
+    ylab("Density") +
+    #annotate("text", x = 15, y = .002, label = "E(x)", color="red", size = 15) +
+    theme_bw(base_size = 30)
+```
+
+Where do we have more *uncertainty*?
 
 ---
 class: inverse, center, middle
@@ -238,8 +361,6 @@ class: inverse, center, middle
 
 
 ---
-
-
 Course Outline
 ==============
 
@@ -308,13 +429,33 @@ Why use R?
 
 - Use of R is **compulsory** for this course
 
-- Free (as in beer), free (as in speech)
+- Free 
 
 - The "standard" language for communicating ecological data analysis
 
-- Difficult at first, but you save a lot of time in the long run
+- Difficult at first, but you will thank yourself in the future
+
+]
+
+.pull-right[
+
+```{r, out.width = '100% ', fig.align ='center ', echo = F}
+knitr :: include_graphics ('figs/crybaby.jpg')
+```
+
+http://www.jillgreenberg.com/
+]
+
+---
+Why use R?
+==========
+
+.pull-left[
+** R: ** a language for *statistical computing* 
 
 - Programming = freedom
+
+- Not different from learning lab or field protocols
 
 - Everyone should install **the latest version of R** and **RStudio**.
 
@@ -328,4 +469,46 @@ knitr :: include_graphics ('figs/crybaby.jpg')
 
 http://www.jillgreenberg.com/
 ]
+---
+Summary
+=======
+
+- Statitics is **philosophy of science** expressed with numbers
+
+- We need statistics when we have **uncertainty**
+
+- We use statistics to **help** us:
+    
+    - Make a decision
+    - Explain a process
+    - Predict a quantity
+    
+- Knowledge is built using models (not all mathematical)
+
+- All statistical analyses can be seen as models
+
+- Our task is to find a good model to describe the data and quantify the uncertainty
+
+---
+
+Next steps
+==========
+
+Watch the recorded lectures on:
+
+- Probabilities
+- Hypothesis testing
+- Type I and type II errors
+
+Read the paper:
+
+*Gigerenzer, G. (2004) Mindless Statistics. The Journal of Socio-Economics 33: 587–606.*
+
+We meet tomorrow (09/04) at 3pm to answer questions and discuss the paper.
+---
+class: center, middle, inverse
+
+```{r, out.width = '100% ', fig.align =' center ', echo = F}
+knitr :: include_graphics ('https://i.stack.imgur.com/c88K3.png')
+```
 
