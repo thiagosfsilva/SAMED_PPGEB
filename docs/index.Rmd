@@ -14,7 +14,7 @@ If we succeed in this course, you should be able to *understand* enough statisti
 The course is usually delivered as a mixture of live streaming and recorded lectures. There are also practical exercises for each lecture, which **must** be done using [R](https://www.r-project.org/) and [RStudio](https://www.rstudio.com/).
 
 For videoconferences, use this link:
-[Google Hangouts link](meet.google.com/dss-wnog-vsa)
+[Google Hangouts link](https://meet.google.com/dss-wnog-vsa?hs=122)
 
 ### Learning Outcomes
 
@@ -45,7 +45,7 @@ At the end of this course, you should be able to:
 
 |   Day     |    Theme                       | Type            | Link                      |
 |-----------|--------------------------------|-----------------|---------------------------|  
-|**Day 1:** |   Introduction to the course   | Videoconference | [Hangouts](meet.google.com/dss-wnog-vsa) / [Slides]('/lectures/Lecture_1_intro/Lecture_1_intro.html')|
+|**Day 1:** |   Introduction to the course   | Videoconference | [Hangouts](https://meet.google.com/dss-wnog-vsa?hs=122) / [Slides]('/lectures/Lecture_1_intro/Lecture_1_intro.html')|
 |           | Probabilitites                 | Recorded lecture| [Video]() / [Slides]()    |
 |           | What is a 'hypothesis test'   | Recorded lecture| [Video]() / [Slides]()    |
 |           | Type I and type II errors      | Recorded lecture| [Video]() / [Slides]()    |
