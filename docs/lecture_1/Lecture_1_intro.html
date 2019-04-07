@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Statistical Analysis and Modeling in Ecology</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Thiago S. F. Silva - thiago.sf.silva@stir.ac.uk" />
+    <script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+    <script src="libs/viz-0.3/viz.js"></script>
+    <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+    <script src="libs/grViz-binding-1.0.0/grViz.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Statistical Analysis and Modeling in Ecology
+## Lecture 1 - Introduction
+### Thiago S. F. Silva - <a href="mailto:thiago.sf.silva@stir.ac.uk" class="email">thiago.sf.silva@stir.ac.uk</a>
+### 2019/04/07 (updated: 2019-04-07)
+
+---
+
+class: center, middle, inverse
+
+
+# Introductions
+
+
+
+---
+
+About Me
+=============
+&lt;small&gt;
+**Thiago Sanna Freire Silva:** thiago.sf.silva@stir.ac.uk
+
+*1998 - 2002*:        Biology B.Sc. - UFRN (Brazil)
+
+*2003 - 2004*:        Remote Sensing M.Sc. - INPE (Brazil)
+
+*2004 - 2009*:        Geography Ph.D. - University of Victoria (Canada)
+
+*2009 - 2013*:        ~~slave~~ Postdoc at UCSB (USA) and INPE (Brazil)
+
+*2013 - 2019*:        Assistant professor, Dept. of Geography, UNESP Rio Claro (Brazil)
+
+*2019 - present*:     Lecturer, Biol. and Env. Sciences, University of Stirling (UK)
+
+**Research Interests:** global change biology, ecosystem function, community assembly, plant functional ecology, biogeochemistry, macroecology, biogeography, remote sensing, data analysis, modeling.
+&lt;/small&gt;
+---
+class: center, middle
+
+# Who are you?
+
+---
+class: center, middle, inverse
+
+What is Statistics?
+====================
+
+---
+
+
+What is Statistics?
+====================
+
+What Statistics ** is not **:
+
+- A completely objective science
+
+- A unique and foolproof method
+
+- An automatic decision-making system
+
+- A solution to all scientific problems
+
+- The salvation for poor research
+
+
+&gt; *"To consult the statistician after an experiment is finished is often
+only to ask him to conduct a post mortem examination.
+&gt; I can maybe say what the experiment died of. "*
+&gt; **- Ronald Fisher**.
+
+---
+
+What is Statistics?
+====================
+
+Mathematics vs. Statistics: are they the same thing?
+
+--
+
+What is Statistics for?
+
+--
+
+Purpose of Statistics: to estimate and quantify ** uncertainties **
+
+Uncertainties = ** probabilities **
+
+How can we quantify uncertainties about something?
+
+--
+
+- Observations...
+
+- Repetitions...
+
+- Experiments...
+---
+
+What is Statistics?
+==================
+
+Why would we want to quantify uncertainties about something?
+--
+
+- To make a **decision**
+
+- To be confident about an **explanation**
+
+- To make a **prediction**
+---
+
+Examples
+=======
+
+"A reservoir has a 60% chance of eliminating the habitat of one aquatic species, but there is a 75% chance that it will ensure the preservation of 500 km&lt;sup&gt;2&lt;/sup&gt; of primary forest habitat for the next 100 years. Should I authorize or veto the construction of this reservoir?" 
+
+"What is the relative contribution of hydrological regime, nutrient concentration and water turbidity to the growth of aquatic plants in the Amazon?"
+
+"How much will crop productivity increase after an addition of 10 grams of Nitrogen per m&lt;sup&gt;2&lt;/sup&gt; ?"
+
+---
+What statistics is
+==================
+
+- A method for quantifying uncertainty
+
+- A method to **help** us make decisions
+
+- A method to **help** us make interpretations
+
+- A method to **help** us make make predictions
+
+**Good computer:** R$ 10,000.00
+
+**PhD Student:**   R$ 2.200,00 `\(\times\)` 48 months = R$ 105,600
+
+**Don't make yourself useless**!
+
+---
+class: center, middle, inverse
+
+Statistical Modeling
+=====================
+
+---
+
+Model
+=====
+
+.pull-left[What is a ** model **?]
+
+.pull-right[
+&lt;img src="figs/bruno.jpg" width="150% " style="display: block; margin: auto;" /&gt;
+]
+
+---
+class: center, middle
+
+# `\(Y = \beta_0 + \beta_1 X\)`
+
+---
+
+&lt;img src="figs/landsat8.jpg" width="1000% " style="display: block; margin: auto;" /&gt;
+---
+
+&lt;img src="figs/casa.jpg" width="100% " /&gt;
+
+---
+What is a model?
+================
+
+- A **simplified** representation of reality
+
+- Describes some aspects of interest while ignoring others
+
+- Doesn't have to be expressed using math!
+
+&lt;br/&gt;&lt;br/&gt;
+
+&gt; "All models are wrong. Some are useful" 
+&gt; **- George E. P. Box **
+
+---
+
+### A taxonomy of models
+
+<div id="htmlwidget-d202d2a9f1d4b2c773dc" style="width:800px;height:400px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d202d2a9f1d4b2c773dc">{"x":{"diagram":"\ndigraph graph2 {\n\ngraph [layout = dot]\n\n# node definitions with substituted label text\nnode [shape = rectangle, width = 4, fillcolor = Biege]\na [label = \"Models\"]\nb [label = \"Conceptual\"]\nc [label = \"Quantitative\"]\nd [label = \"Mathematical\"]\ne [label = \"Statistical\"]\nf [label = \"Deterministic\"]\ng [label = \"Stochastic\"]\nh [label = \"Theoretical\"]\ni [label = \"Empirical\"]\n\na -> b \na -> c\nc -> d\nc -> e\nd -> f -> h\ne -> g -> i\n\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+
+**These relationships are * not * obligatory! **
+
+---
+
+Everything is modelling!
+========================
+
+- All of our scientific knowledge is composed of models
+
+- Mathematical models...
+
+- Statistical models...
+
+- **Conceptual models**
+
+---
+
+Statistics is modelling
+======================
+
+
+
+```r
+x &lt;- c(1, 3, 6, 8, 9, 12, 32)
+mean(x)
+```
+
+```
+## [1] 10.14286
+```
+
+&lt;br/&gt;
+
+`\(\mu_x\)` = `\(E(x)\)` = 10.14
+
+&lt;br/&gt;
+
+
+We call the mean of variable `\(x\)` the *expectation* of `\(x\)`
+
+**Why?**
+
+---
+&lt;img src="Lecture_1_intro_files/figure-html/normplot-1.png" width="100%" /&gt;
+
+
+---
+`\(E(x)\)`: the simplest model
+===================================
+
+- `\(E(x)\)` is the most likely (i.e. the *expected*) value of `\(x\)`
+
+- We just created a model!
+
+- Our model simplifies `\(x\)` by focusing on what is the most likely outcome
+
+- Still, it gives us *some* information about `\(x\)`, i.e. , it reduces our *uncertainty* about `\(x\)`
+
+
+---
+
+## Going beyond: improving the models
+
+
+From here on, we can see every statistical analysis as:
+
+- Defining on a model form
+
+- Fitting the model to data
+
+- Assessing the confidence we have about the model fit
+
+- Comparing models to decide which one is best represents the data
+
+---
+
+&lt;img src="Lecture_1_intro_files/figure-html/normplot2-1.png" width="100%" /&gt;
+
+Where do we have more *uncertainty*?
+
+---
+class: inverse, center, middle
+
+# About the course
+
+
+---
+Course Outline
+==============
+
+This course is composed of:
+
+- ~~Blah, blah, blah, blah~~ ** Theoretical classes **
+
+- ~~Fighting with R~~ ** Practical exercises **
+
+- ~~Zzzzzzzzzzzzzzz~~ ** Paper discussions **
+
+Assessments:
+
+- ** Exercises: ** your scripts from practical classes
+
+- ** Mini-project: ** group statistical analysis project
+
+    - Use your own data or any available data
+---
+
+What we will cover
+=======================
+
+- Crash course into probabilities
+
+- Probability distributions
+
+- Frequentist error analysis ( `\(\ne\)` hypothesis testing :woman_facepalming:)
+
+- Data organization and management
+
+- Data visualization
+
+- General inear models (regression, ANOVA, ANCOVA)
+
+- The very basics of randomization methods
+
+- The very basics of machine learning for data analysis and prediction
+---
+
+What we will NOT cover
+======================
+
+
+- GLMs and GLMMs
+
+- SEMS, path analysis, any other "fancy method"
+
+- Multivariate analysis (Tadeu Siqueira)
+
+### Why?
+
+This course is focused on making you *THINK* statistically
+
+Once you do, you can teach yourself any method
+
+We try to avoid [statistical machismo](https://dynamicecology.wordpress.com/2012/09/11/statistical-machismo/)
+
+
+---
+Why use R?
+==========
+
+.pull-left[
+** R: ** a language for *statistical computing* 
+
+- Use of R is **compulsory** for this course
+
+- Free 
+
+- The "standard" language for communicating ecological data analysis
+
+- Difficult at first, but you will thank yourself in the future
+
+]
+
+.pull-right[
+
+&lt;img src="figs/crybaby.jpg" width="100% " /&gt;
+
+http://www.jillgreenberg.com/
+]
+
+---
+Why use R?
+==========
+
+.pull-left[
+** R: ** a language for *statistical computing* 
+
+- Programming = freedom
+
+- Not different from learning lab or field protocols
+
+- Everyone should install **the latest version of R** and **RStudio**.
+
+]
+
+.pull-right[
+
+&lt;img src="figs/crybaby.jpg" width="100% " /&gt;
+
+http://www.jillgreenberg.com/
+]
+---
+Summary
+=======
+
+- Statitics is **philosophy of science** expressed with numbers
+
+- We need statistics when we have **uncertainty**
+
+- We use statistics to **help** us:
+    
+    - Make a decision
+    - Explain a process
+    - Predict a quantity
+    
+- Knowledge is built using models (not all mathematical)
+
+- All statistical analyses can be seen as models
+
+- Our task is to find a good model to describe the data and quantify the uncertainty
+
+---
+
+Next steps
+==========
+
+Watch the recorded lectures on:
+
+- Probabilities
+- Hypothesis testing
+- Type I and type II errors
+
+Read the paper:
+
+*Gigerenzer, G. (2004) Mindless Statistics. The Journal of Socio-Economics 33: 587–606.*
+
+We meet tomorrow (09/04) at 3pm to answer questions and discuss the paper.
+---
+class: center, middle, inverse
+
+&lt;img src="https://i.stack.imgur.com/c88K3.png" width="100% " /&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
