@@ -1,9 +1,10 @@
 # Statistical Analysis and Modeling of Ecological Data
-### Graduate Program in Ecology and Biodiversity, UNESP - São Paulo State University, Rio Claro, Brazil
+### Graduate Program in Ecology and Biodiversity
+### UNESP - São Paulo State University, Rio Claro, Brazil
 
-Visit the course website: (https://thiagosfsilva.github.io/ecostats/)
-
-This is the home of the postgraduate course in "Statistical Analysis and Modeling of Ecological Data", offered by the [Graduate Program in Ecology and Biodiversity](http://ib.rc.unesp.br/#!/departamentos/ecologia/pos-graduacao-em-ecologia-e-biodiversidade/), [IB - UNESP Rio Claro](http://ib.rc.unesp.br/). 
+This is the home of the postgraduate course in "Statistical Analysis and Modeling of Ecological Data", offered by the [Graduate Program in Ecology and Biodiversity]
+(http://ib.rc.unesp.br/#!/departamentos/ecologia/pos-graduacao-em-ecologia-e-biodiversidade/),
+[IB - UNESP Rio Claro](http://ib.rc.unesp.br/). 
 
 ### Course Overview
 
@@ -49,7 +50,7 @@ At the end of this course, you should be able to:
 |           | Probabilitites                 | Recorded lecture| [Video]() / [Slides]()    |
 |           | What is a 'hypothesis test'   | Recorded lecture| [Video]() / [Slides]()    |
 |           | Type I and type II errors      | Recorded lecture| [Video]() / [Slides]()    |
-|           | Gigerenzer et al. (2004) Mindless statistics. | Reading         | [Paper]('/readings/lecture_1/GG_Mindless_2004,pdf')  |
+|           | Gigerenzer et al. (2004) Mindless statistics. | Reading         | [Paper]('readings/lecture_1/GG_Mindless_2004,pdf')  |
 |**Day 2:**| | | |
 |**Day 3:**| | | |
 |**Day 4:**| | | |
