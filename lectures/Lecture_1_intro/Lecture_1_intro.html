@@ -4,7 +4,8 @@
     <title>Statistical Analysis and Modeling in Ecology</title>
     <meta charset="utf-8" />
     <meta name="author" content="Thiago S. F. Silva (thiago.sf.silva@stir.ac.uk)" />
-    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
   </head>
   <body>
     <textarea id="source">
@@ -17,75 +18,7 @@ class: center, middle, inverse, title-slide
 
 ---
 
-class: inverse, center, middle
-
-# About the course
-
-
----
-
-
-
-Course Outline
-==============
-
-This course is composed of:
-
-- ~~Blah, blah, blah, blah~~ ** Theoretical classes **
-
-- ~~Fighting with R~~ ** Practical exercises **
-
-- ~~Zzzzzzzzzzzzzzz~~ ** Paper discussions **
-
-Assessments:
-
-- ** Exercises: ** your scripts from practical classes
-
-- ** Mini-project: ** group statistical analysis project
-
-    - Use your own data or any available data
----
-
-What we will cover
-=======================
-
-- Crash course into probabilities
-
-- Probability distributions
-
-- Frequentist error analysis ($ x + y $ Hypothesis testing :woman_facepalming:)
-
-- Data organization and management
-
-- Data visualization 
-
-- General Linear Models (regression, ANOVA, ANCOVA)
-
-- The very basics of machine learning for data analysis and prediction
----
-
-What we will NOT cover
-======================
-
-
-- GLMs and GLMMs
-
-- SEMS, path analysis, any other "fancy method"
-
-- Multivariate analysis (Tadeu Siqueira)
-
-### Why?
-
-This course is focused on making you *THINK* statistically
-
-Once you do, you can teach yourself any method
-
-We try to avoid [statistical machismo](https://dynamicecology.wordpress.com/2012/09/11/statistical-machismo/)
-
-
----
-
-About Me me Me
+About Me
 =============
 
 **Thiago Sanna Freire Silva:** thiago.sf.silva@stir.ac.uk
@@ -133,125 +66,262 @@ What Statistic ** is not **:
 
 - The salvation for poor research
 
+&lt;br/&gt;&lt;br/&gt; 
+
 &gt; "To consult the statistician after an experiment is finished is often
-only to ask him to conduct a post mortem examination. 
+only to ask him to conduct a post mortem examination.
 &gt; I can maybe say what the experiment died of. "
-&gt; &lt;footer&gt;- * Sir * Ronald Fisher.&lt;/footer&gt;
+&gt; *Sir* Ronald Fisher.
 
 ---
 
 What is Statistics?
 ====================
 
-Mathematics Vs. Statistics: is it the same thing?
+Mathematics vs. Statistics: are they the same thing?
 
 What is Statistics for?
+
+--
 
 Purpose of Statistics: to estimate and quantify ** uncertainties **
 
 Uncertainties = ** probabilities **
 
-What is Statistics?
+--
 
 How can we quantify uncertainties about something?
 
--   Comments\...
+- Observations...
 
-- Repetitions \ ...
+- Repetitions...
 
-- Experiments \ ...
+- Experiments...
 ---
 
 What is Statistics?
+==================
 
 Why do we want to quantify uncertainties about something?
 
-- Decision \ ...
+- To make a **decision**
 
-- Explanation ...
+- To be confident about an **explanation**
 
--   Prediction\...
-
-Examples
-
-- A reservoir has a 60% chance of eliminating the habitat of a
-    species. But there is a 75% chance that the royalties investment will
-    ensure the preservation of 500 km2 of primary forest in the surrounding
-    of the reservoir. Should I authorize or veto the construction of this
-    reservoir?
-
-- What is the relative contribution of the hydrological regime,
-    nutrients, and turbidity of water in the growth of aquatic plants
-    in the Amazon?
-
-- With what degree of certainty can I say that diversity will increase
-    in 1.5 times when nutrient availability increases by 0.7
-    times?
-
+- To make a **prediction**
 ---
+
+Example
+=======
+
+"A reservoir has a 60% chance of eliminating the habitat of one aquatic species, but there is a 75% chance that it will ensure the preservation of 500 km&lt;sup&gt;2&lt;/sup&gt; of primary forest habitat for the next 100 years. Should I authorize or veto the construction of this reservoir?" 
+
+"What is the relative contribution of hydrological regime, nutrient concentration and water turbidity to the growth of aquatic plants in the Amazon?"
+
+"How much will crop productivity increase after an addition of 10 grams of Nitrogen per m&lt;sup&gt;2&lt;/sup&gt;?"   
+---
+class: center, middle
 
 Statistical Modeling
 =====================
 
-Models
-
-What is a ** model **?
-
-`` `{r, out.width = '50% ', fig.align =' center ', echo = F}
-knitr :: include_graphics ('figs / bruno.jpg')
-(I.e.
-
----
-Models
-
-$ Y = \ beta _0 + \ beta _1 X $
-
 ---
 
-! [image] (C: /Users/thiago/OneDrive/UNESP/Pos_graduacao/Eco/2015/Estatistica_2015/Aulas/Aula_1_Intro_2015/figs/landsat8.jpg) {width = "\ textwidth"}
----
-! [image] (C: /Users/thiago/OneDrive/UNESP/Pos_graduacao/Eco/2015/Estatistica_2015/Aulas/Aula_1_Intro_2015/figs/casa.jpg) {width = "\ textwidth"}
+Model
+=====
+
+.pull-left[What is a ** model **?]
+
+.pull-right[
+&lt;img src="figs/bruno.jpg" width="100% " style="display: block; margin: auto;" /&gt;
+]
 
 ---
-What is a template?
+class: center, middle
 
-- A ** simplified representation of reality
+# `\(Y = \beta_0 + \beta_1 X\)` ?
 
-- It seeks to describe some aspects of interest, ignoring others
+---
 
-[** "All models are wrong. Some are useful" - George E. P. Box **] {. Alert}
+&lt;img src="figs/landsat8.jpg" width="1000% " style="display: block; margin: auto;" /&gt;
+---
+
+&lt;img src="figs/casa.jpg" width="100% " /&gt;
+
+---
+What is a model?
+================
+
+- A **simplified** representation of reality
+
+- Describes some aspects of interest while ignoring others
+
+&lt;br/&gt;&lt;br/&gt;
+
+&gt; "All models are wrong. Some are useful" ** George E. P. Box **
 
 ---
 
 ### A taxonomy of models
 
-** Warning: These relationships are * not * obligatory! **
+&lt;img src="figs/models.png" width="100% " /&gt;
+
+**These relationships are * not * obligatory! **
 
 ---
 
+Everything is modelling!
+========================
+
+- All of our scientific knowledge is composed of models
+
+- Mathematical models...
+
+- Statistical models...
+
+- **Conceptual models**
+
+---
+
+Statistics is modelling
+======================
+
+
+
+```r
+x &lt;- c(1,3,6,8,9,12,32)
+mean(x)
+```
+
+```
+## [1] 10.14286
+```
+
+```r
+sd(x)
+```
+
+```
+## [1] 10.31873
+```
+`\(\mu_x\)` = `\(E(x)\)` = 10.14
+
+We call the mean of variable `\(x\)` the *expectation* of `\(x\)`
+
+**Why?**
+
+---
+&lt;img src="Lecture_1_intro_files/figure-html/normplot-1.png" width="100%" /&gt;
+
+
+---
+`\(E(x)\)`: the simplest possible model
+===================================
+
+- `\(E(x)\)` is the most likely (i.e. the *expected*) value of `\(x\)`
+
+- We just created a model!
+
+- Our model simplifies `\(x\)` by focusing only on what is the most likely outcome
+
+- Still, it gives us *some* information about `\(x\)`, i.e. , it reduces our *uncertainty* about `\(x\)`
+
+---
+class: inverse, center, middle
+
+# About the course
+
+
+---
+
+
+Course Outline
+==============
+
+This course is composed of:
+
+- ~~Blah, blah, blah, blah~~ ** Theoretical classes **
+
+- ~~Fighting with R~~ ** Practical exercises **
+
+- ~~Zzzzzzzzzzzzzzz~~ ** Paper discussions **
+
+Assessments:
+
+- ** Exercises: ** your scripts from practical classes
+
+- ** Mini-project: ** group statistical analysis project
+
+    - Use your own data or any available data
+---
+
+What we will cover
+=======================
+
+- Crash course into probabilities
+
+- Probability distributions
+
+- Frequentist error analysis ( `\(\ne\)` hypothesis testing :woman_facepalming:)
+
+- Data organization and management
+
+- Data visualization
+
+- General inear models (regression, ANOVA, ANCOVA)
+
+- The very basics of randomization methods
+
+- The very basics of machine learning for data analysis and prediction
+---
+
+What we will NOT cover
+======================
+
+
+- GLMs and GLMMs
+
+- SEMS, path analysis, any other "fancy method"
+
+- Multivariate analysis (Tadeu Siqueira)
+
+### Why?
+
+This course is focused on making you *THINK* statistically
+
+Once you do, you can teach yourself any method
+
+We try to avoid [statistical machismo](https://dynamicecology.wordpress.com/2012/09/11/statistical-machismo/)
+
+
+---
 Why use R?
+==========
 
-** R: ** Software for Statistical Analysis and Programming - ** Use
-compulsory in the course **.
+.pull-left[
+** R: ** a language for *statistical computing* 
 
-- Free, free, has become "standard" for data analysis
+- Use of R is **compulsory** for this course
 
-- Difficult at first, but time is recovered after
+- Free (as in beer), free (as in speech)
+
+- The "standard" language for communicating ecological data analysis
+
+- Difficult at first, but you save a lot of time in the long run
 
 - Programming = freedom
 
-- All course exercises must be done in R
+- Everyone should install **the latest version of R** and **RStudio**.
 
-- Assumes that everyone has installed R 3.1.3 and the interface
-    RStudio.
+]
 
-! [image] (C: /Users/thiago/OneDrive/UNESP/Pos_graduacao/Eco/2015/Estatistica_2015/Aulas/Aula_1_Intro_2015/figs/crybaby.jpg) {width = "1.5in"}
+.pull-right[
+
+&lt;img src="figs/crybaby.jpg" width="100% " /&gt;
 
 http://www.jillgreenberg.com/
-Send feedback
-History
-Saved
-Community
+]
+---
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
