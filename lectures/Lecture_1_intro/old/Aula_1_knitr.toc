@@ -1,6 +1,2 @@
-\beamer@endinputifotherversion {3.36pt}
-\select@language {portuguese}
-\beamer@sectionintoc {1}{Visão Geral do Curso}{3}{0}{1}
-\beamer@sectionintoc {2}{O que é Estatística?}{8}{0}{2}
-\beamer@sectionintoc {3}{Modelagem Estatística}{19}{0}{3}
-\beamer@sectionintoc {4}{Probabilidade}{30}{0}{4}
+\babel@toc {portuguese}{}
+\beamer@sectionintoc {1}{Probabilidade}{3}{0}{1}

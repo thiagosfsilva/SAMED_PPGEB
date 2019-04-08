@@ -1,16 +1,4 @@
 \documentclass{beamer}\usepackage[]{graphicx}\usepackage[]{color}
-%% maxwidth is the original width if it is less than linewidth
-%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
-\makeatletter
-\def\maxwidth{ %
-  \ifdim\Gin@nat@width>\linewidth
-    \linewidth
-  \else
-    \Gin@nat@width
-  \fi
-}
-\makeatother
-
 \definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
 \newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
 \newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
@@ -57,18 +45,13 @@
 \usepackage{amssymb}
 \usepackage{hyperref}
 
-\usepackage{tikz}
-\usepackage{tikz-qtree}
-\tikzset{edge from parent/.style={draw,very thick}}
-
-\usetheme{m}
-
 \title{Aula 1: Estatística e Probabilidade}
 \subtitle{Análise Quantitativa de Dados Ambientais}
 \author{\textbf{Thiago S. F. Silva} - tsfsilva@rc.unesp.br}
 \institute{Programa de Pós Graduação em Geografia - IGCE/UNESP}
 \date{\today}
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+
 \begin{document}
 
 
@@ -84,344 +67,6 @@
 \end{frame}
 %===============================================================================%
 
-
-\section{Visão Geral do Curso}
-
-
-%===============================================================================%
-\begin{frame}{Funcionamento do Curso} 
-
-  O curso se divide em:
-  
-  \begin{itemize}
-    
-    \item{\sout{Blá, blá, blá, blá}  \hspace{7.5mm}\textbf{Aulas Teóricas}}
-    \item{\sout{Brigando com o R}  \hspace{4mm}\textbf{Práticas e Exercícios}}
-    \item{\sout{Zzzzzzzzzzzzzzz} \hspace{9.5mm}\textbf{Discussões de artigos}}
-  
-  \end{itemize}
-  
-  \vfill
-  
-  Avaliação:
-  
-  \begin{itemize}
-  
-  \item{\textbf{Exercícios:} scripts de análise derivados das aulas práticas}
-  \item{\textbf{Bootcamp:} maratona de análise de um mini-projeto, em sala}
-  \item{\textbf{Seus próprios dados ou dados pré-adquiridos, à sua escolha}}
-  
-  \end{itemize}
-  
-  
-\end{frame} 
-%===============================================================================%
-
-% %===============================================================================%
-% \begin{frame}{Funcionamento do Curso} 
-% 
-%   Todo o material estará disponível no Dropbox:
-%   
-% \scriptsize{\url{https://www.dropbox.com/sh/9u79oybayyi86zw/AAAW_8GTZShFnA8BrzFbe-LDa?dl=0}}
-%   
-%   \begin{itemize}
-%     
-%     \item Slides
-%     \item Artigos
-%     \item Livros
-%     \item Exercícios
-%     \item Dados
-%       
-%   \end{itemize}
-%       
-% \end{frame} 
-% %===============================================================================%
-
-%===============================================================================%
-\begin{frame}{Sim, nós temos um plano} 
-
-\begin{small}
-
-  \begin{itemize}
-    
-    \item{2015-08-24: Introdução, Probabilidades}
-    
-    \item{2015-08-25: Distribuições de Probabilidade}
-    
-    \item{2015-08-26: Testes de Hipóteses}
-    
-    \item{2015-08-27: Erros Tipo I e Tipo II}
-    
-    \item{2015-08-28: Organização de Dados, Análise Exploratória e Gráfica}
-    
-    \item{2015-08-31: Modelos Lineares Gerais: Regressão Simples e Multivariada}
-    
-    \item{2015-09-01: Modelos Lineares Gerais: ANOVA e ANCOVA}
-    
-    \item{2015-09-02: Modelos Lineares Gerais: Diagnóstico e Remediação}
-            
-    \item{2015-09-03: Bootcamp de Análise de dados}
-    
-  \end{itemize}
-
-\alert{Plano sujeito à mudanças, sempre.}
-
-\end{small}
-
-\end{frame} 
-%===============================================================================%
-
-%===============================================================================%
-\begin{frame}{Apresentações}
-
-  \begin{itemize}
-    \item{\textbf{Thiago Sanna Freire Silva}}
-    \item{Departamento de Geografia - IGCE/UNESP}
-    \item{tsfsilva@rc.unesp.br - (19) 3526-9208}
-  \end{itemize}
-  
-  \vfill
-  
-  \begin{itemize}
-    \item{Biólogo (UFRN)}
-    \item{Mestre em Sensoriamento Remoto (INPE)}
-    \item{Doutor em Geografia (UVic - Canadá)}
-  \end{itemize}
-  
-  \vfill
-  
-  \begin{itemize}
-      \item{Funcionamento de ecossistemas e mudanças climáticas}
-      \item{Dinâmica espaço-temporal de paisagens}
-      \item{Interface entre Ecologia, Computação e Geociências}
-      
-  \end{itemize}
-  
-\end{frame}
-%===============================================================================%
-
-%===============================================================================%
-\begin{frame}{Apresentações}
-
-\vfill
-
-\center{\textbf{\huge{Vocês?}}}
-
-\vfill
-
-\end{frame}
-%===============================================================================%
-
-\section{O que é Estatística?}
-
-%===============================================================================%
-\begin{frame}{O que é Estatística?}
-
-O que é Estatística? \pause
-
-\vfill
-
-  O que a Estatística \textbf{não} é: 
-
-  \begin{itemize}
-  
-    \item{Uma ciência exata}
-    
-    \item{Um método único e infalível}
-    
-    \item{Um sistema automático de decisão}
-    
-    \item{Uma solução para todos os problemas científicos}
-    
-    \item{A salvação para uma pesquisa ruim}
-    
-   \end{itemize}
-    
-\scriptsize{``To consult the statistician after an experiment is finished is often merely to ask him to conduct a post mortem examination. He can perhaps say what the experiment died of''. - \emph{Sir} Ronald Fisher.}
-
-\end{frame}
-%===============================================================================%
-
-
-%===============================================================================%
-\begin{frame}{O que é Estatística?}
-
-  Matemática vs. Estatística: é a mesma coisa?
-  \pause
-  
-  \vfill
-  
-  Pra que serve a Estatística? \pause
-  \vfill
-
-  Propósito da Estatística: estimar e quantificar \textbf{incertezas}
-  
-  \vfill
-  
-  Incertezas = \textbf{probabilidades}
-
-\end{frame}
-%===============================================================================%
-
-
-%===============================================================================%
-\begin{frame}{O que é Estatística?}
-
-  Como podemos quantificar incertezas acerca de alguma coisa? \pause
-  
-  \vfill
-  
-  \begin{itemize}
-  
-    \item{Observações...}
-    
-    \vfill
-    
-    \item{Repetições...}
-    
-    \vfill
-    
-    \item{Experimentos...} 
-  
-  \end{itemize}
-    
-\end{frame}
-%===============================================================================%
-
-%===============================================================================%
-\begin{frame}{O que é Estatística?}
-
-  Por que queremos quantificar incertezas acerca de alguma coisa? \pause
-  
-  \vfill
-  
-  \begin{itemize}
-  
-    \item{Decisão...}
-    
-    \vfill
-    
-    \item{Explicação...}
-    
-    \vfill
-    
-    \item{Previsão...} 
-  
-  \end{itemize}
-    
-\end{frame}
-%===============================================================================%
-
-%===============================================================================%
-\begin{frame}{Exemplos}
-
-\begin{small}
-
- \begin{itemize}
-  
-      \item{Um reservatório tem 60\% de chance de eliminar o habitat de uma espécie. Mas há 75\% de chance de que o investimento dos royalties vá garantir a preservação de 500km$^2$ de floresta primária no entorno do reservatório. Será que devo autorizar ou vetar a construção desse reservatório?}
-    
-    \vfill
-    
-      \item{Qual a contribuição relativa do regime hidrológico, quantidade de nutrientes, e turbidez da água no crescimento de plantas aquáticas na Amazônia?}
-  
-  \vfill
-  
-    \item{Com que grau de certeza posso afirmar que a diversidade irá aumentar em 1.5 vezes quando a disponibilidade de nutrientes aumenta em 0.7 vezes?}
-  
-  \end{itemize}
-  
-\end{small}
-
-\end{frame}
-%===============================================================================%
-
-
-\section{Modelagem Estatística}
-
-
-%===============================================================================%
-\begin{frame}{Modelos}
-\begin{columns}[c]
-\column{3in}
-\huge{O que é um \textbf{modelo}?}
-
-\column{1.5in}
-\includegraphics[width=2in, trim= 100 0 0 50, clip]{C:/Users/thiago/OneDrive/UNESP/Pos_graduacao/Eco/2015/Estatistica_2015/Aulas/Aula_1_Intro_2015/figs/bruno.jpg}
-\end{columns}
-\end{frame}
-%===============================================================================%
-
-
-%===============================================================================%
-\begin{frame}{Modelos}
-
-\begin{huge}
-\centering
-
-$Y = \beta _0 + \beta _1 X$ ?
-
-\end{huge}
-\end{frame}
-%===============================================================================%
-
- 
-%===============================================================================%
-\begin{frame}
-
-\includegraphics[width=\textwidth]{C:/Users/thiago/OneDrive/UNESP/Pos_graduacao/Eco/2015/Estatistica_2015/Aulas/Aula_1_Intro_2015/figs/landsat8.jpg}
-
-\end{frame}
-%===============================================================================%
-
-
-%===============================================================================%
-\begin{frame}
-\centering
-\includegraphics[width=\textwidth]{C:/Users/thiago/OneDrive/UNESP/Pos_graduacao/Eco/2015/Estatistica_2015/Aulas/Aula_1_Intro_2015/figs/casa.jpg}
-\end{frame}
-%===============================================================================%
-
-
-
-%===============================================================================%
-\begin{frame}{O que é um modelo?}
-  \begin{itemize}
-		\item
-			Uma representação \textbf{simplificada} da realidade
-      
-      \vfill
-		\item
-			Busca descrever alguns aspectos de interesse, ignorando outros
-	\end{itemize}
-
-
-\vfill
-
-\alert{\textbf{``All models are wrong. Some are useful'' - George E. P. Box}}
-
-\end{frame}
-%===============================================================================%
-
-
-
-
-%===============================================================================%
-\begin{frame}[t]
-    \frametitle{Uma taxonomia de modelos}
-    \begin{tikzpicture}
-    \only<1>{\Tree [.Modelos Conceituais Quantitativos ]}
-    \only<2>{\Tree [.Modelos \alert{Conceituais} [.Quantitativos Matemáticos Estatísticos ]]}
-    \only<3>{\Tree [.Modelos \alert{Conceituais} [.Quantitativos [.Matemáticos Determinísticos ] [.Estatísticos Estocásticos ]]]}
-    \only<4-5>{\Tree [.Modelos \alert{Conceituais} [.Quantitativos [.Matemáticos [.Determinísticos Teóricos ]] [.Estatísticos [.Estocásticos Empíricos ]]]]}
-		    \end{tikzpicture}
-
-\vfill
-
-\only<5> {\textbf{Atenção: Essas relações \emph{não} são obrigatórias!}}
-
-\end{frame}
-%===============================================================================%
 
 \section{Probabilidade}
 
@@ -454,7 +99,7 @@ Para falar de probabilidade, precisamos definir alguns termos:
   \vfill
   \item \textbf{Resultado (\emph{outcome, $A_i$}): }resultado observado do evento (Ex.: $A_1$ = hove captura) \pause
   \vfill
-  \item \textbf{Espaço (Universo) Amostral ($S = A_i,...,A_n$):} todos os resultados possíveis de um evento (Ex: $S_{captura} =$ \{Houve Captura, Não Houve Captura\}) \pause
+  \item \textbf{Espaço (Universo) Amostral ($S = A_i,...,A_n$):} todos os resultados possíveis de um evento (Ex: $S_{captura} = \{Houve Captura, Não Houve Captura\}$) \pause
   \vfill
     \item Neste exemplo, o espaço amostral é discreto
     
@@ -470,12 +115,14 @@ Para falar de probabilidade, precisamos definir alguns termos:
 
 \textbf{Axioma 1:}
 A probabilidade de qualquer evento dentro do espaço amostral é um número real positivo
+
 \begin{equation*}
     P(A) \in \mathbb{R}, P(A) \geq 0  \quad \forall A \in S
 \end{equation*}
 
 \textbf{Axioma 2:}
 A soma das probabilidades de todos os resultados dentro do espaço amostral é igual a 1
+
 \begin{equation*}
     \sum_{i=1}^{n}{P(A_i)= 1}
 \end{equation*}
@@ -510,7 +157,8 @@ A soma das probabilidades de todos os resultados dentro do espaço amostral é i
 %===============================================================================
 \begin{frame}{Probabilidade em 15 minutos}
 
-\textbf{Regra da Multiplicação:} Se dois eventos são \textbf{independentes}, a probabilidade de que os dois ocorram juntos é o \texbf{produto} da probabilidade de cada evento (\textbf{interseção das probabilidades}, $\cap$)
+\textbf{Regra da Multiplicação:} Se dois eventos são \textbf{independentes}, a probabilidade de que os dois ocorram juntos é o \textbf{produto} da probabilidade de cada evento (\textbf{interseção das probabilidades}, $\cap$)
+
 \begin{equation*}
     P(A \cap B) = P(A) \times P(B)
 \end{equation*}
@@ -531,7 +179,7 @@ A soma das probabilidades de todos os resultados dentro do espaço amostral é i
 %===============================================================================
 \begin{frame}{Probabilidade em 15 minutos}
 
-\textbf{Regra da Adição:} Se dois eventos são \textbf{mutuamente exclusivos (disjuntos)}, a probabilidade de que algum deles ocorra é a \texbf{soma} da probabilidade de cada evento (\textbf{união das probabilidades}, $\cup$)
+\textbf{Regra da Adição:} Se dois eventos são \textbf{mutuamente exclusivos (disjuntos)}, a probabilidade de que algum deles ocorra é a \textbf{soma} da probabilidade de cada evento (\textbf{união das probabilidades}, $\cup$)
 \begin{equation*}
     P(A \cup B) = P(A) + P(B)
 \end{equation*}
@@ -551,7 +199,7 @@ A soma das probabilidades de todos os resultados dentro do espaço amostral é i
 %===============================================================================
 \begin{frame}{Probabilidade em 15 minutos}
 
-Se dois eventos \textbf{não} são mutuamente exclusivos, usamos: $P(A \cup B) = P(A) + P(B) - P(A \cap B)
+Se dois eventos \textbf{não} são mutuamente exclusivos, usamos: $P(A \cup B) = P(A) + P(B) - P(A \cap B)$
 
 \alert{Ex.:} Qual a probabilidade de sortearmos um 7 ($A$) \textbf{ou} uma carta de espadas ($B$) de um baralho com 52 cartas?
 
@@ -658,7 +306,7 @@ Assumindo que as lagartas se dispersam igualmente para todas as manchas, e que s
 
 \textbf{Primeiro Passo:} organizando as informações:
 \vfill
-\tqt{Resistente} ou \tqt{suscetível} são resultados mutuamente exclusivos:
+Resistente ou suscetível são resultados mutuamente exclusivos:
 
 $P(R) = 0.2, \quad P(R^c) = P(1 - R) = 0.8$
 \vfill
@@ -674,7 +322,7 @@ $S = \{R^cL^c,RL^c,RL,R^cL,RL\}$
 
 
 %===============================================================================
-\begin{frame}{Exercício: Gotellli & Ellison 2nd Ed. Ing. pp. 15-17}
+\begin{frame}{Exercício: Gotellli \& Ellison 2nd Ed. Ing. pp. 15-17}
 
 \textbf{Segundo Passo:} Expressando as probabilidades. Resistência e invasão por lagartas são eventos independentes:
 
@@ -921,7 +569,7 @@ P(H \mid A) = \frac{P(H \cap A)}{P(A)} =\frac{P(A \mid H) \times P(H)}{P(A)}
 
 $P(A | H)$: probabilidade da amostra se a hipótese é verdadeira
 
-$P(A)$: probabilidade da amostra, garante que $0 \leq P(H | A)$ \leq 1$
+$P(A)$: probabilidade da amostra, garante que $0 \leq P(H | A) \leq 1$
 
 $\mathbf{P(H)}$: probabilidade da hipótese ser verdadeira. Conhecida como \textbf{priori (prior)}.
 
@@ -939,7 +587,7 @@ $\mathbf{P(H)}$: probabilidade da hipótese ser verdadeira. Conhecida como \text
 
   \item Associada a Thomas Bayes
 
- \item Na visão bayesiana, a análise estatística serve para \texbf{atualizar} o conhecimento anterior
+ \item Na visão bayesiana, a análise estatística serve para \textbf{atualizar} o conhecimento anterior
 
  \item O conhecimento prévio pode ser usado para definir uma probabilidade \emph{priori} da hipótese ser verdadeira 
  
@@ -1072,9 +720,6 @@ $\mathbf{P(H_0=0.99),P(H_1=0.01)} \rightarrow P(H_0S) = 0.506, P(H_1|S) = 0.494$
 
 \column{.5\textwidth}
 
-  \includegraphics[width=2in]{C:/Users/thiago/OneDrive/UNESP/Pos_graduacao/Eco/2015/Estatistica_2015/Aulas/Aula_1_Intro_2015/figs/frequentists_vs_bayesians.png}
-  \tiny{\center{http://xkcd.com/1132/}}
-
 \end{columns}
 
 
@@ -1104,68 +749,6 @@ $\mathbf{P(H_0=0.99),P(H_1=0.01)} \rightarrow P(H_0S) = 0.506, P(H_1|S) = 0.494$
   
 \end{frame}
 %===============================================================================%
-
-%===============================================================================%
-\begin{frame}[t]{Por que usar R?}
-
-\begin{columns}[t]
-
-\column{2.5in}
-\begin{footnotesize}
-
-\textbf{R:} Software para análise e programação estatística - \textbf{Uso obrigatório no curso}. 
-
-\begin{itemize}
-
-	\item Livre, gratuito, tem se tornado ``padrão'' para análise de dados
-      
-  \item	Difícil no início, mas o tempo é recuperado depois
-    
-	\item	Programação =  liberdade 
-	
-  \item Todos os exercícios do curso devem ser feitos em R
-		
-  \item	Assume-se que todos tenham instalado o R 3.1.3 e a interface RStudio.
-	
-  \end{itemize}
-	
-  \end{footnotesize}
-  
-\column{1.5in}
-	
-	\centering
-	\includegraphics[width=1.5in]{C:/Users/thiago/OneDrive/UNESP/Pos_graduacao/Eco/2015/Estatistica_2015/Aulas/Aula_1_Intro_2015/figs/crybaby.jpg}
-	
-	\tiny{http://www.jillgreenberg.com/}
-	
-\end{columns}
-	
-\end{frame}
-%===============================================================================%
-
-
-% %===============================================================================%
-% \begin{frame}{Para a tarde}
-% 
-% \textbf{Leitura e discussão:}
-% 
-% \vfill
-% 
-% \begin{itemize}
-% 
-% \item Martínez-Abraín A (2007) Are there any differences? A non-sensical question in ecology. Acta Oecologica, 32, 203–206.
-% 
-% \vfill
-% 
-% \item Gigerenzer G (2004) Mindless statistics. The Journal of Socio-Economics, 33, 587–606.
-% 
-% \end{itemize}
-%   
-% \center{(Artigos no Dropbox)}
-%   
-% \end{frame}
-% %===============================================================================%
-
 
 
 %===============================================================================%

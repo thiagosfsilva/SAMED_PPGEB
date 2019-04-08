@@ -3,9 +3,6 @@ title: "Statistical Analysis and Modeling in Ecology"
 subtitle: "Lecture 1 - Introduction"
 author: "Thiago S. F. Silva - thiago.sf.silva@stir.ac.uk"
 date: "2019/04/07 (updated: `r Sys.Date()`)"
-header-includes:
-   - \usepackage{tikz}
-   - \usetikzlibrary{shapes.geometric,arrows}
 output:
   xaringan::moon_reader:
     css: xaringan-themer.css

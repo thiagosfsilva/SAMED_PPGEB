@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Thiago S. F. Silva - tsfsilva@rc.unesp.br" />
+  <title>Aula 1: Estatística e Probabilidade</title>
+  <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Aula 1: Estatística e Probabilidade</h1>
+<p class="subtitle">Análise Quantitativa de Dados Ambientais</p>
+<p class="author"><strong>Thiago S. F. Silva</strong> - tsfsilva@rc.unesp.br</p>
+</header>
+<p><span>Outline</span></p>
+<h1 id="probabilidade">Probabilidade</h1>
+<p><span>Probabilidade</span></p>
+<ul>
+<li><p>A base de toda a estatística</p></li>
+<li><p>Conceitualmente simples…</p></li>
+<li><p>…mas que rapidamente se torna <strong>bem complexa</strong>.</p></li>
+<li><p>A probabilidade mede as “chances” de um determinado evento ocorrer</p></li>
+</ul>
+<p><em>Ex.: Qual a probabilidade de um inseto ser capturado por uma planta carnívora?</em></p>
+<p><span>Probabilidade</span></p>
+<p>Para falar de probabilidade, precisamos definir alguns termos:</p>
+<ul>
+<li><p><strong>Evento (<span class="math inline"><em>A</em></span>):</strong> um processo probabilístico (Ex.: <span class="math inline"><em>A</em></span> = tentativa de captura)</p></li>
+<li><p><strong>Resultado (<em>outcome, <span class="math inline"><em>A</em><sub><em>i</em></sub></span></em>):</strong> resultado observado do evento (Ex.: <span class="math inline"><em>A</em><sub>1</sub></span> = hove captura)</p></li>
+<li><p><strong>Espaço (Universo) Amostral (<span class="math inline"><em>S</em> = <em>A</em><sub><em>i</em></sub>, ..., <em>A</em><sub><em>n</em></sub></span>):</strong> todos os resultados possíveis de um evento (Ex: <span class="math inline"><em>S</em><sub><em>c</em><em>a</em><em>p</em><em>t</em><em>u</em><em>r</em><em>a</em></sub> = {<em>H</em><em>o</em><em>u</em><em>v</em><em>e</em><em>C</em><em>a</em><em>p</em><em>t</em><em>u</em><em>r</em><em>a</em>, <em>N</em><em>ã</em><em>o</em><em>H</em><em>o</em><em>u</em><em>v</em><em>e</em><em>C</em><em>a</em><em>p</em><em>t</em><em>u</em><em>r</em><em>a</em>}</span>)</p></li>
+<li><p>Neste exemplo, o espaço amostral é discreto</p></li>
+</ul>
+<p><span>Probabilidade em 15 minutos</span></p>
+<p><strong>Axioma 1:</strong> A probabilidade de qualquer evento dentro do espaço amostral é um número real positivo</p>
+<p><br /><span class="math display"><em>P</em>(<em>A</em>) ∈ ℝ, <em>P</em>(<em>A</em>) ≥ 0 ∀<em>A</em> ∈ <em>S</em></span><br /></p>
+<p><strong>Axioma 2:</strong> A soma das probabilidades de todos os resultados dentro do espaço amostral é igual a 1</p>
+<p><br /><span class="math display">$$\sum_{i=1}^{n}{P(A_i)= 1}$$</span><br /></p>
+<p><span>Probabilidade em 15 minutos</span></p>
+<p><strong>Regra da Subtração:</strong> A probabilidade de observar um determinado resultado é complementar à probabilidade deste resultado não ser observado</p>
+<p><br /><span class="math display"><em>P</em>(<em>A</em>) = 1 − <em>P</em>(<em>A</em><sup><em>c</em></sup>)</span><br /></p>
+<p><span class="alert">Ex.:</span> Qual a probabilidade de tirarmos 5 em um dado?</p>
+<p><br /><span class="math display">$$P(A) = \frac{1}{6} = 1 - P(A^c) = 1 - \frac{5}{6} = \frac{1}{6}$$</span><br /></p>
+<p><span>Probabilidade em 15 minutos</span></p>
+<p><strong>Regra da Multiplicação:</strong> Se dois eventos são <strong>independentes</strong>, a probabilidade de que os dois ocorram juntos é o <strong>produto</strong> da probabilidade de cada evento (<strong>interseção das probabilidades</strong>, <span class="math inline">∩</span>)</p>
+<p><br /><span class="math display"><em>P</em>(<em>A</em> ∩ <em>B</em>) = <em>P</em>(<em>A</em>) × <em>P</em>(<em>B</em>)</span><br /></p>
+<p><span class="alert">Ex.:</span> Qual a probabilidade de tirarmos um 5 <strong><em>e</em></strong> um 6 em dois dados?</p>
+<p><br /><span class="math display">$$P(A \cap B) = P(A) \times P(B) = \frac{1}{6} \times \frac{1}{6} = \frac{1}{36}$$</span><br /></p>
+<p><span>Probabilidade em 15 minutos</span></p>
+<p><strong>Regra da Adição:</strong> Se dois eventos são <strong>mutuamente exclusivos (disjuntos)</strong>, a probabilidade de que algum deles ocorra é a <strong>soma</strong> da probabilidade de cada evento (<strong>união das probabilidades</strong>, <span class="math inline">∪</span>) <br /><span class="math display"><em>P</em>(<em>A</em> ∪ <em>B</em>) = <em>P</em>(<em>A</em>) + <em>P</em>(<em>B</em>)</span><br /></p>
+<p><span class="alert">Ex.:</span> Qual a probabilidade de tirarmos um 5 <strong><em>ou</em></strong> um 6 em um dado?</p>
+<p><br /><span class="math display">$$P(A \cup B) = P(A) + P(B) = \frac{1}{6} + \frac{1}{6} = \frac{2}{6}$$</span><br /></p>
+<p><span>Probabilidade em 15 minutos</span></p>
+<p>Se dois eventos <strong>não</strong> são mutuamente exclusivos, usamos: <span class="math inline"><em>P</em>(<em>A</em> ∪ <em>B</em>) = <em>P</em>(<em>A</em>) + <em>P</em>(<em>B</em>) − <em>P</em>(<em>A</em> ∩ <em>B</em>)</span></p>
+<p><span class="alert">Ex.:</span> Qual a probabilidade de sortearmos um 7 (<span class="math inline"><em>A</em></span>) <strong>ou</strong> uma carta de espadas (<span class="math inline"><em>B</em></span>) de um baralho com 52 cartas?</p>
+<p><br /><span class="math display">$$P(A=7)= \frac{4}{52} = 0.077, P(B = \text{espadas}) = \frac{13}{52} = 0.25$$</span><br /></p>
+<p><br /><span class="math display"><em>P</em>(<em>A</em> ∪ <em>B</em>) = <em>P</em>(<em>A</em>) + <em>P</em>(<em>B</em>) − <em>P</em>(<em>A</em> ∩ <em>B</em>) = 0.077 + 0.25 − (0.077 × 0.25) = 0.308</span><br /></p>
+<p><span>Probabilidade em 15 minutos</span></p>
+<p><strong>Probabilidade condicional:</strong> é a probabilidade de que um evento ocorra, dado que outro evento relacionado <strong>já ocorreu</strong>:</p>
+<p><span class="math inline"><em>P</em>(<em>A</em>|<em>B</em>) = <em>P</em>(<em>A</em> ∩ <em>B</em>)/<em>P</em>(<em>B</em>)</span></p>
+<p><span class="alert">Ex.:</span> Qual a probabilidade de uma carta sorteada ser um 7 (<span class="math inline"><em>A</em></span>), sabendo que a carta é de espadas (<span class="math inline"><em>B</em></span>)?</p>
+<p><br /><span class="math display">$$P(A=7)= \frac{4}{52} = 0.077, P(B = \text{espadas}) = \frac{13}{52} = 0.25$$</span><br /></p>
+<p><br /><span class="math display">$$P(A|B) = \frac{P(A \cap B)}{P(B)} = \frac{0.077 \times 0.25}{0.25} = 0.077$$</span><br /></p>
+<p><span>Probabilidade em 15 minutos</span></p>
+<p><strong>Multiplicação para eventos dependentes:</strong> Se dois eventos são <strong>dependentes</strong>, a probabilidade de que os dois ocorram juntos pode ser obtida pela relação anterior:</p>
+<p><br /><span class="math display">$$P(A|B) = \frac{P(A \cap B)}{P(B)},  \quad P(A \cap B) = P(B) \times P(A|B)$$</span><br /></p>
+<p><span class="alert">Ex.:</span> Em Rio Claro, a chance de ser picado por <em>Aedes egyptii</em> (<span class="math inline"><em>C</em></span>) é de 70% por dia. Assumindo que a chance de um mosquito transmitir o vírus (<span class="math inline"><em>T</em></span>) é de 50% , qual a probabilidade de um aluno de estatística pegar dengue hoje?</p>
+<p><span>Probabilidade em 15 minutos</span></p>
+<p>A probabilida de transmissão é condicional à picada. Se houve picada, <span class="math inline"><em>P</em>(<em>A</em>|<em>B</em>) = 0.5</span>. Se não houve picada, <span class="math inline"><em>P</em>(<em>A</em>|<em>B</em>) = 0</span>.</p>
+<p><br /><span class="math display"><em>P</em>(<em>A</em> ∩ <em>B</em>) = <em>P</em>(<em>B</em>) × <em>P</em>(<em>A</em>|<em>B</em>)</span><br /></p>
+<p><br /><span class="math display"><em>P</em>(<em>T</em> ∩ <em>C</em>) = <em>P</em>(<em>C</em>) × <em>P</em>(<em>T</em>|<em>C</em>) = 0.7 × 0.5 = 0.35</span><br /></p>
+<p><span>Exercício: Gotellli &amp; Ellison 2<span class="math inline"><em></em><sup><em>a</em></sup></span> Ed. Ing. pp. 15-17</span></p>
+<p><strong>Plantas vs. lagartas</strong></p>
+<p>Em uma paisagem, temos manchas de dois fenótipos de uma planta: <span class="math inline"><em>R</em></span> é resistente à herbivoria por lagartas, enquanto <span class="math inline"><em>R</em><sup><em>c</em></sup></span> não é. Os fenótipos nunca ocorrem juntos na mesma mancha, e fenótipos resistentes ocorrem na paisagem com frequência de 20<span class="math inline">%</span>.</p>
+<p>A probabilidade de uma mancha ser invadida por lagartas (<span class="math inline"><em>C</em></span>) é de 0.7, independente da variedade.</p>
+<p>Assumindo que as lagartas se dispersam igualmente para todas as manchas, e que somente populações resistentes sobrevivem à chegada das lagartas, qual a probabilidade de que uma mancha desapareça devido à herbivoria? <span class="alert"><strong>Dica:</strong></span> Primeiro calcule as probabilidades de ocorrência das quatro combinações possíveis de resultados.</p>
+<p><span>Exercício: Gotellli &amp; Ellison 2<span class="math inline"><em></em><sup><em>a</em></sup></span> Ed. Ing. pp. 15-17</span></p>
+<p><strong>Primeiro Passo:</strong> organizando as informações: Resistente ou suscetível são resultados mutuamente exclusivos:</p>
+<p><span class="math inline"><em>P</em>(<em>R</em>) = 0.2, <em>P</em>(<em>R</em><sup><em>c</em></sup>) = <em>P</em>(1 − <em>R</em>) = 0.8</span> Presença e ausência de lagartas são resultados mutuamente exclusivos:</p>
+<p><span class="math inline"><em>P</em>(<em>L</em>) = 0.7, <em>P</em>(<em>L</em><sup><em>c</em></sup>) = <em>P</em>(1 − <em>L</em>) = 0.3</span></p>
+<p><span class="math inline"><em>S</em> = {<em>R</em><sup><em>c</em></sup><em>L</em><sup><em>c</em></sup>, <em>R</em><em>L</em><sup><em>c</em></sup>, <em>R</em><em>L</em>, <em>R</em><sup><em>c</em></sup><em>L</em>, <em>R</em><em>L</em>}</span></p>
+<p><span>Exercício: Gotellli &amp; Ellison 2nd Ed. Ing. pp. 15-17</span></p>
+<p><strong>Segundo Passo:</strong> Expressando as probabilidades. Resistência e invasão por lagartas são eventos independentes:</p>
+<p><span class="math inline"><em>P</em>(<em>R</em><sup><em>c</em></sup><em>L</em><sup><em>c</em></sup>) = <em>P</em>(<em>R</em><sup><em>c</em></sup>) × <em>P</em>(<em>L</em><sup><em>c</em></sup>)</span> <span class="math inline"><em>P</em>(<em>R</em><em>L</em><sup><em>c</em></sup>) = <em>P</em>(<em>R</em>) × <em>P</em>(<em>L</em><sup><em>c</em></sup>)</span> <span class="math inline"><em>P</em>(<em>R</em><sup><em>c</em></sup><em>L</em>) = <em>P</em>(<em>R</em><sup><em>c</em></sup>) × <em>P</em>(<em>L</em>)</span> <span class="math inline"><em>P</em>(<em>R</em><em>L</em>) = <em>P</em>(<em>R</em>) × <em>P</em>(<em>L</em>)</span> Multiplicamos porque os eventos são independentes.</p>
+<p><span>Exercício: Gotellli &amp; Ellison 2<span class="math inline"><em></em><sup><em>a</em></sup></span> Ed. Ing. pp. 15-17</span></p>
+<p><strong>Terceiro Passo:</strong> Calculando as probabilidades: <span class="math inline"><em>P</em>(<em>R</em><sup><em>c</em></sup> ∩ <em>L</em><sup><em>c</em></sup>) = <em>P</em>(<em>R</em><sup><em>c</em></sup>) × <em>P</em>(<em>L</em><sup><em>c</em></sup>) = 0.8 × 0.3 = 0.24</span> <span class="math inline"><em>P</em>(<em>R</em> ∩ <em>L</em><sup><em>c</em></sup>) = <em>P</em>(<em>R</em>) × <em>P</em>(<em>L</em><sup><em>c</em></sup>) = 0.2 × 0.3 = 0.06</span> <span class="math inline"><em>P</em>(<em>R</em><sup><em>c</em></sup> ∩ <em>L</em>) = <em>P</em>(<em>R</em><sup><em>c</em></sup>) × <em>P</em>(<em>L</em>) = 0.8 × 0.7 = 0.56</span> <span class="math inline"><em>P</em>(<em>R</em> ∩ <em>L</em>) = <em>P</em>(<em>R</em>) × <em>P</em>(<em>L</em>) = 0.2 × 0.7 = 0.14</span></p>
+<p><span>Exercício: Gotellli &amp; Ellison 2<span class="math inline"><em></em><sup><em>a</em></sup></span> Ed. Ing. pp. 15-17</span> <strong>Quarto Passo:</strong> Combinando as probabilidades:</p>
+<p><span class="math inline"><em>P</em>(<em>R</em><sup><em>c</em></sup> ∩ <em>L</em><sup><em>c</em></sup>) = <em>P</em>(<em>R</em><sup><em>c</em></sup>) × <em>P</em>(<em>L</em><sup><em>c</em></sup>) = 0.8 × 0.3 = 0.24</span> : Planta permanece <span class="math inline"><em>P</em>(<em>R</em> ∩ <em>L</em><sup><em>c</em></sup>) = <em>P</em>(<em>R</em>) × <em>P</em>(<em>L</em><sup><em>c</em></sup>) = 0.2 × 0.3 = 0.06</span> : Planta permanece <span class="math inline"><em>P</em>(<em>R</em><sup><em>c</em></sup> ∩ <em>L</em>) = <em>P</em>(<em>R</em><sup><em>c</em></sup>) × <em>P</em>(<em>L</em>) = 0.8 × 0.7 = 0.56</span> : <strong>Planta desaparece</strong> <span class="math inline"><em>P</em>(<em>R</em> ∩ <em>L</em>) = <em>P</em>(<em>R</em>) × <em>P</em>(<em>L</em>) = 0.2 × 0.7 = 0.14</span> : Planta permanece</p>
+<p><span class="math inline"><strong>P</strong><strong>(</strong><strong>Planta desaparece</strong><strong>)</strong> <strong>=</strong> <strong>0.56</strong></span></p>
+<p><span class="math inline"><em>P</em>(Planta permanece) = <em>P</em>((<em>R</em><sup><em>c</em></sup> ∩ <em>L</em><sup><em>c</em></sup>) ∪ (<em>R</em> ∩ <em>L</em><sup><em>c</em></sup>) ∪ (<em>R</em> ∩ <em>L</em>)) = 0.44</span></p>
+<p><span>Expandindo o Exercício</span></p>
+<p><strong>Plantas vs. lagartas vs. invasoras</strong></p>
+<p>Mesmo nos fenótipos resistentes, a herbivoria diminui a capacidade competitiva da planta estudada, facilitando o estabelecimento (<span class="math inline"><em>I</em></span>) de uma espécie invasora. Se há presença da lagarta, a invasão tem uma taxa de sucesso de 60%, e se não há plantas, o sucesso é garantido (100%). Qual a probilidade de que haja invasão, sabendo que as lagartas já atingiram a mancha?</p>
+<p><span>Expandindo o Exercício</span></p>
+<p>O primeiro impulso é calcular <span class="math inline"><em>P</em>(<em>I</em> ∩ <em>L</em>) = <em>P</em>(<em>I</em>|<em>L</em>) × <em>P</em>(<em>L</em>)</span>. Mas a herbivoria leva à remoção da planta quando esta não é resistente, modificando a probabilidade de invasão.</p>
+<p>Temos, assim, duas probabilidades condicionais:</p>
+<p><span class="math inline"><em>P</em>(<em>I</em> ∩ <em>R</em><sup><em>c</em></sup><em>L</em>) = <em>P</em>(<em>I</em>|<em>R</em><sup><em>c</em></sup><em>L</em>) × <em>P</em>(<em>R</em><sup><em>c</em></sup><em>L</em>) = 1 × 0.56 = 0.56</span> <span class="math inline"><em>P</em>(<em>I</em> ∩ <em>R</em><em>L</em>) = <em>P</em>(<em>I</em>|<em>R</em><em>L</em>) × <em>P</em>(<em>R</em><em>L</em>) = 0.6 × 0.14 = 0.084</span> <span class="math inline"><em>R</em><em>L</em></span> e <span class="math inline"><em>R</em><sup><em>c</em></sup><em>L</em></span> são mutuamente exclusivos, então temos:</p>
+<p><span class="math inline"><em>P</em>(<em>I</em> ∩ <em>L</em>) = <em>P</em>(<em>I</em> ∩ <em>R</em><sup><em>c</em></sup><em>L</em>) ∪ <em>P</em>(<em>I</em> ∩ <em>R</em><em>L</em>) = 0.56 + 0.084 = 0.644</span></p>
+<p><span>Estimando Probabilidades</span></p>
+<p><em>Qual a probabilidade de uma planta carnívora capturar um inseto?</em></p>
+<ul>
+<li><p><strong>Como podemos estimar essa probabilidade?</strong></p></li>
+<li><p>Realizando uma <strong>contagem</strong> dos sucessos e fracassos da planta, para várias visitas de insetos.</p></li>
+<li><p>Cada visita individual é uma <strong>realização</strong> do evento: capturado ou não. Também conhecida como <strong>réplica</strong> ou <strong>observação</strong>.</p></li>
+<li><p>O conjunto de realizações sucessivas compreende um <strong>experimento</strong>.</p></li>
+</ul>
+<p><span>Frequência vs. Probabilidade</span></p>
+<p><strong>Frequência de Captura:</strong></p>
+<p><br /><span class="math display">$$F  = \frac{\text{número de capturas}}{\text{número de visitas}}$$</span><br /></p>
+<p><span>Frequência vs. Probabilidade</span></p>
+<p><strong>Frequência de Captura:</strong></p>
+<p><br /><span class="math display">$$F = \frac{\text{número de sucessos}}{\text{número de realizações}}$$</span><br /></p>
+<p><span>Frequência vs. Probabilidade</span></p>
+<p><strong>Probabilidade de Captura:</strong></p>
+<p><br /><span class="math display">$$P(\text{captura}) \approx \lim_{n_t \to \infty} \frac{\text{número de sucessos} (n_r)}{\text{número de realizações } (n_t)}$$</span><br /></p>
+<p><span>Culturas Estatísticas</span></p>
+<p><strong>Estatística Frequentista:</strong></p>
+<ul>
+<li><p>Associada principalmente a <em>Sir</em> Ronald Aymer Fisher, FRS.</p></li>
+<li><p>Se baseia na associação entre frequências e probabilidades.</p></li>
+<li><p>Ex: Jogo uma moeda 100 vezes, obtenho 45 caras e 55 coroas. Estimo minhas probabilidades como 0.45 e 0.55</p></li>
+<li><p>Vê a amostra como uma realização aleatória de um evento</p></li>
+<li><p>Parte do princípio de que se o processo fosse repetido infinitamente, seria possivel estimar as probabilidades associadas aos resultados do evento</p></li>
+</ul>
+<p><span>Culturas Estatísticas</span></p>
+<p><span class="math inline"><em>p</em> &lt; 0.05</span>? <span class="math inline"><em>P</em>(<em>A</em>|<em>H</em>)</span> ou <span class="math inline"><em>P</em>(<em>H</em>|<em>A</em>)</span>? É a mesma coisa?</p>
+<p><span>Culturas Estatísticas</span></p>
+<p>Na visão frequentista, se avalia a probabilidade de se obter a amostra observada, dada uma determinada hipótese:</p>
+<p><br /><span class="math display"><em>P</em>(<em>A</em>|<em>H</em>)</span><br /></p>
+<p><span class="alert">Ex:</span> Joguei uma moeda 100 vezes, e obtive 65 caras e 35 coroas. Se a minha hipótese é de que a moeda é honesta (<span class="math inline"><em>P</em>(cara) = <em>P</em>(coroa) = 0.5</span>), qual chance de eu obter esse resultado, <strong>ou um resultado mais extremo</strong>?</p>
+<p><br /><span class="math display"><em>p</em> = 8.6 × 10<sup> − 4</sup></span><br /></p>
+<p>Se eu repetir esse experimento infinitas vezes (jogar 100 moedas), vou encontrar um resultado igual ou mais extremo 0.086% das vezes.</p>
+<p><span>Culturas Estatísticas</span></p>
+<p>A lógica nos diz que o mais importante é saber <span class="math inline"><em>P</em>(<em>H</em>|<em>S</em>)</span>. Mas como?</p>
+<p><br /><span class="math display">$$P(H \mid A) = \frac{P(H \cap A)}{P(A)} =\frac{P(A \mid H) \times P(H)}{P(A)}$$</span><br /></p>
+<p><span class="math inline"><em>P</em>(<em>A</em>|<em>H</em>)</span>: probabilidade da amostra se a hipótese é verdadeira</p>
+<p><span class="math inline"><em>P</em>(<em>A</em>)</span>: probabilidade da amostra, garante que <span class="math inline">0 ≤ <em>P</em>(<em>H</em>|<em>A</em>) ≤ 1</span></p>
+<p><span class="math inline"><strong>P</strong><strong>(</strong><strong>H</strong><strong>)</strong></span>: probabilidade da hipótese ser verdadeira. Conhecida como <strong>priori (prior)</strong>.</p>
+<p><span>Culturas Estatísticas</span></p>
+<p><strong>Estatística Bayesiana</strong></p>
+<ul>
+<li><p>Associada a Thomas Bayes</p></li>
+<li><p>Na visão bayesiana, a análise estatística serve para <strong>atualizar</strong> o conhecimento anterior</p></li>
+<li><p>O conhecimento prévio pode ser usado para definir uma probabilidade <em>priori</em> da hipótese ser verdadeira</p></li>
+<li><p>O resultado do experimento permite que voce atualize (melhore) essa estimativa de probabilidade, com base na amostra observada.</p></li>
+</ul>
+<p><span>Estatística Bayesiana</span></p>
+<p><span class="alert">Ex.:</span> Joguei uma moeda 100 vezes, e obtive 65 caras e 35 coroas. Se a minha hipótese é de que a moeda é honesta (<span class="math inline"><em>P</em>(cara) = <em>P</em>(coroa) = 0.5</span>), qual a probabilidade que essa hipótese esteja correta?</p>
+<p><span class="math inline"><em>H</em><sub>0</sub></span>: A moeda é honesta</p>
+<p><span class="math inline"><em>H</em><sub>1</sub></span>: A moeda é tendenciosa</p>
+<p>Baseado em meu conhecimento de moedas, eu poderia dizer que a probabilidade dela ser honesta é 0.9 (<span class="math inline"><em>P</em>(<em>H</em><sub>0</sub>) = 0.9</span>), e a probabilidade dela ser tendenciosa é 0.1 (<span class="math inline"><em>P</em>(<em>H</em><sub>1</sub>) = 0.1</span>).</p>
+<p><span>Estatística Bayesiana</span></p>
+<p>Para H<span class="math inline"><em></em><sub>0</sub></span>:</p>
+<p><br /><span class="math display">$$P(H_0|A) = \frac{P(A|H_0) \times P(H_0)}{P(A)}$$</span><br /></p>
+<p><br /><span class="math display">$$P(H_0 | A) = \frac{P(A | H_0) \times P(H_0)}{P(A | H_0) \times P(H_0) + P(A | H_1) \times P(H_1)}$$</span><br /></p>
+<p><br /><span class="math display">$$P(H_0 | A) = \frac{P(\ensuremath{8.6\times 10^{-4}})P(0.9)}{\ensuremath{8.6\times 10^{-4}}\times 0.9 +0.0834 \times 0.1}$$</span><br /></p>
+<p><span class="math inline"><em>P</em>(<em>H</em><sub>0</sub>|<em>A</em>) = 0.085</span></p>
+<p><span>Estatística Bayesiana</span></p>
+<p>Para H<span class="math inline"><em></em><sub>1</sub></span>:</p>
+<p><br /><span class="math display">$$P(H_1 | A) = \frac{P(A | H_1) \times P(H_1)}{P(A)}$$</span><br /></p>
+<p><br /><span class="math display">$$P(H_1 | A) = \frac{P(A | H_1) \times P(H_1)}{P(A | H_1) \times P(H_1) + P(A | H_0) \times P(H_0)}$$</span><br /></p>
+<p><br /><span class="math display">$$P(H_0 | A) = \frac{P(0.0834) \times P(0.1)}{0.0834 \times 0.1 +\ensuremath{8.6\times 10^{-4}} \times 0.9}$$</span><br /></p>
+<p><span class="math inline"><em>P</em>(<em>H</em><sub>1</sub>|<em>A</em>) = 0.915</span></p>
+<p><span>Estatística Bayesiana</span></p>
+<p>A escolha da <em>priori</em> afeta fortememente a <em>posteriori</em>:</p>
+<p><span class="math inline"><strong>P</strong><strong>(</strong><strong>H</strong><sub><strong>0</strong></sub> <strong>=</strong> <strong>0.5</strong><strong>)</strong><strong>,</strong> <strong>P</strong><strong>(</strong><strong>H</strong><sub><strong>1</strong></sub> <strong>=</strong> <strong>0.5</strong><strong>)</strong> → <em>P</em>(<em>H</em><sub>0</sub>|<em>S</em>) = 0.01, <em>P</em>(<em>H</em><sub>1</sub>|<em>S</em>) = 0.98</span></p>
+<p><span class="math inline"><strong>P</strong><strong>(</strong><strong>H</strong><sub><strong>0</strong></sub> <strong>=</strong> <strong>0.75</strong><strong>)</strong><strong>,</strong> <strong>P</strong><strong>(</strong><strong>H</strong><sub><strong>1</strong></sub> <strong>=</strong> <strong>0.25</strong><strong>)</strong> → <em>P</em>(<em>H</em><sub>0</sub>|<em>S</em>) = 0.03, <em>P</em>(<em>H</em><sub>1</sub>|<em>S</em>) = 0.97</span></p>
+<p><span class="math inline"><strong>P</strong><strong>(</strong><strong>H</strong><sub><strong>0</strong></sub> <strong>=</strong> <strong>0.95</strong><strong>)</strong><strong>,</strong> <strong>P</strong><strong>(</strong><strong>H</strong><sub><strong>1</strong></sub> <strong>=</strong> <strong>0.05</strong><strong>)</strong> → <em>P</em>(<em>H</em><sub>0</sub>|<em>S</em>) = 0.16, <em>P</em>(<em>H</em><sub>1</sub>|<em>S</em>) = 0.84</span></p>
+<p><span class="math inline"><strong>P</strong><strong>(</strong><strong>H</strong><sub><strong>0</strong></sub> <strong>=</strong> <strong>0.99</strong><strong>)</strong><strong>,</strong> <strong>P</strong><strong>(</strong><strong>H</strong><sub><strong>1</strong></sub> <strong>=</strong> <strong>0.01</strong><strong>)</strong> → <em>P</em>(<em>H</em><sub>0</sub><em>S</em>) = 0.506, <em>P</em>(<em>H</em><sub>1</sub>|<em>S</em>) = 0.494</span></p>
+<p><span>Frequentista vs. Bayesiana</span></p>
+<p><strong>Bayesianos sobre frequentistas:</strong></p>
+<ul>
+<li><p><span>Ignoram qualquer informação a priori</span></p></li>
+<li><p><span>Se baseiam em experimentos fictícios</span></p></li>
+</ul>
+<p><strong>Frequentistas sobre Bayesianos:</strong></p>
+<ul>
+<li><p><span>Podem gerar o resultado que quiserem manipulando as <em>priori</em></span></p></li>
+</ul>
+<p><span>Qual vamos usar?</span></p>
+<p><strong>O Curso se baseará na filosofia frequentista.</strong></p>
+<ul>
+<li><p>Mais frequentemente usada (<em>tu-dum psh</em>).</p></li>
+<li><p>Mais familiar à comunidade ecológico-científica.</p></li>
+<li><p>É a estatística com a qual voces já tiveram algum contato prévio.</p></li>
+<li><p>É a que eu sei ensinar.</p></li>
+</ul>
+<p><strong>Contudo, tomaremos cuidado em enfatizar os maus usos e compreensões equivocadas da estatística frequentista.</strong></p>
+</body>
+</html>

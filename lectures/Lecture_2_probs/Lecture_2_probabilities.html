@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Statistical Analysis and Modeling in Ecology</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Thiago S. F. Silva - thiago.sf.silva@stir.ac.uk" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Statistical Analysis and Modeling in Ecology
+## Lecture 2 - Probabilities
+### Thiago S. F. Silva - <a href="mailto:thiago.sf.silva@stir.ac.uk" class="email">thiago.sf.silva@stir.ac.uk</a>
+### 2019/04/07 (updated: 2019-04-08)
+
+---
+
+class: center, middle, inverse
+
+
+# Probability
+
+
+
+---
+
+Probability
+=============
+
+- The foundation for all statistics
+
+- Conceptually simple ...
+
+- ... but quickly becomes **very complex**.
+
+- Probability measures the "chances" of a certain event occurring
+
+- **Ex:** How likely is an insect to be captured by a carnivorous plant?
+
+---
+
+Probability
+=============
+
+To talk about probability, we need to define some terms:
+
+- ** Event ( `\(A\)` ): ** a probabilistic process (Ex: `\(A\)` = capture attempt)
+
+- ** Outcome ( `\(A_i\)` ): ** observed outcome of the event (Ex: `\(A_1\)` = successfull capture)
+
+- ** Probability Space ( `\(S = A_i, \ldots, A_n\)` ): ** all possible outcomes of an event (Ex:
+ `\(S_{Capture} = \{\text{Capture}, \text{No Capture}\}\)` )
+
+- In this example, the probability space is discrete
+---
+
+Probability in 15 minutes
+=========================
+
+** Axiom 1: ** The probability of any event within the probability space is a positive real number
+
+$$ P(A) \in \mathbb{R}, P(A) \geq 0  \quad \forall A \in S $$
+
+** Axiom 2: ** The sum of the probabilities of all outcomes within the probability space is equal to 1
+
+$$ \sum_{i=1}^{n}{P(A_i)= 1} $$
+
+---
+
+Probability in 15 minutes
+=========================
+
+** Subtraction Rule: ** The probability of observing a given outcome is complementary to the probability of this outcome not being observed:
+
+`$$P (A) = 1 - P (A ^ c)$$`
+
+**Ex:** How likely are we to get a "5" in a die roll?
+
+`$$P (A) = \frac{1}{6} = 1-P (A ^ c) = 1 - \frac{5}{6} = \frac {1}{6}$$`
+---
+
+Probability in 15 minutes
+=========================
+
+** Multiplication Rule: ** If two events are **independent**, the probability that the two occur together is the **product** of each event (**intersection of probabilities**, `\(\cap\)` ):
+
+$$P (A \cap B) = P(A) \times P(B) $$
+
+**Ex:** How likely are we to get a "5" ** and ** a "6" if we roll two dice?
+
+`$$P(A \cap B) = P(A) \times P(B) = \frac{1}{6} \times \frac{1}{6} = \frac{1}{36}$$`
+---
+
+Probability in 15 minutes
+=========================
+
+** Addition Rule: ** If two events are **mutually exclusive (disjoint)**, the probability of **any** of them occurring is the ** sum ** of individual probabilites (**union of probabilities**, `\(\cup\)` )
+
+$$ P (A \cup B) = P (A) + P (B) $$
+
+**Ex:** How likely are we to get a "5" ** or ** a "6" in one die roll?
+
+`$$P(A \cup B) = P(A) + P(B) = \frac{1}{6} + \frac{1}{6} = \frac{2}{6}$$`
+---
+
+Probability in 15 minutes
+=========================
+
+If two events **are not** mutually exclusive, we use:
+
+$$ P (A \cup B) = P (A) + P (B) - P (A \cap B) $$
+
+**Ex:** How likely are we to draw a "7" ( `\(A\)` ) ** or ** a spades card ( `\(B\)` ) from a deck of 52 cards?
+
+$$ P(A=7)= \frac{4}{52} = 0.077, P(B = \text{spades}) = \frac{13}{52} = 0.25$$
+
+$$ P(A \cup B) = 0.077 + 0.25 - (0.077 \times 0.25) = 0.308 $$
+
+**Why subtract `\(P(A \cap B)\)`?**
+
+---
+
+Probability in 15 minutes
+========================
+
+** Conditional probability: ** the probability that an event occurs, given another event **has already occurred**:
+
+`$$P(A|B) = P(A \cap B)/P(B)$$`
+
+**Ex:** How likely are we to draw a "7"" card ( `\(A\)` ), knowing that the card suite is spades ( `\(B\)` )?
+
+$$ P(A=7)= \frac{4}{52} = 0.077, P(B = \text{spades}) = \frac{13}{52} = 0.25$$
+
+$$  P(A|B) = \frac{P(A \cap B)}{P(B)} = \frac{0.077 \times 0.25}{0.25} = 0.077 $$
+If we know a card is from spades, we know there is only `\(\tfrac{1}{13}\)` chance of it being a seven.
+
+---
+
+Probability in 15 minutes
+=========================
+
+**Multiplication for dependent events:** If two events are **dependent**, the likelihood of the two occurring together can be obtained by the previous relation:
+
+`$$P(A|B) = \frac{P(A \cap B)}{P(B)},  \quad P(A \cap B) = P(B) \times P(A|B)$$`
+
+**Ex:** In Rio Claro, the chance of being bitten by *Aedes egyptii* ( `\(C\)` ) is 70% per day. Assuming that the chance of a mosquito transmitting the dengue virus ( `\(T\)`) is 50%, what is the probability of someone getting infected in a day?
+
+---
+Probability in 15 minutes
+=========================
+
+
+The probability of transmission is conditional to being bitten.
+
+If there was a bite: `\(P (T | C) = 0.5\)`. 
+
+If there was no bite: `\(P (T | C) = 0\)`.
+
+$$  P(A \cap B) = P(B) \times P(A | B) $$
+
+$$ P(T \cap C) = P(C) \times P(T | C) = 0.7 \times 0.5 = 0.35 $$
+---
+
+Plants vs. Caterpillars
+=============================================
+
+**Exercise: Gotellli &amp; Ellison 2nd Ed. P. 15-17**
+
+We have patches of two phenotypes of a plant on a landscape: `\(R\)` is resistant to herbivory by caterpillars, while `\(R^c\)` is not. The phenotypes never occur together in the same patch, and resistant phenotypes occur with a frequency of 20%. The probability of a patch being invaded by caterpillars ( `\(C\)` ) is 0.7, independent of the phenotype present.
+
+Assuming that the caterpillars disperse equally to all patches, and that only resistant populations survive the arrival of caterpillars, what is the probability that a patch will disappear due to herbivory?
+
+** Hint: ** First calculate the probabilities of occurrence of the four possible combinations of results.
+---
+
+## ** Step 1: ** Organize the information: 
+
+Resistant and Susceptible are mutually exclusive results:
+
+`$$P(R) = 0.2, \quad P(R^c) = P(1 - R) = 0.8$$`
+Presence and absence of caterpillars are mutually exclusive results:
+
+`$$P(L) = 0.7, \quad P(L^c) = P(1 - L) = 0.3$$`
+
+`$$S = \{R^cL^c,RL^c,RL,R^cL,RL\}$$`
+---
+
+## ** Step 2: ** Express the probabilities 
+
+Resistance and invasion by caterpillars are independent events:
+
+`$$P(R^cL^c) = P(R^c) \times P(L^c)$$`
+
+`$$P(RL^c) = P(R) \times P(L^c)$$`
+
+`$$P(R^cL) = P(R^c) \times P(L)$$`
+
+`$$P(RL) = P(R) \times P(L)$$`
+
+We multiply the probabilities because the events are independent.
+
+---
+
+## ** Step 3: ** Calculate the probabilitites
+
+`$$P(R^c \cap L^c) = P(R^c) \times P(L^c) = 0.8 \times 0.3 = 0.24$$`
+
+`$$P(R \cap L^c) = P(R) \times P(L^c) = 0.2 \times 0.3 = 0.06$$`
+
+`$$P(R^c \cap L) = P(R^c) \times P(L) = 0.8 \times 0.7 = 0.56$$`
+
+`$$P(R \cap L) = P(R) \times P(L) = 0.2 \times 0.7 = 0.14$$`
+
+---
+
+** Step 4: ** Combine probabilities
+============================================
+&lt;small&gt;
+`\(P(R^c \cap L^c) = P(R^c) \times P(L^c) = 0.8 \times 0.3 = 0.24\)` : Patch remains 
+
+`\(P(R \cap L^c) = P(R) \times P(L^c) = 0.2 \times 0.3 = 0.06\)` : Patch remains 
+
+`\(P(R^c \cap L) = P(R^c) \times P(L) = 0.8 \times 0.7 = 0.56\)` : **Patch disappears**
+
+`\(P(R \cap L) = P(R) \times P(L) = 0.2 \times 0.7 = 0.14\)` : Patch remains
+
+`\(\mathbf{P(\textbf{Patch disappears}) = 0.56}\)`
+
+`\(\text{P(Patch remains)} = P((R^c \cap L^c) \cup (R \cap L^c) \cup (R \cap L))  = 0.44\)` 
+&lt;/small&gt;
+---
+A little further
+================
+
+** Plants vs. caterpillars vs. invasives **
+
+Even for resistant phenotypes, herbivory reduces the competitive advantage of the studied plant, facilitating the establishment of an invasive species ( `\(I\)` ). If the caterpillar is present, the invasion has a chance of success of 60%, and if there are no plants, success is guaranteed (100%). What is the probability of a patch invasion, knowing that the caterpillars have already reached the patch?
+
+---
+A little further
+================
+
+The first impulse is to calculate `\(P(I \cap L) = P(I|L) \times P(L)\)`. But herbivory leads to the removal of the plant when it is not resistant, modifying the probability of invasion.
+
+Thus, we have two conditional probabilities:
+
+`\(P(I \cap R^cL) = P(I|R^cL) \times P(R^cL) = 1 \times 0.56 = 0.56\)`
+
+`\(P(I \cap RL) = P(I|RL) \times P(RL) = 0.6 \times 0.14 = 0.084\)`
+
+`\(RL\)` e `\(R^cL\)` são mutuamente exclusivos, então temos:
+
+`\(P(I \cap L) = P(I \cap R^cL) \cup P(I \cap RL) = 0.56 + 0.084  = 0.644\)`
+
+---
+Estimating probabilities
+========================
+
+*How likely is a carnivorous plant to catch an insect?*
+
+- **How can we estimate this probability?**
+
+--
+
+- By ** counting ** the number of capture successes and failures, for *several* visits of insects.
+
+- Each individual visit is an **realization** of the event, yielding an **outcome**: captured or not captured. Also known as **replicate** or **observation**.
+
+The set of successive realizations comprises an (statistical) **experiment**.
+
+---
+Frequency vs. Probability
+=========================
+
+** Capture Frequency: **
+
+$$ F  = \frac{\text{number of captures}}{\text{number of visits}} $$
+---
+
+Frequency vs. Probability
+==========================
+
+** Capture Frequency: **
+
+$$ F  = \frac{\text{number of successes}}{\text{number of realizations}} $$
+---
+
+Frequency vs. Probability
+=========================
+
+** Probability of Capture: **
+
+`$$P(\text{capture}) \approx \lim_{n_t \to \infty} \frac{\text{number of successes} (n_r)}{\text{number of realizations} (n_t)}$$`
+
+---
+
+The two statistical cultures
+============================
+
+**Frequentist Statistics:**
+
+- Associated primarily with *Sir* Ronald Aymer Fisher, FRS.
+
+- Based on the association between frequencies and probabilities.
+
+- **Ex:** I throw a coin 100 times, and get 45 heads and 55 tails. I estimate my probabilities as 0.45 and 0.55
+
+- Each sample observation is a relization of a random event
+
+- Assumes that if we could observe infinite realizations of an event, we would know the exact probabilities
+associated with each possible outcome of the event
+
+---
+
+The two statistical cultures
+============================
+
+`\(p &lt; 0.05\)` ? 
+&lt;br&gt;
+--
+
+`\(P (S | H)\)` or `\(P (H | S)\)`? 
+
+**Is it the same thing?**
+
+---
+
+The two statistical cultures
+============================
+
+In the frequentist view, `\(p\)` is the probability of obtaining the observed sample, given a certain hypothesis:
+
+$$ P (S | H) $$
+
+**Ex:**  I threw a coin 100 times, and got 65 heads and 35 tails. If my hypothesis was that the coin is fair
+( `\(P(heads) = P (tails) = 0.5\)` ), what is the probability of obtaining this sample, **or more extreme samples**? 
+
+$$p = 8.6 \times 10^{-4} $$
+
+If I repeated this experiment inifnite times (throw a coin 100 times), I would expect to get an equal or more extreme sample 0.086% of the time.
+---
+
+The two statistical cultures
+============================
+
+
+Logic tells us that the most important thing is to know `\(P (H | S)\)`. But how?
+
+--
+
+**Baye's Theorem**
+
+`$$P(H \mid S) = \frac{P(H \cap S)}{P(S)} =\frac{P(S) \times P(H)}{P(S)}$$`
+
+** `\(P(S|H)\)` **: probability of the sample, given the hypothesis is true
+
+** `\(P(S)\)` **: unconditional probability of the sample, ensures that `\(0 \leq P (H | S) ≤ 1\)`
+
+** `\(P(H)\)` **: probability of the hypothesis being true. Known as the **prior**.
+
+---
+
+The two statistical cultures
+============================
+
+** Bayesian Statistics **
+
+- Associated with Thomas Bayes
+
+- In the Bayesian view, statistical analysis should update previous knowledge
+
+- Previous knowledge can be used to define the ** prior probability** of the hypothesis being true
+
+- The result of the analysis allows you to update (improve) this prior estimate of probability, based on the observed sample (**posterior probability**).
+
+---
+
+Bayesian Statistics
+===================
+
+**Ex:** I throw a coin 100 times, and get 65 heads and 35 tails. If my hypothesis is that the coin is fair
+( `\(P(heads) = P (tails) = 0.5\)` ), what is the probability that my hypothesis is correct?
+
+`\(H_0\)`: The coin is fair
+
+`\(H_1\)`: The coin is biased
+
+Based on my previous knowledge of coins, I could say that the probability of being honest is 0.9 ( `\(P(H_0) = 0.9\)` ), and the probability of it being biased is 0.1 ( `\(P (H_1) = 0.1\)` ).
+
+If I had any other prior knowledge about the coin, I could express these probabilities differently.
+
+---
+
+Bayesian Statistics
+===================
+
+For `\(H_0\)` :
+
+
+`$$P(H_0|S) = \frac{P(S|H_0) \times P(H_0)}{P(S)}$$`
+
+
+
+`$$P(H_0 | S) = \frac{P(S | H_0) \times P(H_0)}{P(S | H_0) \times P(H_0) + P(S | H_1) \times P(H_1)}$$`
+
+
+
+`$$P(H_0 | S) = \frac{(8.6 \times 10^{-4}) \times 0.9}{(8.6\times 10^{-4}) \times 0.9 + 0.0834 \times 0.1}$$`
+
+
+`$$P(H_0|S) = 0.085$$`
+
+---
+
+Bayesian Statistics
+===================
+
+For `\(H_1\)` :
+
+
+`$$P(H_1 | S) = \frac{P(S | H_1) \times P(H_1)}{P(S)}$$`
+
+`$$P(H_1 | S) = \frac{P(S | H_1) \times P(H_1)}{P(S | H_1) \times P(H_1) + P(S | H_0) \times P(H_0)}$$`
+
+$$P(H_1 | A) = \frac{0.0834 \times 0.1}{0.0834 \times 0.1 + (8.6\times 10^{-4}) \times 0.9} $$
+
+`\(P(H_1|A) = 0.915\)`
+---
+
+Bayesian Statistics
+===================
+
+The choice of *prior* can strongly affect the posterior:
+
+&lt;small&gt;
+
+`\(\mathbf{P(H_0=0.5),P(H_1=0.5)} \rightarrow P(H_0|S) = 0.01, P(H_1|S) = 0.98\)`
+
+`\(\mathbf{P(H_0=0.75),P(H_1=0.25)} \rightarrow P(H_0|S) = 0.03 , P(H_1|S) = 0.97\)`
+
+`\(\mathbf{P(H_0=0.95),P(H_1=0.05)} \rightarrow P(H_0|S) = 0.16, P(H_1|S) = 0.84\)`
+
+`\(\mathbf{P(H_0=0.99),P(H_1=0.01)} \rightarrow P(H_0S) = 0.506, P(H_1|S) = 0.494\)`
+
+&lt;/small&gt;
+---
+
+Frequentists vs. Bayesians
+===========================
+
+** Bayesians on frequentists: **
+
+- They ignore any previous information! 
+
+- They make decisions based on fictitious experiments!
+
+** Frqeuentists on Bayesians: **
+
+- They can produce any result they want by choosing a given *prior*!
+
+- Bayesia methods are harder to understand and computationally intensive!
+n
+---
+
+Which one will we use?
+======================
+
+** The course will be based on the frequentist philosophy. **
+
+- Most *frequently* used.
+
+- More familiar to the ecology scientific community.
+
+- It's the type statistics you've *probably* had some *prior* contact with.
+
+- It's the one I know how to teach.
+
+** However, we will have a modernized view of frequentist statistics, taking care to avoid its common misuses and misconceptions. **
+
+---
+class: inverse
+
+End of this lecture
+====================
+
+### Next Lecture: Probability Distributions
+
+Now that you have a working understanding of probabilitites, go ahead and watch the lecture on probability distributions, which is what all statistical analysis (bayesian or frequentist) is based on.
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
