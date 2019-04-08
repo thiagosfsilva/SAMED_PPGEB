@@ -45,8 +45,8 @@ At the end of this course, you should be able to:
 
 |   Day     |    Theme                       | Type            | Link                      |
 |-----------|--------------------------------|-----------------|---------------------------|  
-|**Day 1:** |   Introduction to the course   | Videoconference | [Hangouts](https://meet.google.com/dss-wnog-vsa?hs=122) / [Slides](https://thiagosfsilva.github.io/ecostats/lecture_1/Lecture_1_intro.html)|
-|           | Probabilitites                 | Recorded lecture| [Video]() / [Slides]()    |
+|**Day 1:** |   Introduction to the course   | Videoconference | [Hangouts](https://meet.google.com/dss-wnog-vsa?hs=122) / [Slides](https://thiagosfsilva.github.io/ecostats/lecture_1/Lecture_1_intro.html) |
+|           | Probabilitites                 | Recorded lecture| [Video]() / [Slides](https://thiagosfsilva.github.io/ecostats/lectures/Lecture_2_probs/Lecture_2_probabilities.html)    |
 |           | What is a 'hypothesis test'   | Recorded lecture| [Video]() / [Slides]()    |
 |           | Type I and type II errors      | Recorded lecture| [Video]() / [Slides]()    |
 |           | Gigerenzer et al. (2004) Mindless statistics. | Reading         | [Paper]('readings/lecture_1/GG_Mindless_2004,pdf')  |
