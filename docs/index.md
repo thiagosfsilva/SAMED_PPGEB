@@ -45,7 +45,7 @@ At the end of this course, you should be able to:
 
 |   Day     |    Theme                       | Type            | Link                      |
 |-----------|--------------------------------|-----------------|---------------------------|  
-|**Day 1:** |   Introduction to the course   | Videoconference | [Hangouts](https://meet.google.com/dss-wnog-vsa?hs=122) / [Slides](https://thiagosfsilva.github.io/ecostats/lecture_1/Lecture_1_intro.html')|
+|**Day 1:** |   Introduction to the course   | Videoconference | [Hangouts](https://meet.google.com/dss-wnog-vsa?hs=122) / [Slides](https://thiagosfsilva.github.io/ecostats/lecture_1/Lecture_1_intro.html)|
 |           | Probabilitites                 | Recorded lecture| [Video]() / [Slides]()    |
 |           | What is a 'hypothesis test'   | Recorded lecture| [Video]() / [Slides]()    |
 |           | Type I and type II errors      | Recorded lecture| [Video]() / [Slides]()    |
