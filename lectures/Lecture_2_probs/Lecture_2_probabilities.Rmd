@@ -192,7 +192,7 @@ Presence and absence of caterpillars are mutually exclusive results:
 
 $$P(L) = 0.7, \quad P(L^c) = P(1 - L) = 0.3$$
 
-$$S = \{R^cL^c,RL^c,RL,R^cL,RL\}$$
+$$S = \{R^cL^c,RL^c,RL,R^cL\}$$
 ---
 
 ## ** Step 2: ** Express the probabilities 
@@ -360,7 +360,7 @@ Logic tells us that the most important thing is to know $P (H | S)$. But how?
 
 **Baye's Theorem**
 
-$$P(H \mid S) = \frac{P(H \cap S)}{P(S)} =\frac{P(S) \times P(H)}{P(S)}$$
+$$P(H|S) = \frac{P(H \cap S)}{P(S)} = \frac{P(S|H) \times P(H)}{P(S)}$$
 
 ** $P(S|H)$ **: probability of the sample, given the hypothesis is true
 
@@ -458,18 +458,18 @@ $\mathbf{P(H_0=0.99),P(H_1=0.01)} \rightarrow P(H_0S) = 0.506, P(H_1|S) = 0.494$
 Frequentists vs. Bayesians
 ===========================
 
-** Bayesians on frequentists: **
+** Bayesians on Frequentists: **
 
 - They ignore any previous information! 
 
 - They make decisions based on fictitious experiments!
 
-** Frqeuentists on Bayesians: **
+** Frequentists on Bayesians: **
 
 - They can produce any result they want by choosing a given *prior*!
 
-- Bayesia methods are harder to understand and computationally intensive!
-n
+- Bayesian methods are harder to understand and computationally intensive!
+
 ---
 
 Which one will we use?
