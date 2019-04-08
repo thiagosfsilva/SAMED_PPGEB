@@ -49,7 +49,7 @@ At the end of this course, you should be able to:
 |           | Probabilitites                 | Recorded lecture| [Video]() / [Slides](https://thiagosfsilva.github.io/ecostats/Lecture_2/Lecture_2_probabilities.html)    |
 |           | What is a 'hypothesis test'   | Recorded lecture| [Video]() / [Slides]()    |
 |           | Type I and type II errors      | Recorded lecture| [Video]() / [Slides]()    |
-|           | Gigerenzer et al. (2004) Mindless statistics. | Reading         | [Paper]('readings/lecture_1/GG_Mindless_2004,pdf')  |
+|           | Gigerenzer et al. (2004) Mindless statistics. | Reading         | [Paper](https://thiagosfsilva.github.io/ecostats/readings/lecture_1/GG_Mindless_2004,pdf)  |
 |**Day 2:**| | | |
 |**Day 3:**| | | |
 |**Day 4:**| | | |
