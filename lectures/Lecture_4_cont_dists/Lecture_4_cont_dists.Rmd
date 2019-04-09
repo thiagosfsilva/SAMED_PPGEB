@@ -1,0 +1,1523 @@
+---
+title: "Presentation Ninja"
+subtitle: "\u2694 <br/>with xaringan and xaringanthemer"  
+author: "Yihui Xie"
+date: '`r Sys.Date()`'
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: xaringan-themer.css
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+```{r xaringan-themer, include=FALSE}
+library(xaringanthemer)
+solarized_dark(
+  code_font_family = "Fira Code",
+  code_font_url    = "https://cdn.rawgit.com/tonsky/FiraCode/1.204/distr/fira_code.css"
+)
+```
+
+---
+Distribuição de Poisson
+
+Poisson}: A Binomial modela o número de sucessos esperados com um numero fixo de realizações. A distribuição Poisson modela a ocorrência de sucessos em situações onde o número de realizações é infinito. O exemplo mais comum são dados de contagem de indivíduos em parcelas, ou ao longo de um intervalo de tempo}. 
+
+
+
+Distribuição Poisson:} $X \sim Pois(\lambda)$ 
+  
+Parâmetros: $\lambda$ ($\lambda > 0$)
+
+Suporte: $x = k, k 0,\ldots,n\right\}$
+
+p.m.f:
+  equation*
+    f(x) = -\lambda
+  equation*
+
+$E[X] = \lambda$
+
+$Var[X] = \lambda$
+
+ 
+---
+
+---
+[fragile]
+
+
+Ex.: Se em média eu observo 50 indivíduos por parcela, qual a probabilidade de eu observar uma parcela com 100 indivíduos?
+
+equation*
+  f(x) = -\lambda
+equation*
+
+equation*
+  P(x=100) = -50
+equation*
+
+equation*
+  P(x=100) = 845272575844 -22
+equation*
+
+equation*
+  P(x=100) = 1.630319 -10
+equation*
+
+<<echo=TRUE, size='tiny'>>=
+dpois(100,50)
+@
+
+
+
+ 
+---
+
+
+---
+Distribuições Contínuas
+
+-ize
+  \- Até agora falamos de V.A. discretas
+  \- Mas e se os dados que queremos modelar são contínuos?
+  Exemplo:} Qual a probabilidade da temperatura máxima de hoje ser 32$^\circ$C?
+-ize
+
+ 
+---
+
+---
+Distribuições Contínuas
+
+-ize
+  \- Uma V.A. contínua pode assumir infinitos valores
+  
+  
+  
+  N}$
+  
+  
+  
+  \- Qual dos dois resultados tem probabilidade maior?
+  
+  -ize
+
+\centering
+  P(temperatura máxima de hoje) =  32$^\circ$C?
+  
+  ou
+  
+  P(temperatura máxima de hoje) = 32.354321$^\circ$C?
+  
+ 
+---
+
+
+---
+Distribuições Contínuas
+
+Qual dos dois resultados tem probabilidade maior?
+  
+\centering
+
+P(temperatura máxima de hoje) =  32$^\circ$C?
+  
+ou
+  
+P(temperatura máxima de hoje) = 32.354321$^\circ$C?
+
+
+
+Os dois tem a mesma probabilidade, que é zero}.
+
+
+$P(n_i) \inf} = 0
+
+  
+$ N \to \inf} P(x) = 0$ 
+
+ 
+---
+
+
+
+---
+Distribuições Contínuas
+
+
+Para V.A. contínuas, ao invés de massas de probabilidade, falamos de densidades de probabilidade}, dentro de um intervalo de valores.
+
+
+
+p.d.f})
+
+
+
+Qual a probabilidade da temperatura máxima de hoje estar entre 32 e 33$^\circ$C?
+
+Qual a probabilidade da temperatura máxima de hoje ser maior que 32$^\circ$C?
+    
+ 
+---
+
+---
+Distribuições Contínuas
+
+Qual a distribuição contínua mais utilizada? 
+
+
+
+Distribuição Normal (Gaussiana): $X \sim N(\mu,\sigma)$
+
+footnotesize
+
+Parâmetros: $R})$); $\sigma$ ($\sigma > 0$)
+
+Suporte: $X R}$
+
+p.d.f:
+
+equation*
+P(x) = 2\sigma ^2 }}
+equation*
+
+$E(X) = \mu$
+
+$Var(X) = \sigma^2} = \sigma$)
+
+
+
+Exemplo:}} Qual a probabilidade de observamos uma temperatura entre 30$^\circ$C e 35$^\circ$C, se a média histórica é $\mu = 30$, e o desvio padrão é $\sigma = 5$?
+
+footnotesize
+    
+ 
+---
+
+---
+Distribuição Normal - Exemplo
+
+
+<<normex, echo=FALSE, fig.height=5,fig.width=7.5,out.height='0.7\\textheight'>>=
+library(ggplot2)
+m <- 30
+sd=5
+min=m-sd*4
+max=m+sd*4
+tmin = 30
+tmax = 35
+
+x <- seq(min,max,by=0.1)
+y <- dnorm(x,mean=m,sd=sd)
+full.df <- data.frame (x=x,y=y)
+shade <- subset(full.df, x >= tmin & x <= tmax)
+
+
+#ggplot(df,aes(x,y)) + geom_ribbon(data = shade.up, aes(ymax=y,ymin=0),col='gray50',fill='gray50') +  geom_ribbon(data = shade.down, aes(ymax=y,ymin=0),col='gray50',fill='gray50') + geom_line(size=1) + theme_bw(base_size=16) + plotheme
+
+ggplot(full.df,aes(x,y)) + geom_ribbon(data = shade, aes(ymax=y,ymin=0),col='gray50',fill='gray50')  + geom_line(size=1) + theme_bw(base_size=20) + geom_vline(x=c(tmin, tmax),color='black',linetype=2) + plotheme + coord_cartesian(ylim = c(0, 0.09)) + ylab(NULL) + xlab(NULL)
+@
+
+ 
+---
+
+
+---
+Distribuição Normal - Exemplo
+
+
+<<cumnorm1, fig.keep='none', size='tiny'>>=
+# No R
+media <- 30
+desvio <- 5
+tmin <- 30
+tmax <- 35
+
+# A maneira mais fácil de calcular uma probabilidade é de maneira cumulativa: P(x <= 30)
+#O comando "pnorm" faz isso:
+
+p.tmin <- pnorm(tmin,mean=media,sd=desvio)
+
+p.tmin
+
+@
+
+ 
+---
+
+
+---
+Distribuição Normal - Exemplo
+
+<<cumnormplot1, echo=FALSE, fig.height=5,fig.width=7.5,out.height='0.7\\textheight'>>=
+min=m-desvio*4
+max=m+desvio*4
+x <- seq(min,max,by=0.1)
+y <- dnorm(x,mean=m,sd=sd)
+full.df <- data.frame (x=x,y=y)
+shade <- subset(full.df, x <= tmin )
+
+plotheme <- theme(axis.line = element_line(colour = "black", size=1), panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.border = element_blank(),panel.background = element_blank()) 
+
+#ggplot(df,aes(x,y)) + geom_ribbon(data = shade.up, aes(ymax=y,ymin=0),col='gray50',fill='gray50') +  geom_ribbon(data = shade.down, aes(ymax=y,ymin=0),col='gray50',fill='gray50') + geom_line(size=1) + theme_bw(base_size=16) + plotheme
+
+ggplot(full.df,aes(x,y)) + geom_ribbon(data = shade, aes(ymax=y,ymin=0),col='gray50',fill='gray50')  + geom_line(size=1) + theme_bw(base_size=20) + geom_vline(x=c(tmin, tmax),color='black',linetype=2) + plotheme + coord_cartesian(ylim = c(0, 0.09)) + ylab(NULL) + xlab(NULL)
+@
+
+ 
+---
+
+---
+Distribuição Normal - Exemplo
+
+
+<<cumnorm2, fig.keep='none', size='tiny'>>=
+# No R
+media <- 30
+desvio <- 5
+tmin <- 30
+tmax <- 35
+
+# calculamos também a probabilidade cumulativa de x <= 35
+
+p.tmax <- pnorm(tmax,mean=media,sd=desvio)
+
+p.tmax
+
+@
+
+ 
+---
+
+
+---
+Distribuição Normal - Exemplo
+
+<<cumnormplot2, echo=FALSE, fig.height=5,fig.width=7.5,out.height='0.7\\textheight'>>=
+min=m-desvio*4
+max=m+desvio*4
+x <- seq(min,max,by=0.1)
+y <- dnorm(x,mean=m,sd=sd)
+full.df <- data.frame (x=x,y=y)
+shade <- subset(full.df, x <= tmax )
+
+plotheme <- theme(axis.line = element_line(colour = "black", size=1), panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.border = element_blank(),panel.background = element_blank()) 
+
+#ggplot(df,aes(x,y)) + geom_ribbon(data = shade.up, aes(ymax=y,ymin=0),col='gray50',fill='gray50') +  geom_ribbon(data = shade.down, aes(ymax=y,ymin=0),col='gray50',fill='gray50') + geom_line(size=1) + theme_bw(base_size=16) + plotheme
+
+ggplot(full.df,aes(x,y)) + geom_ribbon(data = shade, aes(ymax=y,ymin=0),col='gray50',fill='gray50')  + geom_line(size=1) + theme_bw(base_size=20) + geom_vline(x=c(tmin, tmax),color='black',linetype=2) + plotheme + coord_cartesian(ylim = c(0, 0.09)) + ylab(NULL) + xlab(NULL)
+@
+
+ 
+---
+
+---
+Distribuição Normal - Exemplo
+
+
+<<cumnorm3, fig.keep='none', size='tiny'>>=
+# Sabendo as duas probabilidades cumulativas, é só subtrair
+
+p.tmax - p.tmin
+
+@
+
+ 
+---
+
+
+---
+Distribuição Normal - Exemplo
+
+<<cumnormplot3, echo=FALSE, fig.height=5,fig.width=7.5,out.height='0.7\\textheight'>>=
+min=m-desvio*4
+max=m+desvio*4
+x <- seq(min,max,by=0.1)
+y <- dnorm(x,mean=m,sd=sd)
+full.df <- data.frame (x=x,y=y)
+shade <- subset(full.df, x >= tmin & x <= tmax)
+
+plotheme <- theme(axis.line = element_line(colour = "black", size=1), panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.border = element_blank(),panel.background = element_blank()) 
+
+#ggplot(df,aes(x,y)) + geom_ribbon(data = shade.up, aes(ymax=y,ymin=0),col='gray50',fill='gray50') +  geom_ribbon(data = shade.down, aes(ymax=y,ymin=0),col='gray50',fill='gray50') + geom_line(size=1) + theme_bw(base_size=16) + plotheme
+
+ggplot(full.df,aes(x,y)) + geom_ribbon(data = shade, aes(ymax=y,ymin=0),col='red',fill='red')  + geom_line(size=1) + theme_bw(base_size=20) + geom_vline(x=c(tmin, tmax),color='black',linetype=2) + plotheme + coord_cartesian(ylim = c(0, 0.09)) + ylab(NULL) + xlab(NULL)
+@
+
+ 
+---
+
+
+---
+Distribuições Contínuas
+
+small
+-ize
+  Normal}: $X \sim N(\mu,\sigma)$
+  
+  Gamma}: $X \sim Gamma(s,a$)
+  
+  Exponencial}: $X \sim Exp(\lambda)$
+  
+  Beta}: $X \sim Beta(a,b)$
+  
+  Lognormal}: $X \sim logN(\mu,\sigma)$
+  
+  Qui-quadrado}: $X \sim \chi^2(df)$
+-ize
+small
+
+ 
+---
+
+Testes de Hipóteses
+
+
+---
+Testes de Hipóteses Paramétricos
+
+O mecanismo dos testes de hipóteses paramétricos} seguem sempre a mesma lógica:
+
+  small
+  enumerate
+    \- Formule uma hipótese quantitativa 
+    \- Defina uma estatística de interesse que descreva essa quantidade 
+    \- Assuma uma distribuição para esta estatística de interesse, caso a hipótese seja verdadeira
+    \- Especifique os parâmetros dessa distribuição 
+    ou uma mais extrema}, a partir da sua amostra, se a sua hipótese for verdadeira. 
+    \- Avalie a "força da evidência" em relação sua hipótese, com base na probabilidade observada para a amostra. 
+  enumerate
+  small
+  
+ 
+---
+
+---
+Exemplo: Teste dos Sinais
+
+Pergunta:} Estou comparando duas amostras pareadas ($X,Y$), com $N$ observações, e quero saber se existe diferença entre elas.
+\medskip
+
+Hipótese:} Se não há diferença, $P(x_i > y_i) = P(y_i > x_i) = 0.5$. Podemos pensar em $x_i > y_i$ como um sucesso, e $y_i > x_i$ como um fracasso
+\medskip
+
+Estatística de interesse - W}: quantas vezes observamos $x_i > y_i$?
+\medskip
+
+Distribuição de W?}
+Distribuição de W:} $W ~ Bin(n=N,p=0.5)$
+\medskip
+
+Qual a probabilidade de obtermos o valor observado de W ou maior, na nossa amostra, se $W ~ Bin(n=N,p=0.5)$?
+
+
+ 
+---
+
+
+---
+Exemplo:Teste dos Sinais
+
+
+<<size='tiny'>>=
+x <- c(0,3,6,5,3,7,8,9,2,4,6,7)
+y <- c(3,4,5,6,9,7,1,2,3,4,5,6)
+
+n=length(x); n
+
+d <- x-y; d
+
+w <- sum(x-y > 0); w
+
+dbinom(w,size=12,prob=0.5)
+
+@
+
+ 
+---
+
+  
+---
+Exemplo:Teste dos Sinais
+
+<<size='tiny'>>=
+
+# Mas eu quero saber P(w >= 5)
+
+probs <-vector(8,mode='numeric')
+
+for(i in c(5:12)){
+  w=i
+  probs[i] <- dbinom(w,size=12,prob=0.5)
+
+
+probs
+
+sum(probs)
+@
+
+ 
+---
+
+---
+Exemplo:Teste dos Sinais
+
+<<size='tiny'>>=
+
+binom.test(5,12,p=0.5,alternative="greater")
+
+@
+
+ 
+---
+
+
+---
+Exemplo: Teste $\chi^2$
+
+
+Teste  $\chi^2$ (chi-quadrado, chi pronuncia-se "qui")
+
+footnotesize
+
+Pergunta:} Contei os indivíduos em 3 habitats: $N_F=86$,$N_P=3$,$N_A=11$. Cada habitat estava representado na seguinte proporção: Floresta(75\), Pastagem (10\), Agricultura(15\) . Será que existe uma preferência dos indivíduos por um determinado habitat?
+
+
+Hipótese:} Se não há preferência, a quantidade esperada de indivíduos em cada habitat só é afetada  pela proporção de cada um. Se a quantidade observada for diferente da esperada, há indício de preferência.
+
+
+E}}$
+
+Distribuição de $X^2$:} $X^2 \sim \chi^2(k)$ ($k$ =  graus de liberdade = $N -1$)
+
+
+Qual a probabilidade de obtermos o valor observado de $X^2$ ou mais extremo, na nossa amostra?
+
+
+footnotesize
+
+ 
+---
+
+
+---
+[fragile]
+
+<<size='tiny'>>=
+obs <- c(86,3,11)
+habs <- c(0.75,0.1,0.15)
+esp <- rep(sum(obs),3) * habs
+
+x2 <- sum((obs-esp)^2/(esp))
+x2
+
+dchisq(x2,df=2)
+
+# A distribuição qui-quadrada é contínua, então não dá pra somar. Mas existe uma função cumulativa:
+1-pchisq(x2,df=2)
+
+chisq.test(obs,p=habs)
+@
+
+ 
+---
+
+
+---
+Exemplo: Teste Z para a média
+
+Pergunta
+
+Um reservatório com concentrações de clorofila maiores do que 3 mg.m$^{-3}$ pode ser considerado eutrófico. Eu coleto 20 amostras de água e determino uma concentração média de 2.55 mg.m$^{-3}$, com um desvio padrão de 0.9 mg.m$^{-3}$. Será que meu reservatório é eutrófico? 
+
+block
+
+ 
+---
+
+---
+Exemplo: Teste Z para a média
+
+H$_0$:} O reservatório está contaminado, então $\mu = 3$
+
+H$_1$:} O reservatório não está contaminado, então $\mu < 3$
+
+$P(X} >= 2.55 | \mu = 3)$?
+
+
+Estatística:} $Z$
+
+
+
+equation*
+    Z = n}
+equation*
+
+
+
+Distribuição de $Z$?}
+Distribuição de $Z$:}  $Z \sim N (0,1)$
+
+ 
+---
+
+---
+Erro Padrão vs. Desvio Padrão
+
+small
+  
+  standard error}). Qual a diferença? 
+  
+  \- O desvio padrão mede a dispersão dos dados observados.
+  
+  X}$?
+  
+  X}$, não dos dados originais
+
+small
+
+
+
+Erro Padrão da Média}:
+\centering
+$ E.P. = n}}$ 
+
+ 
+---
+
+
+---
+Desvio padrão vs. erro padrão
+
+
+<<desv_err1, fig.keep='none', size='tiny'>>=
+# Tomamos uma amostra aleatória com X ~ N(30,5) e n=50
+set.seed(20)
+x <- rnorm(20,30,5); x
+# Calculamos a média e o desvio padrão
+x_barra <- mean(x); x_barra
+s <- sd(x); s
+@
+
+ 
+---
+
+---
+Desvio padrão vs. erro padrão
+
+<<desv_err_plot1, echo=FALSE, fig.height=5,fig.width=7.5,out.height='0.7\\textheight'>>=
+min=x_barra-s*4
+max=x_barra+s*4
+x_longo <- seq(min, max,0.1)
+y <- dnorm(x_longo,x_barra,s)
+full.df <- data.frame (x=x_longo,y=y)
+#shade <- subset(full.df, x >= tmin & x <= tmax )
+
+plotheme <- theme(axis.line = element_line(colour = "black", size=1), panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.border = element_blank(),panel.background = element_blank()) 
+
+#ggplot(df,aes(x,y)) + geom_ribbon(data = shade.up, aes(ymax=y,ymin=0),col='gray50',fill='gray50') +  geom_ribbon(data = shade.down, aes(ymax=y,ymin=0),col='gray50',fill='gray50') + geom_line(size=1) + theme_bw(base_size=16) + plotheme
+
+ggplot(full.df,aes(x,y)) + geom_line(size=1,color='black') + theme_bw(base_size=20) + plotheme + ylab(NULL) + xlab(NULL) + geom_vline(x=x_barra,color='black',size=1) + geom_vline(x=c(x_barra - 1.96*s,x_barra + 1.96*s),color='black',size=1,linetype=2) + coord_cartesian(x=c(10,50))
+@
+
+ 
+---
+
+---
+Desvio padrão vs. erro padrão
+
+
+<<desv_err2, fig.keep='none', size='tiny'>>=
+# Mas podemos repetir essa amostragem 10000 vezes, e ter 10000 médias diferentes
+medias <- vector(10000,mode='numeric')
+
+for (i in c(1:10000)){
+  x <- rnorm(20,30,5)
+  medias[i] <- mean(x)
+
+
+mean(medias)
+
+sd(medias)
+@
+
+ 
+---
+
+---
+Desvio padrão vs. erro padrão
+
+<<desv_err_plot2, echo=FALSE, fig.height=5,fig.width=7.5,out.height='0.7\\textheight'>>=
+x_barra2 = mean(medias)
+s2 = sd(medias)
+y2 <- dnorm(x_longo,x_barra2,s2)
+full.df2 <- data.frame (x=x_longo,y=y2)
+#shade <- subset(full.df, x >= tmin & x <= tmax )
+
+plotheme <- theme(axis.line = element_line(colour = "black", size=1), panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.border = element_blank(),panel.background = element_blank()) 
+
+ggplot(full.df2,aes(x,y)) + geom_line(size=1,color='black') + ylab(NULL) + xlab(NULL) + geom_vline(x=x_barra2,color='black',size=1) + geom_vline(x=c(x_barra2 - 1.96*s2,x_barra2 + 1.96*s2),color='black',size=1,linetype=2)+ theme_bw(base_size=20) + plotheme + coord_cartesian(x=c(10,50))
+@
+
+ 
+---
+
+---
+Desvio padrão vs. erro padrão
+
+<<desv_err_plot3, echo=FALSE, fig.height=5,fig.width=7.5,out.height='0.7\\textheight'>>=
+ggplot(full.df,aes(x,y)) + geom_line(size=1,color='black') + geom_line(data=full.df2,aes(x,y),color='red',size=1) + theme_bw(base_size=20) + plotheme + ylab(NULL) + xlab(NULL) + geom_vline(x=x_barra,color='black',size=1) + geom_vline(x=c(x_barra - 1.96*s,x_barra + 1.96*s),color='black',size=1,linetype=2) + geom_vline(x=x_barra2,color='red',size=1) + geom_vline(x=c(x_barra2 - 1.96*s2,x_barra2 + 1.96*s2),color='red',size=1,linetype=2)+ coord_cartesian(x=c(10,50))
+@
+
+ 
+---
+
+---
+Desvio padrão vs. erro padrão
+
+
+<<desv_err3, fig.keep='none', size='scriptsize'>>=
+# De fato
+
+sd(medias)
+
+5/sqrt(20)
+
+@
+
+ 
+---
+
+
+---
+Exemplo: Teste Z para a média
+
+H$_0$:} O reservatório está contaminado, então $\mu = 3$
+
+H$_1$:} O reservatório não está contaminado, então $\mu < 3$
+
+$P(X} >= 2.55 | \mu = 3)$?
+
+
+Estatística:} $Z$
+
+
+
+equation*
+    Z = n}
+equation*
+
+
+
+Distribuição de $Z$?}
+Distribuição de $Z$:}  $Z \sim N (0,1)$
+
+ 
+---
+
+---
+Exemplo: Teste Z para a média
+
+<<size='tiny'>>=
+n = 20
+x <-  c(1.85, 2.64, 3.63, 1.94, 2.41, 2.74, 2.85, 3.07, 1.29, 
+        1.50, 1.55, 1.69, 3.70, 3.25, 2.47, 1.95, 3.33, 2.21, 3.02, 3.98)
+x_barra <- mean(x)
+x_barra
+s <- sd(x)
+s
+mu <- 3
+
+x_barra-mu
+(x_barra-mu)/(s/sqrt(n))
+@
+ 
+---
+
+---
+Exemplo: Teste Z para a média
+<<size='tiny'>>=
+z <- (x_barra-mu)/(s/sqrt(n))
+
+pnorm(z,0,1)
+
+# Ou simplesmente
+
+pnorm(x_barra,mu,s/sqrt(n))
+
+@
+
+ 
+---
+
+---
+Teste Z -  Visualmente
+
+<<testez, echo=FALSE, fig.height=5,fig.width=7.5,out.height='0.7\\textheight'>>=
+xref <- seq(-4,4,by=0.1)
+y <- dnorm(xref,0,1)
+full.df <- data.frame (x=xref,y=y)
+shade <- subset(full.df, x <= z )
+
+ggplot(full.df,aes(x,y)) + geom_ribbon(data = shade, aes(ymax=y,ymin=0),col='red',fill='red')  + geom_line(size=1) + theme_bw(base_size=20) + geom_vline(x=0,color='black',linetype=2) + plotheme + ylab(NULL) + xlab(NULL)
+@
+
+ 
+---
+
+---
+Teste Z -  Visualmente
+
+<<testez21, echo=FALSE, fig.height=5,fig.width=7.5,out.height='0.7\\textheight'>>=
+xref <- seq(2,4,by=0.01)
+y <- dnorm(xref,mu,s/sqrt(n))
+full.df <- data.frame (x=xref,y=y)
+shade <- subset(full.df, x <= x_barra)
+
+ggplot(full.df,aes(x,y)) + geom_ribbon(data = shade, aes(ymax=y,ymin=0),col='red',fill='red')  + geom_line(size=1) + theme_bw(base_size=20) + geom_vline(x=3,color='black',linetype=2) + plotheme + ylab(NULL) + xlab(NULL) + coord_cartesian(x=c(2,4))
+@
+
+ 
+---
+
+---
+Exemplo: Teste Z para a média
+
+Pergunta
+
+Estou interessado em saber se a concentração de clorofila varia entre dois reservatórios. 
+
+O primeiro  tem um concentração de 2.5 mg.m$^{-3}$, e o segundo de 2.8 mg.m$^{-3}$ (diferença de 0.3 mg.m$^{-3}$). Qual a evidência de que as concentrações são diferentes? 
+
+block
+
+ 
+---
+
+---
+Exemplo: Teste Z para a média
+
+H$_0$:} Os reservatórios são iguais, então $\mu_1 = \mu_2$, ou $\mu_1 - \mu_2 = 0$
+
+H$_1$:} Os reservatórios são diferentes, então $\mu_1 \neq \mu_2$, ou $\mu_1 - \mu_2 \neq 0$
+
+$P(X_1} >= 0.3 | \mu_1 - \mu_2 = 0)$?
+
+
+Estatística:} $Z$
+
+
+
+equation*
+    Z = n_2}}
+        
+equation*
+
+ 
+---
+
+
+
+---
+Exemplo: Teste Z para a média
+
+<<size='tiny'>>=
+n=20
+x1 <-  c(1.85, 2.64, 3.63, 1.94, 2.41, 2.74, 2.85, 3.07, 1.29,1.50, 1.55, 1.69,
+         3.70, 3.25, 2.47, 1.95, 3.33, 2.21, 3.02, 3.98)
+
+x2 <- c(2.79, 2.61, 3.72, 1.58, 2.02, 2.38, 2.70, 3.18, 3.96, 1.53, 1.51, 2.08,
+        3.34, 3.76, 2.61, 3.98, 3.50, 2.34, 2.95, 3.91)
+
+x_barra1 = mean(x1); x_barra2 = mean(x2)
+
+x_barra1; x_barra2
+
+s1 = sd(x1); s2=sd(x2)
+s1;s2
+
+mu1 = mu2 = 0
+
+@
+ 
+---
+
+
+---
+Exemplo: Teste Z para a média
+
+<<size='tiny'>>=
+z <- ((x_barra1-x_barra2)-(mu1-mu2))/(sqrt(s1^2/n)+sqrt(s2^2/n))
+z
+
+pnorm(z,0,1)
+
+# Ou simplesmente
+
+pnorm(x_barra1-x_barra2,mu1-mu2,sqrt(s1^2/n)+sqrt(s2^2/n))
+
+
+@
+
+ 
+---
+
+---
+Teste Z -  Visualmente
+
+<<testez2, echo=FALSE, fig.height=5,fig.width=7.5,out.height='0.7\\textheight'>>=
+xref <- seq(-4,4,by=0.1)
+y <- dnorm(xref,0,1)
+full.df <- data.frame (x=xref,y=y)
+shade <- subset(full.df, x <= z )
+
+ggplot(full.df,aes(x,y)) + geom_ribbon(data = shade, aes(ymax=y,ymin=0),col='red',fill='red')  + geom_line(size=1) + theme_bw(base_size=20) + geom_vline(x=0,color='black',linetype=2) + plotheme + ylab(NULL) + xlab(NULL)
+@
+
+ 
+---
+
+
+
+---
+Exemplo: Teste Z para a média
+
+Mas isso é só metade da história...a princípio, não sabemos na realidade qual lago é maior e qual é menor, então temos que considerar tanto que $\mu_1 > \mu_2$ quanto $\mu_2 > \mu_1$.
+
+
+ 
+---
+
+
+---
+[fragile]
+
+<<size='tiny'>>=
+z_min <- ((x_barra1-x_barra2)-(mu1-mu2))/(sqrt(s1^2/n)+sqrt(s2^2/n))
+z_max <- ((x_barra2-x_barra1)-(mu2-mu1))/(sqrt(s2^2/n)+sqrt(s1^2/n))
+
+pnorm(z_min,0,1)
+pnorm(z_max,0,1)
+
+p_final <- pnorm(z_min,0,1) + (1 - pnorm(z_max,0,1))
+
+p_final
+
+@
+
+
+ 
+---
+
+---
+Teste Z -  Visualmente
+
+<<testez3, echo=FALSE, fig.height=5,fig.width=7.5,out.height='0.7\\textheight'>>=
+xref <- seq(-4,4,by=0.1)
+y <- dnorm(xref,0,1)
+full.df <- data.frame (x=xref,y=y)
+shade1 <- subset(full.df, x <= z_min)
+shade2 <- subset(full.df, x <= z_max)
+shade3 <- subset(full.df, x >= z_max-0.1)
+
+ggplot(full.df,aes(x,y)) + geom_ribbon(data = shade1, aes(ymax=y,ymin=0),col='red',fill='red') + geom_ribbon(data = shade3, aes(ymax=y,ymin=0),col='red',fill='red') + geom_ribbon(data = shade2, aes(ymax=y,ymin=0),col='gray50',fill='gray50',alpha=0.7) + geom_line(size=1) + theme_bw(base_size=20) + geom_vline(x=0,color='black',linetype=2) + plotheme + ylab(NULL) + xlab(NULL)
+@
+
+ 
+---
+
+---
+Problema do teste Z
+
+-ize
+
+\- Até agora, assumimos que o desvio padrão da amostra aproxima o desvio padrão da população. Mas quanto menor a amostra, menos isso é verdade.
+
+equation*
+    Z = n}
+equation*
+
+viés (bias)
+
+\- Felizmente, existe uma maneira simples de corrigir esse viés:
+
+t de Student
+
+-ize
+
+ 
+---
+
+---
+A distribuição $t$ de Student
+
+-ize
+  \- Student = William Gosset
+  
+  \- Pelo Teorema do Limite Central, $s$ aproxima $\sigma$ para "grandes" amostras ($n \geq 30$). Mas, se as amostras são pequenas, isso não vale.
+  
+  \- Para pequenas amostras, essa estatística se aproxima mais de uma distribuição $t$ de Student.
+  
+  \- O único parâmetro de $t$ é $\nu = (n-1)$, onde $n$ é o número de observações. Esse parametro é conhecido como "graus de liberdade".
+  
+  \- Quando ($n \geq 30$), $t$ se aproxima de uma distribuição normal.
+  
+-ize
+
+frame
+---
+
+
+---
+[fragile]
+
+<<echo=F, fig.height = 5, fig.width = 5, out.width = "0.8\\linewidth">>=
+x <- seq(-4, 4, length=100)
+hx <- dnorm(x)
+
+degf <- c(1, 3, 8, 30)
+colors <- c("red", "blue", "darkgreen", "gold", "black")
+labels <- c("df=1", "df=3", "df=8", "df=30", "normal")
+
+plot(x, hx, type="l", lty=2, xlab=NA,
+  ylab="Density", main="Comparação de Distribuições t")
+
+for (i in 1:4){
+  lines(x, dt(x,degf[i]), lwd=2, col=colors[i])
+
+
+legend("topright", inset=.05, title="Distribuições",
+  labels, lwd=2, lty=c(1, 1, 1, 1, 2), col=colors)
+@
+
+
+
+frame
+---
+
+
+---
+Corrigindo nossos exemplos anteriores
+
+<<size='tiny',echo=-c(1:4)>>=
+n = 20
+x <-  c(1.85, 2.64, 3.63, 1.94, 2.41, 2.74, 2.85, 3.07, 1.29, 1.50, 1.55, 1.69, 3.70, 3.25, 2.47, 1.95, 3.33, 2.21, 3.02, 3.98)
+x_barra = mean(x);s = sd(x)
+mu <- 3
+t <- (x_barra-mu)/(s/sqrt(n))
+
+pnorm(t,0,1);pt(t,n-1) # neste caso, chamamos a estatística de t, e não z
+# ou, usando o comando interno do R
+t.test(x,mu=3,alternative='less')
+@
+ 
+---
+
+
+---
+Corrigindo nossos exemplos anteriores
+
+<<size='tiny',echo=-c(1:9)>>=
+n1=20
+n2=20
+x1 <-  c(1.85, 2.64, 3.63, 1.94, 2.41, 2.74, 2.85, 3.07, 1.29, 1.50, 1.55, 1.69, 3.70, 3.25, 2.47, 1.95, 3.33, 2.21, 3.02, 3.98)
+x2 <- c(2.79, 2.61, 3.72, 1.58, 2.02, 2.38, 2.70, 3.18, 3.96, 1.53, 1.51, 2.08, 3.34, 3.76, 2.61, 3.98, 3.50, 2.34, 2.95, 3.91)
+x_barra1 <- mean(x1)
+s1 <- sd(x1)
+x_barra2 <- mean(x2)
+s2 <- sd(x2)
+mu1=mu2=0
+t <- ((x_barra1-x_barra2)-(mu1-mu2))/sqrt((s1^2/n1)+(s2^2/n2))
+
+pnorm(t,0,1); pt(t,n-1)
+
+t.test(x1,x2, alternative="less")
+
+@
+
+ 
+---
+
+---
+Variações do teste $t$
+
+Teste $t$ para amostras independentes e variância conhecida: 
+
+
+scriptsize
+ c c c 
+
+$2}/n_2}} \sim N(0,1)$   \\
+
+tabular
+scriptsize
+
+
+
+Teste $t$ para amostras independentes e variância desconhecidas e iguais: 
+
+
+scriptsize
+ c c c 
+
+$(n_1+n_2-2)}$   \\
+
+tabular
+scriptsize
+
+frame
+---
+
+---
+Variações do teste $t$
+
+Teste $t$ para amostras independentes e variância desconhecidas e diferentes: 
+
+
+scriptsize
+ c c c 
+
+$(\nu)}$   \\
+
+tabular
+scriptsize
+
+
+
+Teste $t$ para amostras pareadas
+
+
+scriptsize
+ c c c 
+
+$(n-1)}$   \\
+
+tabular
+scriptsize
+
+frame
+---
+
+Erros Tipo I ($\alpha$) e Tipo II ($\beta$)
+
+---
+Erros Tipo I ($\alpha$) e Tipo II ($\beta$)
+
+LEMBRETE IMPORTANTE:} o teste é sempre baseado na distribuição amostral da estatística de interesse, e não na distribuição dos dados originais!
+
+
+frame
+---
+ 
+
+
+
+
+---
+Erros Tipo I ($\alpha$)
+
+Imaginemos um teste $z$ para comparação das médias de duas amostras:
+
+$X_1 \sim N(\mu=10,\sigma=5)$ e $X_2 \sim N(\mu=12,\sigma=5)$. 
+
+Cada população foi amostrada com $n = 30$.
+  
+<<erro alfa 1, size='small',tidy=T>>=
+set.seed(1979)
+
+x1 <- rnorm(30,10,5)
+
+x2 <- rnorm(30,12,5)
+
+@
+
+
+frame
+---
+
+
+
+---
+Erros Tipo I ($\alpha$)
+
+
+Como sabemos, $X}$ e $s$ aproximam (estimam) $\mu$ e $\sigma$. Quanto maior o $n$, melhor a estimação.
+
+
+
+columns}[c]
+.5\textwidth
+<<erro alfa 2, size='small',tidy=T>>=
+mean(x1);mean(x2)
+@
+
+.5\textwidth
+<<erro alfa 3, size='small',tidy=T>>=
+sd(x1);sd(x2)
+@
+
+columns
+
+frame
+---
+
+
+---
+Erros Tipo I ($\alpha$)
+
+Poderíamos formular duas hipóteses
+
+
+$H_1$: $\mu_1 - \mu_2 = 0$
+
+$H_2$: $\mu_1 - \mu_2 = 2$
+
+
+
+Neste caso, a nossa $H_2$ corresponde exatamente à realidade, mas só para fins didáticos.
+
+frame
+---
+
+---
+Erros Tipo I ($\alpha$)
+
+Podemos até visualizar como $X_1$ e $X_2$ estão distribuídos:
+
+<<erro alfa 4, size='tiny',tidy=T,fig.height=4, figdev='my_pdf',fig.ext='pdf'>>=
+curve(dnorm(x,mean=10,sd=5),-10,35,,col="blue",cex=2)
+curve(dnorm(x,mean=15,sd=5),-10,35,,col="red",add=T)
+@
+
+
+frame
+---
+
+
+---
+Erros Tipo I ($\alpha$)
+
+X_2}).
+
+N}}$
+
+
+<<erro alfa 5, size='small',tidy=T,fig.height=4, figdev='my_pdf',fig.ext='pdf'>>=
+
+h1.mu <- 0
+
+h2.mu <- 2
+
+h1.err <- h2.err <- 5/sqrt(30)
+
+@
+
+
+frame
+---
+
+
+---
+Erros Tipo I ($\alpha$)
+
+<<erro alfa 6, size='tiny',tidy=T,fig.height=4, figdev='my_pdf',fig.ext='pdf'>>=
+curve(dnorm(x,mean=h2.mu,sd=h1.err),-10,10,,col="red")
+curve(dnorm(x,mean=h1.mu,sd=h0.err),-10,10,,col="blue",add=T)
+@
+
+frame
+---
+
+
+---
+Erros Tipo I ($\alpha$)
+
+O teste de hipótese clássico ("ritual nulo"), como vimos, só se baseia em refutar uma das hipóteses, independente de outras hipóteses.
+
+enumerate
+  X}_D - \mu_D)/E.P.$ ($H_1: \mu_D = 0$)
+  \- Estimamos a estatística com base na amostra
+  \- Assumimos uma distribuição para essa estatística ($z$)
+  \- Estabelecemos nosso nível de significância ($\alpha = 5\$)
+  0.05}$)
+  \- Com base nesse probabilidade, rejeitamos ou não a hipótese
+enumerate
+
+frame
+---
+
+
+---
+Erros Tipo I ($\alpha$)
+
+Para o nosso caso:
+
+Valor Z calculado:
+
+<<prob t, size='tiny'>>=
+z<- ((mean(x2)-mean(x1)) - 0)/ (5/sqrt(30)); z
+@
+
+Valor Z associado à probabilidade de 0.05: 
+
+<<prob tcrit, size='tiny'>>=
+z_005 <- qnorm(0.05,0,1,lower.tail=F); z_005
+@
+frame
+---
+
+
+---
+Erros Tipo I ($\alpha$)
+
+<<erro alfa 7, size='tiny',tidy=T,fig.height=4, figdev='my_pdf',fig.ext='pdf'>>=
+curve(dnorm(x,mean=h2.mu,sd=h2.err),-10,10,,col="red")
+curve(dnorm(x,mean=h1.mu,sd=h1.err),-10,10,,col="blue",add=T)
+abline(v=z_005,col="blue")
+abline(v=z,lty=1)
+@
+
+frame
+---
+
+
+---
+Erros Tipo I ($\alpha$)
+
+Apesar de não ser comum, nada impede que testemos diferentes hipóteses "competitivas", por exemplo, $H_2: \mu_D = 2$
+
+<<prob2, size='tiny'>>=
+z<- ((mean(x2)-mean(x1)) - 2)/ (5/sqrt(30)); z
+
+z_005 <- qnorm(0.05,2,1,lower.tail=F); z_005
+@
+
+frame
+---
+
+
+---
+Erros Tipo I ($\alpha$)
+
+<<erro2, size='tiny',tidy=T,fig.height=4, figdev='my_pdf',fig.ext='pdf'>>=
+curve(dnorm(x,mean=h2.mu,sd=h2.err),-10,10,,col="red")
+curve(dnorm(x,mean=h1.mu,sd=h1.err),-10,10,,col="blue",add=T)
+abline(v=z_005,col="red")
+abline(v=z,lty=1)
+@
+
+frame
+---
+
+
+---
+Erros Tipo I ($\alpha$)
+
+O erro Tipo I, ou erro $\alpha$, é a probabilidade de rejeitarmos $H_1$ em favor de $H_2$, quando $H_1$ é verdadeira. Ao estabelecermos um nível de significancia, decidimos qual porcentagem de erro Tipo I é aceitável:
+
+<<erro3, size='tiny',tidy=T,fig.height=4, figdev='my_pdf',fig.ext='pdf',echo=FALSE>>=
+z_005 <- qnorm(0.05,0,1,lower.tail=F)
+z_01 <- qnorm(0.1,0,1,lower.tail=F)
+z_001 <- qnorm(0.01,0,1,lower.tail=F)
+curve(dnorm(x,mean=h2.mu,sd=h2.err),-10,10,,col="red")
+curve(dnorm(x,mean=h1.mu,sd=h1.err),-10,10,,col="blue",add=T)
+abline(v=z_01,col="blue",lty=1)
+abline(v=z_005,col="blue",lty=2)
+abline(v=z_001,col="blue",lty=4)
+@
+
+
+frame
+---
+
+
+
+---
+Erros Tipo II ($\beta$)
+
+power})} do teste.
+
+<<erro5, size='tiny',tidy=T,fig.height=4, figdev='my_pdf',fig.ext='pdf',echo=FALSE>>=
+z_005 <- qnorm(0.05,0,1,lower.tail=F)
+z_01 <- qnorm(0.1,0,1,lower.tail=F)
+z_001 <- qnorm(0.01,0,1,lower.tail=F)
+curve(dnorm(x,mean=h2.mu,sd=h2.err),-10,10,,col="red")
+curve(dnorm(x,mean=h1.mu,sd=h1.err),-10,10,,col="blue",add=T)
+abline(v=z_01,col="blue",lty=1)
+abline(v=z_005,col="blue",lty=2)
+abline(v=z_001,col="blue",lty=4)
+@
+
+frame
+---
+
+---
+Erros Tipo II ($\beta$)
+
+E agora? Se aumentamos o nível de significância, perdemos poder. 
+
+Seria esse o momento de abandonar de vez a ciência, e vender arte na praia? 
+
+Como poderíamos resolver esse problema? 
+
+enumerate
+
+  \- Avaliando efeitos maiores
+  
+  \- Reduzindo a nossa variância
+
+enumerate
+
+frame
+---
+
+
+---
+Erros Tipo II ($\beta$)
+
+Avaliando efeitos maiores: $\mu_D = 6$
+
+<<erro4, size='tiny',tidy=T,fig.height=4, figdev='my_pdf',fig.ext='pdf',echo=FALSE>>=
+z_005 <- qnorm(0.05,0,1,lower.tail=F)
+z_01 <- qnorm(0.1,0,1,lower.tail=F)
+z_001 <- qnorm(0.01,0,1,lower.tail=F)
+curve(dnorm(x,mean=6,sd=h2.err),-10,10,,col="red")
+curve(dnorm(x,mean=0,sd=h1.err),-10,10,,col="blue",add=T)
+abline(v=z_01,col="blue",lty=1)
+abline(v=z_005,col="blue",lty=2)
+abline(v=z_001,col="blue",lty=4)
+@
+
+frame
+---
+
+---
+Erros Tipo II ($\beta$)
+
+Aumentando a amostragem: n = 100, $N}}$
+
+
+
+
+<<erro8, size='tiny',tidy=T,fig.height=4, figdev='my_pdf',fig.ext='pdf',echo=FALSE>>=
+h2.err <- h1.err <- 5/sqrt(100)
+z_005 <- qnorm(0.05,0,h1.err,lower.tail=F)
+z_01 <- qnorm(0.1,0,h1.err,lower.tail=F)
+z_001 <- qnorm(0.01,0,h1.err,lower.tail=F)
+curve(dnorm(x,mean=2,sd=h2.err),-10,10,,col="red")
+curve(dnorm(x,mean=0,sd=h1.err),-10,10,,col="blue",add=T)
+abline(v=z_01,col="blue",lty=1)
+abline(v=z_005,col="blue",lty=2)
+abline(v=z_001,col="blue",lty=4)
+@
+
+frame
+---
+
+
+
+---
+Estimando o tamanho amostral
+
+Esta relação nos permite estimar o esforço amostral necessário para garantir que tenhamos poder estatístico suficiente para detectar um efeito de tamanho $d$, com base na definição dos erros $\alpha$ e $\beta$ e em uma estimativa de $\sigma$.
+  
+  
+  
+  
+  A maneira ideal de determinar os parâmetros necessários é a realização de um estudo piloto. Mas podemos também recorrer à literatura e/ou ao bom senso.
+
+frame
+---
+
+
+
+
+ 
+ ---
+ Teorema do Limite Central
+ 
+ -ize
+   \- Seja $X$ uma v.a. independente e identicamente distribuída (i.i.d.), que possui esperança $E[X]=\mu$ e variância $Var[X]=\sigma$ 
+   \- Podemos tomar várias amostras de $X$ ($X_i$), com tamanho $n$, e calcular $E[X]_n$ para cada uma.
+   \- Se nós normalizarmos as médias com relação à média original,
+     equation*
+     Z_n = n}
+   equation*
+   
+   
+   \- Então Z \sim N (0,1)$ ! 
+ -ize
+ 
+     
+  
+ ---
+ 
+ ---
+ [fragile]
+ 
+ columns}[c]
+ 
+ 0.5\linewidth
+ 
+ <<size='tiny',eval=F>>=
+ set.seed(1979)
+ dados <- runif(500,1,6)
+ hist(dados,main=NA)
+ 
+ means <- vector(100,mode='numeric')
+ for (i in c(1:100)){
+   samp <- runif(5,1,6)
+   means[i] <- mean(samp)
+ 
+ 
+ hist(means,breaks=10,main=NA)
+ @
+ 
+ 0.5\linewidth
+ 
+ <<fig.width=4,fig.height=3.5,out.width='0.9\\linewidth', echo=FALSE>>=
+ set.seed(1979)
+ dados <- runif(500,1,6)
+ hist(dados,main=NA)
+ 
+ means <- vector(100,mode='numeric')
+ for (i in c(1:100)){
+   samp <- runif(5,1,6)
+   means[i] <- mean(samp)
+ 
+ 
+ hist(means,breaks=10,main=NA)
+ @
+ 
+ columns
+ 
+  
+ ---
+ 
+ ---
+ Teorema do Limite Central
+ 
+ -ize
+   \- O teorema do limite central é uma das bases da inferência estatística paramétrica
+   \- Não importa a distribuição dos dados originais, a distribuição da média será aproximadamente normal se $n$ for grande 
+   \- Geralmente, estamos fazendo inferências sobre a média
+   -ize
+     \- $\mu_1 > \mu_2$?
+     \- $\mu_1 - \mu_2 > 10$?
+     \- etc.
+     -ize
+ -ize
+ 
+     
+---
+ 
+ 
+ 

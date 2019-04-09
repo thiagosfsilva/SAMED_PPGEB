@@ -1,0 +1,474 @@
+---
+title: "Statistical Analysis and Modeling in Ecology"
+subtitle: "Lecture 3 - Discrete Probability Distributions"
+author: "Thiago S. F. Silva - thiago.sf.silva@stir.ac.uk"
+date: "2019/04/07 (updated: `r Sys.Date()`)"
+header-includes:
+   - \usepackage{amsmath}
+output:
+  xaringan::moon_reader:
+    css: xaringan-themer.css
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+
+---
+class: center, middle, inverse
+
+```{r xaringan-themer, include = FALSE}
+library(xaringanthemer)
+mono_accent(
+  base_color = "#2c4fa3",
+  header_font_google = google_font("Francois One"),
+  text_font_google   = google_font("Roboto Condensed", "400", "400i"),
+  code_font_google   = google_font("Fira Code"),
+  code_font_size = '0.65m',
+  text_font_size = '1.5em',
+  title_slide_background_image = 'https://www.ox.ac.uk/sites/files/oxford/styles/ow_large_feature/public/field/field_image_main/Mathematics%20and%20Statistics.jpg',
+  link_color = "#eb0037" 
+)
+```
+# Probability Distributions
+
+---
+Random Variable
+===============
+
+### Simple definition:
+
+A random event. It may be discrete (e.g. Capture) or continuous (e.g. Temperature)
+
+### Mathematical definition:
+
+A function that associates a numerical value to each possible result of an experiment, within a sample space.
+
+
+**  But what is this "function"? What is this "numerical value"?**
+---
+Random Variable
+===============
+
+A **probability** function! 
+
+Example: How likely is a carnivorous plant to catch 5 out of 10 visiting insects?
+
+---
+Discrete Random Variables
+=========================
+
+For discrete random variables, each possible **outcome** has an associated *probability*.
+
+We can then say that the R.V. is defined by a **probability mass function (p.m.f)**.
+
+Probability of Insect Capture:
+
+$$f(x) = \begin{cases} p & \text{for } k=1  \text{(capture)} \\ q = (1-p) & \text{for } k= 0 \text{ (no capture)} \end{cases}$$
+
+
+---
+Bernoulli Distribution
+======================
+
+Distribution of a single discrete event with probability of success $p$ and probability of failure $q = 1-p$
+
+The simplest discrete probability distribution
+
+**Examples:**
+
+- Capture, No Capture
+- Presence, Absence
+- Heads, Tails
+- Yes, No
+- **Success, Failure**
+
+---
+Bernoulli Distribution
+======================
+
+Every probability distribution is defined by a **probability function** and its **parameters**.
+
+### Bernoulli Distribution:
+
+Parameters:  $p, \quad (0 \leq p \leq 1, p \in \mathbb{R})$
+
+P.m.f.:
+$$f(x) = \begin{cases} p & \text{for } k=1 \\ q = (1-p) & \text{for } k= 0 \end{cases}$$
+
+Exampe: probability of rolling "6" on a die:
+
+$D \sim \text{Bernoulli(p=1/6)}$
+
+---
+Binomial Distribution
+=====================
+
+Distribution of the expected number of sucesses ( $k$ ) on a sequence of ( $n$ ) **independent** realizations (trials) of a discrete event, with  probability of success $p$ and probability of failure $q = 1-p$.
+
+**Binomial Distribution: $X \sim B(n,p)$**
+
+Parameters  $n$ $(n \in \mathbb{N})$; $p$ $(0 \leq p \leq 1, p \in \mathbb{R})$
+
+Suport: $x = k, k \in \left\{0,\ldots,n\right\}$
+
+P.m.f:
+
+$$
+  f(x) = \binom{n}{k} p^k(1-p)^{n-k}
+$$
+
+---
+
+Combinatorial analysis
+======================
+
+
+$\binom{n}{k}$ means a combination of $n$ results, $k$ by $k$:
+
+$\binom{n}{k} =  C_{k}^{n} = \frac{n!}{k!(n-k)!}$
+
+Example:
+
+How many possible combinations of the numbers 1 to 4, 2 by 2?
+
+$\binom{4}{2} =  C_{2}^{ 4} = \frac{4!}{2!(4-2)!} = \frac{ 4 \times 3 \times 2 \times 1}{2 \times 1 \times (2 \times 1)} = \frac{24}{4} = 6$
+
+---
+
+Combinatorial analysis
+======================
+
+** Or use R :-) **
+
+```{r combnex}
+choose(4,2)
+combn(4,2)
+```
+
+---
+Binomial Distribution
+=====================
+
+$$
+  f(x) = \binom{n}{k} p^k(1-p)^{n-k}
+$$
+
+**Let us break down the equation:**
+
+We want $k$ successes with probability $p^k = P(C_1 \cap C_2 \ldots \cap C_k)$
+
+If we have $p$ successes, we necessarily have $n-k$ failures, with probability $q = (1-p)^{n-k}$
+
+Since order doesn't matter, there are $\binom{n}{k}$ ways to get a combination of $k$ successes and $n-k$ failures over $n$ trials.
+
+
+---
+Binomial Distribution Example
+=============================
+
+What is the probability that 7 insects will be captured after 10 visits, if capture probability is 0.2 per visit?
+
+$$
+P(x=k) =\binom{n}{k} p^k(1-p)^{n-k} = {n! \over k!(n-k)!} \times p^k \times (1-p)^{n-k}
+$$
+  
+$$
+  P(x=7) =\binom{10}{7} \times 0.2^7 \times 0.8^3 = {10! \over 7!(3)!} \times 0.2^7 \times 0.8^3
+$$  
+$$  P(x=7) = 120 \times 1.3 \times 10^{-5} \times 0.512
+$$
+$$  
+P(x=7) = 7.9 \times 10^{-4}
+$$
+
+---
+Binomial Distribution
+=====================
+
+**Give it a try:** How likely am I to throw a coin 5 times and get 3 heads?
+
+$$
+P(x=k) =\binom{n}{k} p^k(1-p)^{n-k} = {n! \over k!(n-k)!} \times p^k \times (1-p)^{n-k}
+$$
+
+---
+Binomial Distribution
+=====================
+
+**Give it a try:** How likely am I to throw a coin 5 times and get 3 heads?
+
+$P (x=3) =$ ? ; $X \sim B(p=0.5, n=5)$ ; $k=3$
+
+$$
+  P(x=3) =\binom{5}{3} \times 0.5^3 \times 0.5^2 = {5! \over 3!(5-3)!} \times 0.5^3 \times 0.3^3
+$$
+
+$$
+P (x=3) = 10 \times 0.125 \times 0.25
+$$
+
+$$P(x = 3) = 0.3125$$
+---
+Bionomial distribution
+======================
+
+**Give it a try:** How likely am I to throw a coin 5 times and get 3 heads?
+
+
+```{r binoex1}
+# Computing each term of the function separately
+p_x <- choose(5,3) * 0.5^3 * 0.5^2
+
+p_x
+
+# R has built-in probability functions!
+dbinom(3, size = 5, prob = 0.5)
+```
+
+---
+Binomial Distribution
+=====================
+
+**One more:** How likely am I to throw a coin 5 times and get between 2 and 4 heads?
+
+Suggestion: use R!
+
+---
+Binomial Distribution
+=====================
+
+**One more:** How likely am I to throw a coin 5 times and get between 2 and 4 heads?
+
+
+We can think of the problem as the union of three probabilities:
+
+$P(x = 2) \cup P (x = 3) \cup P(x = 4)$
+
+
+```{r binomrange}
+p2 <- dbinom (2, size = 10, prob = 0.2)
+p3 <- dbinom (3, size = 10, prob = 0.2)
+p4 <- dbinom (4, size = 10, prob = 0.2)
+
+p2 + p3 + p4
+
+```
+
+
+---
+Binomial Distribution
+=====================
+
+We can also use probability functions to simulate replication, and observe the expected sampling results:
+
+.pull-left[
+```{r binomsim, fig.show='hide', fig.height=4,fig.width=4,echo=-1}
+par(mgp=c(1.8,0.5,0), mar=c(3,3,0,1),cex=1.2)
+# "sets" the random number 
+set.seed (40) 
+
+# Simulate 1000 trials
+x <- rbinom (1000,
+             size = 10,
+             prob = 0.2)
+
+# Plots results as histogram
+hist (x, breaks = 7,
+      main = NA,
+      col = "gray70")
+```
+]
+
+.pull-right[
+![](`r knitr::fig_chunk("binomsim", "png")`)
+]
+
+
+---
+Binomial Distribution
+=====================
+
+Comparing with our early results
+
+.pull-left[
+```{r binomsim2, tidy = T, fig.show='hide', fig.height=4, fig.width=4,echo=-c(1,2)}
+par(mgp=c(1.8,0.5,0), mar=c(3,3,0,1),cex=1.2)
+hist(x,breaks=7,main=NA,col="gray70",freq=F)
+round(c(p2,p3,p4),2)
+
+round(p2 + p3 + p4,2)
+
+
+```
+]
+.pull-right[
+![](`r knitr::fig_chunk("binomsim2", "png")`)
+]
+
+---
+Why use distributions?
+======================
+
+- What are the advantages of knowing a probability distribution?
+
+- Do you expect most ecological data to really follow a specific distribution?
+
+
+---
+Why use distributions?
+======================
+
+Distributions have known properties. For the binomial distribution:
+
+**Expectation (First Moment):** The most likley outcome for a random variable
+
+$$E[X] = \sum_{i=1}^n{x_ip_i}$$
+**Variance (Second Moment):** The *dispersion* of a random variable.
+
+$$Var[X] = \sum_{i=1}^n{p_i}(x_i - E[X])^2$$
+---
+Binomial Distribution
+=====================
+
+Binomial Distribution: $X \sim B(n,p)$
+
+Parameters: $n$ $(n \in \mathbb{N})$; $p$ $(0 < p < 1, p \in \mathbb{R})0$
+
+Support: $x = k, k \in \left\{0,\ldots,n\right\}$
+
+P.m.f:
+
+$$f(x) = \binom{n}{k}p^k(1-p)^{n-k}$$
+
+$E[X] = np$
+
+$Var[X] = np(1 - p)$
+
+
+---
+Binomial Distribution
+=====================
+
+Example: If capture probability is 0.2, what is the average number of captures I expect to see after 10 insect visits?
+
+
+$E[x] = np = 10 \times 0.2 = 2$ captures
+
+
+How variable do I expect this average to be? 
+
+$Var[X] = np(1 - p) = `r 10*0.2*(1-0.2)`$
+
+
+---
+Binomial Distribution
+=====================
+
+.pull-left[
+
+$n = 10$,  $p =0.2$
+
+$E[X] = 2$
+
+$Var[X] = `r 10*0.2*(1-0.2)`$
+]
+
+.pull-right[
+```{r binomdemo1, echo = F, fig.height=4, fig.width=4}
+par(mgp=c(1.8,0.5,0), mar=c(3,3,0,1),cex=1.2)
+set.seed(40)
+x <- rbinom(1000,size=10,prob=0.2)
+hist(x,breaks=7,xlim=c(0,10),main=NA,col="gray70",freq=F)
+```
+]
+
+---
+Binomial Distribution
+=====================
+
+.pull-left[
+
+$n = 10$,  $p =0.9$
+
+$E[X] = 9$
+
+$Var[X] = `r 10*0.9*(1-0.9)`$
+]
+
+.pull-right[
+```{r binomdemo2, echo = F, fig.height=4, fig.width=4}
+par(mgp=c(1.8,0.5,0), mar=c(3,3,0,1),cex=1.2)
+set.seed(40)
+x <- rbinom(1000,size=10,prob=0.9)
+hist(x,breaks=7,xlim=c(0,10),main=NA,col="gray70",freq=F)
+```
+] 
+---
+
+Why use distributions?
+=======================
+
+- Statistics was created before computers.
+
+- Simulations were very hard to do!
+
+- By assuming data followed a known probability distribution, statistical problems became tractable.
+
+---
+
+How many intern hours?
+=======================
+
+```{r megabinsim}
+# Set parameters 
+n = 10; p = 0.2
+
+# Expectation 
+E_x <- n*p; E_x
+ 
+system.time(sim <- rbinom(10000000,size=10,prob=0.2))
+
+mean(sim)
+```
+
+---
+
+How many intern hours?
+=======================
+```{r plotmegasim, fig.height=4, fig.width=6, echo=-1}
+par(mgp=c(1.8,0.5,0), mar=c(3,3,0,1),cex=1.2) 
+hist(sim, breaks=c(0:10), xlim=c(0,10), main=NA)
+abline(v=mean(sim), col='red', lwd=2)
+``` 
+ 
+---
+Discrete Distributions
+======================
+
+<small>
+**Bernoulli (Binomial with $n=1$)**: Success of a single trial
+    
+**Binomial** ($X \sim B(n,p$)): Success on several trials.
+    
+**Multinomial** ($X \sim M(n,p_1,\dots,p_k)$): Generalization of the binomial for more than two possible outcomes.
+    
+**Poisson** ($X \sim Pois(\lambda)$): Expected successes for an unknown number of trials.
+    
+**Negative Binomial**($X \sim NB(r,p)$): Expected number of failures before a given number of sucesses occur.
+    
+**Geometric**($X \sim Geom(p)$): Expected number of trials until the first failure. 
+    
+**Beta-binomial**($X \sim BetaBin(p,\theta)$): Negative binomial with variable probability of success.
+
+</small>
+
+---
+class: inverse
+
+Next Lecture:
+=============
+
+Continuous Probability Distributions: infinite possibilitites!
+
+![](http://phdcomics.com/comics/archive/phd090507s.gif)

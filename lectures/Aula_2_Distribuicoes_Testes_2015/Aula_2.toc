@@ -1,5 +1,0 @@
-\beamer@endinputifotherversion {3.36pt}
-\select@language {english}
-\beamer@sectionintoc {1}{Distribuições de Probabilidade}{3}{0}{1}
-\beamer@sectionintoc {2}{Testes de Hipóteses}{44}{0}{2}
-\beamer@sectionintoc {3}{Erros Tipo I ($\alpha $) e Tipo II ($\beta $)}{91}{0}{3}

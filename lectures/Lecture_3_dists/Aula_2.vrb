@@ -1,0 +1,13 @@
+\frametitle{Erros Tipo II ($\beta $)}
+
+Aumentando a amostragem: n = 100, $\sigma_{\mu} = \dfrac{\sigma}{\sqrt{N}}$
+
+\vfill
+
+
+\begin{knitrout}\tiny
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/erro8-1}
+
+\end{knitrout}
+

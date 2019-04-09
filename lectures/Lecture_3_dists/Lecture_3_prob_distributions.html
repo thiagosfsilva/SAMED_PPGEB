@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Statistical Analysis and Modeling in Ecology</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Thiago S. F. Silva - thiago.sf.silva@stir.ac.uk" />
+    
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Statistical Analysis and Modeling in Ecology
+## Lecture 3 - Discrete Probability Distributions
+### Thiago S. F. Silva - <a href="mailto:thiago.sf.silva@stir.ac.uk" class="email">thiago.sf.silva@stir.ac.uk</a>
+### 2019/04/07 (updated: 2019-04-09)
+
+---
+
+class: center, middle, inverse
+
+
+# Probability Distributions
+
+---
+Random Variable
+===============
+
+### Simple definition:
+
+A random event. It may be discrete (e.g. Capture) or continuous (e.g. Temperature)
+
+### Mathematical definition:
+
+A function that associates a numerical value to each possible result of an experiment, within a sample space.
+
+
+**  But what is this "function"? What is this "numerical value"?**
+---
+Random Variable
+===============
+
+A **probability** function! 
+
+Example: How likely is a carnivorous plant to catch 5 out of 10 visiting insects?
+
+---
+Discrete Random Variables
+=========================
+
+For discrete random variables, each possible **outcome** has an associated *probability*.
+
+We can then say that the R.V. is defined by a **probability mass function (p.m.f)**.
+
+Probability of Insect Capture:
+
+`$$f(x) = \begin{cases} p &amp; \text{for } k=1  \text{(capture)} \\ q = (1-p) &amp; \text{for } k= 0 \text{ (no capture)} \end{cases}$$`
+
+
+---
+Bernoulli Distribution
+======================
+
+Distribution of a single discrete event with probability of success `\(p\)` and probability of failure `\(q = 1-p\)`
+
+The simplest discrete probability distribution
+
+**Examples:**
+
+- Capture, No Capture
+- Presence, Absence
+- Heads, Tails
+- Yes, No
+- **Success, Failure**
+
+---
+Bernoulli Distribution
+======================
+
+Every probability distribution is defined by a **probability function** and its **parameters**.
+
+### Bernoulli Distribution:
+
+Parameters:  `\(p, \quad (0 \leq p \leq 1, p \in \mathbb{R})\)`
+
+P.m.f.:
+`$$f(x) = \begin{cases} p &amp; \text{for } k=1 \\ q = (1-p) &amp; \text{for } k= 0 \end{cases}$$`
+
+Exampe: probability of rolling "6" on a die:
+
+`\(D \sim \text{Bernoulli(p=1/6)}\)`
+
+---
+Binomial Distribution
+=====================
+
+Distribution of the expected number of sucesses ( `\(k\)` ) on a sequence of ( `\(n\)` ) **independent** realizations (trials) of a discrete event, with  probability of success `\(p\)` and probability of failure `\(q = 1-p\)`.
+
+**Binomial Distribution: `\(X \sim B(n,p)\)`**
+
+Parameters  `\(n\)` `\((n \in \mathbb{N})\)`; `\(p\)` `\((0 \leq p \leq 1, p \in \mathbb{R})\)`
+
+Suport: `\(x = k, k \in \left\{0,\ldots,n\right\}\)`
+
+P.m.f:
+
+$$
+  f(x) = \binom{n}{k} p^k(1-p)^{n-k}
+$$
+
+---
+
+Combinatorial analysis
+======================
+
+
+`\(\binom{n}{k}\)` means a combination of `\(n\)` results, `\(k\)` by `\(k\)`:
+
+`\(\binom{n}{k} =  C_{k}^{n} = \frac{n!}{k!(n-k)!}\)`
+
+Example:
+
+How many possible combinations of the numbers 1 to 4, 2 by 2?
+
+`\(\binom{4}{2} =  C_{2}^{ 4} = \frac{4!}{2!(4-2)!} = \frac{ 4 \times 3 \times 2 \times 1}{2 \times 1 \times (2 \times 1)} = \frac{24}{4} = 6\)`
+
+---
+
+Combinatorial analysis
+======================
+
+** Or use R :-) **
+
+
+```r
+choose(4,2)
+```
+
+```
+## [1] 6
+```
+
+```r
+combn(4,2)
+```
+
+```
+##      [,1] [,2] [,3] [,4] [,5] [,6]
+## [1,]    1    1    1    2    2    3
+## [2,]    2    3    4    3    4    4
+```
+
+---
+Binomial Distribution
+=====================
+
+$$
+  f(x) = \binom{n}{k} p^k(1-p)^{n-k}
+$$
+
+**Let us break down the equation:**
+
+We want `\(k\)` successes with probability `\(p^k = P(C_1 \cap C_2 \ldots \cap C_k)\)`
+
+If we have `\(p\)` successes, we necessarily have `\(n-k\)` failures, with probability `\(q = (1-p)^{n-k}\)`
+
+Since order doesn't matter, there are `\(\binom{n}{k}\)` ways to get a combination of `\(k\)` successes and `\(n-k\)` failures over `\(n\)` trials.
+
+
+---
+Binomial Distribution Example
+=============================
+
+What is the probability that 7 insects will be captured after 10 visits, if capture probability is 0.2 per visit?
+
+$$
+P(x=k) =\binom{n}{k} p^k(1-p)^{n-k} = {n! \over k!(n-k)!} \times p^k \times (1-p)^{n-k}
+$$
+  
+$$
+  P(x=7) =\binom{10}{7} \times 0.2^7 \times 0.8^3 = {10! \over 7!(3)!} \times 0.2^7 \times 0.8^3
+$$  
+$$  P(x=7) = 120 \times 1.3 \times 10^{-5} \times 0.512
+$$
+$$  
+P(x=7) = 7.9 \times 10^{-4}
+$$
+
+---
+Binomial Distribution
+=====================
+
+**Give it a try:** How likely am I to throw a coin 5 times and get 3 heads?
+
+$$
+P(x=k) =\binom{n}{k} p^k(1-p)^{n-k} = {n! \over k!(n-k)!} \times p^k \times (1-p)^{n-k}
+$$
+
+---
+Binomial Distribution
+=====================
+
+**Give it a try:** How likely am I to throw a coin 5 times and get 3 heads?
+
+`\(P (x=3) =\)` ? ; `\(X \sim B(p=0.5, n=5)\)` ; `\(k=3\)`
+
+$$
+  P(x=3) =\binom{5}{3} \times 0.5^3 \times 0.5^2 = {5! \over 3!(5-3)!} \times 0.5^3 \times 0.3^3
+$$
+
+$$
+P (x=3) = 10 \times 0.125 \times 0.25
+$$
+
+`$$P(x = 3) = 0.3125$$`
+---
+Bionomial distribution
+======================
+
+**Give it a try:** How likely am I to throw a coin 5 times and get 3 heads?
+
+
+
+```r
+# Computing each term of the function separately
+p_x &lt;- choose(5,3) * 0.5^3 * 0.5^2
+
+p_x
+```
+
+```
+## [1] 0.3125
+```
+
+```r
+# R has built-in probability functions!
+dbinom(3, size = 5, prob = 0.5)
+```
+
+```
+## [1] 0.3125
+```
+
+---
+Binomial Distribution
+=====================
+
+**One more:** How likely am I to throw a coin 5 times and get between 2 and 4 heads?
+
+Suggestion: use R!
+
+---
+Binomial Distribution
+=====================
+
+**One more:** How likely am I to throw a coin 5 times and get between 2 and 4 heads?
+
+
+We can think of the problem as the union of three probabilities:
+
+`\(P(x = 2) \cup P (x = 3) \cup P(x = 4)\)`
+
+
+
+```r
+p2 &lt;- dbinom (2, size = 10, prob = 0.2)
+p3 &lt;- dbinom (3, size = 10, prob = 0.2)
+p4 &lt;- dbinom (4, size = 10, prob = 0.2)
+
+p2 + p3 + p4
+```
+
+```
+## [1] 0.5913969
+```
+
+
+---
+Binomial Distribution
+=====================
+
+We can also use probability functions to simulate replication, and observe the expected sampling results:
+
+.pull-left[
+
+```r
+# "sets" the random number 
+set.seed (40) 
+
+# Simulate 1000 trials
+x &lt;- rbinom (1000,
+             size = 10,
+             prob = 0.2)
+
+# Plots results as histogram
+hist (x, breaks = 7,
+      main = NA,
+      col = "gray70")
+```
+]
+
+.pull-right[
+![](Lecture_3_prob_distributions_files/figure-html/binomsim-1.png)
+]
+
+
+---
+Binomial Distribution
+=====================
+
+Comparing with our early results
+
+.pull-left[
+
+```r
+round(c(p2, p3, p4), 2)
+```
+
+```
+## [1] 0.30 0.20 0.09
+```
+
+```r
+round(p2 + p3 + p4, 2)
+```
+
+```
+## [1] 0.59
+```
+]
+.pull-right[
+![](Lecture_3_prob_distributions_files/figure-html/binomsim2-1.png)
+]
+
+---
+Why use distributions?
+======================
+
+- What are the advantages of knowing a probability distribution?
+
+- Do you expect most ecological data to really follow a specific distribution?
+
+
+---
+Why use distributions?
+======================
+
+Distributions have known properties. For the binomial distribution:
+
+**Expectation (First Moment):** The most likley outcome for a random variable
+
+`$$E[X] = \sum_{i=1}^n{x_ip_i}$$`
+**Variance (Second Moment):** The *dispersion* of a random variable.
+
+`$$Var[X] = \sum_{i=1}^n{p_i}(x_i - E[X])^2$$`
+---
+Binomial Distribution
+=====================
+
+Binomial Distribution: `\(X \sim B(n,p)\)`
+
+Parameters: `\(n\)` `\((n \in \mathbb{N})\)`; `\(p\)` `\((0 &lt; p &lt; 1, p \in \mathbb{R})0\)`
+
+Support: `\(x = k, k \in \left\{0,\ldots,n\right\}\)`
+
+P.m.f:
+
+`$$f(x) = \binom{n}{k}p^k(1-p)^{n-k}$$`
+
+`\(E[X] = np\)`
+
+`\(Var[X] = np(1 - p)\)`
+
+
+---
+Binomial Distribution
+=====================
+
+Example: If capture probability is 0.2, what is the average number of captures I expect to see after 10 insect visits?
+
+
+`\(E[x] = np = 10 \times 0.2 = 2\)` captures
+
+
+How variable do I expect this average to be? 
+
+`\(Var[X] = np(1 - p) = 1.6\)`
+
+
+---
+Binomial Distribution
+=====================
+
+.pull-left[
+
+`\(n = 10\)`,  `\(p =0.2\)`
+
+`\(E[X] = 2\)`
+
+`\(Var[X] = 1.6\)`
+]
+
+.pull-right[
+![](Lecture_3_prob_distributions_files/figure-html/binomdemo1-1.png)&lt;!-- --&gt;
+]
+
+---
+Binomial Distribution
+=====================
+
+.pull-left[
+
+`\(n = 10\)`,  `\(p =0.9\)`
+
+`\(E[X] = 9\)`
+
+`\(Var[X] = 0.9\)`
+]
+
+.pull-right[
+![](Lecture_3_prob_distributions_files/figure-html/binomdemo2-1.png)&lt;!-- --&gt;
+] 
+---
+
+Why use distributions?
+=======================
+
+- Statistics was created before computers.
+
+- Simulations were very hard to do!
+
+- By assuming data followed a known probability distribution, statistical problems became tractable.
+
+---
+
+How many intern hours?
+=======================
+
+
+```r
+# Set parameters 
+n = 10; p = 0.2
+
+# Expectation 
+E_x &lt;- n*p; E_x
+```
+
+```
+## [1] 2
+```
+
+```r
+system.time(sim &lt;- rbinom(10000000,size=10,prob=0.2))
+```
+
+```
+##    user  system elapsed 
+##   0.462   0.006   0.468
+```
+
+```r
+mean(sim)
+```
+
+```
+## [1] 1.99978
+```
+
+---
+
+How many intern hours?
+=======================
+
+```r
+hist(sim, breaks=c(0:10), xlim=c(0,10), main=NA)
+abline(v=mean(sim), col='red', lwd=2)
+```
+
+![](Lecture_3_prob_distributions_files/figure-html/plotmegasim-1.png)&lt;!-- --&gt;
+ 
+---
+Discrete Distributions
+======================
+
+&lt;small&gt;
+**Bernoulli (Binomial with `\(n=1\)`)**: Success of a single trial
+    
+**Binomial** ($X \sim B(n,p$)): Success on several trials.
+    
+**Multinomial** ($X \sim M(n,p_1,\dots,p_k)$): Generalization of the binomial for more than two possible outcomes.
+    
+**Poisson** ($X \sim Pois(\lambda)$): Expected successes for an unknown number of trials.
+    
+**Negative Binomial**($X \sim NB(r,p)$): Expected number of failures before a given number of sucesses occur.
+    
+**Geometric**($X \sim Geom(p)$): Expected number of trials until the first failure. 
+    
+**Beta-binomial**($X \sim BetaBin(p,\theta)$): Negative binomial with variable probability of success.
+
+&lt;/small&gt;
+
+---
+class: inverse
+
+Next Lecture:
+=============
+
+Continuous Probability Distributions: infinite possibilitites!
+
+![](http://phdcomics.com/comics/archive/phd090507s.gif)
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
