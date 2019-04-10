@@ -50,7 +50,7 @@ At the end of this course, you should be able to:
 |           | Discrete Probability Distributions   | Recorded lecture| [Video](https://youtu.be/cb7wuMPWzFY) / [Slides](https://thiagosfsilva.github.io/ecostats/Lecture_3/Lecture_3_prob_distributions.html)    |
 |           | Gigerenzer et al. (2004) Mindless statistics. | Reading         | [Paper](https://thiagosfsilva.github.io/ecostats/readings/lecture_1/GG_Mindless_2004.pdf)  |
 |           | Class discussion - 16:00h                     | Videoconference | [Hangouts](https://meet.google.com/dss-wnog-vsa?hs=122)|
-|**Day 3:**| Continuous Probability Distributions      | Recorded lecture | Video / [Slides](https://thiagosfsilva.github.io/ecostats/Lecture_4/Lecture_4_cont_dists.html)    |
+|**Day 3:**| Continuous Probability Distributions      | Recorded lecture | [Video](https://youtu.be/KzxO4Vj0nao) / [Slides](https://thiagosfsilva.github.io/ecostats/Lecture_4/Lecture_4_cont_dists.html)    |
 |           | Hypothesis tests | Recorded Lecture | Video / Slides |
 |           | Class discussion and R demo - 14:30 | Video Conference | [Hangouts](https://meet.google.com/dss-wnog-vsa?hs=122)|
 |**Day 4:**| | | |
