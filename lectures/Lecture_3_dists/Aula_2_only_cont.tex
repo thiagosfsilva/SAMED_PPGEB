@@ -1,0 +1,353 @@
+\documentclass{beamer}
+\usefonttheme[onlymath]{serif}
+
+\usepackage[portuguese,english]{babel}
+\usepackage{graphicx}
+\usepackage{ulem} % Para texto em strikeout
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\ifdefined\knitrout 
+\renewenvironment{knitrout}{\setlength{\topsep}{0mm}}{}
+\else
+\fi
+
+\title{Aulas 2-4: Distribuições de Probabilidade e Testes de Hipótese}
+\subtitle{Análise Quantitativa de Dados Ambientais}
+\author{\textbf{Thiago S. F. Silva} - tsfsilva@rc.unesp.br}
+\institute{Programa de Pós Graduação em Geografia - IGCE/UNESP}
+\date{\today}
+
+\usepackage{Sweave}
+\begin{document}
+\input{Aula_2_only_cont-concordance}
+
+
+%===============================================================================%
+\begin{frame}[plain] % plain avoids a badbox error from page number in title page
+  \titlepage
+\end{frame}
+
+\begin{frame}{Outline}
+  \tableofcontents
+\end{frame}
+%===============================================================================%
+
+
+
+
+%===============================================================================
+\begin{frame}{Distribuição de Poisson}
+
+\small{\textbf{Poisson}: A Binomial modela o número de sucessos esperados com um numero fixo de realizações. A distribuição Poisson modela a ocorrência de sucessos em situações onde o número de realizações é infinito. O exemplo mais comum são dados de contagem de indivíduos em parcelas, ou ao longo de um intervalo de tempo}. 
+
+\vfill
+
+\textbf{Distribuição Poisson:} $X \sim Pois(\lambda)$ 
+  
+Parâmetros: $\lambda$ ($\lambda > 0$)
+
+Suporte: $x = k, k \in \left\{0,\ldots,n\right\}$
+
+p.m.f:
+  \begin{equation*}
+    f(x) = \frac{lambda^k}{k!} e^{-\lambda}
+  \end{equation*}
+
+$E[X] = \lambda$
+
+$Var[X] = \lambda$
+
+\end{frame} 
+%===============================================================================%
+
+%===============================================================================
+\begin{frame}[fragile]
+
+
+Ex.: Se em média eu observo 50 indivíduos por parcela, qual a probabilidade de eu observar uma parcela com 100 indivíduos?
+
+\begin{equation*}
+  f(x) = \frac{lambda^k}{k!} e^{-\lambda}
+\end{equation*}
+
+\begin{equation*}
+  P(x=100) = \frac{50^{100}}{100!} \times e^{-50}
+\end{equation*}
+
+\begin{equation*}
+  P(x=100) = 845272575844 \times  1.92875 \times 10^{-22}
+\end{equation*}
+
+\begin{equation*}
+  P(x=100) = 1.630319 \times 10^{-10}
+\end{equation*}
+
+\begin{Schunk}
+\begin{Sinput}
+> dpois(100,50)
+\end{Sinput}
+\begin{Soutput}
+[1] 1.630319e-10
+\end{Soutput}
+\end{Schunk}
+
+
+
+\end{frame} 
+%===============================================================================%
+
+
+%===============================================================================
+\begin{frame}{Distribuições Contínuas}
+
+\begin{itemize}
+  \item Até agora falamos de V.A. discretas
+  \item Mas e se os dados que queremos modelar são contínuos?
+  \item \textbf{Exemplo:} Qual a probabilidade da temperatura máxima de hoje ser 32$^\circ$C?
+\end{itemize}
+
+\end{frame} 
+%===============================================================================%
+
+%===============================================================================
+\begin{frame}{Distribuições Contínuas}
+
+\begin{itemize}
+  \item Uma V.A. contínua pode assumir infinitos valores
+  
+  \vfill
+  
+  \item Se assumimos que: $P \approx F = \frac{n_i}{N}$
+  
+  \vfill
+  
+  \item Qual dos dois resultados tem probabilidade maior?
+  
+  \end{itemize}
+
+\centering
+  P(temperatura máxima de hoje) =  32$^\circ$C?
+  
+  ou
+  
+  P(temperatura máxima de hoje) = 32.354321$^\circ$C?
+  
+\end{frame} 
+%===============================================================================%
+
+
+%===============================================================================
+\begin{frame}{Distribuições Contínuas}
+
+Qual dos dois resultados tem probabilidade maior?
+  \vfill
+\centering
+
+P(temperatura máxima de hoje) =  32$^\circ$C?
+  
+ou
+  
+P(temperatura máxima de hoje) = 32.354321$^\circ$C?
+
+\vfill
+
+Os dois tem a mesma probabilidade, que é \textbf{zero}.
+
+
+$P(n_i) \approx F = \frac{n_i}{N} = \frac{1}{\inf} = 0$
+
+  
+$ \lim_{N \to \inf} P(x) = 0$ 
+
+\end{frame} 
+%===============================================================================%
+
+
+
+%===============================================================================
+\begin{frame}{Distribuições Contínuas}
+
+
+Para V.A. contínuas, ao invés de massas de probabilidade, falamos de \textbf{densidades de probabilidade}, dentro de um intervalo de valores.
+
+\vfill
+
+As distribuições de probabilidade contínuas tem, desta maneira, \textbf{funções de densidade de probabilidade (f.d.p ou \emph{p.d.f})}
+
+\vfill
+
+Qual a probabilidade da temperatura máxima de hoje estar entre 32 e 33$^\circ$C?
+
+Qual a probabilidade da temperatura máxima de hoje ser maior que 32$^\circ$C?
+    
+\end{frame} 
+%===============================================================================%
+
+%===============================================================================
+\begin{frame}{Distribuições Contínuas}
+
+Qual a distribuição contínua mais utilizada? \pause
+
+\vfill
+
+\textbf{Distribuição Normal (Gaussiana): $X \sim N(\mu,\sigma)$}
+
+\begin{footnotesize}
+
+Parâmetros: $\mu$ ($\mu \in \mathbb{R})$); $\sigma$ ($\sigma > 0$)
+
+Suporte: $X \in \mathbb{R}$
+
+p.d.f:
+
+\begin{equation*}
+P(x) = \frac{1}{{\sigma \sqrt {2\pi } }}e^{{{ - \left( {x - \mu } \right)^2 } \mathord{\left/ {\vphantom {{ - \left( {x - \mu } \right)^2 } {2\sigma ^2 }}} \right. \kern-\nulldelimiterspace} {2\sigma ^2 }}}
+\end{equation*}
+
+$E(X) = \mu$
+
+$Var(X) = \sigma^2$ (Muitas vezes usamos o desvio padrão: $\sqrt{\sigma^2} = \sigma$)
+
+
+
+\alert{\textbf{Exemplo:}} Qual a probabilidade de observamos uma temperatura entre 30$^\circ$C e 35$^\circ$C, se a média histórica é $\mu = 30$, e o desvio padrão é $\sigma = 5$?
+
+\end{footnotesize}
+    
+\end{frame} 
+%===============================================================================%
+
+%===============================================================================
+\begin{frame}[fragile]{Distribuição Normal - Exemplo}
+
+
+
+\end{frame} 
+%===============================================================================%
+
+
+%===============================================================================
+\begin{frame}[fragile]{Distribuição Normal - Exemplo}
+
+
+\begin{Schunk}
+\begin{Sinput}
+> # No R
+> media <- 30
+> desvio <- 5
+> tmin <- 30
+> tmax <- 35
+> # A maneira mais fácil de calcular uma probabilidade é de maneira cumulativa: P(x <= 30)
+> #O comando "pnorm" faz isso:
+> 
+> p.tmin <- pnorm(tmin,mean=media,sd=desvio)
+> p.tmin
+\end{Sinput}
+\begin{Soutput}
+[1] 0.5
+\end{Soutput}
+\begin{Sinput}
+> 
+\end{Sinput}
+\end{Schunk}
+
+\end{frame} 
+%===============================================================================%
+
+
+%===============================================================================
+\begin{frame}[fragile]{Distribuição Normal - Exemplo}
+
+
+\end{frame} 
+%===============================================================================%
+
+%===============================================================================
+\begin{frame}[fragile]{Distribuição Normal - Exemplo}
+
+
+\begin{Schunk}
+\begin{Sinput}
+> # No R
+> media <- 30
+> desvio <- 5
+> tmin <- 30
+> tmax <- 35
+> # calculamos também a probabilidade cumulativa de x <= 35
+> 
+> p.tmax <- pnorm(tmax,mean=media,sd=desvio)
+> p.tmax
+\end{Sinput}
+\begin{Soutput}
+[1] 0.8413447
+\end{Soutput}
+\begin{Sinput}
+> 
+\end{Sinput}
+\end{Schunk}
+
+\end{frame} 
+%===============================================================================%
+
+
+%===============================================================================
+\begin{frame}[fragile]{Distribuição Normal - Exemplo}
+
+
+\end{frame} 
+%===============================================================================%
+
+%===============================================================================
+\begin{frame}[fragile]{Distribuição Normal - Exemplo}
+
+
+\begin{Schunk}
+\begin{Sinput}
+> # Sabendo as duas probabilidades cumulativas, é só subtrair
+> 
+> p.tmax - p.tmin
+\end{Sinput}
+\begin{Soutput}
+[1] 0.3413447
+\end{Soutput}
+\begin{Sinput}
+> 
+\end{Sinput}
+\end{Schunk}
+
+\end{frame} 
+%===============================================================================%
+
+
+%===============================================================================
+\begin{frame}[fragile]{Distribuição Normal - Exemplo}
+
+
+\end{frame} 
+%===============================================================================%
+
+
+%===============================================================================
+\begin{frame}{Distribuições Contínuas}
+
+\begin{small}
+\begin{itemize}
+  \item \textbf{Normal}: $X \sim N(\mu,\sigma)$
+  \vfill
+  \item \textbf{Gamma}: $X \sim Gamma(s,a$)
+  \vfill
+  \item \textbf{Exponencial}: $X \sim Exp(\lambda)$
+  \vfill
+  \item \textbf{Beta}: $X \sim Beta(a,b)$
+  \vfill
+  \item \textbf{Lognormal}: $X \sim logN(\mu,\sigma)$
+  \vfill
+  \item \textbf{Qui-quadrado}: $X \sim \chi^2(df)$
+\end{itemize}
+\end{small}
+
+\end{frame} 
+%===============================================================================%
+
+\end{document}

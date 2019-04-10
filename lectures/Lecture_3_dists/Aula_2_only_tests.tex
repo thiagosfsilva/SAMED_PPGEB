@@ -1,0 +1,350 @@
+\documentclass{beamer}
+\usefonttheme[onlymath]{serif}
+
+\usepackage[portuguese,english]{babel}
+\usepackage{graphicx}
+\usepackage{ulem} % Para texto em strikeout
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\ifdefined\knitrout 
+\renewenvironment{knitrout}{\setlength{\topsep}{0mm}}{}
+\else
+\fi
+
+\title{Aulas 2-4: Distribuições de Probabilidade e Testes de Hipótese}
+\subtitle{Análise Quantitativa de Dados Ambientais}
+\author{\textbf{Thiago S. F. Silva} - tsfsilva@rc.unesp.br}
+\institute{Programa de Pós Graduação em Geografia - IGCE/UNESP}
+\date{\today}
+
+\usepackage{Sweave}
+\begin{document}
+\input{Aula_2_only_tests-concordance}
+
+
+%===============================================================================%
+\begin{frame}[plain] % plain avoids a badbox error from page number in title page
+  \titlepage
+\end{frame}
+
+\begin{frame}{Outline}
+  \tableofcontents
+\end{frame}
+%===============================================================================%
+
+
+
+
+\section{Testes de Hipóteses}
+
+
+%===============================================================================
+\begin{frame}{Testes de Hipóteses Paramétricos}
+
+O mecanismo dos testes de hipóteses \textbf{paramétricos} seguem sempre a mesma lógica:
+\vfill
+  \begin{small}
+  \begin{enumerate}
+    \item Formule uma hipótese quantitativa \pause
+    \item Defina uma estatística de interesse que descreva essa quantidade \pause
+    \item Assuma uma distribuição para esta estatística de interesse, caso a hipótese seja verdadeira
+    \item Especifique os parâmetros dessa distribuição \pause
+    \item Calcule a probabilidade de se obter a estatística de interesse observada, \textbf{ou uma mais extrema}, a partir da sua amostra, se a sua hipótese for verdadeira. \pause
+    \item Avalie a "força da evidência" em relação sua hipótese, com base na probabilidade observada para a amostra. \pause
+  \end{enumerate}
+  \end{small}
+  
+\end{frame} 
+%===============================================================================%
+
+%===============================================================================
+\begin{frame}{Exemplo: Teste dos Sinais}
+
+\textbf{Pergunta:} Estou comparando duas amostras pareadas ($X,Y$), com $N$ observações, e quero saber se existe diferença entre elas.
+\medskip
+
+\textbf{Hipótese:} Se não há diferença, $P(x_i > y_i) = P(y_i > x_i) = 0.5$. Podemos pensar em $x_i > y_i$ como um sucesso, e $y_i > x_i$ como um fracasso
+\medskip
+
+\textbf{Estatística de interesse - W}: quantas vezes observamos $x_i > y_i$?
+\medskip
+
+\only<1-1>{\textbf{Distribuição de W?}}
+\only<2-2>{\textbf{Distribuição de W:} $W ~ Bin(n=N,p=0.5)$}
+\medskip
+
+\only<2-2>{Qual a probabilidade de obtermos o valor observado de W ou maior, na nossa amostra, se $W ~ Bin(n=N,p=0.5)$?}
+
+
+\end{frame} 
+%===============================================================================%
+
+
+%===============================================================================
+\begin{frame}[fragile]{Exemplo:Teste dos Sinais}
+
+
+\begin{Schunk}
+\begin{Sinput}
+> x <- c(0,3,6,5,3,7,8,9,2,4,6,7)
+> y <- c(3,4,5,6,9,7,1,2,3,4,5,6)
+> n=length(x); n
+\end{Sinput}
+\begin{Soutput}
+[1] 12
+\end{Soutput}
+\begin{Sinput}
+> d <- x-y; d
+\end{Sinput}
+\begin{Soutput}
+ [1] -3 -1  1 -1 -6  0  7  7 -1  0  1  1
+\end{Soutput}
+\begin{Sinput}
+> w <- sum(x-y > 0); w
+\end{Sinput}
+\begin{Soutput}
+[1] 5
+\end{Soutput}
+\begin{Sinput}
+> dbinom(w,size=12,prob=0.5)
+\end{Sinput}
+\begin{Soutput}
+[1] 0.1933594
+\end{Soutput}
+\begin{Sinput}
+> 
+\end{Sinput}
+\end{Schunk}
+
+\end{frame} 
+%===============================================================================%
+
+  
+%===============================================================================
+\begin{frame}[fragile]{Exemplo:Teste dos Sinais}
+
+\begin{Schunk}
+\begin{Sinput}
+> # Mas eu quero saber P(w >= 5)
+> 
+> probs <-vector(8,mode='numeric')
+> for(i in c(5:12)){
++   w=i
++   probs[i] <- dbinom(w,size=12,prob=0.5)
++ }
+> probs
+\end{Sinput}
+\begin{Soutput}
+ [1] 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.1933593750
+ [6] 0.2255859375 0.1933593750 0.1208496094 0.0537109375 0.0161132813
+[11] 0.0029296875 0.0002441406
+\end{Soutput}
+\begin{Sinput}
+> sum(probs)
+\end{Sinput}
+\begin{Soutput}
+[1] 0.8061523
+\end{Soutput}
+\end{Schunk}
+
+\end{frame} 
+%===============================================================================%
+
+%===============================================================================
+\begin{frame}[fragile]{Exemplo:Teste dos Sinais}
+
+\begin{Schunk}
+\begin{Sinput}
+> binom.test(5,12,p=0.5,alternative="greater")
+\end{Sinput}
+\begin{Soutput}
+	Exact binomial test
+
+data:  5 and 12
+number of successes = 5, number of trials = 12, p-value = 0.8062
+alternative hypothesis: true probability of success is greater than 0.5
+95 percent confidence interval:
+ 0.1810248 1.0000000
+sample estimates:
+probability of success 
+             0.4166667 
+\end{Soutput}
+\begin{Sinput}
+> 
+\end{Sinput}
+\end{Schunk}
+
+\end{frame} 
+%===============================================================================%
+
+
+%===============================================================================
+\begin{frame}{Exemplo: Teste $\chi^2$}
+
+
+\textbf{Teste  $\chi^2$ (chi-quadrado, chi pronuncia-se "qui")}
+
+\begin{footnotesize}
+
+\textbf{Pergunta:} Contei os indivíduos em 3 habitats: $N_F=86$,$N_P=3$,$N_A=11$. Cada habitat estava representado na seguinte proporção: Floresta(75\%), Pastagem (10\%), Agricultura(15\%) . Será que existe uma preferência dos indivíduos por um determinado habitat?
+
+
+\textbf{Hipótese:} Se não há preferência, a quantidade esperada de indivíduos em cada habitat só é afetada  pela proporção de cada um. Se a quantidade observada for diferente da esperada, há indício de preferência.
+
+
+\textbf{Estatística:} $X^2 = \sum{\frac{(O-E)^2}{E}}$
+
+\textbf{Distribuição de $X^2$:} $X^2 \sim \chi^2(k)$ ($k$ =  graus de liberdade = $N -1$)
+
+
+Qual a probabilidade de obtermos o valor observado de $X^2$ ou mais extremo, na nossa amostra?
+
+
+\end{footnotesize}
+
+\end{frame} 
+%===============================================================================%
+
+
+%===============================================================================
+\begin{frame}[fragile]
+
+\begin{Schunk}
+\begin{Sinput}
+> obs <- c(86,3,11)
+> habs <- c(0.75,0.1,0.15)
+> esp <- rep(sum(obs),3) * habs
+> x2 <- sum((obs-esp)^2/(esp))
+> x2
+\end{Sinput}
+\begin{Soutput}
+[1] 7.58
+\end{Soutput}
+\begin{Sinput}
+> dchisq(x2,df=2)
+\end{Sinput}
+\begin{Soutput}
+[1] 0.0112978
+\end{Soutput}
+\begin{Sinput}
+> # A distribuição qui-quadrada é contínua, então não dá pra somar. Mas existe uma função cumulativa:
+> 1-pchisq(x2,df=2)
+\end{Sinput}
+\begin{Soutput}
+[1] 0.0225956
+\end{Soutput}
+\begin{Sinput}
+> chisq.test(obs,p=habs)
+\end{Sinput}
+\begin{Soutput}
+	Chi-squared test for given probabilities
+
+data:  obs
+X-squared = 7.58, df = 2, p-value = 0.0226
+\end{Soutput}
+\end{Schunk}
+
+\end{frame} 
+%===============================================================================%
+
+
+%===============================================================================
+\begin{frame}{Exemplo: Teste Z para a média}
+
+\begin{block}{Pergunta}
+
+Um reservatório com concentrações de clorofila maiores do que 3 mg.m$^{-3}$ pode ser considerado eutrófico. Eu coleto 20 amostras de água e determino uma concentração média de 2.55 mg.m$^{-3}$, com um desvio padrão de 0.9 mg.m$^{-3}$. Será que meu reservatório é eutrófico? 
+
+\end{block}
+
+\end{frame} 
+%===============================================================================%
+
+%===============================================================================
+\begin{frame}{Exemplo: Teste Z para a média}
+
+\textbf{H$_0$:} O reservatório está contaminado, então $\mu = 3$
+\vfill
+\textbf{H$_1$:} O reservatório não está contaminado, então $\mu < 3$
+\vfill
+$P(\bar{X} >= 2.55 | \mu = 3)$?
+\vfill
+
+\textbf{Estatística:} $Z$
+
+\vfill
+
+\begin{equation*}
+    Z = \frac{\bar{X} - \mu}{E.P.} = \frac{\bar{X} - \mu}{\sigma / \sqrt{n}}
+\end{equation*}
+
+\vfill
+
+\only<1-1>{\textbf{Distribuição de $Z$?}}
+\only<2-2>{\textbf{Distribuição de $Z$:}  $Z \sim N (0,1)$}
+
+\end{frame} 
+%===============================================================================%
+
+%===============================================================================
+\begin{frame}{Erro Padrão vs. Desvio Padrão}
+
+\begin{small}
+  \begin{enumerate}
+  \item Uma confusão comum é confundir desvio padrão (\emph{standard deviation}) e erro padrão (\emph{standard error}). Qual a diferença? \pause
+  \vfill
+  \item O desvio padrão mede a dispersão dos dados observados.
+  \vfill
+  \item A partir desses dados, podemos calcular a média ($\bar{X}$), um estimador da média da população ($\mu$). Se tomarmos amostras diferentes, teremos $\bar{X}$ diferentes. Qual a distribuição de $\bar{X}$?
+  \pause
+  \item O erro padrão mede a dispersão esperada (desvio padrão) de $\bar{X}$, não dos dados originais
+\end{enumerate}
+\end{small}
+
+\vfill
+
+\textbf{Erro Padrão da Média}:
+\centering
+$ E.P. = \frac{\sigma}{\sqrt{n}}$ 
+
+\end{frame} 
+%===============================================================================%
+
+
+%===============================================================================
+\begin{frame}[fragile]{Desvio padrão vs. erro padrão}
+
+
+\begin{Schunk}
+\begin{Sinput}
+> # Tomamos uma amostra aleatória com X ~ N(30,5) e n=50
+> set.seed(20)
+> x <- rnorm(20,30,5); x
+\end{Sinput}
+\begin{Soutput}
+ [1] 35.81343 27.07038 38.92733 23.33703 27.76717 32.84803 15.55141 25.65491
+ [9] 27.69149 27.22230 29.89932 29.24809 26.85937 36.61610 22.39325 27.81286
+[17] 34.85289 30.14111 29.57109 31.94607
+\end{Soutput}
+\begin{Sinput}
+> # Calculamos a média e o desvio padrão
+> x_barra <- mean(x); x_barra
+\end{Sinput}
+\begin{Soutput}
+[1] 29.06118
+\end{Soutput}
+\begin{Sinput}
+> s <- sd(x); s
+\end{Sinput}
+\begin{Soutput}
+[1] 5.365711
+\end{Soutput}
+\end{Schunk}
+
+\end{frame} 
+%===============================================================================%
+
+%===============================================================================
+\begin{frame}[fragile]{Desvio padrão vs. erro padrão}
+

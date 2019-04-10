@@ -14,7 +14,7 @@ class: center, middle, inverse, title-slide
 # Statistical Analysis and Modeling in Ecology
 ## Lecture 3 - Discrete Probability Distributions
 ### Thiago S. F. Silva - <a href="mailto:thiago.sf.silva@stir.ac.uk" class="email">thiago.sf.silva@stir.ac.uk</a>
-### 2019/04/07 (updated: 2019-04-09)
+### 2019/04/07 (updated: 2019-04-10)
 
 ---
 
@@ -80,7 +80,7 @@ Bernoulli Distribution
 
 Every probability distribution is defined by a **probability function** and its **parameters**.
 
-### Bernoulli Distribution:
+**Bernoulli Distribution:**
 
 Parameters:  `\(p, \quad (0 \leq p \leq 1, p \in \mathbb{R})\)`
 
@@ -264,15 +264,15 @@ We can think of the problem as the union of three probabilities:
 
 
 ```r
-p2 &lt;- dbinom (2, size = 10, prob = 0.2)
-p3 &lt;- dbinom (3, size = 10, prob = 0.2)
-p4 &lt;- dbinom (4, size = 10, prob = 0.2)
+p2 &lt;- dbinom (2, size = 5, prob = 0.5)
+p3 &lt;- dbinom (3, size = 5, prob = 0.5)
+p4 &lt;- dbinom (4, size = 5, prob = 0.5)
 
 p2 + p3 + p4
 ```
 
 ```
-## [1] 0.5913969
+## [1] 0.78125
 ```
 
 
@@ -283,6 +283,7 @@ Binomial Distribution
 We can also use probability functions to simulate replication, and observe the expected sampling results:
 
 .pull-left[
+&lt;small&gt;
 
 ```r
 # "sets" the random number 
@@ -290,14 +291,16 @@ set.seed (40)
 
 # Simulate 1000 trials
 x &lt;- rbinom (1000,
-             size = 10,
-             prob = 0.2)
+             size = 5,
+             prob = 0.5)
 
 # Plots results as histogram
-hist (x, breaks = 7,
+bks &lt;- c(0,0.99,1.99,2.99,3.99,4.99,6)
+hist (x, breaks = bks,
       main = NA,
       col = "gray70")
 ```
+&lt;/small&gt;
 ]
 
 .pull-right[
@@ -318,7 +321,7 @@ round(c(p2, p3, p4), 2)
 ```
 
 ```
-## [1] 0.30 0.20 0.09
+## [1] 0.31 0.31 0.16
 ```
 
 ```r
@@ -326,7 +329,7 @@ round(p2 + p3 + p4, 2)
 ```
 
 ```
-## [1] 0.59
+## [1] 0.78
 ```
 ]
 .pull-right[
@@ -456,7 +459,7 @@ system.time(sim &lt;- rbinom(10000000,size=10,prob=0.2))
 
 ```
 ##    user  system elapsed 
-##   0.462   0.006   0.468
+##   0.450   0.013   0.463
 ```
 
 ```r
@@ -484,19 +487,19 @@ Discrete Distributions
 ======================
 
 &lt;small&gt;
-**Bernoulli (Binomial with `\(n=1\)`)**: Success of a single trial
+**Bernoulli** (Binomial with `\(n=1\)`): Success of a single trial
     
-**Binomial** ($X \sim B(n,p$)): Success on several trials.
+**Binomial** ( `\(X \sim B(n,p)\)` ): Success on several trials.
     
-**Multinomial** ($X \sim M(n,p_1,\dots,p_k)$): Generalization of the binomial for more than two possible outcomes.
+**Multinomial** ( `\(X \sim M(n,p_1,\dots,p_k)\)` ): Generalization of the binomial for more than two possible outcomes.
     
-**Poisson** ($X \sim Pois(\lambda)$): Expected successes for an unknown number of trials.
+**Poisson** ( `\(X \sim Pois(\lambda)\)` ): Expected successes for an unknown number of trials.
     
-**Negative Binomial**($X \sim NB(r,p)$): Expected number of failures before a given number of sucesses occur.
+**Negative Binomial**( `\(X \sim NB(r,p)\)` ): Expected number of failures before a given number of sucesses occur.
     
-**Geometric**($X \sim Geom(p)$): Expected number of trials until the first failure. 
+**Geometric**( `\(X \sim Geom(p)\)` ): Expected number of trials until the first failure. 
     
-**Beta-binomial**($X \sim BetaBin(p,\theta)$): Negative binomial with variable probability of success.
+**Beta-binomial**( `\(X \sim BetaBin(p,\theta)\)` ): Negative binomial with variable probability of success.
 
 &lt;/small&gt;
 

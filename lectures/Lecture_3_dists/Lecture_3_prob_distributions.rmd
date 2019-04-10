@@ -89,7 +89,7 @@ Bernoulli Distribution
 
 Every probability distribution is defined by a **probability function** and its **parameters**.
 
-### Bernoulli Distribution:
+**Bernoulli Distribution:**
 
 Parameters:  $p, \quad (0 \leq p \leq 1, p \in \mathbb{R})$
 
@@ -247,9 +247,9 @@ $P(x = 2) \cup P (x = 3) \cup P(x = 4)$
 
 
 ```{r binomrange}
-p2 <- dbinom (2, size = 10, prob = 0.2)
-p3 <- dbinom (3, size = 10, prob = 0.2)
-p4 <- dbinom (4, size = 10, prob = 0.2)
+p2 <- dbinom (2, size = 5, prob = 0.5)
+p3 <- dbinom (3, size = 5, prob = 0.5)
+p4 <- dbinom (4, size = 5, prob = 0.5)
 
 p2 + p3 + p4
 
@@ -263,6 +263,7 @@ Binomial Distribution
 We can also use probability functions to simulate replication, and observe the expected sampling results:
 
 .pull-left[
+<small>
 ```{r binomsim, fig.show='hide', fig.height=4,fig.width=4,echo=-1}
 par(mgp=c(1.8,0.5,0), mar=c(3,3,0,1),cex=1.2)
 # "sets" the random number 
@@ -270,14 +271,16 @@ set.seed (40)
 
 # Simulate 1000 trials
 x <- rbinom (1000,
-             size = 10,
-             prob = 0.2)
+             size = 5,
+             prob = 0.5)
 
 # Plots results as histogram
-hist (x, breaks = 7,
+bks <- c(0,0.99,1.99,2.99,3.99,4.99,6)
+hist (x, breaks = bks,
       main = NA,
       col = "gray70")
 ```
+</small>
 ]
 
 .pull-right[
@@ -294,7 +297,9 @@ Comparing with our early results
 .pull-left[
 ```{r binomsim2, tidy = T, fig.show='hide', fig.height=4, fig.width=4,echo=-c(1,2)}
 par(mgp=c(1.8,0.5,0), mar=c(3,3,0,1),cex=1.2)
-hist(x,breaks=7,main=NA,col="gray70",freq=F)
+hist(x,breaks = c(0,0.99,1.99,2.99,3.99,4.99,6),
+     main=NA,col="gray70",freq=F)
+
 round(c(p2,p3,p4),2)
 
 round(p2 + p3 + p4,2)
@@ -379,7 +384,7 @@ $Var[X] = `r 10*0.2*(1-0.2)`$
 par(mgp=c(1.8,0.5,0), mar=c(3,3,0,1),cex=1.2)
 set.seed(40)
 x <- rbinom(1000,size=10,prob=0.2)
-hist(x,breaks=7,xlim=c(0,10),main=NA,col="gray70",freq=F)
+hist(x,breaks=c(0,(seq(0,9)+rep(0.99,10)),11),xlim=c(0,10),main=NA,col="gray70",freq=F)
 ```
 ]
 
@@ -401,7 +406,7 @@ $Var[X] = `r 10*0.9*(1-0.9)`$
 par(mgp=c(1.8,0.5,0), mar=c(3,3,0,1),cex=1.2)
 set.seed(40)
 x <- rbinom(1000,size=10,prob=0.9)
-hist(x,breaks=7,xlim=c(0,10),main=NA,col="gray70",freq=F)
+hist(x,breaks=c(0,(seq(0,9)+rep(0.99,10)),11),xlim=c(0,11),main=NA,col="gray70",freq=F)
 ```
 ] 
 ---
@@ -447,19 +452,19 @@ Discrete Distributions
 ======================
 
 <small>
-**Bernoulli (Binomial with $n=1$)**: Success of a single trial
+**Bernoulli** (Binomial with $n=1$): Success of a single trial
     
-**Binomial** ($X \sim B(n,p$)): Success on several trials.
+**Binomial** ( $X \sim B(n,p)$ ): Success on several trials.
     
-**Multinomial** ($X \sim M(n,p_1,\dots,p_k)$): Generalization of the binomial for more than two possible outcomes.
+**Multinomial** ( $X \sim M(n,p_1,\dots,p_k)$ ): Generalization of the binomial for more than two possible outcomes.
     
-**Poisson** ($X \sim Pois(\lambda)$): Expected successes for an unknown number of trials.
+**Poisson** ( $X \sim Pois(\lambda)$ ): Expected successes for an unknown number of trials.
     
-**Negative Binomial**($X \sim NB(r,p)$): Expected number of failures before a given number of sucesses occur.
+**Negative Binomial**( $X \sim NB(r,p)$ ): Expected number of failures before a given number of sucesses occur.
     
-**Geometric**($X \sim Geom(p)$): Expected number of trials until the first failure. 
+**Geometric**( $X \sim Geom(p)$ ): Expected number of trials until the first failure. 
     
-**Beta-binomial**($X \sim BetaBin(p,\theta)$): Negative binomial with variable probability of success.
+**Beta-binomial**( $X \sim BetaBin(p,\theta)$ ): Negative binomial with variable probability of success.
 
 </small>
 

@@ -46,12 +46,13 @@ At the end of this course, you should be able to:
 |   Day     |    Theme                       | Type            | Link                      |
 |-----------|--------------------------------|-----------------|---------------------------|  
 |**Day 1:** |   Introduction to the course   | Videoconference | [Hangouts](https://meet.google.com/dss-wnog-vsa?hs=122) / [Slides](https://thiagosfsilva.github.io/ecostats/lecture_1/Lecture_1_intro.html) |
-|           | Probabilitites                 | Recorded lecture| [Video](https://youtu.be/qAk7W8Lbu7o) / [Slides](https://thiagosfsilva.github.io/ecostats/Lecture_2/Lecture_2_probabilities.html)    |
+|** Day 2:**| Probabilitites                 | Recorded lecture| [Video](https://youtu.be/qAk7W8Lbu7o) / [Slides](https://thiagosfsilva.github.io/ecostats/Lecture_2/Lecture_2_probabilities.html)    |
 |           | Discrete Probability Distributions   | Recorded lecture| [Video](https://youtu.be/cb7wuMPWzFY) / [Slides](https://thiagosfsilva.github.io/ecostats/Lecture_3/Lecture_3_prob_distributions.html)    |
-|           | Continuous Probability Distributions      | Recorded lecture| Video / Slides    |
 |           | Gigerenzer et al. (2004) Mindless statistics. | Reading         | [Paper](https://thiagosfsilva.github.io/ecostats/readings/lecture_1/GG_Mindless_2004.pdf)  |
-|**Day 2:**| | | |
-|**Day 3:**| | | |
+|           | Class discussion - 16:00h                     | Videoconference | [Hangouts](https://meet.google.com/dss-wnog-vsa?hs=122)|
+|**Day 3:**| Continuous Probability Distributions      | Recorded lecture | Video / [Slides](https://thiagosfsilva.github.io/ecostats/Lecture_4/Lecture_4_cont_dists.html)    |
+|           | Hypothesis tests | Recorded Lecture | Video / Slides |
+|           | Class discussion and R demo - 14:30 | Video Conference | [Hangouts](https://meet.google.com/dss-wnog-vsa?hs=122)|
 |**Day 4:**| | | |
 |**Day 5:**| | | |
 |**Day 6:**| | | |
