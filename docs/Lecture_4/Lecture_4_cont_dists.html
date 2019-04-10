@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Statistical Analysis and Modeling in Ecology</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Thiago S. F. Silva - thiago.sf.silva@stir.ac.uk" />
+    
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Statistical Analysis and Modeling in Ecology
+## Lecture 4 - Continuous Probability Distributions
+### Thiago S. F. Silva - <a href="mailto:thiago.sf.silva@stir.ac.uk" class="email">thiago.sf.silva@stir.ac.uk</a>
+### 2019/04/010 (updated: 2019-04-10)
+
+---
+
+class: center, middle, inverse
+
+
+# One last discrete distribution
+
+---
+
+Poisson Distribution
+====================
+
+**Poisson Distribution**: models the probability of a given number of events occurring within a fixed interval, for a known expectation of the number of events. An interval can be thought as distance, space or time. It can be thought of as a Binomial distribution with an unknown number of trials.
+
+---
+
+Poisson Distribution
+====================
+
+**Poisson Distribution:** `\(X \sim Pois(\lambda)\)`
+
+Parameters: `\(\lambda\)` ($\lambda &gt; 0$)
+
+Support: `\(x = k, k \in \left\{0,\ldots,n\right\}\)`
+
+p.m.f: `$$f(x) = \frac{lambda^k}{k!} e^{-\lambda}$$`
+
+`\(E[X] = \lambda\)`
+
+`\(Var[X] = \lambda\)`
+
+---
+
+Poisson Distribution
+====================
+
+If I expect an average of 50 individuals of a species of mammal per plot, what is the probability that would observe a plot with 100 individuals? 
+
+`$$f(x) = \frac{lambda^k}{k!} e^{-\lambda}$$`
+
+`$$P(x=100) = \frac{50^{100}}{100!} \times e^{-50}$$`
+
+`$$P(x=100) = 845272575844 \times  1.92875 \times 10^{-22}$$`
+
+`$$P(x=100) = 1.630319 \times 10^{-10}$$`
+
+
+```r
+dpois(100,50)
+```
+
+```
+## [1] 1.630319e-10
+```
+---
+class: center, middle, inverse
+
+# Continuous Probability Distributions
+
+---
+
+Continuous Distributions
+========================
+
+- So far, we have looked at discrete distributions.
+
+- But what if the data we want to model is continuous?
+
+- **Example:** What is the probability of today's maximum temperature being
+    32&amp;deg;C?
+    
+---
+
+Continuous Distributions
+========================
+
+
+- The random variable can take on infinite values
+
+- We assume that: `\(P\approx F =\frac{n_i}{N}\)` (the frequentist logic)
+
+**Which of these two outcomes is most probable?**
+
+P (today's maximum temperature) = 32&amp;deg;C?
+
+or
+
+P (today's maximum temperature) = 32.354321&amp;deg;C?
+
+---
+
+Continuous Distributions
+========================
+
+**Which of the two results is most probable?**
+
+
+Actually, they both have the same probability, which is **zero**!.
+
+`\(P(n_i) \approx F = \frac{n_i}{N} = \frac{1}{\inf} = 0\)`
+
+`\(\lim_{N \to \inf} P(x) = 0\)`
+
+
+---
+
+Continuous Distributions
+========================
+
+For continuous random variables, instead of **probability mass**, we talk about **probability density**, within a given interval.
+
+Continuous probability distributions therefore have a **probability density function**.
+
+What is the probability of today's maximum temperature being between 30&amp;deg;C and 35&amp;deg;C?
+
+What is the probability of today's maximum temperature being larger than 32&amp;deg;C (i.e. from 32 to `\(\infty\)` )
+
+---
+
+Continuous Distributions
+========================
+
+Which continuous distribution is the most commonly used?
+
+---
+
+
+Continuous Distributions
+========================
+
+
+**The Normal (Gaussian) Distribution: `\(X \sim N(\mu,\sigma)\)` **
+
+Parameters: `\(\mu (\mu \in \mathbb{R}); \sigma (\sigma &gt; 0)\)`
+
+Support: `\(X \in \mathbb{R}\)`
+
+p.d.f:
+
+`$$P(x) = \frac{1}{{\sigma \sqrt{2\pi}}} e^{\frac{-(x-\mu)^2}{(2\sigma^2)}}$$`
+
+`\(E(X) = \mu\)`
+
+`\(Var(X) = \sigma^2\)` (Muitas vezes usamos o desvio padrão:
+`\(\sqrt{\sigma^2} = \sigma\)`)
+
+---
+
+
+**Example:** What is the probability that we observe a temperature between 30&amp;deg;C e 35&amp;deg;C, considering our historical average is `\(\mu = 30^\circ\)`C with a standard deviation of `\(\sigma = 5^\circ\)`C?
+
+
+![](Lecture_4_cont_dists_files/figure-html/normex-1.png)&lt;!-- --&gt;
+---
+Normal Distribution
+===================
+
+For mathematical reasons, is much easier to calculate cumulative probabilities.
+
+
+```r
+media &lt;- 30; desvio &lt;- 5; tmin &lt;- 30; tmax &lt;- 35
+
+cumprob_tmin &lt;- pnorm(tmin,mean=media,sd=desvio)
+cumprob_tmax &lt;- pnorm(tmax,mean=media,sd=desvio)
+
+c(cumprob_tmin, cumprob_tmax)
+```
+
+```
+## [1] 0.5000000 0.8413447
+```
+---
+
+Normal Distribution
+===================
+
+&lt;img src="Lecture_4_cont_dists_files/figure-html/cumnormplot1-1.png" height="100%" /&gt;
+
+---
+Normal Distribution
+===================
+&lt;img src="Lecture_4_cont_dists_files/figure-html/cumnormplot2-1.png" height="100%" /&gt;
+
+---
+Normal Distribution
+===================
+
+Once we know both cumulative probabilities, it's just a matter of subtracting them:
+
+
+```r
+cumprob_tmax - cumprob_tmin
+```
+
+```
+## [1] 0.3413447
+```
+---
+
+Continuous Distributions
+========================
+
+&lt;small&gt;
+
+-   **Normal**: `\(X \sim N(\mu,\sigma)\)`
+
+-   **Gamma**: `\(X \sim Gamma(s,a\)`)
+
+-   **Exponential**: `\(X \sim Exp(\lambda)\)`
+
+-   **Beta**: `\(X \sim Beta(a,b)\)`
+
+-   **Lognormal**: `\(X \sim logN(\mu,\sigma)\)`
+
+-   **Chi-squared**: `\(X \sim \chi^2(df)\)`
+
+&lt;/small&gt;
+
+---
+class: inverse
+
+End of this lecture
+==================
+
+Next lecture: the truth behind hypothesis testing. Shocking revelations!
+
+![](https://pbs.twimg.com/media/BqvPZP4CcAEkc9a.jpg)
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

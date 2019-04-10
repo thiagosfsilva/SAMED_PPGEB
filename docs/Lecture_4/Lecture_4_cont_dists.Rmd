@@ -1,0 +1,285 @@
+---
+title: "Statistical Analysis and Modeling in Ecology"
+subtitle: "Lecture 4 - Continuous Probability Distributions"
+author: "Thiago S. F. Silva - thiago.sf.silva@stir.ac.uk"
+date: "2019/04/010 (updated: `r Sys.Date()`)"
+header-includes:
+   - \usepackage{amsmath}
+output:
+  xaringan::moon_reader:
+    css: xaringan-themer.css
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+
+---
+class: center, middle, inverse
+
+```{r xaringan-themer, include = FALSE}
+library(xaringanthemer)
+mono_accent(
+  base_color = "#2c4fa3",
+  header_font_google = google_font("Francois One"),
+  text_font_google   = google_font("Roboto Condensed", "400", "400i"),
+  code_font_google   = google_font("Fira Code"),
+  code_font_size = '0.65m',
+  text_font_size = '1.5em',
+  title_slide_background_image = 'https://www.ox.ac.uk/sites/files/oxford/styles/ow_large_feature/public/field/field_image_main/Mathematics%20and%20Statistics.jpg',
+  link_color = "#eb0037" 
+)
+
+library(ggplot2)
+plotheme <- theme(axis.line = element_line(colour = "black", size=1), panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.border = element_blank(),panel.background = element_blank()) 
+```
+# One last discrete distribution
+
+---
+
+Poisson Distribution
+====================
+
+**Poisson Distribution**: models the probability of a given number of events occurring within a fixed interval, for a known expectation of the number of events. An interval can be thought as distance, space or time. It can be thought of as a Binomial distribution with an unknown number of trials.
+
+---
+
+Poisson Distribution
+====================
+
+**Poisson Distribution:** $X \sim Pois(\lambda)$
+
+Parameters: $\lambda$ ($\lambda > 0$)
+
+Support: $x = k, k \in \left\{0,\ldots,n\right\}$
+
+p.m.f: $$f(x) = \frac{lambda^k}{k!} e^{-\lambda}$$
+
+$E[X] = \lambda$
+
+$Var[X] = \lambda$
+
+---
+
+Poisson Distribution
+====================
+
+If I expect an average of 50 individuals of a species of mammal per plot, what is the probability that would observe a plot with 100 individuals? 
+
+$$f(x) = \frac{lambda^k}{k!} e^{-\lambda}$$
+
+$$P(x=100) = \frac{50^{100}}{100!} \times e^{-50}$$
+
+$$P(x=100) = 845272575844 \times  1.92875 \times 10^{-22}$$
+
+$$P(x=100) = 1.630319 \times 10^{-10}$$
+
+```{r poisex}
+dpois(100,50)
+```
+---
+class: center, middle, inverse
+
+# Continuous Probability Distributions
+
+---
+
+Continuous Distributions
+========================
+
+- So far, we have looked at discrete distributions.
+
+- But what if the data we want to model is continuous?
+
+- **Example:** What is the probability of today's maximum temperature being
+    32&deg;C?
+    
+---
+
+Continuous Distributions
+========================
+
+
+- The random variable can take on infinite values
+
+- We assume that: $P\approx F =\frac{n_i}{N}$ (the frequentist logic)
+
+**Which of these two outcomes is most probable?**
+
+P (today's maximum temperature) = 32&deg;C?
+
+or
+
+P (today's maximum temperature) = 32.354321&deg;C?
+
+---
+
+Continuous Distributions
+========================
+
+**Which of the two results is most probable?**
+
+
+Actually, they both have the same probability, which is **zero**!.
+
+$P(n_i) \approx F = \frac{n_i}{N} = \frac{1}{\inf} = 0$
+
+$\lim_{N \to \inf} P(x) = 0$
+
+
+---
+
+Continuous Distributions
+========================
+
+For continuous random variables, instead of **probability mass**, we talk about **probability density**, within a given interval.
+
+Continuous probability distributions therefore have a **probability density function**.
+
+What is the probability of today's maximum temperature being between 30&deg;C and 35&deg;C?
+
+What is the probability of today's maximum temperature being larger than 32&deg;C (i.e. from 32 to $\infty$ )
+
+---
+
+Continuous Distributions
+========================
+
+Which continuous distribution is the most commonly used?
+
+---
+
+
+Continuous Distributions
+========================
+
+
+**The Normal (Gaussian) Distribution: $X \sim N(\mu,\sigma)$ **
+
+Parameters: $\mu (\mu \in \mathbb{R}); \sigma (\sigma > 0)$
+
+Support: $X \in \mathbb{R}$
+
+p.d.f:
+
+$$P(x) = \frac{1}{{\sigma \sqrt{2\pi}}} e^{\frac{-(x-\mu)^2}{(2\sigma^2)}}$$
+
+$E(X) = \mu$
+
+$Var(X) = \sigma^2$ (We normally express it using the standard deviation: $\sqrt{\sigma^2} = \sigma$)
+
+---
+
+
+**Example:** What is the probability that we observe a temperature between 30&deg;C e 35&deg;C, considering our historical average is $\mu = 30^\circ$C with a standard deviation of $\sigma = 5^\circ$C?
+
+
+```{r normex, echo=FALSE, fig.height=5,fig.width=7.5}
+library(ggplot2)
+m <- 30
+sd=5
+min=m-sd*4
+max=m+sd*4
+tmin = 30
+tmax = 35
+
+x <- seq(min,max,by=0.1)
+y <- dnorm(x,mean=m,sd=sd)
+full.df <- data.frame (x=x,y=y)
+shade <- subset(full.df, x >= tmin & x <= tmax)
+
+
+#ggplot(df,aes(x,y)) + geom_ribbon(data = shade.up, aes(ymax=y,ymin=0),col='gray50',fill='gray50') +  geom_ribbon(data = shade.down, aes(ymax=y,ymin=0),col='gray50',fill='gray50') + geom_line(size=1) + theme_bw(base_size=16) + plotheme
+
+ggplot(full.df,aes(x,y)) + geom_ribbon(data = shade, aes(ymax=y,ymin=0),col='gray50',fill='gray50')  + geom_line(size=1) + theme_bw(base_size=20) + geom_vline(xintercept=c(tmin, tmax),color='black',linetype=2) + plotheme + coord_cartesian(ylim = c(0, 0.09)) + ylab(NULL) + xlab(NULL)
+```
+---
+Normal Distribution
+===================
+
+For mathematical reasons, is much easier to calculate cumulative probabilities.
+
+```{r}
+media <- 30; desvio <- 5; tmin <- 30; tmax <- 35
+
+cumprob_tmin <- pnorm(tmin,mean=media,sd=desvio)
+cumprob_tmax <- pnorm(tmax,mean=media,sd=desvio)
+
+c(cumprob_tmin, cumprob_tmax)
+
+```
+---
+
+Normal Distribution
+===================
+
+```{r, cumnormplot1, echo=FALSE, fig.height=5,fig.width=7.5,out.height='100%'}
+min=m-desvio*4
+max=m+desvio*4
+x <- seq(min,max,by=0.1)
+y <- dnorm(x,mean=m,sd=sd)
+full.df <- data.frame (x=x,y=y)
+shade <- subset(full.df, x <= tmin )
+
+#ggplot(df,aes(x,y)) + geom_ribbon(data = shade.up, aes(ymax=y,ymin=0),col='gray50',fill='gray50') +  geom_ribbon(data = shade.down, aes(ymax=y,ymin=0),col='gray50',fill='gray50') + geom_line(size=1) + theme_bw(base_size=16) + plotheme
+
+ggplot(full.df,aes(x,y)) + geom_ribbon(data = shade, aes(ymax=y,ymin=0),col='gray50',fill='gray50')  + geom_line(size=1) + theme_bw(base_size=20) + geom_vline(xintercept=c(tmin, tmax),color='black',linetype=2) + plotheme + coord_cartesian(ylim = c(0, 0.09)) + ylab(NULL) + xlab(NULL)
+```
+
+---
+Normal Distribution
+===================
+```{r cumnormplot2, echo=FALSE, fig.height=5,fig.width=7.5,out.height='100%'}
+min=m-desvio*4
+max=m+desvio*4
+x <- seq(min,max,by=0.1)
+y <- dnorm(x,mean=m,sd=sd)
+full.df <- data.frame (x=x,y=y)
+shade <- subset(full.df, x <= tmax )
+
+plotheme <- theme(axis.line = element_line(colour = "black", size=1), panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.border = element_blank(),panel.background = element_blank()) 
+
+#ggplot(df,aes(x,y)) + geom_ribbon(data = shade.up, aes(ymax=y,ymin=0),col='gray50',fill='gray50') +  geom_ribbon(data = shade.down, aes(ymax=y,ymin=0),col='gray50',fill='gray50') + geom_line(size=1) + theme_bw(base_size=16) + plotheme
+
+ggplot(full.df,aes(x,y)) + geom_ribbon(data = shade, aes(ymax=y,ymin=0),col='gray50',fill='gray50')  + geom_line(size=1) + theme_bw(base_size=20) + geom_vline(xintercept=c(tmin, tmax),color='black',linetype=2) + plotheme + coord_cartesian(ylim = c(0, 0.09)) + ylab(NULL) + xlab(NULL)
+```
+
+---
+Normal Distribution
+===================
+
+Once we know both cumulative probabilities, it's just a matter of subtracting them:
+
+```{r}
+cumprob_tmax - cumprob_tmin
+```
+---
+
+Continuous Distributions
+========================
+
+<small>
+
+-   **Normal**: $X \sim N(\mu,\sigma)$
+
+-   **Gamma**: $X \sim Gamma(s,a$)
+
+-   **Exponential**: $X \sim Exp(\lambda)$
+
+-   **Beta**: $X \sim Beta(a,b)$
+
+-   **Lognormal**: $X \sim logN(\mu,\sigma)$
+
+-   **Chi-squared**: $X \sim \chi^2(df)$
+
+</small>
+
+---
+class: inverse
+
+End of this lecture
+==================
+
+Next lecture: the truth behind hypothesis testing. Shocking revelations!
+
+![](https://pbs.twimg.com/media/BqvPZP4CcAEkc9a.jpg)
